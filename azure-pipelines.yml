@@ -1,0 +1,17 @@
+pool:
+  vmImage: "ubuntu-18.04"
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "14.x"
+
+  - script: npm install
+  
+  - script: npm install @playwright/test
+
+    displayName: "Install browser dependencies"
+  - script: npm i playwright-chromium
+
+    displayName: "run test"
+  - script: npm run cicdtest
