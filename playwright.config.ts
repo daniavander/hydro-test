@@ -6,11 +6,11 @@ expect.extend(matchers)
 
 const config: PlaywrightTestConfig = {
 
-  globalTimeout: 100000, // Maximum time the whole test suite can run,
-  timeout: 100000,        // Timeout for each test
+  globalTimeout: 60000, // Maximum time the whole test suite can run,
+  timeout: 60000,        // Timeout for each test
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
-  reporter: 'html',
+  reporter: process.env.CI ? 'dot' : 'list',
   // See: https://playwright.dev/docs/api/class-testconfig
   outputDir: 'test-results/',
   //just the wanted folder will be run
@@ -19,9 +19,9 @@ const config: PlaywrightTestConfig = {
     viewport: { width: 1100, height: 900 },
     actionTimeout: 30000,
     ignoreHTTPSErrors: true,
-    trace: 'on',
-    video: 'on',
-    screenshot: 'on',
+    trace: 'off',
+    video: 'off',
+    screenshot: 'off',
   },
   projects: [
     {
@@ -30,13 +30,6 @@ const config: PlaywrightTestConfig = {
         browserName: "chromium"
       }
     }
-    ,{
-      name: 'iphone',
-      use: {
-        browserName: 'webkit',
-        ...devices['iPhone 11'],
-      },
-    },
   ]
 }
 
