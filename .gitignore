@@ -1,0 +1,30 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Coverage directory used by tools like istanbul
+coverage
+.nyc_output
+coverage.*
+
+# Dependency directory
+node_modules
+
+#folders
+allure*
+playwright-report/
+.vscode/
+.idea
+test-results/
+
+# Optional npm cache directory
+.npm
+
+typings/
+lib/*.js
+test/*.js
+*.map
+notes.txt
+.prettierrc
+yarn.lock
