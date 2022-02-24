@@ -5,7 +5,7 @@ pool:
 
 steps:
   - bash: echo $(a)  #outputs job yaml
-  - task: Bash@3
+  #- task: Bash@3
 
   - script: echo $(dev)
 
