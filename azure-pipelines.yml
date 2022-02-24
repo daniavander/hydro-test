@@ -7,12 +7,7 @@ steps:
   - bash: echo $(a)  #outputs job yaml
   - task: Bash@3
 
-    targetType: 'inline'
-    script: 'echo "##vso[task.setvariable variable=dev;]0.0.1"'
-
   - script: echo $(dev)
-  
-
 
   - script: npm install
   
