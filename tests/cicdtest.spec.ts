@@ -24,24 +24,8 @@ test.describe("my first test suite", () => {
 
     // Click input[name="search"]
     await page.locator('input[name="search"]').type('avander')
-    // Click button:has-text("keresés")
-    //await page.pause()
     await console.log("last step next")
     await page.locator('.gsc-search-button.gsc-search-button-v2').click();
-
-    /*await dashBoard.sidebarIsVisible()
-    await dashBoard.topBarIsAvailable()
-    //await page.pause()
-
-    await navBar.clickOnTopMenu("Add New Case")
-
-    await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
-
-    await casePage.setDepartment(departments.administration)
-
-    await casePage.setTypeAndSev(caseType.ife, secLevels.low)
-    await console.log("first playwright test in ci cd")
-    //await casePage.setTypeAndSev(caseType.ife, secLevels.verylow)*/
   })
 })
 
