@@ -13,7 +13,7 @@ node_modules
 
 #folders
 allure*
-playwright-report/
+#playwright-report/
 .vscode/
 .idea
 test-results/
