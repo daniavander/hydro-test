@@ -15,13 +15,14 @@ test.describe("my first test suite", () => {
     navBar = new Navbar(page)
     dashBoard = new Dashboard(page)
     casePage = new CasePage(page)
-    const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/app/'
+    //const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/app/'
+    const baseUrl = 'https://steeldecor.hu'
     await page.goto(baseUrl, { timeout: 50000 })
   })
 
-  test('Add new injury free event', async ({ page }) => {
+  test('cicd test', async ({ page }) => {
 
-    await dashBoard.sidebarIsVisible()
+    /*await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     //await page.pause()
 
@@ -33,7 +34,7 @@ test.describe("my first test suite", () => {
 
     await casePage.setTypeAndSev(caseType.ife, secLevels.low)
     await console.log("first playwright test in ci cd")
-    //await casePage.setTypeAndSev(caseType.ife, secLevels.verylow)
+    //await casePage.setTypeAndSev(caseType.ife, secLevels.verylow)*/
   })
 })
 

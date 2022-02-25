@@ -21,7 +21,7 @@ const config: PlaywrightTestConfig = {
     ignoreHTTPSErrors: true,
     trace: 'off',
     video: 'off',
-    screenshot: 'off',
+    screenshot: 'on',
   },
   projects: [
     {
