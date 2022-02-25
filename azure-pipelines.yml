@@ -17,4 +17,4 @@ steps:
 
     displayName: "run test"
   #- script: npm run cicdtesthydro
-  - script: npm run cicd
+  - script: npm run cicdbasichydro
