@@ -27,7 +27,7 @@ test.describe("my first test suite", () => {
     // Click button:has-text("keresés")
     //await page.pause()
     await console.log("last step next")
-    await page.locator('button:has-text("keresés")').click();
+    await page.locator('.gsc-search-button.gsc-search-button-v2').click();
 
     /*await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
