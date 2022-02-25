@@ -19,7 +19,6 @@ steps:
   #- script: npm run cicdtesthydro
   - script: npm run cicd
 
-steps:
   - task: PublishPipelineArtifact@1
     displayName: "publish"
     inputs:
