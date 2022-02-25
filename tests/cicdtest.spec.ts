@@ -15,14 +15,14 @@ test.describe("my first test suite", () => {
     navBar = new Navbar(page)
     dashBoard = new Dashboard(page)
     casePage = new CasePage(page)
-    //const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/app/'
-    const baseUrl = 'https://steeldecor.hu'
+    const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/app/'
+    //const baseUrl = 'https://steeldecor.hu'
     await page.goto(baseUrl, { timeout: 50000 })
   })
 
   test('cicd test', async ({ page }) => {
 
-    /*await dashBoard.sidebarIsVisible()
+    await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     //await page.pause()
 
