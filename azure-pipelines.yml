@@ -4,7 +4,6 @@ pool:
   vmImage: "ubuntu-18.04"
 
 steps:
-  - bash: echo $(a)  #outputs job yaml
   #- task: Bash@3
 
   - script: echo $(dev)
@@ -17,4 +16,4 @@ steps:
   - script: npm i playwright-chromium
 
     displayName: "run test"
-  - script: npm run cicdtest
+  - script: npm run cicdtesthydro
