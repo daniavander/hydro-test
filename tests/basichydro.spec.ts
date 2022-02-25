@@ -20,12 +20,17 @@ test.describe("my first test suite", () => {
     dashBoard = new Dashboard(page)
     casePage = new CasePage(page)
     addUserAction = new AddUserAction(page)
-    const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/app/'
+    const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net'
+    await page.screenshot({ path: 'homepage.png' });
     await page.goto(baseUrl, { timeout: 50000 })
   })
 
   test('Add new injury free event', async ({ page }) => {
 
+    await page.locator("#i0116").type("kovacs.daniel@avander.hu")
+    await page.keyboard.press("Enter");
+    await page.locator("#i0118").type("123ims456!")
+    await page.keyboard.press("Enter");
     
     const ghostCard = await page.locator(".side-panel-content")
     await ghostCard.screenshot({ path: 'side-panel-content.png' })
