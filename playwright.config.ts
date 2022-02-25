@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
   //reporter: process.env.CI ? 'dot' : 'list',
-  reporter: 'html',
+  reporter: 'line',
   // See: https://playwright.dev/docs/api/class-testconfig
   outputDir: 'test-results/',
   //just the wanted folder will be run
