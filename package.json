@@ -9,7 +9,8 @@
     "cicdtesthead": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
     "cicd": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts",
     "cicdhydro": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts",
-    "cicdbasichydro": "playwright test tests/basichydro.spec.ts --config=playwright.config.ts"
+    "cicdbasichydro": "playwright test tests/basichydro.spec.ts --config=playwright.config.ts --reporter=html",
+    "cicdbasichydroreport": "playwright test tests/basichydro.spec.ts --config=playwright.config.ts"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +19,7 @@
     "prettier": "^2.5.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.19.1",
+    "@playwright/test": "^1.19.2",
     "allure-playwright": "^2.0.0-beta.15",
     "expect-playwright": "^0.8.0",
     "experimental-allure-playwright": "^0.0.3"
