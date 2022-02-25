@@ -17,7 +17,7 @@ steps:
 
     displayName: "run test"
 
-  - script: npm run cicdbasichydro
+  - script: npm run cicd
 
   - task: PublishPipelineArtifact@1
     displayName: "publish"
