@@ -27,6 +27,9 @@ test.describe("my first test suite", () => {
   test('Add new injury free event', async ({ page }) => {
 
     await dashBoard.sidebarIsVisible()
+    const ghostCard = await page.locator(".side-panel-content")
+    await ghostCard.screenshot({ path: 'side-panel-content.png' })
+
     await dashBoard.topBarIsAvailable()
     //await page.pause()
     //await dashBoard.snapshotTopBar()
