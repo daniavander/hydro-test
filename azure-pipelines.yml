@@ -21,7 +21,8 @@ steps:
 
   - task: PublishPipelineArtifact@1
     displayName: "publish"
+    condition: succeededOrFailed()
     inputs:
-     targetPath: '$(System.DefaultWorkingDirectory)/_daniavander_hydro-test/playwright-report/index.html'
+     targetPath: '$(System.DefaultWorkingDirectory)/index.html'
      artifact: 'test-results'
     continueOnError: true
