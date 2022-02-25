@@ -4,7 +4,6 @@ pool:
   vmImage: "ubuntu-18.04"
 
 steps:
-  #- task: Bash@3
 
   - script: echo $(dev)
 
@@ -16,5 +15,14 @@ steps:
   - script: npm i playwright-chromium
 
     displayName: "run test"
-  #- script: npm run cicdtesthydro
+
   - script: npm run cicdbasichydro
+
+  - task: PublishPipelineArtifact@1
+    displayName: "publish"
+    condition: succeededOrFailed()
+    inputs:
+     targetPath: '$(System.DefaultWorkingDirectory)/index.html'
+     artifact: 'test-results'
+    continueOnError: true
+
