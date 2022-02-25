@@ -28,7 +28,7 @@ test.describe("my first test suite", () => {
 
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    await page.pause()
+    //await page.pause()
     //await dashBoard.snapshotTopBar()
 
     await navBar.clickOnTopMenu("Add New Case")
@@ -48,7 +48,7 @@ test.describe("my first test suite", () => {
     expect(page.isVisible(".ghost-action-card-tile-title"))
     await (await page.waitForSelector('.p-state-filled')).isVisible()
     await page.pause()
-    await casePage.snapshotGhostCard()
+    //await casePage.snapshotGhostCard()
 
     await addUserAction.addNewAction("description","instruction","Kovács Dániel","Add Action tag", "action1")
 
