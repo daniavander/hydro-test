@@ -18,3 +18,11 @@ steps:
     displayName: "run test"
   #- script: npm run cicdtesthydro
   - script: npm run cicd
+
+steps:
+  - task: PublishPipelineArtifact@1
+    displayName: "publish"
+    inputs:
+     targetPath: '**/*.html'
+     artifact: 'test-results'
+    continueOnError: true
