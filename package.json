@@ -7,8 +7,9 @@
     "test": "playwright test",
     "onchrome": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts --headed --project=Chromium",
     "cicdtesthead": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
-    "cicdtest": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts",
-    "cicdtesthydro": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts"
+    "cicd": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts",
+    "cicdhydro": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts",
+    "cicdbasichydro": "playwright test tests/basichydro.spec.ts --config=playwright.config.ts"
   },
   "author": "",
   "license": "ISC",
