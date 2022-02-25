@@ -16,4 +16,5 @@ steps:
   - script: npm i playwright-chromium
 
     displayName: "run test"
-  - script: npm run cicdtesthydro
+  #- script: npm run cicdtesthydro
+  - script: npm run cicdtest
