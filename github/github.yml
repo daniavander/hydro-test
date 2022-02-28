@@ -1,0 +1,31 @@
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  e2e-tests:
+    runs-on: windows-latest # or macos-latest, windows-latest, ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+
+      - uses: microsoft/playwright-github-action@v1
+
+      - name: Install dependencies
+        run: npm install && npm run cicd
+
+      - name: run tests
+        run: npm run cicd
+
+      - name: push artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: |
+            playwright-report/**
+            test-results/**
+          if-no-file-found: error
+          retention-days: 60

@@ -10,8 +10,7 @@
     "cicd": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts",
     "cicdhydro": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts",
     "cicdeeszt": "playwright test tests/eeszt.spec.ts --config=playwright.config.ts --headed",
-    "cicdbasichydro": "playwright test tests/basichydro.spec.ts --config=playwright.config.ts --headed",
-    "cicdbasichydroreport": "playwright test tests/basichydro.spec.ts --config=playwright.config.ts"
+    "cicdbasichydro": "playwright test tests/basichydro.spec.ts --config=playwright.config.ts"
   },
   "author": "",
   "license": "ISC",

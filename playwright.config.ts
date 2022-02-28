@@ -12,7 +12,8 @@ const config: PlaywrightTestConfig = {
   // See: https://playwright.dev/docs/test-reporters/
   //reporter: process.env.CI ? 'dot' : 'list',
   //reporter: './my-awesome-reporter.ts',
-  reporter: 'html',
+  //reporter: 'html',
+  reporter: [['html'], ['./my-awesome-reporter.ts'], ['json', {outputFile: 'test-result.json'}]],
   // See: https://playwright.dev/docs/api/class-testconfig
   outputDir: 'test-results/',
   //just the wanted folder will be run
@@ -24,6 +25,7 @@ const config: PlaywrightTestConfig = {
     trace: 'on',
     video: 'on',
     screenshot: 'on',
+    //slowMo: 100
   },
   projects: [
     {
