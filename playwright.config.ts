@@ -13,7 +13,7 @@ const config: PlaywrightTestConfig = {
   //reporter: process.env.CI ? 'dot' : 'list',
   //reporter: './my-awesome-reporter.ts',
   //reporter: 'html',
-  reporter: [['html'], ['./my-awesome-reporter.ts'], ['json', {outputFile: 'test-result.json'}]],
+  reporter: [['html'], ['./my-awesome-reporter.ts'], ['list'], ['json', {outputFile: 'test-result.json'}]],
   // See: https://playwright.dev/docs/api/class-testconfig
   outputDir: 'test-results/',
   //just the wanted folder will be run
@@ -29,9 +29,13 @@ const config: PlaywrightTestConfig = {
   },
   projects: [
     {
-      name: "Chrome",
-      use: {
-        browserName: "chromium"
+      // Desktop Chromium
+        name: 'DesktopChromium',
+        use: {
+          browserName: 'chromium',
+          headless: true,
+          // Can be "chrome", "msedge", "chrome-beta", "msedge-beta", "msedge-dev", etc. Test against chrome channel.
+          channel: 'chrome',
       }
     }
   ]
