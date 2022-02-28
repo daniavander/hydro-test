@@ -29,3 +29,4 @@ export async function getRandomStr()  {
 export async function getRandomEmail()  {
     return crypto.randomBytes(20).toString('hex')
 }
+
