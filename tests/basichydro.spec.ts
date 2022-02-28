@@ -1,4 +1,7 @@
-import { test, expect } from "@playwright/test"
+import { test } from "@playwright/test"
+
+const chai = require('chai')
+const expect = chai.expect
 
 
 
