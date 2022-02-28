@@ -17,7 +17,7 @@ jobs:
       - uses: microsoft/playwright-github-action@v1
 
       - name: Install dependencies
-        run: npx playwright install --with-deps
+        run: npx playwright install
 
       - name: run tests
         run: npm run cicd
