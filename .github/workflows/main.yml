@@ -17,10 +17,7 @@ jobs:
       - uses: microsoft/playwright-github-action@v1
 
       - name: Install dependencies
-        run: npm install
-
-      - name: update node
-        run: npm install -g n
+        run: run: npx playwright install --with-deps
 
       - name: run tests
         run: npm run cicd
@@ -34,6 +31,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: push artifacts
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
