@@ -12,6 +12,8 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
+          cache-dependency-path: subdir/package-lock.json
+          
       - uses: actions/setup-node@v1
 
       - uses: microsoft/playwright-github-action@v1
