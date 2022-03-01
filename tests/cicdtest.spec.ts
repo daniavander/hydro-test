@@ -1,21 +1,16 @@
 import { test, expect } from "@playwright/test"
 
-import { Navbar } from "../page-objects/common/Navbar"
-import { Dashboard } from "../page-objects/common/Dashboard"
-import { CasePage } from "../page-objects/CasePage"
-import { caseType, secLevels, departments } from "../page-objects/common/constans"
+const { chromium } = require('playwright');  // Or 'firefox' or 'webkit'.
 
 
 test.describe("my first test suite", () => {
-  let navBar: Navbar
-  let dashBoard: Dashboard
-  let casePage: CasePage
 
-  test.beforeEach(async ({ page }) => {
-    navBar = new Navbar(page)
-    dashBoard = new Dashboard(page)
-    casePage = new CasePage(page)
-    //const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/app/'
+  test.beforeEach(async () => {
+    const browser = await chromium.connect({ 
+      timeout: 1000,
+      wsEndpoint: 'ws://100.94.43.39:4444/wd/hub' 
+    });
+    const page = await browser.newPage();
     const baseUrl = 'https://www.kapu.hu'
     await page.goto(baseUrl, { timeout: 50000 })
   })
