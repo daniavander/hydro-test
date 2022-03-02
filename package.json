@@ -6,7 +6,9 @@
   "scripts": {
     "onchrome": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts --headed --project=Chromium",
     "cicdtesthead": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
-    "cicd": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
+    "azure": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
+    "azure2": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts",
+
     "testt": "playwright test tests/test.spec.ts --config=playwright.config.ts",
     "cicdhydro": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts",
     "cicdeeszt": "playwright test tests/eeszt.spec.ts --config=playwright.config.ts --headed",

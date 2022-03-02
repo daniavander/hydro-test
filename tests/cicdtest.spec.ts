@@ -5,12 +5,8 @@ const { chromium } = require('playwright');  // Or 'firefox' or 'webkit'.
 
 test.describe("my first test suite", () => {
 
-  test.beforeEach(async () => {
-    const browser = await chromium.connect({ 
-      timeout: 1000,
-      wsEndpoint: 'ws://100.94.43.39:4444/wd/hub' 
-    });
-    const page = await browser.newPage();
+  test.beforeEach(async ({ page }) => {
+
     const baseUrl = 'https://www.kapu.hu'
     await page.goto(baseUrl, { timeout: 50000 })
   })

@@ -53,12 +53,74 @@
     "version": "1.19.2",
     "workers": 8,
     "webServer": null,
-    "__testGroupsCount": 0
+    "__testGroupsCount": 1
   },
-  "suites": [],
-  "errors": [
+  "suites": [
     {
-      "message": "=================\n no tests found.\n================="
+      "title": "tests\\cicdtest.spec.ts",
+      "file": "tests/cicdtest.spec.ts",
+      "line": 0,
+      "column": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "my first test suite",
+          "file": "tests/cicdtest.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "cicd test",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectName": "DesktopChromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 5044,
+                      "stdout": [
+                        {
+                          "text": "last step next\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-cicdtest-my-first-test-suite-cicd-test-DesktopChromium\\video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-cicdtest-my-first-test-suite-cicd-test-DesktopChromium\\trace.zip"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-cicdtest-my-first-test-suite-cicd-test-DesktopChromium\\test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "file": "tests/cicdtest.spec.ts",
+              "line": 14,
+              "column": 3
+            }
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "errors": []
 }
