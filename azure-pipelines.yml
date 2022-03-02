@@ -24,7 +24,7 @@ steps:
     displayName: "publish"
     condition: succeededOrFailed()
     inputs:
-     targetPath: '**/index.html'
+     targetPath: '**/*.html'
      artifact: 'test-results'
     continueOnError: true
 
