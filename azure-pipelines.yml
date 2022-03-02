@@ -24,7 +24,7 @@ steps:
     displayName: "publish"
     condition: succeededOrFailed()
     inputs:
-     targetPath: '$(System.DefaultWorkingDirectory)/index.html'
+     targetPath: '**/playwright-report/index.html'
      artifact: 'test-results'
     continueOnError: true
 
