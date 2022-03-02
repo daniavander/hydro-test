@@ -13,7 +13,7 @@ test.describe("my first test suite", () => {
   let dashBoard: Dashboard
 
   test.beforeEach(async ({ page }) => {
-    
+
     dashBoard = new Dashboard(page)
 
     const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net'
@@ -29,9 +29,9 @@ test.describe("my first test suite", () => {
     await page.keyboard.press('Enter')
     await page.keyboard.press('Enter')
     await console.log("last step next")
+    await page.screenshot({ path: 'screenshot.png' });
 
-    await dashBoard.sidebarIsVisible()
-    const ghostCard = await page.locator(".side-panel-content")
+    const ghostCard = await page.locator(".top-menu-container")
     await ghostCard.screenshot({ path: 'side-panel-content.png' })
   })
 })
