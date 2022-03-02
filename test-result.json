@@ -57,25 +57,25 @@
   },
   "suites": [
     {
-      "title": "tests\\cicdtest.spec.ts",
-      "file": "tests/cicdtest.spec.ts",
+      "title": "tests\\addIFEWithUDA.spec.ts",
+      "file": "tests/addIFEWithUDA.spec.ts",
       "line": 0,
       "column": 0,
       "specs": [],
       "suites": [
         {
           "title": "my first test suite",
-          "file": "tests/cicdtest.spec.ts",
-          "line": 6,
+          "file": "tests/addIFEWithUDA.spec.ts",
+          "line": 12,
           "column": 6,
           "specs": [
             {
-              "title": "cicd test",
+              "title": "Add new injury free event",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 45000,
+                  "timeout": 0,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectName": "DesktopChromium",
@@ -83,29 +83,25 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 5044,
-                      "stdout": [
-                        {
-                          "text": "last step next\n"
-                        }
-                      ],
+                      "duration": 15370,
+                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
                       "attachments": [
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-cicdtest-my-first-test-suite-cicd-test-DesktopChromium\\video.webm"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-addIFEWithUDA-my-first-test-suite-Add-new-injury-free-event-DesktopChromium\\video.webm"
                         },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-cicdtest-my-first-test-suite-cicd-test-DesktopChromium\\trace.zip"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-addIFEWithUDA-my-first-test-suite-Add-new-injury-free-event-DesktopChromium\\trace.zip"
                         },
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-cicdtest-my-first-test-suite-cicd-test-DesktopChromium\\test-finished-1.png"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-addIFEWithUDA-my-first-test-suite-Add-new-injury-free-event-DesktopChromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -113,8 +109,8 @@
                   "status": "expected"
                 }
               ],
-              "file": "tests/cicdtest.spec.ts",
-              "line": 14,
+              "file": "tests/addIFEWithUDA.spec.ts",
+              "line": 27,
               "column": 3
             }
           ]
