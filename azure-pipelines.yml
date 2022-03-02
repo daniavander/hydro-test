@@ -17,7 +17,7 @@ steps:
 
     displayName: "run test"
 
-  - script: npm run cicdbasichydroreport
+  - script: npm run azure2
 
   - task: PublishPipelineArtifact@1
     displayName: "publish"
