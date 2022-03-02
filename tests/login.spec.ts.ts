@@ -24,10 +24,6 @@ test.describe("my first test suite", () => {
 
   test('cicd simple login test', async ({ page }) => {
 
-    page.on("pageerror", (err) => {
-      console.log(err.message)
-    })
-
 
     // Click input[name="search"]
     await page.pause()
