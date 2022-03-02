@@ -39,7 +39,7 @@ test.describe("my first test suite", () => {
 
 
     // Click input[name="search"]
-    await page.pause()
+    //await page.pause()
     await page.locator('#i0116').type('imstestglobaladmin1@avander.hu')
     await page.keyboard.press('Enter');
     await page.locator('#i0118').type('123ims456!s')
