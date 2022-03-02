@@ -16,15 +16,14 @@ steps:
   - script: npm i playwright-chromium
 
     displayName: "run test"
-
-  #- script: npm run azure2
   - script: npm run azurelogin
+
 
   - task: PublishPipelineArtifact@1
     displayName: "publish"
     condition: succeededOrFailed()
     inputs:
-     targetPath: '$(System.DefaultWorkingDirectory)/index.html'
+     targetPath: '**/*.html'
      artifact: 'test-results'
     continueOnError: true
 
