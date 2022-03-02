@@ -16,7 +16,7 @@ steps:
   - script: npm i playwright-chromium
 
     displayName: "run test"
-  - script: npm run azurelogin
+  - script: npm run azure2
 
 
   - task: PublishPipelineArtifact@1
