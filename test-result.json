@@ -57,33 +57,33 @@
   },
   "suites": [
     {
-      "title": "tests\\cicdtest.spec.ts",
-      "file": "tests/cicdtest.spec.ts",
+      "title": "tests\\login.spec.ts.ts",
+      "file": "tests/login.spec.ts.ts",
       "line": 0,
       "column": 0,
       "specs": [],
       "suites": [
         {
-          "title": "my first test suite",
-          "file": "tests/cicdtest.spec.ts",
-          "line": 6,
+          "title": "cicd azure simple login test",
+          "file": "tests/login.spec.ts.ts",
+          "line": 4,
           "column": 6,
           "specs": [
             {
-              "title": "cicd test",
+              "title": "cicd azure simple login test",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 45000,
+                  "timeout": 0,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectName": "DesktopChromium",
                   "results": [
                     {
                       "workerIndex": 0,
-                      "status": "passed",
-                      "duration": 4857,
+                      "status": "skipped",
+                      "duration": 0,
                       "stdout": [
                         {
                           "text": "last step next\n"
@@ -91,30 +91,14 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "attachments": [
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-cicdtest-my-first-test-suite-cicd-test-DesktopChromium\\video.webm"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-cicdtest-my-first-test-suite-cicd-test-DesktopChromium\\trace.zip"
-                        },
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-cicdtest-my-first-test-suite-cicd-test-DesktopChromium\\test-finished-1.png"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "file": "tests/cicdtest.spec.ts",
-              "line": 19,
+              "file": "tests/login.spec.ts.ts",
+              "line": 11,
               "column": 3
             }
           ]
@@ -122,5 +106,9 @@
       ]
     }
   ],
-  "errors": []
+  "errors": [
+    {
+      "message": "Timed out waiting 45s for the entire test run"
+    }
+  ]
 }
