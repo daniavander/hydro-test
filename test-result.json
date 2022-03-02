@@ -82,8 +82,8 @@
                   "results": [
                     {
                       "workerIndex": 0,
-                      "status": "skipped",
-                      "duration": 0,
+                      "status": "passed",
+                      "duration": 34044,
                       "stdout": [
                         {
                           "text": "last step next\n"
@@ -91,10 +91,26 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-simple-login-test-cicd-azure-simple-login-test-DesktopChromium\\video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-simple-login-test-cicd-azure-simple-login-test-DesktopChromium\\trace.zip"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-simple-login-test-cicd-azure-simple-login-test-DesktopChromium\\test-finished-1.png"
+                        }
+                      ]
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "file": "tests/login.spec.ts.ts",
@@ -106,9 +122,5 @@
       ]
     }
   ],
-  "errors": [
-    {
-      "message": "Timed out waiting 45s for the entire test run"
-    }
-  ]
+  "errors": []
 }
