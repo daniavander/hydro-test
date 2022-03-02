@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test"
+import { Dashboard } from "../page-objects/common/Dashboard"
 
 const { chromium } = require('playwright');  // Or 'firefox' or 'webkit'.
 
@@ -9,8 +10,11 @@ test.describe("my first test suite", () => {
   const tenantId = "56394630-8e65-4116-8410-06ee2cb2df2f";
   const client_secret = "XmZ7Q~F64qYnEk_z0FCc61wSV9mG0US14gKqC";
 
+  let dashBoard: Dashboard
 
   test.beforeEach(async ({ page }) => {
+    
+    dashBoard = new Dashboard(page)
 
     const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net'
     await page.goto(baseUrl, { timeout: 50000 })
@@ -25,6 +29,10 @@ test.describe("my first test suite", () => {
     await page.keyboard.press('Enter')
     await page.keyboard.press('Enter')
     await console.log("last step next")
+
+    await dashBoard.sidebarIsVisible()
+    const ghostCard = await page.locator(".side-panel-content")
+    await ghostCard.screenshot({ path: 'side-panel-content.png' })
   })
 })
 
