@@ -31,26 +31,27 @@ test.describe("just login to ims2", () => {
     console.log(errorLogs)
   })*/
 
-  test('cicd simple login test', async ({ page }) => {
+    test('cicd simple login test', async ({ page }) => {
 
-    page.on("pageerror", (err) => {
-      console.log(err.message)
+      page.on("pageerror", (err) => {
+        console.log(err.message)
+      })
+
+
+      // Click input[name="search"]
+      //await page.pause()
+      await page.locator('#i0116').type('imstestglobaladmin1@avander.hu')
+      await page.keyboard.press('Enter');
+      await page.locator('#i0118').type('123ims456!')
+      await page.keyboard.press('Enter')
+      await page.keyboard.press('Enter')
+      await console.log("last step next")
+      await page.screenshot({ path: 'screenshot.png' });
+
+      const ghostCard = await page.locator(".top-menu-container")
+      await ghostCard.screenshot({ path: 'side-panel-content.png' })
     })
 
-
-    // Click input[name="search"]
-    //await page.pause()
-    await page.locator('#i0116').type('imstestglobaladmin1@avander.hu')
-    await page.keyboard.press('Enter');
-    await page.locator('#i0118').type('123ims456!')
-    await page.keyboard.press('Enter')
-    await page.keyboard.press('Enter')
-    await console.log("last step next")
-    await page.screenshot({ path: 'screenshot.png' });
-
-    const ghostCard = await page.locator(".top-menu-container")
-    await ghostCard.screenshot({ path: 'side-panel-content.png' })
   })
-
 })
 
