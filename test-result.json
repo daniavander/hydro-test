@@ -32,7 +32,7 @@
         null
       ],
       [
-        "list",
+        "line",
         null
       ],
       [
@@ -57,33 +57,37 @@
   },
   "suites": [
     {
-      "title": "tests\\addIFEWithUDA.spec.ts",
-      "file": "tests/addIFEWithUDA.spec.ts",
+      "title": "tests\\login.spec.ts.ts",
+      "file": "tests/login.spec.ts.ts",
       "line": 0,
       "column": 0,
       "specs": [],
       "suites": [
         {
           "title": "my first test suite",
-          "file": "tests/addIFEWithUDA.spec.ts",
-          "line": 12,
+          "file": "tests/login.spec.ts.ts",
+          "line": 6,
           "column": 6,
           "specs": [
             {
-              "title": "Add new injury free event",
+              "title": "cicd simple login test",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 0,
+                  "timeout": 45000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectName": "DesktopChromium",
                   "results": [
                     {
                       "workerIndex": 0,
-                      "status": "passed",
-                      "duration": 15370,
+                      "status": "skipped",
+                      "duration": 38500,
+                      "error": {
+                        "message": "locator.type: Target closed\n=========================== logs ===========================\nwaiting for selector \"#i0116\"\n============================================================",
+                        "stack": "locator.type: Target closed\n=========================== logs ===========================\nwaiting for selector \"#i0116\"\n============================================================\n    at C:\\git\\hydro-test\\tests\\login.spec.ts.ts:22:34"
+                      },
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
@@ -91,26 +95,31 @@
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-addIFEWithUDA-my-first-test-suite-Add-new-injury-free-event-DesktopChromium\\video.webm"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-my-first-test-suite-cicd-simple-login-test-DesktopChromium\\video.webm"
                         },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-addIFEWithUDA-my-first-test-suite-Add-new-injury-free-event-DesktopChromium\\trace.zip"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-my-first-test-suite-cicd-simple-login-test-DesktopChromium\\trace.zip"
                         },
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-addIFEWithUDA-my-first-test-suite-Add-new-injury-free-event-DesktopChromium\\test-finished-1.png"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-my-first-test-suite-cicd-simple-login-test-DesktopChromium\\test-failed-1.png"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\git\\hydro-test\\tests\\login.spec.ts.ts",
+                        "column": 34,
+                        "line": 22
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "file": "tests/addIFEWithUDA.spec.ts",
-              "line": 27,
+              "file": "tests/login.spec.ts.ts",
+              "line": 19,
               "column": 3
             }
           ]

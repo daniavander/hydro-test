@@ -8,7 +8,7 @@
     "cicdtesthead": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
     "azure": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
     "azure2": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts",
-
+    "azurelogin": "playwright test tests/login.spec.ts --config=playwright.config.ts",
     "testt": "playwright test tests/test.spec.ts --config=playwright.config.ts",
     "cicdhydro": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts",
     "cicdeeszt": "playwright test tests/eeszt.spec.ts --config=playwright.config.ts --headed",
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.19.2",
+    "allure-commandline": "^2.17.2",
     "allure-playwright": "^2.0.0-beta.15",
     "expect-playwright": "^0.8.0",
     "experimental-allure-playwright": "^0.0.3",
