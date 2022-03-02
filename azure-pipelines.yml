@@ -17,14 +17,14 @@ steps:
 
     displayName: "run test"
 
-  #- script: npm run azure2
-  - script: npm run cicdhydro
+  - script: npm run azure2
+  #- script: npm run cicdhydro
 
   - task: PublishPipelineArtifact@1
     displayName: "publish"
     condition: succeededOrFailed()
     inputs:
-     targetPath: '**/playwright-report/index.html'
+     targetPath: '**/index.html'
      artifact: 'test-results'
     continueOnError: true
 
