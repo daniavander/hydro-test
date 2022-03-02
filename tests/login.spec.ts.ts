@@ -9,16 +9,16 @@ test.describe("cicd azure simple login test", () => {
   })
 
   test('cicd azure simple login test', async ({ page }) => {
-    await page.pause()
-    await page.locator('#i0116s').type('imstestglobaladmin1@avander.hu')
+    //await page.pause()
+    await page.locator('#i0116').type('imstestglobaladmin1@avander.hu')
     await page.keyboard.press('Enter');
     await page.locator('#i0118').type('123ims456!')
     await page.keyboard.press('Enter')
     await page.keyboard.press('Enter')
     await console.log("last step next")
-    await page.screenshot({ path: 'screenshot.png' });
+    await page.screenshot({ path: './test-results/screenshot.png' , fullPage: true});
     const ghostCard = await page.locator(".top-menu-container")
-    await ghostCard.screenshot({ path: 'side-panel-content.png' })
+    await ghostCard.screenshot({ path: './test-results/side-panel-content.png'})
   })
 
 })

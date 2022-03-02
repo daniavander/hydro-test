@@ -83,7 +83,7 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 34044,
+                      "duration": 39847,
                       "stdout": [
                         {
                           "text": "last step next\n"
