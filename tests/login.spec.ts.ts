@@ -4,8 +4,8 @@ import { Dashboard } from "../page-objects/common/Dashboard"
 const { chromium } = require('playwright');  // Or 'firefox' or 'webkit'.
 
 
-test.describe("just login to ims2", () => {
-
+test.describe("my first test suite", () => {
+  
   const clientId = "5aea3d4b-9d0d-48d6-8b21-57d355cc3a3f";
   const tenantId = "56394630-8e65-4116-8410-06ee2cb2df2f";
   const client_secret = "XmZ7Q~F64qYnEk_z0FCc61wSV9mG0US14gKqC";
@@ -19,39 +19,29 @@ test.describe("just login to ims2", () => {
     const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net'
     await page.goto(baseUrl, { timeout: 50000 })
 
-    /*const errorLogs = []
-    page.on("console", (message) => {
-      if (message.type() === "error") {
-        errorLogs.push(message.text())
-      }
-    })
-    await page.evaluate(() => {
-      console.error("hello from the browser")
-    })
-    console.log(errorLogs)
-  })*/
-
-    test('cicd simple login test', async ({ page }) => {
-
-      page.on("pageerror", (err) => {
-        console.log(err.message)
-      })
-
-
-      // Click input[name="search"]
-      //await page.pause()
-      await page.locator('#i0116').type('imstestglobaladmin1@avander.hu')
-      await page.keyboard.press('Enter');
-      await page.locator('#i0118').type('123ims456!')
-      await page.keyboard.press('Enter')
-      await page.keyboard.press('Enter')
-      await console.log("last step next")
-      await page.screenshot({ path: 'screenshot.png' });
-
-      const ghostCard = await page.locator(".top-menu-container")
-      await ghostCard.screenshot({ path: 'side-panel-content.png' })
-    })
-
+    
   })
+
+  test('cicd simple login test', async ({ page }) => {
+
+    page.on("pageerror", (err) => {
+      console.log(err.message)
+    })
+
+
+    // Click input[name="search"]
+    await page.pause()
+    await page.locator('#i0116').type('imstestglobaladmin1@avander.hu')
+    await page.keyboard.press('Enter');
+    await page.locator('#i0118').type('123ims456!s')
+    await page.keyboard.press('Enter')
+    await page.keyboard.press('Enter')
+    await console.log("last step next")
+    await page.screenshot({ path: 'screenshot.png' });
+
+    const ghostCard = await page.locator(".top-menu-container")
+    await ghostCard.screenshot({ path: 'side-panel-content.png' })
+  })
+
 })
 

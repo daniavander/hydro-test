@@ -53,77 +53,12 @@
     "version": "1.19.2",
     "workers": 8,
     "webServer": null,
-    "__testGroupsCount": 1
+    "__testGroupsCount": 0
   },
-  "suites": [
+  "suites": [],
+  "errors": [
     {
-      "title": "tests\\login.spec.ts.ts",
-      "file": "tests/login.spec.ts.ts",
-      "line": 0,
-      "column": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "my first test suite",
-          "file": "tests/login.spec.ts.ts",
-          "line": 7,
-          "column": 6,
-          "specs": [
-            {
-              "title": "cicd simple login test",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 0,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectName": "DesktopChromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "status": "passed",
-                      "duration": 40494,
-                      "stdout": [
-                        {
-                          "text": "[ \u001b[32m'hello from the browser'\u001b[39m ]\n"
-                        },
-                        {
-                          "text": "last step next\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "attachments": [
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-my-first-test-suite-cicd-simple-login-test-DesktopChromium\\video.webm"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-my-first-test-suite-cicd-simple-login-test-DesktopChromium\\trace.zip"
-                        },
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-my-first-test-suite-cicd-simple-login-test-DesktopChromium\\test-finished-1.png"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "file": "tests/login.spec.ts.ts",
-              "line": 34,
-              "column": 3
-            }
-          ]
-        }
-      ]
+      "message": "=================\n no tests found.\n================="
     }
-  ],
-  "errors": []
+  ]
 }
