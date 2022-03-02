@@ -10,11 +10,11 @@ test.describe("my first test suite", () => {
   const tenantId = "56394630-8e65-4116-8410-06ee2cb2df2f";
   const client_secret = "XmZ7Q~F64qYnEk_z0FCc61wSV9mG0US14gKqC";
 
-  let dashBoard: Dashboard
+
 
   test.beforeEach(async ({ page }) => {
 
-    dashBoard = new Dashboard(page)
+
 
     const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net'
     await page.goto(baseUrl, { timeout: 50000 })
@@ -24,8 +24,6 @@ test.describe("my first test suite", () => {
 
   test('cicd simple login test', async ({ page }) => {
 
-
-    // Click input[name="search"]
     //await page.pause()
     await page.locator('#i0116').type('imstestglobaladmin1@avander.hu')
     await page.keyboard.press('Enter');
