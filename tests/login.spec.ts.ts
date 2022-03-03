@@ -10,9 +10,11 @@ test.describe("cicd azure simple login test", () => {
     loginPage = new LoginPage(page)
     const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net'
     await page.goto(baseUrl, { timeout: 50000 })
-    await loginPage.loginInAzure(page)
   })
 
+  test("testinfo", async ({ page }) => {
+    await loginPage.loginInAzure(page)
+  })
   
 
   test("testinfo", async ({ page }, testInfo) => {
