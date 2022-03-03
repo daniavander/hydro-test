@@ -12,7 +12,7 @@ test.describe("cicd azure simple login test", () => {
     await page.goto(baseUrl, { timeout: 50000 })
   })
 
-  test("testinfo", async ({ page }) => {
+  test("pom_login", async ({ page }) => {
     await loginPage.loginInAzure(page)
   })
   
