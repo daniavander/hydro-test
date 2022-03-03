@@ -21,7 +21,7 @@ steps:
       
   - task: CopyFiles@2
     inputs:
-      #sourceFolder: '$(System.DefaultWorkingDirectory)/_daniavander_hydro-test/playwright-report'
+      sourceFolder: '$(Build.SourcesDirectory)/_daniavander_hydro-test/playwright-report'
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       
   - task: PublishBuildArtifacts@1    
