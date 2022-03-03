@@ -82,35 +82,15 @@
                   "results": [
                     {
                       "workerIndex": 0,
-                      "status": "passed",
-                      "duration": 39847,
-                      "stdout": [
-                        {
-                          "text": "last step next\n"
-                        }
-                      ],
+                      "status": "skipped",
+                      "duration": 0,
+                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "attachments": [
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-simple-login-test-cicd-azure-simple-login-test-DesktopChromium\\video.webm"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-simple-login-test-cicd-azure-simple-login-test-DesktopChromium\\trace.zip"
-                        },
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-simple-login-test-cicd-azure-simple-login-test-DesktopChromium\\test-finished-1.png"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
               "file": "tests/login.spec.ts.ts",
@@ -122,5 +102,9 @@
       ]
     }
   ],
-  "errors": []
+  "errors": [
+    {
+      "message": "Timed out waiting 45s for the entire test run"
+    }
+  ]
 }

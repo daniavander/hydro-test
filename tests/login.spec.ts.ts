@@ -10,18 +10,18 @@ test.describe("cicd azure simple login test", () => {
 
   test('cicd azure simple login test', async ({ page }) => {
     //await page.pause()
-    await page.screenshot({ path: './playwright-report/screenshot0.png' , fullPage: true});
+    await page.screenshot({ path: 'screenshot0.png' , fullPage: true});
     await page.locator('#i0116').type('imstestglobaladmin1@avander.hu')
     await page.keyboard.press('Enter');
-    await page.screenshot({ path: './playwright-report/screenshot1.png' , fullPage: true});
-    await page.locator("#i0118")
+    await page.screenshot({ path: 'screenshot1.png' , fullPage: true});
+    await page.waitForSelector('#i0118', {timeout: 5000})
     await page.locator('#i0118').type('123ims456!')
+    await page.screenshot({ path: 'screenshot2.png' , fullPage: true});
     await page.keyboard.press('Enter')
     await page.keyboard.press('Enter')
     await console.log("last step next")
-    await page.screenshot({ path: './playwright-report/screenshot2.png' , fullPage: true});
-    //const ghostCard = await page.locator(".top-menu-container")
+    await page.screenshot({ path: 'screenshot3.png' , fullPage: true});
+    await page.locator(".top-menu-container").screenshot({ path: 'side-panel-content.png'})
   })
-
 })
 
