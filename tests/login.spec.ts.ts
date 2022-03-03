@@ -18,10 +18,10 @@ test.describe("cicd azure simple login test", () => {
     await page.locator('#i0118').type('123ims456!')
     await page.screenshot({ path: 'screenshot2.png' , fullPage: true});
     await page.keyboard.press('Enter')
-    await page.waitForSelector('data-report-event=Signin_Submit')
+    await page.waitForSelector('text=Yes')
     await console.log("last step next")
     await page.screenshot({ path: 'screenshot3.png' , fullPage: true});
-    await page.pause()
+    //await page.pause()
         //await page.locator(".top-menu-container").screenshot({ path: 'side-panel-content.png'})
   })
 })
