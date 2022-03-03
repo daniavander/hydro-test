@@ -26,4 +26,7 @@ steps:
       Contents: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'playwright-report'
       ArtifactType: Container
+  - publish: $(Build.ArtifactStagingDirectory)
+    displayName: Publish Artifacts
+    artifact: drop
 
