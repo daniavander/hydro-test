@@ -23,7 +23,7 @@ test.describe("cicd azure simple login test", () => {
     await console.log("last step next")
     await page.screenshot({ path: 'screenshot3.png' , fullPage: true});
     //await page.pause()
-        //await page.locator(".top-menu-container").screenshot({ path: 'side-panel-content.png'})
+    await page.locator(".top-menu-container").screenshot({ path: 'side-panel-content.png'})
   })
 })
 
