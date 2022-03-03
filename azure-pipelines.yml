@@ -23,12 +23,12 @@ steps:
     displayName: 'Copy Publish Artifact: playwright-report'
     inputs:
       CopyRoot: '$(System.DefaultWorkingDirectory)/_daniavander_hydro-test/playwright-report'
-      Contents: '$(Build.StagingDirectory)'
+      Contents: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'playwright-report'
       ArtifactType: Container
       TargetPath: '$(Build.ArtifactStagingDirectory)'
   - task: PublishBuildArtifacts@1    
     displayName: 'Publish Artifact: drop'
     inputs:
-      PathtoPublish: '$(build.artifactstagingdirectory)'
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
 
