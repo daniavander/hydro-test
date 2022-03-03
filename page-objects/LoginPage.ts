@@ -51,14 +51,14 @@ export class LoginPage {
 
 
     //login in pipeline!
-    async loginInAzure(page) {
+    async loginInAzure() {
         await this.nameInput.type('imstestglobaladmin1@avander.hu')
-        await page.keyboard.press('Enter');
+        await this.page.keyboard.press('Enter');
         await this.page.waitForSelector("#displayName")
         await this.pwdInput.type('123ims456!')
-        await page.keyboard.press('Enter')
-        await page.waitForSelector(this.remember)
-        await page.locator(this.remember).click()
-        await page.locator(this.header).screenshot({ path: 'side-panel-content.png' })
+        await this.page.keyboard.press('Enter')
+        await this.page.waitForSelector("text=Yes")
+        await this.page.locator("text=Yes").click()
+        await this.page.locator(this.header).screenshot({ path: 'side-panel-content.png' })
     }
 }
