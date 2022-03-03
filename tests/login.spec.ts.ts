@@ -18,7 +18,7 @@ test.describe("cicd azure simple login test", () => {
     await page.locator('#i0118').type('123ims456!')
     await page.screenshot({ path: 'screenshot2.png' , fullPage: true});
     await page.keyboard.press('Enter')
-    await page.locator('#i0118').type('idSIButton9!')
+    await page.waitForSelector('#idSIButton9!')
     await console.log("last step next")
     await page.screenshot({ path: 'screenshot3.png' , fullPage: true});
     await page.pause()
