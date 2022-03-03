@@ -21,7 +21,9 @@ steps:
       
   - task: CopyFiles@2
     inputs:
-      sourceFolder: '$(Build.SourcesDirectory)/_daniavander_hydro-test/playwright-report'
+    #leave it empty, the copying is done from the root folder
+      #sourceFolder: '$(Build.SourcesDirectory)/_daniavander_hydro-test/playwright-report'
+      Contents: 'playwright-report/**'
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       
   - task: PublishBuildArtifacts@1    
