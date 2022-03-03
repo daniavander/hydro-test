@@ -19,6 +19,7 @@ test.describe("cicd azure simple login test", () => {
     await page.screenshot({ path: 'screenshot2.png' , fullPage: true});
     await page.keyboard.press('Enter')
     await page.waitForSelector('text=Yes')
+    await page.locator('text=Yes').click()
     await console.log("last step next")
     await page.screenshot({ path: 'screenshot3.png' , fullPage: true});
     //await page.pause()
