@@ -2,6 +2,7 @@ variables:
       VERSION: 7.2
 pool:
   vmImage: "ubuntu-18.04"
+  workingDir: '$(service_path)'
 
 steps:
 
@@ -17,7 +18,6 @@ steps:
 
     displayName: "run test"
   - script: npm run azure2
-
 
   - task: CopyPublishBuildArtifacts@1
     displayName: 'Copy Publish Artifact: playwright-report'
