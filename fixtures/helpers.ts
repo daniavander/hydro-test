@@ -31,6 +31,10 @@ export async function getRandomEmail()  {
     return crypto.randomBytes(20).toString('hex')
 }
 
+
+const fixture = baseTest.extend<{login}>({
+    
+})
 export async function loginToIMS(page) {
     //await page.pause()
     await page.screenshot({ path: 'screenshot0.png' , fullPage: true});

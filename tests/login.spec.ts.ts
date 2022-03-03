@@ -1,15 +1,19 @@
 import { test, expect } from "@playwright/test"
 import { loginToIMS } from "../fixtures/helpers"
+import { LoginPage } from "../page-objects/LoginPage"
 
 
 test.describe("cicd azure simple login test", () => {
-  let loginToIMS
+  let loginPage: LoginPage
 
   test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page)
     const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net'
     await page.goto(baseUrl, { timeout: 50000 })
-    await loginToIMS()
+    await loginPage.loginInAzure(page)
   })
+
+  
 
   test("testinfo", async ({ page }, testInfo) => {
     await page.goto('https://www.example.com')
@@ -18,7 +22,6 @@ test.describe("cicd azure simple login test", () => {
 
   test('cicd azure simple login test', async ({ page }) => {
     //await page.pause()
-    await loginToIMS.loginToIMS()
     await page.screenshot({ path: 'screenshot0.png', fullPage: true });
     await page.locator('#i0116').type('imstestglobaladmin1@avander.hu')
     await page.keyboard.press('Enter');
