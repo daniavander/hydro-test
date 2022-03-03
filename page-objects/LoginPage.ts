@@ -54,7 +54,7 @@ export class LoginPage {
     async loginInAzure(page) {
         await this.nameInput.type('imstestglobaladmin1@avander.hu')
         await page.keyboard.press('Enter');
-        await page.waitForSelector(this.displayedName)
+        await this.page.waitForSelector("#displayName")
         await this.pwdInput.type('123ims456!')
         await page.keyboard.press('Enter')
         await page.waitForSelector(this.remember)
