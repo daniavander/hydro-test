@@ -10,7 +10,7 @@ test.describe("cicd azure describe", () => {
     
     const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net'
     await page.goto(baseUrl, { timeout: 50000 })
-    //await loginPage.loginInAzure()
+    await loginPage.loginInAzure()
   })  
 
   test('cicd azure simple login test', async ({ page }) => {
@@ -27,7 +27,7 @@ test.describe("cicd azure describe", () => {
     await console.log("isvisible")
     await (await page.waitForSelector('.side-panel-content')).isVisible()
     await page.locator(".side-panel-content").elementHandle()
-    //await page.waitForTimeout(5000)
+    await page.waitForTimeout(5000)
   })
 
 })
