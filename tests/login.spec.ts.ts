@@ -3,7 +3,7 @@ import { loginToIMS } from "../fixtures/helpers"
 import { LoginPage } from "../page-objects/LoginPage"
 
 
-test.describe("cicd azure simple login test", () => {
+test.describe("cicd azure describe", () => {
   let loginPage: LoginPage
 
   test.beforeEach(async ({ page }) => {
@@ -19,10 +19,10 @@ test.describe("cicd azure simple login test", () => {
 
   test("testinfo", async ({ page }, testInfo) => {
     await page.goto('https://www.example.com')
-    console.log(testInfo.title)
+    console.log("testinfo: ",testInfo.title)
   })
 
-  test('cicd azure simple login test', async ({ page }) => {
+  /*test('cicd azure simple login test', async ({ page }) => {
     //await page.pause()
     await page.screenshot({ path: 'screenshot0.png', fullPage: true });
     await page.locator('#i0116').type('imstestglobaladmin1@avander.hu')
@@ -39,6 +39,6 @@ test.describe("cicd azure simple login test", () => {
     //await page.pause()
     await page.locator(".top-menu-container").screenshot({ path: 'side-panel-content.png' })
     await page.locator(".dashboard-qr-code-a").screenshot({ path: 'side-panel-content.png' })
-  })
+  })*/
 })
 
