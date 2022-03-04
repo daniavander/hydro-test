@@ -4,29 +4,29 @@ pool:
   vmImage: "ubuntu-18.04"
   workingDir: '$(service_path)'
 
-steps:
-
-  - script: echo $(dev)
-
+jobs:
+- job: PreWork
+  steps:
   - script: npm install
-  
   - script: npm install @playwright/test
-  - script: npx playwright install 
-
+  - script: npx playwright install
     displayName: "Install browser dependencies"
   - script: npm i playwright-chromium
 
-    displayName: "run test"
+    displayName: "run the test"
   - script: npm run azurelogin
       
-  - task: CopyFiles@2
+  - task: CopyFiles@1
     inputs:
     #leave it empty, the copying is done from the root folder
       #sourceFolder: '$(Build.SourcesDirectory)/_daniavander_hydro-test/playwright-report'
-      Contents: 'playwright-report/**'
+      contents: |
+        playwright-report/**
+        test-results/**
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       
-  - task: PublishBuildArtifacts@1    
+      
+  - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
     inputs:
       PathtoPublish: '$(build.artifactstagingdirectory)'
