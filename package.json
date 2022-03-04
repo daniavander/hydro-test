@@ -7,9 +7,9 @@
     "onchrome": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts --headed --project=Chromium",
     "cicdtesthead": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
     "azure": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
-    "azure2": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts",
+    "azureloginlocal": "playwright test tests/login.spec.ts --config=playwright.config.ts --headed",
     "azurelogin": "playwright test tests/login.spec.ts --config=playwright.config.ts",
-    "testt": "playwright test tests/test.spec.ts --config=playwright.config.ts",
+    "testt": "playwright test tests/test.spec.ts --config=playwright.config.ts --headed",
     "cicdhydro": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts",
     "cicdeeszt": "playwright test tests/eeszt.spec.ts --config=playwright.config.ts --headed",
     "cicdbasichydro": "playwright test tests/basichydro.spec.ts --config=playwright.config.ts"
@@ -31,6 +31,20 @@
     "experimental-allure-playwright": "^0.0.3",
     "jest": "^27.5.1",
     "jest-playwright-preset": "^1.7.0",
-    "playwright": "^1.19.2"
+    "playwright": "^1.19.2",
+    "ts-jest": "^26.5.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
