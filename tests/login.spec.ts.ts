@@ -13,7 +13,7 @@ test.describe("cicd azure simple login test", () => {
   })
 
   test("pom_login", async ({ page }) => {
-    await loginPage.loginInAzure(page)
+    await loginPage.loginInAzure()
   })
   
 

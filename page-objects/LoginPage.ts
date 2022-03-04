@@ -59,6 +59,6 @@ export class LoginPage {
         await this.page.keyboard.press('Enter')
         await this.page.waitForSelector("text=Yes")
         await this.page.locator("text=Yes").click()
-        await this.page.locator(this.header).screenshot({ path: 'side-panel-content.png' })
+        await this.page.locator(".top-menu-container").screenshot({ path: 'side-panel-content.png' })
     }
 }
