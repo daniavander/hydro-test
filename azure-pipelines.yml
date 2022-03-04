@@ -20,7 +20,9 @@ jobs:
     inputs:
     #leave it empty, the copying is done from the root folder
       #sourceFolder: '$(Build.SourcesDirectory)/_daniavander_hydro-test/playwright-report'
-      contents: 'playwright-report/**?test-result/**'
+      contents: |
+        playwright-report/**
+        test-result/**
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       
       
