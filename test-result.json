@@ -10,11 +10,11 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "C:/git/hydro-test/test-results",
+        "outputDir": "c:/git/hydro-test/test-results",
         "repeatEach": 1,
         "retries": 0,
         "name": "DesktopChromium",
-        "testDir": "C:/git/hydro-test",
+        "testDir": "c:/git/hydro-test",
         "testIgnore": [],
         "testMatch": [
           "**/?(*.)@(spec|test).*"
@@ -28,7 +28,7 @@
         null
       ],
       [
-        "C:\\git\\hydro-test\\my-awesome-reporter.ts",
+        "c:\\git\\hydro-test\\my-awesome-reporter.ts",
         null
       ],
       [
@@ -46,7 +46,7 @@
       "max": 5,
       "threshold": 15000
     },
-    "rootDir": "C:/git/hydro-test",
+    "rootDir": "c:/git/hydro-test",
     "quiet": false,
     "shard": null,
     "updateSnapshots": "missing",
@@ -57,64 +57,80 @@
   },
   "suites": [
     {
-      "title": "tests\\test.spec.ts",
-      "file": "tests/test.spec.ts",
+      "title": "tests\\login.spec.ts.ts",
+      "file": "tests/login.spec.ts.ts",
       "line": 0,
       "column": 0,
       "specs": [],
       "suites": [
         {
-          "title": "my first test suite",
-          "file": "tests/test.spec.ts",
-          "line": 6,
+          "title": "cicd azure describe",
+          "file": "tests/login.spec.ts.ts",
+          "line": 5,
           "column": 6,
           "specs": [
             {
-              "title": "cicd test",
+              "title": "cicd azure simple login test",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 80000,
+                  "timeout": 0,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectName": "DesktopChromium",
                   "results": [
                     {
                       "workerIndex": 0,
-                      "status": "passed",
-                      "duration": 2885,
-                      "stdout": [
-                        {
-                          "text": "last step next\n"
-                        }
-                      ],
+                      "status": "skipped",
+                      "duration": 0,
+                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "attachments": [
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-test-my-first-test-suite-cicd-test-DesktopChromium\\video.webm"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-test-my-first-test-suite-cicd-test-DesktopChromium\\trace.zip"
-                        },
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-test-my-first-test-suite-cicd-test-DesktopChromium\\test-finished-1.png"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "file": "tests/test.spec.ts",
-              "line": 14,
+              "file": "tests/login.spec.ts.ts",
+              "line": 16,
+              "column": 3
+            },
+            {
+              "title": "cicd expect",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 0,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectName": "DesktopChromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "file": "tests/login.spec.ts.ts",
+              "line": 21,
+              "column": 3
+            },
+            {
+              "title": "cicd isVisible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 0,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectName": "DesktopChromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "file": "tests/login.spec.ts.ts",
+              "line": 26,
               "column": 3
             }
           ]
@@ -122,5 +138,9 @@
       ]
     }
   ],
-  "errors": []
+  "errors": [
+    {
+      "message": "Timed out waiting 80s for the entire test run"
+    }
+  ]
 }
