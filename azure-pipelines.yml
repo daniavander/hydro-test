@@ -16,12 +16,13 @@ jobs:
     displayName: "run the test"
   - script: npm run azurelogin
       
-  - task: CopyFiles@2
+  - task: CopyFiles@1
     inputs:
     #leave it empty, the copying is done from the root folder
       #sourceFolder: '$(Build.SourcesDirectory)/_daniavander_hydro-test/playwright-report'
-      Contents: 'playwright-report/**'
+      contents: 'playwright-report/**?test-result/**'
       targetFolder: '$(Build.ArtifactStagingDirectory)'
+      
       
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
