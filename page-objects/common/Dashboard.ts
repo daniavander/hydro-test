@@ -17,11 +17,12 @@ export class Dashboard {
     }
 
     async sidebarIsVisible() {
-        await this.sideBar.waitFor()
+        await this.page.waitForTimeout(6000)
+        await this.sideBar.isVisible()
     }
     async snapshotSideBar() {
-        //take snapshot about the sidebar
-        expect(await this.sideBar.screenshot()).toMatchSnapshot('sideBar.png')
+        //take snapshot about the sidebar, took next to the test, tofast just take a white shot
+        expect(await this.sideBar.screenshot()).toMatchSnapshot('screenshot/snapshotSideBar.png')
     }
 
     async topBarIsAvailable() {

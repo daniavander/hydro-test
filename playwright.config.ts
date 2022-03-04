@@ -10,8 +10,6 @@ const config: PlaywrightTestConfig = {
   timeout: 80000,        // Timeout for each test
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
-  //reporter: process.env.CI ? 'dot' : 'list',
-  //reporter: './my-awesome-reporter.ts',
   reporter: [['html'], ['./my-awesome-reporter.ts'], ['line'], ['json', {outputFile: 'test-result.json'}]],
   // See: https://playwright.dev/docs/api/class-testconfig
   outputDir: 'test-results/',
@@ -21,10 +19,9 @@ const config: PlaywrightTestConfig = {
     viewport: { width: 1100, height: 900 },
     //actionTimeout: 50000,
     ignoreHTTPSErrors: true,
-    trace: 'on',
+    trace: 'off',
     video: 'on',
     screenshot: 'on',
-    //slowMo: 100
   },
   projects: [
     {
@@ -35,6 +32,11 @@ const config: PlaywrightTestConfig = {
           headless: true,
           // Can be "chrome", "msedge", "chrome-beta", "msedge-beta", "msedge-dev", etc. Test against chrome channel.
           channel: 'chrome',
+          launchOptions: {
+            args: ['--no-sandbox', '--disable-dev-shm-usage'],
+            headless: false,
+            slowMo: 2000,
+          },
       }
     }
   ]

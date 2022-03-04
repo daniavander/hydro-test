@@ -15,7 +15,7 @@ export class Navbar {
     constructor(page: Page) {
         this.page = page
         this.dashboard = page.locator("text=Dashboard")
-        this.activities = page.locator("text=Activities")
+        this.activities = page.locator("[title=Activities]")
         this.cases = page.locator("text=Cases")
         this.actions = page.locator("[title=Actions]")
         this.reports = page.locator("[title=Reports]")
@@ -24,7 +24,7 @@ export class Navbar {
         this.addNewCase = page.locator("[title='Add New Case']")
         this.admin = page.locator("text=Admin")
     }
-    async clickOnTopMenu(tabName) {
+    async clickOnTopMenu(tabName: string) {
         switch (tabName) {
             case "Dashboard":
                 await this.dashboard.click()

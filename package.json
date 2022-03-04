@@ -6,13 +6,12 @@
   "scripts": {
     "onchrome": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts --headed --project=Chromium",
     "cicdtesthead": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
-    "azure": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
+    "azurelogin": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
     "azureloginlocal": "playwright test tests/login.spec.ts --config=playwright.config.ts --headed",
-    "azurelogin": "playwright test tests/login.spec.ts --config=playwright.config.ts",
-    "testt": "playwright test tests/test.spec.ts --config=playwright.config.ts --headed",
-    "cicdhydro": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts",
-    "cicdeeszt": "playwright test tests/eeszt.spec.ts --config=playwright.config.ts --headed",
-    "cicdbasichydro": "playwright test tests/basichydro.spec.ts --config=playwright.config.ts"
+    "activity": "playwright test tests/smoke/activityList.spec.ts --config=playwright.config.ts --headed",
+
+
+    "cicdhydro": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts"
   },
   "author": "",
   "license": "ISC",
