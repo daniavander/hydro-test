@@ -82,13 +82,13 @@
                   "results": [
                     {
                       "workerIndex": 0,
-                      "status": "passed",
-                      "duration": 15284,
-                      "stdout": [
-                        {
-                          "text": "\u001b[36m[AsyncFunction: body]\u001b[39m\n"
-                        }
-                      ],
+                      "status": "skipped",
+                      "duration": 27380,
+                      "error": {
+                        "message": "locator.type: Target closed\n=========================== logs ===========================\nwaiting for selector \"#i0116\"\n============================================================",
+                        "stack": "locator.type: Target closed\n=========================== logs ===========================\nwaiting for selector \"#i0116\"\n============================================================\n    at LoginPage.loginInAzure (C:\\git\\hydro-test\\page-objects\\LoginPage.ts:55:30)\n    at C:\\git\\hydro-test\\tests\\smoke\\activityList.spec.ts:19:21"
+                      },
+                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
                       "attachments": [
@@ -100,12 +100,17 @@
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-activityList-Smoke-test---Activity-list-31035---Activity-list-DesktopChromium\\test-finished-1.png"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-activityList-Smoke-test---Activity-list-31035---Activity-list-DesktopChromium\\test-failed-1.png"
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\git\\hydro-test\\tests\\smoke\\activityList.spec.ts",
+                        "column": 21,
+                        "line": 19
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
               "file": "tests/smoke/activityList.spec.ts",

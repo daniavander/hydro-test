@@ -8,7 +8,7 @@ test.describe("Smoke test - Activity list", () => {
   let navBar: Navbar
   let dashBoard: Dashboard
 
-  const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/app/'
+  const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/'
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page)
@@ -16,7 +16,7 @@ test.describe("Smoke test - Activity list", () => {
     dashBoard = new Dashboard(page)
 
     await page.goto(baseUrl, { timeout: 50000 })
-    await loginPage.loginInAzure()
+    //await loginPage.loginInAzure()
   })
 
   test('31035 - Activity list', async ({ page, request }) => {
