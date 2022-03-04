@@ -15,7 +15,8 @@ test.describe("cicd azure describe", () => {
 
   test('cicd azure simple login test', async ({ page }) => {
     await console.log("loog")
-    await page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/side-panel-content.png' })
+    await page.waitForSelector(".dashboard-qr-code-a")
+    await page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
   })
 
   test('cicd expect', async ({ page }) => {
