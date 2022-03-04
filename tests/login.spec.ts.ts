@@ -17,11 +17,6 @@ test.describe("cicd azure describe", () => {
   })
   
 
-  test("testinfo", async ({ page }, testInfo) => {
-    await page.goto('https://www.example.com')
-    console.log("testinfo: ",testInfo.title)
-  })
-
   /*test('cicd azure simple login test', async ({ page }) => {
     //await page.pause()
     await page.screenshot({ path: 'screenshot0.png', fullPage: true });
