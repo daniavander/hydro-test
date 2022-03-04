@@ -22,7 +22,7 @@ jobs:
       #sourceFolder: '$(Build.SourcesDirectory)/_daniavander_hydro-test/playwright-report'
       contents: |
         playwright-report/**
-        test-result/**
+        test-results/**
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       
       
