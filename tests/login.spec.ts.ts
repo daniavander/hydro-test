@@ -17,5 +17,17 @@ test.describe("cicd azure describe", () => {
     await console.log("loog")
     await page.locator(".dashboard-qr-code-a").screenshot({ path: 'side-panel-content.png' })
   })
+
+  test('cicd expect', async ({ page }) => {
+    await console.log("expect")
+    expect(page.isVisible(".side-panel-content"))
+  })
+
+  test('cicd isVisible', async ({ page }) => {
+    await console.log("isvisible")
+    await (await page.waitForSelector('.side-panel-content')).isVisible()
+    await page.locator(".side-panel-content").elementHandle()
+  })
+
 })
 
