@@ -21,33 +21,7 @@ test.describe("cicd azure describe", () => {
   })
 
   test('cicd azure simple login test', async ({ page }) => {
-    await console.log("login azure webkit")
-    
-    var emailaddress = "ImsTestGlobalAdmin1@avander.hu"
-
-    await page.type("id=i0116",emailaddress)
-    await page.locator('text=Next').click()
-    await page.screenshot({ path: 'screenshot/email.png' });
-    //await delay(2000);
-
-    var pwd = "123ims456!"
-    await page.type("id=i0118",pwd , { timeout: 10000 } )
-    //await delay(2000);
-    await page.screenshot({ path: 'screenshot/jelszo1.png' });
-    await page.locator('text=Sign in').click( { timeout: 10000 } )
-    await page.screenshot({ path: 'screenshot/jelszo2.png' });
-    //await delay(5000);
-    await page.screenshot({ path: 'screenshot/jelszo3.png' });
-    await page.locator('text=Yes').click( { timeout: 40000 } )
-    await page.screenshot({ path: 'screenshot/jelszoremember.png' })
-    //await delay(5000)
-    await page.screenshot({ path: 'screenshot/loggedin.png' });
-    //await delay(15000)
-    const ghostCard = await page.locator(".side-panel-content")
-    await ghostCard.screenshot({ path: 'screenshot/side-panel-content.png' })
-
-    await page.waitForSelector(".dashboard-qr-code-a")
-    await page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
+    await loginPage.loginInAzure()
 
     /*
     console.log('before waiting');

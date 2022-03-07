@@ -52,13 +52,32 @@ export class LoginPage {
 
     //login in pipeline!
     async loginInAzure() {
-        await this.nameInput.type('imstestglobaladmin1@avander.hu')
-        await this.page.keyboard.press('Enter');
-        await this.page.waitForSelector("#displayName")
-        await this.pwdInput.type('123ims456!')
-        //await this.page.keyboard.press('Enter')
-        await this.page.waitForSelector("text=Yes")
-        await this.page.locator("text=Yes").click()
-        //await this.page.locator(".top-menu-container").screenshot({ path: 'screenhot/header.png' })
+    await console.log("login azure webkit")
+    
+    var emailaddress = "ImsTestGlobalAdmin1@avander.hu"
+
+    await this.page.type("id=i0116",emailaddress)
+    await this.page.locator('text=Next').click()
+    await this.page.screenshot({ path: 'screenshot/email.png' });
+    //await delay(2000);
+
+    var pwd = "123ims456!"
+    await this.page.type("id=i0118", pwd , { timeout: 10000 } )
+    //await delay(2000);
+    await this.page.screenshot({ path: 'screenshot/jelszo1.png' });
+    await this.page.locator('text=Sign in').click( { timeout: 10000 } )
+    await this.page.screenshot({ path: 'screenshot/jelszo2.png' });
+    //await delay(5000);
+    await this.page.screenshot({ path: 'screenshot/jelszo3.png' });
+    await this.page.locator('text=Yes').click( { timeout: 40000 } )
+    await this.page.screenshot({ path: 'screenshot/jelszoremember.png' })
+    //await delay(5000)
+    await this.page.screenshot({ path: 'screenshot/loggedin.png' });
+    //await delay(15000)
+    const ghostCard = await this.page.locator(".side-panel-content")
+    await ghostCard.screenshot({ path: 'screenshot/side-panel-content.png' })
+
+    await this.page.waitForSelector(".dashboard-qr-code-a")
+    await this.page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
     }
 }
