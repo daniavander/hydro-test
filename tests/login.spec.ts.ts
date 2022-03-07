@@ -27,22 +27,20 @@ test.describe("cicd azure describe", () => {
 
     await page.type("id=i0116",emailaddress)
     await page.locator('text=Next').click()
-    await page.screenshot({ path: 'screenshot/screenshot.png' });
+    await page.screenshot({ path: 'screenshot/email.png' });
     //await delay(2000);
 
     var pwd = "123ims456!"
     await page.type("id=i0118",pwd , { timeout: 10000 } )
     //await delay(2000);
     await page.locator('text=Sign in').click( { timeout: 10000 } )
-    await page.screenshot({ path: 'screenshot/screenshot2.png' });
+    await page.screenshot({ path: 'screenshot/jelszo.png' });
     await delay(15000);
     console.log('after waiting 15 sec');
-    await page.screenshot({ path: 'screenshot/side-panel-content2.png' })
-    await page.locator('text=Yes').click( { timeout: 20000 } )
-    //await delay(5000);
-    await page.screenshot({ path: 'screenshot/screenshot3.png' });
+    await page.screenshot({ path: 'screenshot/remember.png' })
+    await page.locator('text=Yes').click( { timeout: 30000 } )
     await delay(10000);
-    await page.screenshot({ path: 'screenshot/screenshot4.png' });
+    await page.screenshot({ path: 'screenshot/loggedin.png' });
     /*const ghostCard = await page.locator(".side-panel-content")
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content.png' })
 
