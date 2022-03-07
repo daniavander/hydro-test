@@ -52,6 +52,7 @@ export class LoginPage {
 
     //login in pipeline!
     async loginInAzure() {
+        //withous sso login steps
         var emailaddress = "ImsTestGlobalAdmin1@avander.hu"
         var pwd = "123ims456!"
 
