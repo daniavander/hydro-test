@@ -25,13 +25,15 @@ test.describe("cicd azure describe", () => {
     //await page.pause()
     await page.locator("#i0116").type("ImsTestGlobalAdmin1@avander.hu")
     await page.locator('text=Next').click()
+    await page.screenshot({ path: 'screenshot/screenshot.png' });
 
     await page.locator("#i0118").type('123ims456!')
     await delay(2000);
     await page.locator('text=Sign in').click()
+    await page.screenshot({ path: 'screenshot/screenshot2.png' });
     //await page.locator('text=Yes').click()
 
-    const ghostCard = await page.locator(".side-panel-content")
+    /*const ghostCard = await page.locator(".side-panel-content")
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content.png' })
 
     console.log('before waiting');
@@ -39,6 +41,7 @@ test.describe("cicd azure describe", () => {
     await delay(15000);
     console.log('after waiting 15 sec');
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content2.png' })
+
     //await this.page.locator(".top-menu-container").screenshot({ path: 'screenhot/header.png' })
     //await page.waitForSelector(".dashboard-qr-code-a")
     //await page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
