@@ -16,6 +16,7 @@ jobs:
     displayName: "run the test"
   - script: npm run azurelogin
       
+      
   - task: CopyFiles@1
     inputs:
     #leave it empty, the copying is done from the root folder
@@ -29,5 +30,5 @@ jobs:
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
     inputs:
-      PathtoPublish: '$(build.artifactstagingdirectory)'
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
 
