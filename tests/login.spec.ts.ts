@@ -46,6 +46,9 @@ test.describe("cicd azure describe", () => {
     const ghostCard = await page.locator(".side-panel-content")
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content.png' })
 
+    await page.waitForSelector(".dashboard-qr-code-a")
+    await page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
+
     /*
     console.log('before waiting');
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content1.png' })
@@ -54,8 +57,7 @@ test.describe("cicd azure describe", () => {
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content2.png' })*/
 
     //await this.page.locator(".top-menu-container").screenshot({ path: 'screenhot/header.png' })
-    //await page.waitForSelector(".dashboard-qr-code-a")
-    //await page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
+    
   })
 
   /*test('cicd expect', async ({ page }) => {
