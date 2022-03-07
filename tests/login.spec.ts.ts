@@ -26,8 +26,10 @@ test.describe("cicd azure describe", () => {
     await page.locator("#i0116").type("ImsTestGlobalAdmin1@avander.hu")
     await page.locator('text=Next').click()
     await page.screenshot({ path: 'screenshot/screenshot.png' });
-
-    await page.locator("#i0118").type('123ims456!')
+    await delay(2000);
+    var pwd = "123ims456!"
+    await page.locator("#i0118").type(pwd)
+    console.log('password',pwd);
     await delay(2000);
     await page.locator('text=Sign in').click()
     await page.screenshot({ path: 'screenshot/screenshot2.png' });
