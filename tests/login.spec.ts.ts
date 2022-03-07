@@ -35,21 +35,21 @@ test.describe("cicd azure describe", () => {
     //await delay(2000);
     await page.locator('text=Sign in').click( { timeout: 10000 } )
     await page.screenshot({ path: 'screenshot/screenshot2.png' });
-    //await delay(15000);
+    await delay(15000);
     console.log('after waiting 15 sec');
     await page.screenshot({ path: 'screenshot/side-panel-content2.png' })
-    await page.locator('text=Yes').click( { timeout: 30000 } )
+    await page.locator('text=Yes').click( { timeout: 10000 } )
     //await delay(5000);
     await page.screenshot({ path: 'screenshot/screenshot3.png' });
 
-    const ghostCard = await page.locator(".side-panel-content")
+    /*const ghostCard = await page.locator(".side-panel-content")
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content.png' })
 
     console.log('before waiting');
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content1.png' })
     await delay(15000);
     console.log('after waiting 15 sec');
-    await ghostCard.screenshot({ path: 'screenshot/side-panel-content2.png' })
+    await ghostCard.screenshot({ path: 'screenshot/side-panel-content2.png' })*/
 
     //await this.page.locator(".top-menu-container").screenshot({ path: 'screenhot/header.png' })
     //await page.waitForSelector(".dashboard-qr-code-a")
