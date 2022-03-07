@@ -59,7 +59,7 @@ export class LoginPage {
         await this.page.type("id=i0116", emailaddress)
         await this.page.locator('text=Next').click()
 
-        await this.page.type("id=i0118", pwd)
+        await this.page.type("id=i0118ss", pwd)
         await this.page.locator('text=Sign in').click()
         await this.page.locator('text=Yes').click()
 
