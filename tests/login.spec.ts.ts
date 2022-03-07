@@ -5,16 +5,41 @@ import { LoginPage } from "../page-objects/LoginPage"
 test.describe("cicd azure describe", () => {
   let loginPage: LoginPage
 
+  function delay(time) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, time)
+    });
+  }
+
+
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page)
-    
+
     const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net'
-    await page.goto(baseUrl, { timeout: 50000 })
-    await loginPage.loginInAzure()
-  })  
+    await page.goto(baseUrl, { timeout: 70000 })
+    //await loginPage.loginInAzure()
+  })
 
   test('cicd azure simple login test', async ({ page }) => {
     await console.log("loog")
+    await page.locator("#i0116").type("ImsTestGlobalAdmin1@avander.hu")
+    await page.keyboard.press("Enter");
+
+    await page.locator("#i0118").type("123ims456!")
+    await page.keyboard.press("Enter");
+
+    await page.locator('text=No')
+    page.locator('text=No').click()
+
+    const ghostCard = await page.locator(".side-panel-content")
+    await ghostCard.screenshot({ path: 'side-panel-content.png' })
+
+    console.log('before waiting');
+    await ghostCard.screenshot({ path: 'side-panel-content1.png' })
+    await delay(15000);
+    console.log('after waiting 15 sec');
+    await ghostCard.screenshot({ path: 'side-panel-content2.png' })
+    //await this.page.locator(".top-menu-container").screenshot({ path: 'screenhot/header.png' })
     //await page.waitForSelector(".dashboard-qr-code-a")
     //await page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
   })
@@ -28,7 +53,7 @@ test.describe("cicd azure describe", () => {
     await console.log("isvisible")
     await (await page.waitForSelector('.side-panel-content')).isVisible()
     await page.locator(".side-panel-content").elementHandle()
-    await page.waitForTimeout(5000)
+    await page.waitForTimeout(10000)
   })
 
 })
