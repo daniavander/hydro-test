@@ -22,6 +22,7 @@ const config: PlaywrightTestConfig = {
     trace: 'off',
     video: 'on',
     screenshot: 'on',
+    actionTimeout: 20000 
   },
   projects: [
     {
