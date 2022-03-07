@@ -29,7 +29,7 @@ test.describe("cicd azure describe", () => {
     await page.locator("#i0118").type('123ims456!')
     await delay(2000);
     await page.locator('text=Sign in').click()
-    await page.locator('text=Yes').click()
+    //await page.locator('text=Yes').click()
 
     const ghostCard = await page.locator(".side-panel-content")
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content.png' })
