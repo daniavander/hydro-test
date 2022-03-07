@@ -63,19 +63,15 @@ export class LoginPage {
 
         var pwd = "123ims456!"
         await this.page.type("id=i0118", pwd, { timeout: 10000 })
-        //await delay(2000);
-        await this.page.screenshot({ path: 'screenshot/jelszo1.png' });
+
         await this.page.locator('text=Sign in').click({ timeout: 10000 })
-        await this.page.screenshot({ path: 'screenshot/jelszo2.png' });
-        //await delay(5000);
-        await this.page.screenshot({ path: 'screenshot/jelszo3.png' });
+
+
         await this.page.locator('text=Yes').click({ timeout: 40000 })
-        await this.page.screenshot({ path: 'screenshot/jelszoremember.png' })
-        //await delay(5000)
-        await this.page.screenshot({ path: 'screenshot/loggedin.png' });
-        //await delay(15000)
-        const sidepanel = await this.page.locator(".side-panel-content")
-        await sidepanel.screenshot({ path: 'screenshot/side-panel-content.png' })
+
+
+        await this.page.waitForSelector(".side-panel-content")
+
 
         await this.page.waitForSelector(".dashboard-qr-code-a")
         await this.page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
