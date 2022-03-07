@@ -24,6 +24,7 @@ jobs:
       contents: |
         playwright-report/**
         screenshot/**
+        test-results/**
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       
       
