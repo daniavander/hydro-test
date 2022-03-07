@@ -40,7 +40,7 @@ test.describe("cicd azure describe", () => {
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content1.png' })
     await delay(15000);
     console.log('after waiting 15 sec');
-    await ghostCard.screenshot({ path: 'screenshot/side-panel-content2.png' })
+    await ghostCard.screenshot({ path: 'screenshot/side-panel-content2.png' })*/
 
     //await this.page.locator(".top-menu-container").screenshot({ path: 'screenhot/header.png' })
     //await page.waitForSelector(".dashboard-qr-code-a")
