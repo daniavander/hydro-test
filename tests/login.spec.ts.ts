@@ -36,10 +36,10 @@ test.describe("cicd azure describe", () => {
     await page.screenshot({ path: 'screenshot/jelszo1.png' });
     await page.locator('text=Sign in').click( { timeout: 10000 } )
     await page.screenshot({ path: 'screenshot/jelszo2.png' });
-    await delay(15000);
+    await delay(5000);
     await page.screenshot({ path: 'screenshot/jelszo3.png' });
     await page.locator('text=Yes').click( { timeout: 40000 } )
-    await page.screenshot({ path: 'screenshot/remember.png' })
+    await page.screenshot({ path: 'screenshot/jelszoremember.png' })
     await delay(5000)
     await page.screenshot({ path: 'screenshot/loggedin.png' });
     await delay(15000)
