@@ -40,7 +40,7 @@ test.describe("cicd azure describe", () => {
     await page.screenshot({ path: 'screenshot/jelszo3.png' });
     await page.locator('text=Yes').click( { timeout: 40000 } )
     await page.screenshot({ path: 'screenshot/remember.png' })
-    await delay(50000)
+    await delay(5000)
     await page.screenshot({ path: 'screenshot/loggedin.png' });
     await delay(15000)
     const ghostCard = await page.locator(".side-panel-content")
