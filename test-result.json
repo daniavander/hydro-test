@@ -3,7 +3,7 @@
     "forbidOnly": false,
     "globalSetup": null,
     "globalTeardown": null,
-    "globalTimeout": 110000,
+    "globalTimeout": 140000,
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
@@ -19,7 +19,7 @@
         "testMatch": [
           "**/?(*.)@(spec|test).*"
         ],
-        "timeout": 110000
+        "timeout": 120000
       }
     ],
     "reporter": [
@@ -57,25 +57,25 @@
   },
   "suites": [
     {
-      "title": "tests\\login.spec.ts.ts",
-      "file": "tests/login.spec.ts.ts",
+      "title": "tests\\smoke\\activityList.spec.ts",
+      "file": "tests/smoke/activityList.spec.ts",
       "line": 0,
       "column": 0,
       "specs": [],
       "suites": [
         {
-          "title": "cicd azure describe",
-          "file": "tests/login.spec.ts.ts",
-          "line": 5,
+          "title": "Smoke test - Activity list",
+          "file": "tests/smoke/activityList.spec.ts",
+          "line": 6,
           "column": 6,
           "specs": [
             {
-              "title": "cicd azure simple login test",
+              "title": "31035 - Activity list",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 110000,
+                  "timeout": 120000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectName": "DesktopChromium",
@@ -83,30 +83,20 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 40815,
-                      "stdout": [
-                        {
-                          "text": "login azure webkit\n"
-                        },
-                        {
-                          "text": "before waiting\n"
-                        },
-                        {
-                          "text": "after waiting 15 sec\n"
-                        }
-                      ],
+                      "duration": 12929,
+                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
                       "attachments": [
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-describe-cicd-azure-simple-login-test-DesktopChromium\\video.webm"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-activityList-Smoke-test---Activity-list-31035---Activity-list-DesktopChromium\\video.webm"
                         },
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-describe-cicd-azure-simple-login-test-DesktopChromium\\test-finished-1.png"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-activityList-Smoke-test---Activity-list-31035---Activity-list-DesktopChromium\\test-finished-1.png"
                         }
                       ]
                     }
@@ -114,8 +104,8 @@
                   "status": "expected"
                 }
               ],
-              "file": "tests/login.spec.ts.ts",
-              "line": 23,
+              "file": "tests/smoke/activityList.spec.ts",
+              "line": 22,
               "column": 3
             }
           ]
