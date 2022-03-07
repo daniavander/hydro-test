@@ -10,18 +10,18 @@ test.describe("cicd azure describe", () => {
     
     const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net'
     await page.goto(baseUrl, { timeout: 50000 })
-    //await loginPage.loginInAzure()
+    await loginPage.loginInAzure()
   })  
 
   test('cicd azure simple login test', async ({ page }) => {
     await console.log("loog")
-    await page.waitForSelector(".dashboard-qr-code-a")
-    await page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
+    //await page.waitForSelector(".dashboard-qr-code-a")
+    //await page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
   })
 
   test('cicd expect', async ({ page }) => {
     await console.log("expect")
-    expect(page.isVisible(".side-panel-content"))
+    expect(page.isVisible("side-panel-content obs_clearfix"))
   })
 
   test('cicd isVisible', async ({ page }) => {
