@@ -63,6 +63,7 @@ export class LoginPage {
         await this.page.locator('text=Yes').click({ timeout: 40000 })
         await this.page.waitForSelector(".side-panel-content")
         await this.page.waitForSelector(".dashboard-qr-code-a")
+        await this.page.screenshot({ path: 'screenshot/loggedin.png' });
     }
 
     //login in pipeline!
