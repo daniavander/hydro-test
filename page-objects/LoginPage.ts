@@ -52,29 +52,17 @@ export class LoginPage {
 
     //login in pipeline!
     async loginInAzure() {
-        await console.log("login azure webkit")
-
         var emailaddress = "ImsTestGlobalAdmin1@avander.hu"
+        var pwd = "123ims456!"
 
         await this.page.type("id=i0116", emailaddress)
         await this.page.locator('text=Next').click()
-        await this.page.screenshot({ path: 'screenshot/email.png' });
-        //await delay(2000);
 
-        var pwd = "123ims456!"
-        await this.page.type("id=i0118", pwd, { timeout: 10000 })
-
-        await this.page.locator('text=Sign in').click({ timeout: 10000 })
-
-
-        await this.page.locator('text=Yes').click({ timeout: 40000 })
-
-
+        await this.page.type("id=i0118", pwd)
+        await this.page.locator('text=Sign in').click()
+        await this.page.locator('text=Yes').click()
         await this.page.waitForSelector(".side-panel-content")
-
-
         await this.page.waitForSelector(".dashboard-qr-code-a")
-        await this.page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
     }
 
     //login in pipeline!
