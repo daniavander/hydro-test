@@ -56,7 +56,7 @@ export class LoginPage {
         await this.page.keyboard.press('Enter');
         await this.page.waitForSelector("#displayName")
         await this.pwdInput.type('123ims456!')
-        await this.page.keyboard.press('Enter')
+        //await this.page.keyboard.press('Enter')
         await this.page.waitForSelector("text=Yes")
         await this.page.locator("text=Yes").click()
         //await this.page.locator(".top-menu-container").screenshot({ path: 'screenhot/header.png' })

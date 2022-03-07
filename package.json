@@ -8,10 +8,7 @@
     "cicdtesthead": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
     "azurelogin": "playwright test tests/login.spec.ts --config=playwright.config.ts",
     "azureloginlocal": "playwright test tests/login.spec.ts --config=playwright.config.ts --headed",
-
     "activity": "playwright test tests/smoke/activityList.spec.ts --config=playwright.config.ts",
-
-
     "cicdhydro": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts"
   },
   "author": "",
@@ -21,6 +18,7 @@
     "init-playwright": "^0.25.3",
     "mocha": "^9.2.1",
     "playwright-core": "^1.19.2",
+    "playwright-webkit": "^1.19.2",
     "prettier": "^2.5.1"
   },
   "devDependencies": {

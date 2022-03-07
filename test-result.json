@@ -3,7 +3,7 @@
     "forbidOnly": false,
     "globalSetup": null,
     "globalTeardown": null,
-    "globalTimeout": 80000,
+    "globalTimeout": 110000,
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
@@ -19,7 +19,7 @@
         "testMatch": [
           "**/?(*.)@(spec|test).*"
         ],
-        "timeout": 80000
+        "timeout": 110000
       }
     ],
     "reporter": [
@@ -75,7 +75,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 80000,
+                  "timeout": 110000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectName": "DesktopChromium",
@@ -83,10 +83,16 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 4653,
+                      "duration": 40815,
                       "stdout": [
                         {
-                          "text": "loog\n"
+                          "text": "login azure webkit\n"
+                        },
+                        {
+                          "text": "before waiting\n"
+                        },
+                        {
+                          "text": "after waiting 15 sec\n"
                         }
                       ],
                       "stderr": [],
@@ -109,93 +115,7 @@
                 }
               ],
               "file": "tests/login.spec.ts.ts",
-              "line": 16,
-              "column": 3
-            },
-            {
-              "title": "cicd expect",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 80000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectName": "DesktopChromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "status": "passed",
-                      "duration": 4432,
-                      "stdout": [
-                        {
-                          "text": "expect\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "attachments": [
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-describe-cicd-expect-DesktopChromium\\video.webm"
-                        },
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-describe-cicd-expect-DesktopChromium\\test-finished-1.png"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "file": "tests/login.spec.ts.ts",
-              "line": 22,
-              "column": 3
-            },
-            {
-              "title": "cicd isVisible",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 80000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectName": "DesktopChromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "status": "passed",
-                      "duration": 11758,
-                      "stdout": [
-                        {
-                          "text": "isvisible\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "attachments": [
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-describe-cicd-isVisible-DesktopChromium\\video.webm"
-                        },
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-describe-cicd-isVisible-DesktopChromium\\test-finished-1.png"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "file": "tests/login.spec.ts.ts",
-              "line": 27,
+              "line": 23,
               "column": 3
             }
           ]

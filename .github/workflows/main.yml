@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: run tests
-        run: npm run azure2
+        run: npm run azurelogin
 
       - name: push artifacts
         if: always()

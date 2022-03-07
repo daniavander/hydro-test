@@ -21,30 +21,30 @@ test.describe("cicd azure describe", () => {
   })
 
   test('cicd azure simple login test', async ({ page }) => {
-    await console.log("loog")
+    await console.log("login azure webkit")
+    //await page.pause()
     await page.locator("#i0116").type("ImsTestGlobalAdmin1@avander.hu")
-    await page.keyboard.press("Enter");
+    await page.locator('text=Next').click()
 
-    await page.locator("#i0118").type("123ims456!")
-    await page.keyboard.press("Enter");
-
-    await page.locator('text=No')
-    page.locator('text=No').click()
+    await page.locator("#i0118").type('123ims456!')
+    await delay(2000);
+    await page.locator('text=Sign in').click()
+    await page.locator('text=Yes').click()
 
     const ghostCard = await page.locator(".side-panel-content")
-    await ghostCard.screenshot({ path: 'side-panel-content.png' })
+    await ghostCard.screenshot({ path: 'screenshot/side-panel-content.png' })
 
     console.log('before waiting');
-    await ghostCard.screenshot({ path: 'side-panel-content1.png' })
+    await ghostCard.screenshot({ path: 'screenshot/side-panel-content1.png' })
     await delay(15000);
     console.log('after waiting 15 sec');
-    await ghostCard.screenshot({ path: 'side-panel-content2.png' })
+    await ghostCard.screenshot({ path: 'screenshot/side-panel-content2.png' })
     //await this.page.locator(".top-menu-container").screenshot({ path: 'screenhot/header.png' })
     //await page.waitForSelector(".dashboard-qr-code-a")
     //await page.locator(".dashboard-qr-code-a").screenshot({ path: 'screenhot/qr-code.png' })
   })
 
-  test('cicd expect', async ({ page }) => {
+  /*test('cicd expect', async ({ page }) => {
     await console.log("expect")
     expect(page.isVisible("side-panel-content obs_clearfix"))
   })
@@ -54,7 +54,7 @@ test.describe("cicd azure describe", () => {
     await (await page.waitForSelector('.side-panel-content')).isVisible()
     await page.locator(".side-panel-content").elementHandle()
     await page.waitForTimeout(10000)
-  })
+  })*/
 
 })
 
