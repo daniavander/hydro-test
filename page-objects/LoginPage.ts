@@ -58,9 +58,9 @@ export class LoginPage {
         await this.page.type("id=i0116", emailaddress)
         await this.page.locator('text=Next').click()
 
-        await this.page.type("id=i0118", pwd)
-        await this.page.locator('text=Sign in').click()
-        await this.page.locator('text=Yes').click()
+        await this.page.type("id=i0118", pwd, { timeout: 10000 })
+        await this.page.locator('text=Sign in').click({ timeout: 10000 })
+        await this.page.locator('text=Yes').click({ timeout: 40000 })
         await this.page.waitForSelector(".side-panel-content")
         await this.page.waitForSelector(".dashboard-qr-code-a")
     }
