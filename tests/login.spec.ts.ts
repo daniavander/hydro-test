@@ -25,21 +25,15 @@ test.describe("cicd azure describe", () => {
     //await page.pause()
     await page.locator("#i0116").type("ImsTestGlobalAdmin1@avander.hu")
     await page.locator('text=Next').click()
-    await page.screenshot({ path: 'screenshot/screenshot.png' });
-    await delay(2000);
     var pwd = "123ims456!"
-    //await page.locator("#i0118").type(pwd)
     await page.type("id=i0118",pwd)
-    console.log('password',pwd);
-    await delay(2000);
     await page.locator('text=Sign in').click()
     await page.screenshot({ path: 'screenshot/screenshot2.png' });
-    await delay(15000);
-    console.log('after waiting 15 sec');
-    await page.screenshot({ path: 'screenshot/side-panel-content2.png' })
     await page.locator('text=Yes').click()
     await delay(5000);
     await page.screenshot({ path: 'screenshot/screenshot3.png' });
+    await delay(5000);
+    await page.screenshot({ path: 'screenshot/screenshot4.png' });
 
     /*const ghostCard = await page.locator(".side-panel-content")
     await ghostCard.screenshot({ path: 'screenshot/side-panel-content.png' })
