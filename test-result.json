@@ -87,7 +87,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 70000,
+                  "timeout": 0,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectName": "webkit",
@@ -95,7 +95,7 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 24303,
+                      "duration": 31645,
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,

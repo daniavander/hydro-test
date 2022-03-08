@@ -40,10 +40,11 @@ test.describe("Smoke tests", () => {
     await expect(actionBar).toHaveClass("action-bar obs_clearfix ng-star-inserted");
     const response = await request.get(`${baseUrl}pi/report?queryString=`)
     expect(response.status()).toBe(200)
-    expect(await page.isVisible("//span[text()='Sum']"))
-    expect(await page.isVisible("//span[text()='Breakdown']"))
-    expect(await page.isVisible("//span[text()='fakedia']"))
-    expect(await page.isVisible("//span[text()='Legacy\\ reports']"))
+    expect(page.locator("//span[text()='Sum']")).toBeVisible()
+    expect(page.locator("//span[text()='Breakdown']")).toBeVisible()
+    expect(page.locator("//span[text()='Diagrams']")).toBeVisible()
+    expect(page.locator("//span[text()='Legacy\\ reports']")).toBeVisible()
+    expect(page.locator("//span[text()='faketext']")).toBeVisible()
   })
 })
 
