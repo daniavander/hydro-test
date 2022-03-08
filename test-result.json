@@ -3,7 +3,7 @@
     "forbidOnly": false,
     "globalSetup": null,
     "globalTeardown": null,
-    "globalTimeout": 50000,
+    "globalTimeout": 70000,
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
@@ -13,13 +13,13 @@
         "outputDir": "C:/git/hydro-test/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "name": "DesktopChromium",
+        "name": "chromium",
         "testDir": "C:/git/hydro-test",
         "testIgnore": [],
         "testMatch": [
           "**/?(*.)@(spec|test).*"
         ],
-        "timeout": 50000
+        "timeout": 70000
       },
       {
         "outputDir": "C:/git/hydro-test/test-results",
@@ -31,7 +31,7 @@
         "testMatch": [
           "**/?(*.)@(spec|test).*"
         ],
-        "timeout": 50000
+        "timeout": 70000
       }
     ],
     "reporter": [
@@ -69,20 +69,20 @@
   },
   "suites": [
     {
-      "title": "tests\\login.spec.ts.ts",
-      "file": "tests/login.spec.ts.ts",
+      "title": "tests\\smoke\\activityList.spec.ts",
+      "file": "tests/smoke/activityList.spec.ts",
       "line": 0,
       "column": 0,
       "specs": [],
       "suites": [
         {
-          "title": "cicd azure describe",
-          "file": "tests/login.spec.ts.ts",
-          "line": 5,
+          "title": "Smoke test - Activity list",
+          "file": "tests/smoke/activityList.spec.ts",
+          "line": 6,
           "column": 6,
           "specs": [
             {
-              "title": "cicd azure simple login test",
+              "title": "31035 - Activity list",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,7 +95,7 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 32237,
+                      "duration": 48937,
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
@@ -103,12 +103,12 @@
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-describe-cicd-azure-simple-login-test-webkit\\video.webm"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-activityList-Smoke-test---Activity-list-31035---Activity-list-webkit\\video.webm"
                         },
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-login.spec.ts.ts-cicd-azure-describe-cicd-azure-simple-login-test-webkit\\test-finished-1.png"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-activityList-Smoke-test---Activity-list-31035---Activity-list-webkit\\test-finished-1.png"
                         }
                       ]
                     }
@@ -116,8 +116,8 @@
                   "status": "expected"
                 }
               ],
-              "file": "tests/login.spec.ts.ts",
-              "line": 23,
+              "file": "tests/smoke/activityList.spec.ts",
+              "line": 22,
               "column": 3
             }
           ]

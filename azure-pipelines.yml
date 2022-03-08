@@ -24,7 +24,7 @@ jobs:
 
     displayName: "run the test"
     condition: succeeded()
-  - script: npm run azurelogin
+  - script: npm run activity
       
       
   - task: CopyFiles@1
