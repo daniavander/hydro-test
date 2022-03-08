@@ -1,48 +1,24 @@
 variables:
       VERSION: 7.2
 pool:
-  vmImage: "ubuntu-18.04"
+  #vmImage: "ubuntu-18.04"
+  vmImage: 'ubuntu-20.04'
   workingDir: '$(service_path)'
 
 jobs:
 - job: PreWork
   steps:
-  # Install browser deps, starting with webkit
-# https://github.com/microsoft/playwright/issues/1062
-  - bash: |
-      which bash
-      sudo apt-get install -y libwoff1 \
-                         libopus0 \
-                         libwebp6 \
-                         libwebpdemux2 \
-                         libenchant1c2a \
-                         libgudev-1.0-0 \
-                         libsecret-1-0 \
-                         libhyphen0 \
-                         libgdk-pixbuf2.0-0 \
-                         libegl1 \
-                         libnotify4 \
-                         libxslt1.1 \
-                         libevent-2.1-6 \
-                         libgles2 \
-                         libgl1 \
-                         libegl1 \
-                         libvpx5 \
-                         libnss3 \
-                         libxss1 \
-                         libasound2 \
-                         libdbus-glib-1-2 \
-                         libxt6
-    displayName: Multiline Bash script
+
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '12.x'
+      versionSpec: '14.x'
     displayName: 'Install Node.js'
     
   - script: npm install
+  - script: npm ci
   - script: npm install @playwright/test
-  - script: npx playwright install
+  - script: npx playwright install --with-deps
     displayName: "Install browser dependencies"
   - script: npm i playwright-chromium
 
