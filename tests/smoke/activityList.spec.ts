@@ -28,7 +28,7 @@ test.describe("Smoke test - Activity list", () => {
     await page.pause()
     await page.locator('.obs_csstable').isVisible()
     const activitiesHeader = page.locator('.header.header-style2');
-    await expect(activitiesHeader).toHaveClass("row obs_flex obs_flexgrow1 header header-style2");
+    await expect(activitiesHeader).toHaveClass("row obs_flex obs_flexgrow1 header header-style2 badclassname");
 
     const response = await request.get(`${baseUrl}pi/activity?queryString=`)
     expect(response.status()).toBe(200)
