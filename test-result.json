@@ -69,25 +69,25 @@
   },
   "suites": [
     {
-      "title": "tests\\smoke\\activityList.spec.ts",
-      "file": "tests/smoke/activityList.spec.ts",
+      "title": "tests\\smoke\\smokeTests.spec.ts",
+      "file": "tests/smoke/smokeTests.spec.ts",
       "line": 0,
       "column": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Smoke test - Activity list",
-          "file": "tests/smoke/activityList.spec.ts",
+          "title": "Smoke tests",
+          "file": "tests/smoke/smokeTests.spec.ts",
           "line": 6,
           "column": 6,
           "specs": [
             {
-              "title": "31035 - Activity list",
+              "title": "31036 - Reports page",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 0,
+                  "timeout": 70000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectName": "webkit",
@@ -95,7 +95,7 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 48937,
+                      "duration": 24303,
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
@@ -103,12 +103,12 @@
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-activityList-Smoke-test---Activity-list-31035---Activity-list-webkit\\video.webm"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-smokeTests-Smoke-tests-31036---Reports-page-webkit\\video.webm"
                         },
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-activityList-Smoke-test---Activity-list-31035---Activity-list-webkit\\test-finished-1.png"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-smokeTests-Smoke-tests-31036---Reports-page-webkit\\test-finished-1.png"
                         }
                       ]
                     }
@@ -116,9 +116,9 @@
                   "status": "expected"
                 }
               ],
-              "file": "tests/smoke/activityList.spec.ts",
-              "line": 22,
-              "column": 3
+              "file": "tests/smoke/smokeTests.spec.ts",
+              "line": 34,
+              "column": 8
             }
           ]
         }
