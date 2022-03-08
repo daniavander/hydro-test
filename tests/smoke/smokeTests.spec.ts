@@ -42,7 +42,7 @@ test.describe("Smoke tests", () => {
     expect(response.status()).toBe(200)
     expect(await page.isVisible("//span[text()='Sum']"))
     expect(await page.isVisible("//span[text()='Breakdown']"))
-    expect(await page.isVisible("//span[text()='Diagramss']"))
+    expect(await page.isVisible("//span[text()='fakedia']"))
     expect(await page.isVisible("//span[text()='Legacy\\ reports']"))
   })
 })
