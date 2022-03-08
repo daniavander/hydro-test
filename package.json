@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "onchrome": "playwright test tests/addIFEWithUDA.spec.ts --config=playwright.config.ts --headed --project=Chromium",
-    "cicdtesthead": "playwright test tests/cicdtest.spec.ts --config=playwright.config.ts --headed",
+    "azureloginwebkit": "playwright test tests/login.spec.ts --config=playwright.config.ts --project=webkit --headed",
     "azurelogin": "playwright test tests/login.spec.ts --config=playwright.config.ts",
     "azureloginlocal": "playwright test tests/login.spec.ts --config=playwright.config.ts --headed",
     "activity": "playwright test tests/smoke/activityList.spec.ts --config=playwright.config.ts --headed",

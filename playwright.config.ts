@@ -39,6 +39,12 @@ const config: PlaywrightTestConfig = {
             //slowMo: 200,
           },
       }
+    },
+    {
+      name: "webkit",
+      use:{
+        browserName: "webkit"
+      }
     }
   ]
 }

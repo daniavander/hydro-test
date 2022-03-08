@@ -52,16 +52,24 @@ export class LoginPage {
 
     //login in pipeline!
     async loginInAzure() {
+        function delay(time) {
+            return new Promise(function (resolve) {
+              setTimeout(resolve, time)
+            });
+          }
+
         //withous sso login steps
         var emailaddress = "ImsTestGlobalAdmin1@avander.hu"
         var pwd = "123ims456!"
-
+          await this.page.pause()
         await this.page.type("id=i0116", emailaddress)
         await this.page.locator('text=Next').click()
 
+        await delay(2000);
         await this.page.type("id=i0118", pwd)
+        
         await this.page.locator('text=Sign in').click()
-
+        await delay(6000);
         /*await this.page.locator('text=Yes').click()
 
         await this.page.waitForSelector(".side-panel-content")
