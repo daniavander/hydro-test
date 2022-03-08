@@ -22,13 +22,13 @@ test.describe("Smoke test - Activity list", () => {
   test('31035 - Activity list', async ({ page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    await page.pause()
+    //await page.pause()
     await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Activities")
-    await page.pause()
+    //await page.pause()
     await page.locator('.obs_csstable').isVisible()
     const activitiesHeader = page.locator('.header.header-style2');
-    await expect(activitiesHeader).toHaveClass("row obs_flex obs_flexgrow1 header header-style2 badclassname");
+    await expect(activitiesHeader).toHaveClass("row obs_flex obs_flexgrow1 header header-style2");
 
     const response = await request.get(`${baseUrl}pi/activity?queryString=`)
     expect(response.status()).toBe(200)
