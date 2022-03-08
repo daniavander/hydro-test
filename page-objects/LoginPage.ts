@@ -69,14 +69,14 @@ export class LoginPage {
         await this.page.type("id=i0118", pwd)
         
         await this.page.locator('text=Sign in').click()
-        await delay(6000);
+        //await delay(6000);
         await this.page.locator('text=Yes').click()
 
         await this.page.waitForSelector(".side-panel-content")
-        await this.page.locator(".side-panel-content").screenshot({ path: 'screenhot/side.png' })
-        await delay(6000);
+        //await this.page.locator(".side-panel-content").screenshot({ path: 'screenshot/sidepanel.png' })
+        //await delay(6000);
         await this.page.waitForSelector(".dashboard-qr-code-a")
-        await this.page.screenshot({ path: 'screenshot/qr.png' });
+        //await this.page.screenshot({ path: 'screenshot/qrcode.png' });
     }
 
     //login in pipeline!
