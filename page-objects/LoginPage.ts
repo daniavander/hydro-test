@@ -61,12 +61,13 @@ export class LoginPage {
 
         await this.page.type("id=i0118", pwd)
         await this.page.locator('text=Sign in').click()
-        await this.page.locator('text=Yes').click()
+
+        /*await this.page.locator('text=Yes').click()
 
         await this.page.waitForSelector(".side-panel-content")
 
         await this.page.waitForSelector(".dashboard-qr-code-a")
-        await this.page.screenshot({ path: 'screenshot/loggedin.png' });
+        await this.page.screenshot({ path: 'screenshot/loggedin.png' });*/
     }
 
     //login in pipeline!

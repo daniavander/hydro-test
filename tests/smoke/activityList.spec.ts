@@ -22,7 +22,7 @@ test.describe("Smoke test - Activity list", () => {
   test('31035 - Activity list', async ({ page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    //await page.pause()
+    await page.pause()
     await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
     //expect(await page.locator(".side-panel-content").screenshot()).toMatchSnapshot('side-panel-content.png', { threshold: 0.5 })
     await navBar.clickOnTopMenu("Activities")

@@ -3,7 +3,7 @@
     "forbidOnly": false,
     "globalSetup": null,
     "globalTeardown": null,
-    "globalTimeout": 140000,
+    "globalTimeout": 50000,
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
@@ -19,7 +19,7 @@
         "testMatch": [
           "**/?(*.)@(spec|test).*"
         ],
-        "timeout": 120000
+        "timeout": 50000
       }
     ],
     "reporter": [
@@ -75,7 +75,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 120000,
+                  "timeout": 50000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectName": "DesktopChromium",
@@ -83,7 +83,7 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 12929,
+                      "duration": 8528,
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
