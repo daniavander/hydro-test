@@ -1,7 +1,8 @@
 variables:
       VERSION: 7.2
 pool:
-  vmImage: "ubuntu-18.04"
+  #vmImage: "ubuntu-18.04"
+  vmImage: 'ubuntu-20.04'
   workingDir: '$(service_path)'
 
 jobs:
@@ -37,12 +38,13 @@ jobs:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '12.x'
+      versionSpec: '14.x'
     displayName: 'Install Node.js'
     
   - script: npm install
+  - script: npm ci
   - script: npm install @playwright/test
-  - script: npx playwright install
+  - script: npx playwright install --with-deps
     displayName: "Install browser dependencies"
   - script: npm i playwright-chromium
 
