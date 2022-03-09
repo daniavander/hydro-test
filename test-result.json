@@ -95,7 +95,7 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 31645,
+                      "duration": 31422,
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,

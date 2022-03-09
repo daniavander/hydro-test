@@ -22,7 +22,7 @@ test.describe("Smoke tests", () => {
   test('31035 - Activity list', async ({ page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
+    //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Activities")
     await page.locator('.obs_csstable').isVisible()
     const activitiesHeader = page.locator('.header.header-style2');
@@ -34,7 +34,7 @@ test.describe("Smoke tests", () => {
   test.only('31036 - Reports page', async ({ page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
+    //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Reports")
     const actionBar = page.locator('.action-bar');
     await expect(actionBar).toHaveClass("action-bar obs_clearfix ng-star-inserted");
@@ -43,7 +43,8 @@ test.describe("Smoke tests", () => {
     expect(page.locator("//span[text()='Sum']")).toBeVisible()
     expect(page.locator("//span[text()='Breakdown']")).toBeVisible()
     expect(page.locator("//span[text()='Diagrams']")).toBeVisible()
-    expect(page.locator("//span[text()='Legacy\\ reports']")).toBeVisible()
+    await page.pause()
+    expect(page.locator("//span[text()='Legacy reports']")).toBeVisible()
     //expect(page.locator("//span[text()='faketext']")).toBeVisible()
     await page.locator("//span[text()='Diagrams']").isVisible()
   })

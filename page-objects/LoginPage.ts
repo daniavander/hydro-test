@@ -59,7 +59,7 @@ export class LoginPage {
           }
 
         //withou sso login steps
-        var emailaddress = "ImsTestGlobalAdmin1@avander.hu"
+        var emailaddress = "ImsTestGlobalAdmin3@avander.hu"
         var pwd = "123ims456!"
         //await this.page.pause()
         await this.page.type("id=i0116", emailaddress)
