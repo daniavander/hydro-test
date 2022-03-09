@@ -17,12 +17,14 @@ const config: PlaywrightTestConfig = {
   //testDir: "tests/tips",
   use: {
     viewport: { width: 1100, height: 900 },
-    //actionTimeout: 50000,
     ignoreHTTPSErrors: true,
     trace: 'off',
     video: 'on',
     screenshot: 'on',
     actionTimeout: 20000
+  },
+  expect: {
+    timeout: 10 * 1000,
   },
   projects: [
     {
