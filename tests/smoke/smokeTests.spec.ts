@@ -31,7 +31,7 @@ test.describe("Smoke tests", () => {
     expect(response.status()).toBe(200)
   })
 
-  test.only('31036 - Reports page', async ({ page, request }) => {
+  test('31036 - Reports page', async ({ page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
