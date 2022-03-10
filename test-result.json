@@ -3,7 +3,7 @@
     "forbidOnly": false,
     "globalSetup": null,
     "globalTeardown": null,
-    "globalTimeout": 70000,
+    "globalTimeout": 7000000,
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
@@ -19,7 +19,7 @@
         "testMatch": [
           "**/?(*.)@(spec|test).*"
         ],
-        "timeout": 70000
+        "timeout": 7000000
       },
       {
         "outputDir": "C:/git/hydro-test/test-results",
@@ -31,7 +31,7 @@
         "testMatch": [
           "**/?(*.)@(spec|test).*"
         ],
-        "timeout": 70000
+        "timeout": 7000000
       }
     ],
     "reporter": [
@@ -69,20 +69,20 @@
   },
   "suites": [
     {
-      "title": "tests\\smoke\\smokeTests.spec.ts",
-      "file": "tests/smoke/smokeTests.spec.ts",
+      "title": "tests\\ife.spec.ts",
+      "file": "tests/ife.spec.ts",
       "line": 0,
       "column": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Smoke tests",
-          "file": "tests/smoke/smokeTests.spec.ts",
-          "line": 6,
+          "title": "my first test suite",
+          "file": "tests/ife.spec.ts",
+          "line": 14,
           "column": 6,
           "specs": [
             {
-              "title": "31036 - Reports page",
+              "title": "Add new injury free event",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,7 +95,7 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 31422,
+                      "duration": 36157,
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
@@ -103,12 +103,12 @@
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-smokeTests-Smoke-tests-31036---Reports-page-webkit\\video.webm"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-ife-my-first-test-suite-Add-new-injury-free-event-webkit\\video.webm"
                         },
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-smokeTests-Smoke-tests-31036---Reports-page-webkit\\test-finished-1.png"
+                          "path": "C:\\git\\hydro-test\\test-results\\tests-ife-my-first-test-suite-Add-new-injury-free-event-webkit\\test-finished-1.png"
                         }
                       ]
                     }
@@ -116,9 +116,9 @@
                   "status": "expected"
                 }
               ],
-              "file": "tests/smoke/smokeTests.spec.ts",
-              "line": 34,
-              "column": 8
+              "file": "tests/ife.spec.ts",
+              "line": 35,
+              "column": 3
             }
           ]
         }

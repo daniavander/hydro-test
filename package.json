@@ -9,7 +9,8 @@
     "azurelogin": "playwright test tests/login.spec.ts --config=playwright.config.ts --project=chromium",
     "azureloginlocal": "playwright test tests/login.spec.ts --config=playwright.config.ts --headed",
     "smoke": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chromium",
-    "smokelocal": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=webkit --headed"
+    "smokelocal": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=webkit --headed",
+    "ife": "playwright test tests/ife.spec.ts --config=playwright.config.ts --project=webkit --headed"
   },
   "author": "",
   "license": "ISC",

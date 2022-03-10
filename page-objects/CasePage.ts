@@ -88,6 +88,10 @@ export class CasePage {
         await this.page.click("[aria-label='" + alTag + "']")
         await this.page.click(".sop-add-new-modal-save")
     }
+    async addMainAndSubTagWithoutBtn(mainTag: string, alTag: string) {
+        await this.page.locator("//span[text()='" + mainTag + "']").click()
+        await this.page.click("[aria-label='" + alTag + "']")
+    }
 
     async pageContainsActionCorrectly(description: string, instruction: string){
         // the card is visible after saving it?

@@ -24,7 +24,7 @@ jobs:
 
     displayName: "run the test"
     condition: succeeded()
-  - script: npm run smoke
+  - script: npm run ife
       
       
   - task: CopyFiles@1

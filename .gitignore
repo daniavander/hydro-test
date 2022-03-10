@@ -27,5 +27,6 @@ lib/*.js
 test/*.js
 *.map
 notes.txt
+notes-js.txt
 .prettierrc
 yarn.lock
