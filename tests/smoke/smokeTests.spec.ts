@@ -1,12 +1,21 @@
 import { test, expect } from "@playwright/test"
 import { LoginPage } from "../../page-objects/LoginPage"
 import { Navbar } from "../../page-objects/common/Navbar"
+
+import { CaseList } from "../../page-objects/CaseList"
+import { CasePage } from "../../page-objects/CasePage"
 import { Dashboard } from "../../page-objects/common/Dashboard"
+import { AddUserAction } from "../../page-objects/common/AddUserAction"
+
+import { caseType, secLevels, departments } from "../../page-objects/common/constans"
 
 test.describe("Smoke tests", () => {
   let loginPage: LoginPage
   let navBar: Navbar
   let dashBoard: Dashboard
+  let casePage: CasePage
+  let caseList: CaseList
+  let addUserAction: AddUserAction
 
   const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/'
 
@@ -14,6 +23,10 @@ test.describe("Smoke tests", () => {
     loginPage = new LoginPage(page)
     navBar = new Navbar(page)
     dashBoard = new Dashboard(page)
+
+    casePage = new CasePage(page)
+    caseList = new CaseList(page)
+    addUserAction = new AddUserAction(page)
 
     await page.goto(baseUrl, { timeout: 50000 })
     await loginPage.loginInAzure()
@@ -47,6 +60,42 @@ test.describe("Smoke tests", () => {
     expect(page.locator("//span[text()='Legacy reports']")).toBeVisible()
     //expect(page.locator("//span[text()='faketext']")).toBeVisible()
     await page.locator("//span[text()='Diagrams']").isVisible()
+  })
+
+  test('Add new injury free event', async ({ page }) => {
+
+    await dashBoard.sidebarIsVisible()
+    await page.locator(".side-panel-content")
+
+    await dashBoard.topBarIsAvailable()
+
+    await navBar.clickOnTopMenu("Add New Case")
+
+    await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
+
+    await casePage.setDepartment(departments.administration)
+
+    await casePage.setTypeAndSev(caseType.ife, secLevels.low)
+
+    await casePage.fillDescription("lorem ipsum set dolor sit amen")
+
+    await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
+    await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
+
+    await page.click("//button[text()='Save']")
+
+    expect(page.isVisible(".ghost-action-card-tile-title"))
+    await (await page.waitForSelector('.p-state-filled')).isVisible()
+
+    await addUserAction.addNewAction("description", "instruction", "Kovács Dániel", "Add Action tag", "action1")
+
+    await casePage.pageContainsActionCorrectly("description", "instruction")
+
+    const locator = page.locator('.fullopacity');
+    await expect(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
+    await page.locator('text=Close').click();
+
+    await caseList.getCaseByDescriptionAndDo("lorem ipsum set dolor sit amen", "Delete")
   })
 })
 
