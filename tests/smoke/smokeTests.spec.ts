@@ -58,7 +58,6 @@ test.describe("Smoke tests", () => {
     expect(page.locator("//span[text()='Diagrams']")).toBeVisible()
     await page.pause()
     expect(page.locator("//span[text()='Legacy reports']")).toBeVisible()
-    expect(page.locator("//span[text()='faketext']")).toBeVisible()
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
