@@ -58,11 +58,11 @@ test.describe("Smoke tests", () => {
     expect(page.locator("//span[text()='Diagrams']")).toBeVisible()
     await page.pause()
     expect(page.locator("//span[text()='Legacy reports']")).toBeVisible()
-    //expect(page.locator("//span[text()='faketext']")).toBeVisible()
+    expect(page.locator("//span[text()='faketext']")).toBeVisible()
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  test('Add new injury free event', async ({ page }) => {
+  test.only('Add new injury free event', async ({ page }) => {
 
     await dashBoard.sidebarIsVisible()
     await page.locator(".side-panel-content")
@@ -87,12 +87,12 @@ test.describe("Smoke tests", () => {
     expect(page.isVisible(".ghost-action-card-tile-title"))
     await (await page.waitForSelector('.p-state-filled')).isVisible()
 
-    await addUserAction.addNewAction("description", "instruction", "Kovács Dániel", "Add Action tag", "action1")
+    await addUserAction.addNewAction("description", "instruction", "kovacs.daniel@avander.hu", "Add Action tag", "action1")
 
     await casePage.pageContainsActionCorrectly("description", "instruction")
 
     const locator = page.locator('.fullopacity');
-    await expect(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
+    await expect(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity active");
     await page.locator('text=Close').click();
 
     await caseList.getCaseByDescriptionAndDo("lorem ipsum set dolor sit amen", "Delete")
