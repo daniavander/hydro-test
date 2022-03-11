@@ -67,7 +67,6 @@ test.describe("Smoke tests", () => {
     await page.locator(".side-panel-content")
 
     await dashBoard.topBarIsAvailable()
-
     await navBar.clickOnTopMenu("Add New Case")
 
     await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
@@ -76,7 +75,7 @@ test.describe("Smoke tests", () => {
 
     await casePage.setTypeAndSev(caseType.ife, secLevels.low)
 
-    await casePage.fillDescription("lorem ipsum set dolor sit amen")
+    await casePage.fillDescription("low ife type automated testt")
 
     await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
     await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
@@ -93,8 +92,7 @@ test.describe("Smoke tests", () => {
     const locator = page.locator('.fullopacity');
     await expect(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity active");
     await page.locator('text=Close').click();
-
-    await caseList.getCaseByDescriptionAndDo("lorem ipsum set dolor sit amen", "Delete")
+    //await caseList.getCaseByDescriptionAndDo("lorem ipsum set dolor sit amen", "Delete")
   })
 })
 

@@ -40,7 +40,8 @@ export class CasePage {
     async setSite(loc: string) {
         //TODO create sting list or dict with severity names
         //ha van space a névben akkor: Very\\ high
-        await this.page.locator(".ng-tns-c73-17.p-dropdown-label").click()
+
+        await this.page.locator("//span[text()='please choose...']").click()
         await this.page.locator("[aria-label='" + loc + "']").click()
     }
 

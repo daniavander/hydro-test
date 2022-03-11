@@ -16,7 +16,7 @@ export class Navbar {
         this.page = page
         this.dashboard = page.locator("text=Dashboard")
         this.activities = page.locator("[title=Activities]")
-        this.cases = page.locator("text=Cases")
+        this.cases = page.locator("(//a[@title='Cases'])[1]")
         this.actions = page.locator("[title=Actions]")
         this.reports = page.locator("[title=Reports]")
         this.riskAssesment = page.locator("text=Risk Assessment")

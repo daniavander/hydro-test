@@ -3,7 +3,7 @@
     "forbidOnly": false,
     "globalSetup": null,
     "globalTeardown": null,
-    "globalTimeout": 70000,
+    "globalTimeout": 180000,
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
@@ -19,7 +19,7 @@
         "testMatch": [
           "**/?(*.)@(spec|test).*"
         ],
-        "timeout": 70000
+        "timeout": 180000
       },
       {
         "outputDir": "C:/git/hydro-test/test-results",
@@ -31,7 +31,19 @@
         "testMatch": [
           "**/?(*.)@(spec|test).*"
         ],
-        "timeout": 70000
+        "timeout": 180000
+      },
+      {
+        "outputDir": "C:/git/hydro-test/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "name": "firefox",
+        "testDir": "C:/git/hydro-test",
+        "testIgnore": [],
+        "testMatch": [
+          "**/?(*.)@(spec|test).*"
+        ],
+        "timeout": 180000
       }
     ],
     "reporter": [
@@ -78,11 +90,11 @@
         {
           "title": "Smoke tests",
           "file": "tests/smoke/smokeTests.spec.ts",
-          "line": 6,
+          "line": 12,
           "column": 6,
           "specs": [
             {
-              "title": "31036 - Reports page",
+              "title": "30746 - Smoke test - Add IFE case with an user defined action",
               "ok": true,
               "tags": [],
               "tests": [
@@ -94,30 +106,19 @@
                   "results": [
                     {
                       "workerIndex": 0,
-                      "status": "passed",
-                      "duration": 31422,
+                      "status": "skipped",
+                      "duration": 0,
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "attachments": [
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-smokeTests-Smoke-tests-31036---Reports-page-webkit\\video.webm"
-                        },
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\git\\hydro-test\\test-results\\tests-smoke-smokeTests-Smoke-tests-31036---Reports-page-webkit\\test-finished-1.png"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
               "file": "tests/smoke/smokeTests.spec.ts",
-              "line": 34,
+              "line": 64,
               "column": 8
             }
           ]
@@ -125,5 +126,9 @@
       ]
     }
   ],
-  "errors": []
+  "errors": [
+    {
+      "message": "Timed out waiting 180s for the entire test run"
+    }
+  ]
 }

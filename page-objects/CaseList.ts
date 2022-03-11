@@ -13,7 +13,7 @@ export class CaseList {
         await this.page.locator('text=' + desc + '').click();
         //hover three dot
         await this.page.hover("(//div[contains(@class, 'p0i')])[1]")
-        await this.page.locator('button:has-text("' + action +'")').click();
+        await this.page.locator('text="' + action +'"').first().click();
         await this.page.locator('text=Yes').click()
     }
     

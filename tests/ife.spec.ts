@@ -57,14 +57,14 @@ test.describe("my first test suite", () => {
 
     expect(page.isVisible(".ghost-action-card-tile-title"))
     await (await page.waitForSelector('.p-state-filled')).isVisible()
-    await casePage.snapshotGhostCard()
+    //await casePage.snapshotGhostCard()
 
-    await addUserAction.addNewAction("description", "instruction", "Kovács Dániel", "Add Action tag", "action1")
+    await addUserAction.addNewAction("description", "instruction", "kovacs.daniel@avander.hu", "Add Action tag", "action1")
 
     await casePage.pageContainsActionCorrectly("description", "instruction")
 
     const locator = page.locator('.fullopacity');
-    await expect(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
+    await expect(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity active");
     await page.locator('text=Close').click();
 
     await caseList.getCaseByDescriptionAndDo("lorem ipsum set dolor sit amen", "Delete")

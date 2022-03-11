@@ -24,7 +24,6 @@ export class AddUserAction {
         //loc: Kovács Dániel(kovacs.daniel@avander.hu)
         //ha placeholder van akkor csak egy \ a space előtt !!!!!!!!!!!!!!!!!!!!!!!!!!!
         await this.page.fill('[placeholder="Add\ responsible"]','kovács dá')
-        //fixme faszért nem megy paraméterrel
         await this.page.locator('//div[text()="(' + name + ')"]').click();
         //await this.page.locator("text=" + loc + "]").click();
         //await this.page.locator('text=Kovács Dániel(kovacs.daniel@avander.hu)').click();

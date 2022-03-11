@@ -10,7 +10,7 @@ const config: PlaywrightTestConfig = {
   timeout: 180000,        // Timeout for each test
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
-  reporter: [['html'], ['./my-awesome-reporter.ts'], ['line'], ['json', {outputFile: 'test-result.json'}]],
+  reporter: [['html'], ['./my-awesome-reporter.ts'], ['line'], ['allure-playwright']],
   // See: https://playwright.dev/docs/api/class-testconfig
   outputDir: 'test-results/',
   //just the wanted folder will be run
@@ -46,6 +46,12 @@ const config: PlaywrightTestConfig = {
       name: "webkit",
       use:{
         browserName: "webkit"
+      }
+    },
+    {
+      name: "firefox",
+      use:{
+        browserName: "firefox"
       }
     }
   ]
