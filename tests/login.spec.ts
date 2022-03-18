@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test"
-import { LoginPage } from "../page-objects/LoginPage"
+import { LoginPage } from "../page-objects/Login.page"
 
 
 test.describe("cicd azure describe", () => {
   let loginPage: LoginPage
 
-  function delay(time) {
+  function delay(time: number | undefined) {
     return new Promise(function (resolve) {
       setTimeout(resolve, time)
     });

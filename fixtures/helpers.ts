@@ -3,7 +3,7 @@ import {test as baseTest} from "@playwright/test";
 const crypto = require('crypto')
 
 
-export async function loadHomePage(page){
+export async function loadHomePage(page: Page){
     await page.goto("https://example.com")
 }
 
@@ -15,9 +15,6 @@ export async function checkTextArea(page, str) {
     await page.locator("//span[text()='" + str + "']").click()
 }
 
-export async function toHaveClass(locator: Locator, classes: string)  {
-    await expect(this.page.locator(locator)).toContain(classes);
-}
 
 export async function getRandomNumber()  {
     return Math.floor(Math.random() * 1000 + 1)
@@ -32,9 +29,6 @@ export async function getRandomEmail()  {
 }
 
 
-const fixture = baseTest.extend<{login}>({
-    
-})
 export async function loginToIMS(page) {
     //await page.pause()
     await page.screenshot({ path: 'screenshot0.png' , fullPage: true});

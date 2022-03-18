@@ -1,38 +1,22 @@
-import { test, expect } from "@playwright/test"
-import { LoginPage } from "../../page-objects/LoginPage"
-import { Navbar } from "../../page-objects/common/Navbar"
-
-import { CaseList } from "../../page-objects/CaseList"
-import { CasePage } from "../../page-objects/CasePage"
-import { Dashboard } from "../../page-objects/common/Dashboard"
-import { AddUserAction } from "../../page-objects/common/AddUserAction"
+//import * as data from "../../Login.cred.json"
+import { expect } from "@fixtures/basePages"
+import test from "@fixtures/basePages"
 
 import { caseType, secLevels, departments } from "../../page-objects/common/constans"
 
+//test.describe.configure({ mode: 'parallel' })
+
 test.describe("Smoke tests", () => {
-  let loginPage: LoginPage
-  let navBar: Navbar
-  let dashBoard: Dashboard
-  let casePage: CasePage
-  let caseList: CaseList
-  let addUserAction: AddUserAction
 
   const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/'
 
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page)
-    navBar = new Navbar(page)
-    dashBoard = new Dashboard(page)
-
-    casePage = new CasePage(page)
-    caseList = new CaseList(page)
-    addUserAction = new AddUserAction(page)
+  test.beforeEach(async ({ loginPage, page }) => {
 
     await page.goto(baseUrl, { timeout: 50000 })
     await loginPage.loginInAzure()
   })
 
-  test('31035 - Activity list', async ({ page, request }) => {
+  test('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
@@ -44,7 +28,7 @@ test.describe("Smoke tests", () => {
     expect(response.status()).toBe(200)
   })
 
-  test('31036 - Reports page', async ({ page, request }) => {
+  test('31036 - Reports page', async ({dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
@@ -61,7 +45,7 @@ test.describe("Smoke tests", () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action', async ({ page }) => {
+  test('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
 
     await dashBoard.sidebarIsVisible()
     await page.locator(".side-panel-content")
@@ -84,15 +68,21 @@ test.describe("Smoke tests", () => {
 
     expect(page.isVisible(".ghost-action-card-tile-title"))
     await (await page.waitForSelector('.p-state-filled')).isVisible()
-
-    await addUserAction.addNewAction("description", "instruction", "kovacs.daniel@avander.hu", "Add Action tag", "action1")
+    await addUserAction.addNewAction("description", "instruction", "ImsTestGlobalAdmin3", "Add Action tag", "action1")
 
     await casePage.pageContainsActionCorrectly("description", "instruction")
 
     const locator = page.locator('.fullopacity');
-    await expect(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity active");
+    await expect.soft(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
+    /*const mytasklocator = page.locator(".tile.action.my-task:before")
+    await page.pause()
+    const color = await mytasklocator.evaluate((el) => {
+      return window.getComputedStyle(el).getPropertyValue('background');
+    });
+    console.log(color);*/
     await page.locator('text=Close').click();
-    //await caseList.getCaseByDescriptionAndDo("lorem ipsum set dolor sit amen", "Delete")
+    //TODO huiba van itt
+    //await caseList.getCaseByDescriptionAndDo("description", "Delete")
   })
 })
 

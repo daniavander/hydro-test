@@ -13,20 +13,17 @@ export class AddUserAction {
     }
 
 
-    async addDescription(msg) {
+    async addDescription(msg: string) {
         await this.description.type(msg)
     }
-    async addInstruction(msg) {
+    async addInstruction(msg: string) {
         await this.instruction.type(msg)
     }
 
     async addResponsible(name: string) {
-        //loc: Kovács Dániel(kovacs.daniel@avander.hu)
         //ha placeholder van akkor csak egy \ a space előtt !!!!!!!!!!!!!!!!!!!!!!!!!!!
-        await this.page.fill('[placeholder="Add\ responsible"]','kovács dá')
+        await this.page.fill('[placeholder="Add\ responsible"]', 'imstestglobaladmin3')
         await this.page.locator('//div[text()="(' + name + ')"]').click();
-        //await this.page.locator("text=" + loc + "]").click();
-        //await this.page.locator('text=Kovács Dániel(kovacs.daniel@avander.hu)').click();
     }
 
     async addTags(main: string, sub: string) {
@@ -41,14 +38,14 @@ export class AddUserAction {
     //add udaction
 
 
-    async addNewAction(desc: string, inst: string, name: string, main: string, sub: string) {
+    async addNewAction(desc: string, inst: string, name: string, tagname: string, subtag: string) {
         await this.page.locator("//span[text()='Add new action']").click()
         await this.page.locator("(//textarea)[2]").type(desc)
         await this.instruction.type(inst)
-        await this.page.fill('[placeholder="Add\ responsible"]','kovács dá')
-        await this.page.locator("//div[text()='(" + name + ")']").click();
-        await this.page.locator("//span[text()='" + main + "']").click();
-        await this.page.locator("[aria-label=" + sub + "]").click();
+        await this.page.fill('[placeholder="Add\ responsible"]', name)
+        await this.page.locator("//div[text()='" + name + "']").click();
+        await this.page.locator("//span[text()='" + tagname + "']").click();
+        await this.page.locator("[aria-label=" + subtag + "]").click();
         await this.page.locator("//button[text()='Save changes']").click()
     }
 }

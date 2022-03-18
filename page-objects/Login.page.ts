@@ -3,7 +3,8 @@ import { expect, Locator, Page } from "@playwright/test";
 
 export class LoginPage {
     //define selectors
-    readonly page: Page
+    private page: Page
+    
     readonly usernameInput: Locator
     readonly passwordInput: Locator
     readonly submitBtn: Locator
@@ -52,7 +53,7 @@ export class LoginPage {
 
     //login in pipeline!
     async loginInAzure() {
-        function delay(time) {
+        function delay(time: number | undefined) {
             return new Promise(function (resolve) {
               setTimeout(resolve, time)
             });

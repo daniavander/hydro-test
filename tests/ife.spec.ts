@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test"
 
-import { Navbar } from "../page-objects/common/Navbar"
-import { Dashboard } from "../page-objects/common/Dashboard"
+import { Navbar } from "../page-objects/common/Navbar.page"
+import { Dashboard } from "../page-objects/common/Dashboard.page"
 import { AddUserAction } from "../page-objects/common/AddUserAction"
 import { CasePage } from "../page-objects/CasePage"
 import { CaseList } from "../page-objects/CaseList"
-import { LoginPage } from "../page-objects/LoginPage"
+import { LoginPage } from "../page-objects/Login.page"
 //import { secLevels } from "../page-objects/common/constans"
 import { caseType, secLevels, departments } from "../page-objects/common/constans"
 

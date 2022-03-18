@@ -4,7 +4,7 @@ export class Dashboard {
     readonly page: Page
     readonly sideBar: Locator
     readonly topBar: Locator
-    readonly linkFeedback: Locator
+    //readonly linkFeedback: Locator
 
     constructor(page: Page) {
         this.page = page

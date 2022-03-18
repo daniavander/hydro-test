@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test"
-import { LoginPage } from "../page-objects/LoginPage"
-import { Navbar } from "../page-objects/common/Navbar"
+import { LoginPage } from "../page-objects/Login.page"
+import { Navbar } from "../page-objects/common/Navbar.page"
 
 import { CaseList } from "../page-objects/CaseList"
 import { CasePage } from "../page-objects/CasePage"
-import { Dashboard } from "../page-objects/common/Dashboard"
+import { Dashboard } from "../page-objects/common/Dashboard.page"
 import { AddUserAction } from "../page-objects/common/AddUserAction"
 
 import { caseType, secLevels, departments } from "../page-objects/common/constans"
