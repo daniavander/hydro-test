@@ -7,7 +7,7 @@ import { CasePage } from "../page-objects/CasePage"
 import { Dashboard } from "../page-objects/common/Dashboard.page"
 import { AddUserAction } from "../page-objects/common/AddUserAction"
 
-import { caseType, secLevels, departments } from "../page-objects/common/constans"
+import { caseType, secLevels, departments } from "../fixtures/constans"
 
 test.describe("Smoke tests", () => {
   let loginPage: LoginPage

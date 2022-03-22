@@ -2,7 +2,7 @@
 import { expect } from "@fixtures/basePages"
 import test from "@fixtures/basePages"
 
-import { caseType, secLevels, departments } from "../../page-objects/common/constans"
+import { caseType, secLevels, departments, classesUnderAction3Dot } from "@fixtures/constans"
 
 //test.describe.configure({ mode: 'parallel' })
 
@@ -28,7 +28,7 @@ test.describe("Smoke tests", () => {
     expect(response.status()).toBe(200)
   })
 
-  test('31036 - Reports page', async ({dashBoard, navBar, page, request }) => {
+  test('31036 - Reports page', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
@@ -44,7 +44,7 @@ test.describe("Smoke tests", () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
+  test.only('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
 
     await dashBoard.sidebarIsVisible()
     await page.locator(".side-panel-content")
@@ -55,14 +55,13 @@ test.describe("Smoke tests", () => {
     await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
 
     await casePage.setDepartment(departments.administration)
-
-    await casePage.setTypeAndSev(caseType.ife, secLevels.low)
-
-    await casePage.fillDescription("low ife type automated testt")
-
+    await page.pause()
+    await casePage.setCaseType("ife", secLevels.low)
     await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
     await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
 
+    await casePage.fillDescription("Automation test descrption2")
+    
     await page.click("//button[text()='Save']")
 
     expect(page.isVisible(".ghost-action-card-tile-title"))
@@ -72,6 +71,7 @@ test.describe("Smoke tests", () => {
     await casePage.pageContainsActionCorrectly("description", "instruction")
 
     const locator = page.locator('.fullopacity');
+    await page.pause()
     await expect.soft(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
     /*const mytasklocator = page.locator(".tile.action.my-task:before")
     await page.pause()
@@ -79,9 +79,49 @@ test.describe("Smoke tests", () => {
       return window.getComputedStyle(el).getPropertyValue('background');
     });
     console.log(color);*/
-    await page.locator('text=Close').click();
+    await page.click('text=Close')
     //TODO huiba van itt
-    //await caseList.getCaseByDescriptionAndDo("description", "Delete")
+  })
+
+  test('31034 - Smoke test - Create a Serious Injury case', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+    await dashBoard.sidebarIsVisible()
+    await page.locator(".side-panel-content")
+
+    await dashBoard.topBarIsAvailable()
+    await navBar.clickOnTopMenu("Add New Case")
+
+    await casePage.setSite("B&A-Brazil-Alunorte-CAPEX Projects")
+
+    //webkiten failel:O
+    await casePage.setDepartment(departments.hse)
+
+    await casePage.fillDescription("Automation test description injury")
+    //faszas
+    await casePage.setCaseType("injury", secLevels.seriouscase)
+
+    await addPeopleDetails.injuredPerson("imsTestGlobalAdmin3","Yes","injury comment")
+
+    await page.click("//button[text()='Save']")
+
+    expect(page.isVisible("//p[text()='Investigation task']"))
+    expect(page.isVisible("//p[text()=' Injury Details ']"))
+    expect(page.isVisible("//p[text()=' Classify Injury ']"))
+    expect(page.isVisible("//p[text()=' HR Details ']"))
+
+    await addUserAction.addActionWith3Dot(classesUnderAction3Dot.aftercare)
+    expect(page.isVisible("//p[text()=' After Care ']"))
+
+    
+    await page.pause()
+    await addUserAction.fillInvestigationTask("investigation finding")
+    await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
+
+
+    
+    //await page.locator('text=Close').click();
+    await page.click('text=Close')
+    //TODO huiba van itt
+    await caseList.getCaseByDescriptionAndDo("Automation test description injury", "Delete")
   })
 })
 

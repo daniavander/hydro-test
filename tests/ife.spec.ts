@@ -7,7 +7,7 @@ import { CasePage } from "../page-objects/CasePage"
 import { CaseList } from "../page-objects/CaseList"
 import { LoginPage } from "../page-objects/Login.page"
 //import { secLevels } from "../page-objects/common/constans"
-import { caseType, secLevels, departments } from "../page-objects/common/constans"
+import { caseType, secLevels, departments } from "../fixtures/constans"
 
 //import { waitForClass } from "../helpers"
 
