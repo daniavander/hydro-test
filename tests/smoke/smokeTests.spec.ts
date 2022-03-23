@@ -60,7 +60,7 @@ test.describe("Smoke tests", () => {
     await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
     await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
 
-    await casePage.fillDescription("Automation test descrption4")
+    await casePage.fillDescription("Automation test descrption finish")
     
     await page.click("//button[text()='Save']")
 
@@ -71,16 +71,12 @@ test.describe("Smoke tests", () => {
     await casePage.pageContainsActionCorrectly("description", "instruction")
 
     const locator = page.locator('.fullopacity');
-    await page.pause()
+    /*await page.pause()
     //await expect.soft(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
-    /*const mytasklocator = page.locator(".tile.action.my-task:before")
-    await page.pause()
-    const color = await mytasklocator.evaluate((el) => {
-      return window.getComputedStyle(el).getPropertyValue('background');
-    });
-    console.log(color);*/
+    const mytasklocator = page.locator(".tile.action.my-task:before")
+    await expect(mytasklocator).toHaveCSS('background', '#006eff');*/
     await page.click('text=Close')
-    await caseList.getCaseByDescriptionAndDo("Automation test descrption4", "Delete")
+    await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
   test.only('31034 - Smoke test - Create a Serious Injury case', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
@@ -109,13 +105,12 @@ test.describe("Smoke tests", () => {
     expect(page.isVisible("//p[text()=' HR Details ']"))
 
     //await addUserAction.addActionWith3Dot(classesUnderAction3Dot.aftercare)
-    await page.pause()
+    //await page.pause()
     await page.hover("(//div[@class='submenu obs_floatright'])[1]")
+    await page.waitForTimeout(4000);
     await page.locator(".icon-afc").click()
     expect(page.isVisible("//p[text()=' After Care ']"))
 
-    
-    await page.pause()
     await addUserAction.fillInvestigationTask("investigation finding")
     await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
 
