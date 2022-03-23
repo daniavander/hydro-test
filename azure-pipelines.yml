@@ -15,7 +15,7 @@ jobs:
     
   - script: npm install
   - script: npm install @playwright/test
-  - script: npx playwright install --with-deps
+  #- script: npx playwright install --with-deps
 
     displayName: "run the test"
     condition: succeeded()
