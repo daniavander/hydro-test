@@ -44,7 +44,7 @@ test.describe("Smoke tests", () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  test.only('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
+  test('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
 
     await dashBoard.sidebarIsVisible()
     await page.locator(".side-panel-content")
@@ -72,7 +72,7 @@ test.describe("Smoke tests", () => {
 
     const locator = page.locator('.fullopacity');
     await page.pause()
-    await expect.soft(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
+    //await expect.soft(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
     /*const mytasklocator = page.locator(".tile.action.my-task:before")
     await page.pause()
     const color = await mytasklocator.evaluate((el) => {
@@ -95,7 +95,7 @@ test.describe("Smoke tests", () => {
     //webkiten failel:O
     await casePage.setDepartment(departments.hse)
 
-    await casePage.fillDescription("Automation test description injury")
+    await casePage.fillDescription("aaAutomation test description injury")
     //faszas
     await casePage.setCaseType("injury", secLevels.seriouscase)
 
@@ -121,7 +121,7 @@ test.describe("Smoke tests", () => {
     //await page.locator('text=Close').click();
     await page.click('text=Close')
     //TODO huiba van itt
-    await caseList.getCaseByDescriptionAndDo("Automation test description injury", "Delete")
+    await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 })
 
