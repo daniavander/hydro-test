@@ -105,9 +105,8 @@ test.describe("Smoke tests", () => {
     expect(page.isVisible("//p[text()=' HR Details ']"))
 
     //await addUserAction.addActionWith3Dot(classesUnderAction3Dot.aftercare)
-    await page.pause()
     await page.hover("//div[text()='Actions']/following-sibling::div")
-    await page.waitForTimeout(4000);
+    //await page.pause()
     await page.locator(".icon-afc").click()
     expect(page.isVisible("//p[text()=' After Care ']"))
 

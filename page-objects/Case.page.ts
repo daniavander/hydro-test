@@ -49,8 +49,8 @@ export class CasePage {
 
     async setDepartment(depName: string) {
         await this.page.click("button#filter-department")
-        //const element = this.page.locator("[title=" + depName + "]")
-        //await element.scrollIntoViewIfNeeded()
+        const element = this.page.locator("[title=" + depName + "]")
+        await element.scrollIntoViewIfNeeded()
         await this.page.locator("[title=" + depName + "]").click()
     }
 
