@@ -13,7 +13,7 @@ test.describe("Smoke tests", () => {
   test.beforeEach(async ({ loginPage, page }) => {
 
     await page.goto(baseUrl, { timeout: 50000 })
-    //await loginPage.loginInAzure()
+    await loginPage.loginInAzure()
   })
 
   test('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
