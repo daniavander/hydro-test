@@ -10,6 +10,7 @@
     "azureloginlocal": "playwright test tests/login.spec.ts --config=playwright.config.ts --headed",
     "smoke": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=webkit",
     "smokelocal": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=webkit --headed",
+    "smokelocalchrome": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome --headed",
     "ife": "playwright test tests/ife.spec.ts --config=playwright.config.ts --project=webkit --headed",
     "test": "playwright test tests/test.spec.ts --config=playwright.config.ts --project=webkit --headed"
   },
@@ -32,18 +33,5 @@
     "jest": "^27.5.1",
     "jest-playwright-preset": "^1.7.0",
     "playwright": "^1.19.2"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   }
 }

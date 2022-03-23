@@ -14,7 +14,7 @@ export class CaseList {
         //hover three dot
         await this.page.hover("(//div[contains(@class, 'p0i')])[1]")
         await this.page.locator('text="' + action +'"').first().click();
-        await this.page.locator('text=Yes').click()
+        await this.page.click("//button[text()='Yes']")
     }
     
 }

@@ -25,6 +25,8 @@ export class CasePage {
 
         //case types
         this.auditType = page.locator("#test-audit")
+        this.injuryType = page.locator("#test-injury")
+        this.ifeType = page.locator("#test-ife")
         this.wocType = page.locator("#test-woc")
         this.secType = page.locator("#test-security")
         this.qaType = page.locator("#test-quality")
@@ -46,7 +48,9 @@ export class CasePage {
     }
 
     async setDepartment(depName: string) {
-        await this.page.click("#filter-department")
+        await this.page.click("button#filter-department")
+        //const element = this.page.locator("[title=" + depName + "]")
+        //await element.scrollIntoViewIfNeeded()
         await this.page.locator("[title=" + depName + "]").click()
     }
 
@@ -55,7 +59,10 @@ export class CasePage {
         await this.page.locator("[aria-label='" + level + "']").click()
     }
 
-    async setCaseType(caseType) {
+
+
+    async setCaseType(caseType: any, level: string) {
+        var validCaseType = true
         switch (caseType) {
             case "Audit":
                 await this.auditType.click()
@@ -65,6 +72,15 @@ export class CasePage {
                 break
             case "Security":
                 await this.secType.click()
+                break
+            case "ife":
+                await this.ifeType.click()
+                await this.page.locator("[aria-label='" + level + "']").click()
+                break
+            case "injury":
+                await this.injuryType.click()
+                await this.page.locator("[aria-label='" + level + "']").click()
+                await this.page.locator("(//div[@role='checkbox'])[2]").click()
                 break
             case "Health":
                 await this.healthType.click()
@@ -76,12 +92,9 @@ export class CasePage {
                 await this.hseType.click()
                 break
             default:
+                validCaseType = false
                 throw new Error("This is not a valid case type name...")
         }
-    }
-
-    async fillDescription(msg: string) {
-        await this.page.fill("textarea", msg)
     }
 
     async addMainAndSubTag(mainTag: string, alTag: string) {
@@ -89,13 +102,17 @@ export class CasePage {
         await this.page.click("[aria-label='" + alTag + "']")
         await this.page.click(".sop-add-new-modal-save")
     }
-
     async addMainAndSubTagWithoutBtn(mainTag: string, alTag: string) {
         await this.page.locator("//span[text()='" + mainTag + "']").click()
         await this.page.click("[aria-label='" + alTag + "']")
     }
 
-    async pageContainsActionCorrectly(description: string, instruction: string){
+    async fillDescription(msg: string) {
+        await this.page.fill("textarea", msg)
+    }
+
+
+    async pageContainsActionCorrectly(description: string, instruction: string) {
         // the card is visible after saving it?
         // the created action card is contain correctly the added texts?
         expect(this.page.isVisible(".tile.my-task.active"))

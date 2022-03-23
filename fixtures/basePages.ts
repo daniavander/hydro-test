@@ -1,23 +1,28 @@
 //import { Page, Locator, expect } from "@playwright/test";
-import {test as baseTexst } from "@playwright/test";
+import {test as baseTest } from "@playwright/test";
 
-import { LoginPage } from "../page-objects/Login.page"
-import { Navbar } from "../page-objects/common/Navbar.page"
+import { LoginPage } from "@pages/Login.page"
+import { Navbar } from "@pages/common/Navbar.page"
 
-import { CaseList } from "../page-objects/CaseList"
-import { CasePage } from "../page-objects/Case.page"
-//import { Dashboard } from "../page-objects/common/Dashboard"
+import { CaseList } from "@pages/CaseList"
+import { CasePage } from "@pages/Case.page"
+
 import { Dashboard } from "@pages/common/Dashboard.page"
-import { AddUserAction } from "../page-objects/common/AddUserAction"
+import { AddUserAction } from "@pages/common/AddUserAction"
+import { AddPeopleDetails } from "@pages/common/PeopleDetails"
 
 
-const test = baseTexst.extend<{
+const test = baseTest.extend<{
     dashBoard: Dashboard
     navBar : Navbar
     loginPage : LoginPage
     casePage : CasePage
     caseList : CaseList
     addUserAction : AddUserAction
+    addPeopleDetails : AddPeopleDetails
+    addUserActionDots : AddUserAction
+    fillInvestigation : AddUserAction
+    fillInjuryDetails : AddUserAction
 }>({
     dashBoard:async ({page}, use) => {
         await use(new Dashboard(page))
@@ -37,6 +42,18 @@ const test = baseTexst.extend<{
     addUserAction:async ({page}, use) => {
         await use(new AddUserAction(page))
     },
+    addPeopleDetails:async ({page}, use) => {
+        await use(new AddPeopleDetails(page))
+    },
+    addUserActionDots:async ({page}, use) => {
+        await use(new AddUserAction(page))
+    },
+    fillInvestigation:async ({page}, use) => {
+        await use(new AddUserAction(page))
+    },
+    fillInjuryDetails:async ({page}, use) => {
+        await use(new AddUserAction(page))
+    }
 
 })
 
