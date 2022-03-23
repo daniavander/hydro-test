@@ -83,7 +83,7 @@ test.describe("Smoke tests", () => {
     await caseList.getCaseByDescriptionAndDo("Automation test descrption4", "Delete")
   })
 
-  test('31034 - Smoke test - Create a Serious Injury case', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+  test.only('31034 - Smoke test - Create a Serious Injury case', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
     await dashBoard.sidebarIsVisible()
     await page.locator(".side-panel-content")
 
@@ -108,7 +108,10 @@ test.describe("Smoke tests", () => {
     expect(page.isVisible("//p[text()=' Classify Injury ']"))
     expect(page.isVisible("//p[text()=' HR Details ']"))
 
-    await addUserAction.addActionWith3Dot(classesUnderAction3Dot.aftercare)
+    //await addUserAction.addActionWith3Dot(classesUnderAction3Dot.aftercare)
+    await page.pause()
+    await page.hover("(//div[@class='submenu obs_floatright'])[1]")
+    await page.locator(".icon-afc").click()
     expect(page.isVisible("//p[text()=' After Care ']"))
 
     
@@ -121,7 +124,7 @@ test.describe("Smoke tests", () => {
     //await page.locator('text=Close').click();
     await page.click('text=Close')
     //TODO huiba van itt
-    await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
+    //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
   

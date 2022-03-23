@@ -49,6 +49,7 @@ export class AddUserAction {
 
     async addActionWith3Dot(type: string) {
         //hover three dot
+        await this.page.pause()
         await this.page.hover("(//div[@class='submenu obs_floatright'])[1]")
         await this.page.locator("." + type + "").click()
     }
