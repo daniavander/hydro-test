@@ -44,6 +44,8 @@ export class CasePage {
         //ha van space a névben akkor: Very\\ high
 
         await this.page.locator("//span[text()='please choose...']").click()
+        //span[text()='please choose...']
+        //span[text()='Please choose....']
         await this.page.locator("[aria-label='" + loc + "']").click()
     }
 
@@ -67,7 +69,7 @@ export class CasePage {
             case "Audit":
                 await this.auditType.click()
                 break
-            case "WOC":
+            case "woc":
                 await this.wocType.click()
                 break
             case "Security":

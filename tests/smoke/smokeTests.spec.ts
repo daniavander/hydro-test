@@ -87,11 +87,12 @@ test.describe("Smoke tests", () => {
     await navBar.clickOnTopMenu("Add New Case")
 
     await casePage.setSite("B&A-Brazil-Alunorte-CAPEX Projects")
+    //await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
 
     //webkiten failel:O
     await casePage.setDepartment(departments.hse)
 
-    await casePage.fillDescription("aaAutomation test description injury")
+    await casePage.fillDescription("bbAutomation test description injury")
     //faszas
     await casePage.setCaseType("injury", secLevels.seriouscase)
 
@@ -116,6 +117,36 @@ test.describe("Smoke tests", () => {
     //await page.locator('text=Close').click();
     await page.click('text=Close')
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
+  })
+
+  test('30746 - new', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
+
+    await dashBoard.sidebarIsVisible()
+    await page.locator(".side-panel-content")
+
+    await dashBoard.topBarIsAvailable()
+    await navBar.clickOnTopMenu("Add New Case")
+
+    await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
+
+    await casePage.setDepartment(departments.administration)
+    await page.pause()
+    await casePage.setCaseType("woc", secLevels.low)
+    await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
+    await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
+
+    await casePage.fillDescription("Automation test descrption finish")
+    
+    await page.click("//button[text()='Save']")
+
+    expect(page.isVisible(".ghost-action-card-tile-title"))
+    await (await page.waitForSelector('.p-state-filled')).isVisible()
+    await addUserAction.addNewAction("description", "instruction", "ImsTestGlobalAdmin3", "Add Action tag", "action1")
+
+    await casePage.pageContainsActionCorrectly("description", "instruction")
+
+    await page.click('text=Close')
+    await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
   

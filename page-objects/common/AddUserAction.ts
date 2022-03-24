@@ -59,7 +59,9 @@ export class AddUserAction {
         await this.page.fill("(//textarea[@rows='1'])[2]", finding )
         await this.page.click("//button[text()='Mark as Completed']")
         expect(this.page.isVisible("//p[text()='" + finding +"']"))
-        expect(this.page.isVisible("(//span[text()='Completed'])[1]"))
+        await this.page.pause()
+        //expect(this.page.isVisible("(//span[text()='Completed'])[1]"))
+        await this.page.click('text=Mark as Completed')
     }
     async fillInjuryDetailsTask(injury: string, specify: string, location: string, locationspecify:string, comment: string) {
         await this.page.click("//p[text()=' Injury Details ']")
