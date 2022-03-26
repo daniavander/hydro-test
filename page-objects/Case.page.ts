@@ -63,7 +63,7 @@ export class CasePage {
 
 
 
-    async setCaseType(caseType: any, level: string) {
+    async setCaseType(caseType: any, variable: string) {
         var validCaseType = true
         switch (caseType) {
             case "Audit":
@@ -71,17 +71,21 @@ export class CasePage {
                 break
             case "woc":
                 await this.wocType.click()
+                await this.page.locator('text=Please choose...').click()
+                await this.page.locator('text=Interjú').click()
+                await this.page.fill('[placeholder="Interviewed"]', variable)
+                await this.page.click("text=" + variable + "")
                 break
             case "Security":
                 await this.secType.click()
                 break
             case "ife":
                 await this.ifeType.click()
-                await this.page.locator("[aria-label='" + level + "']").click()
+                await this.page.locator("[aria-label='" + variable + "']").click()
                 break
             case "injury":
                 await this.injuryType.click()
-                await this.page.locator("[aria-label='" + level + "']").click()
+                await this.page.locator("[aria-label='" + variable + "']").click()
                 await this.page.locator("(//div[@role='checkbox'])[2]").click()
                 break
             case "Health":
@@ -117,14 +121,23 @@ export class CasePage {
     async pageContainsActionCorrectly(description: string, instruction: string) {
         // the card is visible after saving it?
         // the created action card is contain correctly the added texts?
-        expect(this.page.isVisible(".tile.my-task.active"))
-        expect(this.page.isVisible("//p[text()='" + description + "']"))
-        expect(this.page.isVisible("//p[text()='" + instruction + "']"))
+        expect(await this.page.isVisible(".tile.my-task.active"))
+        await this.page.pause()
+        expect(await this.page.isVisible("text=" + description + ""))
+        expect(await this.page.isVisible("text=" + instruction + ""))
     }
 
     async snapshotGhostCard() {
         const ghostCard = await this.page.locator(".ghost-action-card-tile-list-common")
         await ghostCard.screenshot({ path: 'ghostcard.png' })
         expect(await ghostCard.screenshot()).toMatchSnapshot("ghostcard2.png")
+    }
+
+    async addSurvey(type: string, category: string, itemNum: number) {
+        await this.page.click("text=Add new survey")
+        await this.page.click("text=" + type + "")
+        await this.page.click("text=" + category + "")
+        await this.page.click("text=Add items: " + itemNum + "")
+        await console.log("---------")
     }
 }

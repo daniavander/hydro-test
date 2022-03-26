@@ -35,6 +35,12 @@ export class AddUserAction {
         // Click text=Add Action tag
     }
 
+
+    async getCardText(locClass: string, expected: string) {
+        const elemTextValue = await (this.page.locator("//h2[@class='" + locClass + "']").allTextContents())
+        expect(elemTextValue.toString()).toBe(expected)
+    }
+
     //add udaction
     async addNewAction(desc: string, inst: string, name: string, tagname: string, subtag: string) {
         await this.page.locator("//span[text()='Add new action']").click()
@@ -56,20 +62,20 @@ export class AddUserAction {
 
     async fillInvestigationTask(finding: string) {
         await this.page.click("//p[text()='Investigation task']")
-        await this.page.fill("(//textarea[@rows='1'])[2]", finding )
+        await this.page.fill("(//textarea[@rows='1'])[2]", finding)
         await this.page.click("//button[text()='Mark as Completed']")
-        expect(this.page.isVisible("//p[text()='" + finding +"']"))
+        expect(this.page.isVisible("//p[text()='" + finding + "']"))
         await this.page.pause()
         //expect(this.page.isVisible("(//span[text()='Completed'])[1]"))
         await this.page.click('text=Mark as Completed')
     }
-    async fillInjuryDetailsTask(injury: string, specify: string, location: string, locationspecify:string, comment: string) {
+    async fillInjuryDetailsTask(injury: string, specify: string, location: string, locationspecify: string, comment: string) {
         await this.page.click("//p[text()=' Injury Details ']")
         await this.page.click("[title='" + injury + "']")
         await this.page.click("[title='" + specify + "']")
         await this.page.click("#" + location + "")
         await this.page.click("//span[text()='" + locationspecify + "']")
-        await this.page.fill("(//textarea[@rows='1'])[2]", comment )
+        await this.page.fill("(//textarea[@rows='1'])[2]", comment)
         await this.page.click("//button[text()=' Mark as Completed']")
         expect(this.page.isVisible("text=" + injury + ""))
         expect(this.page.isVisible("(//span[text()='Completed'])[2]"))

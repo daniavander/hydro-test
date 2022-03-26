@@ -7,7 +7,7 @@ export class AbstractClass {
         this.page= page
     }
 
-   async waitForClass(selector, classes)  {
-    await expect(this.page.locator(selector)).toContain(classes);
+   async clickToMarkAsCompleteBtn()  {
+    //await page.click("//button[text()='Mark as Completed']")
    }
 }

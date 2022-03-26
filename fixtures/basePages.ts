@@ -6,6 +6,7 @@ import { Navbar } from "@pages/common/Navbar.page"
 
 import { CaseList } from "@pages/CaseList"
 import { CasePage } from "@pages/Case.page"
+import { SurveyPage } from "@pages/Survey.page"
 
 import { Dashboard } from "@pages/common/Dashboard.page"
 import { AddUserAction } from "@pages/common/AddUserAction"
@@ -17,12 +18,17 @@ const test = baseTest.extend<{
     navBar : Navbar
     loginPage : LoginPage
     casePage : CasePage
+    addSurvey : CasePage
+    surveyPage : SurveyPage
     caseList : CaseList
     addUserAction : AddUserAction
-    addPeopleDetails : AddPeopleDetails
+    getCardText: AddUserAction
     addUserActionDots : AddUserAction
     fillInvestigation : AddUserAction
     fillInjuryDetails : AddUserAction
+    addPeopleDetails : AddPeopleDetails
+    checkOpenedSurvey : SurveyPage
+    
 }>({
     dashBoard:async ({page}, use) => {
         await use(new Dashboard(page))
@@ -36,16 +42,19 @@ const test = baseTest.extend<{
     casePage:async ({page}, use) => {
         await use(new CasePage(page))
     },
+    addSurvey:async ({page}, use) => {
+        await use(new CasePage(page))
+    },
     caseList:async ({page}, use) => {
         await use(new CaseList(page))
     },
     addUserAction:async ({page}, use) => {
         await use(new AddUserAction(page))
     },
-    addPeopleDetails:async ({page}, use) => {
-        await use(new AddPeopleDetails(page))
-    },
     addUserActionDots:async ({page}, use) => {
+        await use(new AddUserAction(page))
+    },
+    getCardText:async ({page}, use) => {
         await use(new AddUserAction(page))
     },
     fillInvestigation:async ({page}, use) => {
@@ -53,6 +62,15 @@ const test = baseTest.extend<{
     },
     fillInjuryDetails:async ({page}, use) => {
         await use(new AddUserAction(page))
+    },
+    addPeopleDetails:async ({page}, use) => {
+        await use(new AddPeopleDetails(page))
+    },
+    surveyPage:async ({page}, use) => {
+        await use(new SurveyPage(page))
+    },
+    checkOpenedSurvey:async ({page}, use) => {
+        await use(new SurveyPage(page))
     }
 
 })
