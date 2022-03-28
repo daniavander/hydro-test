@@ -123,7 +123,7 @@ test.describe("Smoke tests", () => {
   test('30746 - new', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
-    await page.locator(".side-panel-content")
+    page.locator(".side-panel-content")
 
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Add New Case")
