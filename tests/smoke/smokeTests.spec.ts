@@ -49,7 +49,7 @@ test.describe("Smoke tests", () => {
   test('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
 
     await dashBoard.sidebarIsVisible()
-    await page.locator(".side-panel-content")
+    page.locator(".side-panel-content")
 
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Add New Case")
@@ -57,7 +57,7 @@ test.describe("Smoke tests", () => {
     await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
 
     await casePage.setDepartment(departments.administration)
-    await page.pause()
+    //await page.pause()
     await casePage.setCaseType("ife", secLevels.low)
     await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
     await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
@@ -83,7 +83,7 @@ test.describe("Smoke tests", () => {
 
   test('31034 - Smoke test - Create a Serious Injury case', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
     await dashBoard.sidebarIsVisible()
-    await page.locator(".side-panel-content")
+    page.locator(".side-panel-content")
 
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Add New Case")
@@ -100,7 +100,15 @@ test.describe("Smoke tests", () => {
     await addPeopleDetails.injuredPerson("imsTestGlobalAdmin3", "Yes", "injury comment")
 
     await page.click("//button[text()='Save']")
+    //await page.pause()
 
+    //TODO when answered my question https://github.com/microsoft/playwright/discussions/13123
+    //expect(page.isVisible("(//action-list-tile[@class='ng-star-inserted']//div)[1]"))
+    await page.locator("(//action-list-tile[@class='ng-star-inserted']//div)[1]").isEnabled()
+    //expect(page.isVisible("(//action-list-tile[@class='ng-star-insertedd']//div)[1]"))
+    //await page.locator("(//action-list-tile[@class='ng-star-insertedd']//div)[1]").isDisabled()
+
+    //await page.locator("(//action-list-tile[@class='ng-star-inserted']//div)[1]").isDisabled()
     expect(page.isVisible("//p[text()='Investigation task']"))
     expect(page.isVisible("//p[text()=' Injury Details ']"))
     expect(page.isVisible("//p[text()=' Classify Injury ']"))
@@ -162,8 +170,8 @@ test.describe("Smoke tests", () => {
 
     await surveyPage.checkOpenedSurvey("Ongoing", "Yes")
 
-    await page.pause()
-
+    //await page.pause()
+    await page.locator("//p[text()=' Sign & Archive ']").isEnabled()
     await addUserAction.getCardText("icon-signature ng-star-inserted", " Sign & Archive ")
     await expect(page.locator("(//span)[10]")).toContainText('Completed')
 
@@ -175,9 +183,9 @@ test.describe("Smoke tests", () => {
     //todo ha lesz automation id akkor fixálni
     await page.hover("(//div[@class='action-bar obs_clearfix']//div)[3]")
     //delet btn will be disable but code how
-    await page.pause()
+    
     expect(page.locator("//button[text()=' Delete ']").isDisabled())
-    expect(page.locator("//button[text()=' Delete ']").isEnabled())
+    //expect(page.locator("//button[text()=' Delete ']").isEnabled())
 
     //reopen
     await page.click("//p[text()=' Sign & Archive ']")

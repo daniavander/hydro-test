@@ -122,7 +122,7 @@ export class CasePage {
         // the card is visible after saving it?
         // the created action card is contain correctly the added texts?
         expect(await this.page.isVisible(".tile.my-task.active"))
-        await this.page.pause()
+        //await this.page.pause()
         expect(await this.page.isVisible("text=" + description + ""))
         expect(await this.page.isVisible("text=" + instruction + ""))
     }

@@ -37,7 +37,7 @@ export class AddUserAction {
 
 
     async getCardText(locClass: string, expected: string) {
-        const elemTextValue = await (this.page.locator("//h2[@class='" + locClass + "']").allTextContents())
+        const elemTextValue = await this.page.locator("//h2[@class='" + locClass + "']/p").allTextContents()
         expect(elemTextValue.toString()).toBe(expected)
     }
 
