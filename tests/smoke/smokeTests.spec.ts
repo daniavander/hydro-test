@@ -121,7 +121,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
-  test('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
