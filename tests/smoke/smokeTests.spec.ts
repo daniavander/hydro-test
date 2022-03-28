@@ -15,7 +15,7 @@ test.describe("Smoke tests", () => {
   test.beforeEach(async ({ loginPage, page }) => {
 
     await page.goto(baseUrl, { timeout: 50000 })
-    await loginPage.loginInAzure()
+    //await loginPage.loginInAzure()
   })
 
   test('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
@@ -81,7 +81,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test.skip('31034 - Smoke test - Create a Serious Injury case', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+  test('31034 - Smoke test - Create a Serious Injury case', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
     await dashBoard.sidebarIsVisible()
     await page.locator(".side-panel-content")
 
@@ -113,6 +113,7 @@ test.describe("Smoke tests", () => {
     expect(page.isVisible("//p[text()=' After Care ']"))*/
 
     await addUserAction.fillInvestigationTask("investigation finding")
+    
     await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
     //step 15 next due to an error
 
@@ -120,7 +121,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
-  test('30746 - new', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -173,8 +174,10 @@ test.describe("Smoke tests", () => {
 
     //todo ha lesz automation id akkor fixálni
     await page.hover("(//div[@class='action-bar obs_clearfix']//div)[3]")
-      //delet btn will be disable but code how
-    expect(await page.locator("//button[text()=' Delete ']").isDisabled())
+    //delet btn will be disable but code how
+    await page.pause()
+    expect(page.locator("//button[text()=' Delete ']").isDisabled())
+    expect(page.locator("//button[text()=' Delete ']").isEnabled())
 
     //reopen
     await page.click("//p[text()=' Sign & Archive ']")
