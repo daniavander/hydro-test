@@ -30,7 +30,7 @@ test.describe("Smoke tests", () => {
     expect(response.status()).toBe(200)
   })
 
-  test.only('31036 - Reports page', async ({ dashBoard, navBar, page, request }) => {
+  test('31036 - Reports page', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
@@ -46,7 +46,7 @@ test.describe("Smoke tests", () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
+  test.only('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
