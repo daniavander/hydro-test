@@ -44,8 +44,6 @@ export class CasePage {
         //ha van space a névben akkor: Very\\ high
 
         await this.page.locator("//span[text()='please choose...']").click()
-        //span[text()='please choose...']
-        //span[text()='Please choose....']
         await this.page.locator("[aria-label='" + loc + "']").click()
     }
 
@@ -70,11 +68,14 @@ export class CasePage {
                 await this.auditType.click()
                 break
             case "woc":
+                await this.page.pause()
                 await this.wocType.click()
                 await this.page.locator('text=Please choose...').click()
                 await this.page.locator('text=Interjú').click()
                 await this.page.fill('[placeholder="Interviewed"]', variable)
-                await this.page.click("text=" + variable + "")
+                //await this.page.click("text=" + variable + "")
+                await this.page.click("//div[text()='I3']/following-sibling::div")
+
                 break
             case "Security":
                 await this.secType.click()
@@ -137,7 +138,7 @@ export class CasePage {
         //add class CONTAINS for h3 tag and the expected text
         const elemTextValue = await this.page.locator("//h3[contains(@class,'" + locClass + "')]/a").allTextContents()
         //h3[contains(@class,'warning translation')]/a
-        
+
         expect(elemTextValue.toString()).toBe(expected)
     }
 
