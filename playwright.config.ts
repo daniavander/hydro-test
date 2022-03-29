@@ -24,7 +24,7 @@ const config: PlaywrightTestConfig = {
     actionTimeout: 30000
   },
   expect: {
-    timeout: 15 * 1000,
+    timeout: 10 * 1000,
   },
   projects: [
     {
