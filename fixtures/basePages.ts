@@ -19,13 +19,16 @@ const test = baseTest.extend<{
     loginPage : LoginPage
     casePage : CasePage
     addSurvey : CasePage
+    getCardH2Text: CasePage
+    getH3Text: CasePage
     surveyPage : SurveyPage
     caseList : CaseList
     addUserAction : AddUserAction
-    getCardText: AddUserAction
+    
     addUserActionDots : AddUserAction
     fillInvestigation : AddUserAction
     fillInjuryDetails : AddUserAction
+    fillClassificationTask : AddUserAction
     addPeopleDetails : AddPeopleDetails
     checkOpenedSurvey : SurveyPage
     
@@ -45,6 +48,12 @@ const test = baseTest.extend<{
     addSurvey:async ({page}, use) => {
         await use(new CasePage(page))
     },
+    getCardH2Text:async ({page}, use) => {
+        await use(new CasePage(page))
+    },
+    getH3Text:async ({page}, use) => {
+        await use(new CasePage(page))
+    },
     caseList:async ({page}, use) => {
         await use(new CaseList(page))
     },
@@ -54,13 +63,14 @@ const test = baseTest.extend<{
     addUserActionDots:async ({page}, use) => {
         await use(new AddUserAction(page))
     },
-    getCardText:async ({page}, use) => {
-        await use(new AddUserAction(page))
-    },
+    
     fillInvestigation:async ({page}, use) => {
         await use(new AddUserAction(page))
     },
     fillInjuryDetails:async ({page}, use) => {
+        await use(new AddUserAction(page))
+    },
+    fillClassificationTask:async ({page}, use) => {
         await use(new AddUserAction(page))
     },
     addPeopleDetails:async ({page}, use) => {

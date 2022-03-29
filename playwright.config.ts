@@ -6,8 +6,8 @@ expect.extend(matchers)
 
 const config: PlaywrightTestConfig = {
 
-  globalTimeout: 210000, // Maximum time the whole test suite can run,
-  timeout: 210000,        // Timeout for each test
+  globalTimeout: 300000, // Maximum time the whole test suite can run,
+  timeout: 120000,        // Timeout for each test
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
   reporter: [['html'], ['./my-awesome-reporter.ts'], ['line'], ['allure-playwright']],
@@ -38,7 +38,7 @@ const config: PlaywrightTestConfig = {
           launchOptions: {
             args: ['--no-sandbox', '--disable-dev-shm-usage'],
             headless: false,
-            //slowMo: 200,
+            slowMo: 200,
           },
       }
     },

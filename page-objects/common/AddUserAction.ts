@@ -36,10 +36,7 @@ export class AddUserAction {
     }
 
 
-    async getCardText(locClass: string, expected: string) {
-        const elemTextValue = await this.page.locator("//h2[@class='" + locClass + "']/p").allTextContents()
-        expect(elemTextValue.toString()).toBe(expected)
-    }
+    
 
     //add udaction
     async addNewAction(desc: string, inst: string, name: string, tagname: string, subtag: string) {
@@ -56,7 +53,7 @@ export class AddUserAction {
     async addActionWith3Dot(type: string) {
         //hover three dot
         await this.page.pause()
-        await this.page.hover("(//div[@class='submenu obs_floatright'])[1]")
+        await this.page.hover("data-testid=case-action-section-submenu")
         await this.page.locator("." + type + "").click()
     }
 
@@ -77,5 +74,16 @@ export class AddUserAction {
         await this.page.click("//button[text()=' Mark as Completed']")
         expect(this.page.isVisible("text=" + injury + ""))
         expect(this.page.isVisible("(//span[text()='Completed'])[2]"))
+    }
+    async fillClassificationTask(recordable: string, type: string, level: string) {
+        await this.page.click("//p[text()=' Classify Injury ']")
+        await this.page.click("(//span[text()='" + recordable + "'])[2]")
+        if (recordable === "Yes") {
+            await this.page.click("text=" + type + "")
+            // Click [aria-label="Very\ high"]
+            //await page.locator('[aria-label="Very\\ high"]').click();
+            await this.page.click("[aria-label='" + level + "']")
+        }
+        await this.page.click("//button[text()='Mark as Completed']")
     }
 }

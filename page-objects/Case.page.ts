@@ -119,12 +119,26 @@ export class CasePage {
 
 
     async pageContainsActionCorrectly(description: string, instruction: string) {
+        //todo megnézni h működik e faszán
         // the card is visible after saving it?
         // the created action card is contain correctly the added texts?
         expect(await this.page.isVisible(".tile.my-task.active"))
         //await this.page.pause()
         expect(await this.page.isVisible("text=" + description + ""))
         expect(await this.page.isVisible("text=" + instruction + ""))
+    }
+    async getCardH2Text(locClass: string, expected: string) {
+        //add class for h2 tag and the expected text
+        const elemTextValue = await this.page.locator("//h2[@class='" + locClass + "']/p").allTextContents()
+        expect(elemTextValue.toString()).toBe(expected)
+    }
+
+    async getH3Text(locClass: string, expected: string) {
+        //add class CONTAINS for h3 tag and the expected text
+        const elemTextValue = await this.page.locator("//h3[contains(@class,'" + locClass + "')]/a").allTextContents()
+        //h3[contains(@class,'warning translation')]/a
+        
+        expect(elemTextValue.toString()).toBe(expected)
     }
 
     async snapshotGhostCard() {

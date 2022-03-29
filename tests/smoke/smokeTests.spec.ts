@@ -15,7 +15,7 @@ test.describe("Smoke tests", () => {
   test.beforeEach(async ({ loginPage, page }) => {
 
     await page.goto(baseUrl, { timeout: 50000 })
-    await loginPage.loginInAzure()
+    //await loginPage.loginInAzure()
   })
 
   test('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
@@ -94,13 +94,9 @@ test.describe("Smoke tests", () => {
     await casePage.setDepartment(departments.hse)
 
     await casePage.fillDescription("bbAutomation test description injury")
-    //faszas
     await casePage.setCaseType("injury", secLevels.seriouscase)
-
     await addPeopleDetails.injuredPerson("imsTestGlobalAdmin3", "Yes", "injury comment")
-
     await page.click("//button[text()='Save']")
-    //await page.pause()
 
     //TODO when answered my question https://github.com/microsoft/playwright/discussions/13123
     //expect(page.isVisible("(//action-list-tile[@class='ng-star-inserted']//div)[1]"))
@@ -114,18 +110,18 @@ test.describe("Smoke tests", () => {
     expect(page.isVisible("//p[text()=' Classify Injury ']"))
     expect(page.isVisible("//p[text()=' HR Details ']"))
 
-    /*//await addUserAction.addActionWith3Dot(classesUnderAction3Dot.aftercare)
-    await page.hover("//div[text()='Actions']/following-sibling::div")
-    //await page.pause()
-    await page.locator(".icon-afc").click()
-    expect(page.isVisible("//p[text()=' After Care ']"))*/
-
     await addUserAction.fillInvestigationTask("investigation finding")
-    
-    await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
-    //step 15 next due to an error
 
-    await page.click('text=Close')
+    //step 15
+    await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
+    //step 16
+    await addUserAction.fillClassificationTask("Yes", "Fatality (Hydro)", "Very high")
+    await casePage.getCardH2Text("icon-poe ng-star-inserted", " Absent dates ")
+    await page.waitForTimeout(2000)
+    await casePage.getCardH2Text("icon-translation ng-star-inserted", "Translation review")
+    
+    await casePage.getH3Text("warning translation", "Click here to change to Portuguese (Brazil)")
+
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
@@ -154,43 +150,37 @@ test.describe("Smoke tests", () => {
     //add survey
     await casePage.addSurvey("Checklist", "első kategória", 1)
 
-    //case is ongoing
-    await expect(page.locator("(//span)[10]")).toContainText('Ongoing')
+    await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
     expect(await page.isVisible("//p[text()=' WOC form for managers ']"))
 
-    //id contain HUS number
-    await expect(page.locator('(//h3)[2]')).toContainText('HUS')
+    //id contain HUS string
+    await expect(page.locator('data-testid=case-id')).toContainText('HUS')
 
     //buttons are disappeared
     expect(page.locator("//button[text()='Save']")).toHaveCount(0)
     expect(page.locator("//button[text()='Discard']")).toHaveCount(0)
 
-
-    //await page.locator('text=Discard').click();
-
     await surveyPage.checkOpenedSurvey("Ongoing", "Yes")
 
-    //await page.pause()
+
     await page.locator("//p[text()=' Sign & Archive ']").isEnabled()
-    await addUserAction.getCardText("icon-signature ng-star-inserted", " Sign & Archive ")
-    await expect(page.locator("(//span)[10]")).toContainText('Completed')
+    await casePage.getCardH2Text("icon-signature ng-star-inserted", " Sign & Archive ")
+    await expect(page.locator("data-testid=case-status")).toContainText('Completed')
 
     //open s and a
     await page.click("//p[text()=' Sign & Archive ']")
     await page.click("//button[text()='Mark as Completed']")
-    expect(page.locator("(//span)[10]")).toContainText('Archive')
+    expect(page.locator("data-testid=case-status")).toContainText('Archive')
 
-    //todo ha lesz automation id akkor fixálni
-    await page.hover("(//div[@class='action-bar obs_clearfix']//div)[3]")
-    //delet btn will be disable but code how
-    
+  
+    await page.hover("data-testid=case-submenu")
+
     expect(page.locator("//button[text()=' Delete ']").isDisabled())
-    //expect(page.locator("//button[text()=' Delete ']").isEnabled())
 
     //reopen
     await page.click("//p[text()=' Sign & Archive ']")
     await page.click("//button[text()=' Reopen action ']")
-    await page.hover("(//div[@class='action-bar obs_clearfix']//div)[3]")
+    await page.hover("data-testid=case-submenu")
     await page.click("//button[text()=' Delete ']")
     await page.click("//button[text()='Yes']")
 
