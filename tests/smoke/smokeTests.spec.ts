@@ -18,7 +18,7 @@ test.describe("Smoke tests", () => {
     await loginPage.loginInAzure()
   })
 
-  test('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
+  test.only('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
