@@ -54,6 +54,8 @@ export class AddUserAction {
         //hover three dot
         //await this.page.pause()
         await this.page.hover("data-testid=case-action-section-submenu")
+        const href = await this.page.evaluate(() => document.querySelector('[data-testid="case-submenu"]'))
+        await this.page.href.click();
         await this.page.locator("." + type + "").click()
     }
 

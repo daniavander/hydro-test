@@ -68,7 +68,7 @@ export class CasePage {
                 await this.auditType.click()
                 break
             case "woc":
-                await this.page.pause()
+                //await this.page.pause()
                 await this.wocType.click()
                 await this.page.locator('text=Please choose...').click()
                 await this.page.locator('text=Interjú').click()

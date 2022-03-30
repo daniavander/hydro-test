@@ -119,7 +119,7 @@ test.describe("Smoke tests", () => {
     await casePage.getCardH2Text("icon-poe ng-star-inserted", " Absent dates ")
     await page.waitForTimeout(2000)
     await casePage.getCardH2Text("icon-translation ng-star-inserted", "Translation review")
-    
+
     await casePage.getH3Text("warning translation", "Click here to change to Portuguese (Brazil)")
 
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
@@ -172,7 +172,11 @@ test.describe("Smoke tests", () => {
     await page.click("//button[text()='Mark as Completed']")
     expect(page.locator("data-testid=case-status")).toContainText('Archive')
 
-  
+    //await page.pause()
+    //const href = await page.evaluate(() => document.querySelector('[data-testid="case-submenu"]'))
+    //await page.evaluate(() => document.querySelector('[data-testid="case-submenu"]').click())
+    //page.evaluate("document.querySelector('[data-testid='case-submenu']').click()")
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await page.hover("data-testid=case-submenu")
 
     expect(page.locator("//button[text()=' Delete ']").isDisabled())
