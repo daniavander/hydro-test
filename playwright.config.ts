@@ -16,7 +16,7 @@ const config: PlaywrightTestConfig = {
   //just the wanted folder will be run
   //testDir: "tests/tips",
   use: {
-    viewport: { width: 1450, height: 900 },
+    viewport: { width: 1250, height: 900 },
     ignoreHTTPSErrors: true,
     trace: 'on',
     video: 'on',

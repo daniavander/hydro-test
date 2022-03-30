@@ -52,7 +52,7 @@ export class AddUserAction {
 
     async addActionWith3Dot(type: string) {
         //hover three dot
-        await this.page.pause()
+        //await this.page.pause()
         await this.page.hover("data-testid=case-action-section-submenu")
         await this.page.locator("." + type + "").click()
     }
