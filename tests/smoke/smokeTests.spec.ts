@@ -15,7 +15,11 @@ test.describe("Smoke tests", () => {
   test.beforeEach(async ({ loginPage, page }) => {
 
     await page.goto(baseUrl, { timeout: 50000 })
-    await loginPage.loginInAzure()
+    //await loginPage.loginInAzure()
+  })
+ 
+  test.afterEach(async ({ page }) => {
+    await page.waitForTimeout(6000)
   })
 
   test('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
@@ -125,7 +129,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
-  test('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test.skip('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -149,7 +153,7 @@ test.describe("Smoke tests", () => {
 
     //add survey
     await casePage.addSurvey("Checklist", "első kategória", 1)
-
+    //await page.pause()
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
     expect(await page.isVisible("//p[text()=' WOC form for managers ']"))
 
@@ -195,6 +199,20 @@ test.describe("Smoke tests", () => {
 
     //await page.click('text=Close')
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
+  })
+
+  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+
+    await dashBoard.sidebarIsVisible()
+    page.locator(".side-panel-content")
+
+    await dashBoard.topBarIsAvailable()
+    await navBar.clickOnTopMenu("Cases")
+    //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
+    //step 1 list loaded
+    expect(page.locator(".obs_csstable"))
+
+    await page.pause()
   })
 
 })
