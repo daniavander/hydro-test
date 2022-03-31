@@ -17,7 +17,7 @@ test.describe("Smoke tests", () => {
     await page.goto(baseUrl, { timeout: 50000 })
     await loginPage.loginInAzure()
   })
- 
+
   test.afterEach(async ({ page }) => {
     await page.waitForTimeout(6000)
   })
@@ -85,7 +85,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test.skip('31034 - Smoke test - Create a Serious Injury case', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+  test('31034 - Smoke test - Create a Serious Injury case', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
@@ -201,7 +201,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -209,10 +209,20 @@ test.describe("Smoke tests", () => {
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Cases")
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
-    //step 1 list loaded
+    //step 3 list loaded
     expect(page.locator(".obs_csstable"))
-
-    await page.pause()
+    //step 4 select site
+    await page.click("//div[@title='All MY sites']")
+    //uncheck all 
+    await page.locator('.csscheckbox').first().click();
+    await page.fill("#treeview-input-search", "fehervar")
+    await page.keyboard.press('Enter');
+    await page.locator('text=Extrusion-Hungary-Szekesfehervar').first().click();
+    //await page.pause()
+    await page.click("//button[text()='OK']")
+    //await page.locator('text=Customized view').click();
+    //customized view load
+    await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
   })
 
 })
