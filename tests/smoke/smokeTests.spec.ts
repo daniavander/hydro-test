@@ -25,7 +25,7 @@ test.describe("Smoke tests", () => {
   test('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
+    await expect(page.locator(".c_site-selector-button")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Activities")
     await page.locator('.obs_csstable').isVisible()
     const activitiesHeader = page.locator('.header.header-style2');
@@ -129,7 +129,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
-  test.skip('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -140,8 +140,9 @@ test.describe("Smoke tests", () => {
     await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
 
     await casePage.setDepartment(departments.hse)
-
+    //await page.pause()
     await casePage.setCaseType("woc", "ImsTestGlobalAdmin3")
+    
     await casePage.addMainAndSubTagWithoutBtn("Add shift", "Night shift")
     await casePage.addMainAndSubTagWithoutBtn("Add Action tag", "action1")
     await page.click('div[role="checkbox"]:has-text("Yes")')
@@ -201,7 +202,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -213,16 +214,10 @@ test.describe("Smoke tests", () => {
     expect(page.locator(".obs_csstable"))
     //step 4 select site
     await page.click("//div[@title='All MY sites']")
-    //uncheck all 
-    await page.locator('.csscheckbox').first().click();
-    await page.fill("#treeview-input-search", "fehervar")
-    await page.keyboard.press('Enter');
-    await page.locator('text=Extrusion-Hungary-Szekesfehervar').first().click();
-    //await page.pause()
-    await page.click("//button[text()='OK']")
-    //await page.locator('text=Customized view').click();
-    //customized view load
-    await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
+
+    //add method every filter
+    searchCaseByFilters
+    Extrusion-Hungary-Szekesfehervar
   })
 
 })

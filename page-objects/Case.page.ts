@@ -74,7 +74,8 @@ export class CasePage {
                 await this.page.locator('text=Interjú').click()
                 await this.page.fill('[placeholder="Interviewed"]', variable)
                 //await this.page.click("text=" + variable + "")
-                await this.page.click("//div[text()='I3']/following-sibling::div")
+                await this.page.locator('text=ImsTestGlobalAdmin3(ImsTestGlobalAdmin3@avander.hu)').click();
+                //await this.page.click("//div[text()='I3']/following-sibling::div")
 
                 break
             case "Security":

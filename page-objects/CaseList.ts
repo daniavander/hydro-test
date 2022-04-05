@@ -13,8 +13,25 @@ export class CaseList {
         await this.page.locator('text=' + desc + '').click();
         //hover three dot
         await this.page.hover("(//div[contains(@class, 'p0i')])[1]")
-        await this.page.locator('text="' + action +'"').first().click();
+        await this.page.locator('text="' + action + '"').first().click();
         await this.page.click("//button[text()='Yes']")
     }
-    
+
+    async searchCaseByFilters(site: string, cases: string) {
+        //uncheck all 
+        await this.page.locator('.csscheckbox').first().click();
+        await this.page.fill("#treeview-input-search", "" + site + "")
+        await this.page.keyboard.press('Enter');
+        await this.page.locator('text=' + site + '').first().click();
+        //await page.pause()
+        await this.page.click("//button[text()='OK']")
+        //await page.locator('text=Customized view').click();
+        //customized view load
+        await expect(this.page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
+        //step 5
+        await this.page.fill("(//div[@class='c_container'])[1]", "" + cases + "")
+        await this.page.keyboard.press('Enter');
+        await this.page.locator('text=' + cases + '').first().click();
+    }
+
 }
