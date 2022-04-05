@@ -25,13 +25,15 @@ export class CaseList {
         await this.page.locator('text=' + site + '').first().click();
         //await page.pause()
         await this.page.click("//button[text()='OK']")
-        //await page.locator('text=Customized view').click();
-        //customized view load
-        await expect(this.page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
         //step 5
         await this.page.fill("(//div[@class='c_container'])[1]", "" + cases + "")
         await this.page.keyboard.press('Enter');
-        await this.page.locator('text=' + cases + '').first().click();
+        //(//span[text()='HSE'])[1]
+        await this.page.locator('text=' + cases + '').first().click()
+        await this.page.click("(//button[text()=' OK '])[1]")
+         //await page.locator('text=Customized view').click();
+        //customized view load
+        await expect(this.page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
     }
 
 }

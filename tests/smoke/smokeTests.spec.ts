@@ -37,7 +37,7 @@ test.describe("Smoke tests", () => {
   test('31036 - Reports page', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
+    await expect(page.locator(".c_site-selector-button")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Reports")
     const actionBar = page.locator('.action-bar');
     await expect(actionBar).toHaveClass("action-bar obs_clearfix ng-star-inserted");
