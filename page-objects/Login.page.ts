@@ -71,7 +71,10 @@ export class LoginPage {
         
         await this.page.locator('text=Sign in').click()
         //await delay(6000);
+        //await this.page.pause()
         await this.page.locator('text=Yes').click()
+        await delay(2000);
+        await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
 
         await this.page.waitForSelector(".side-panel-content")
         //await this.page.locator(".side-panel-content").screenshot({ path: 'screenshot/sidepanel.png' })

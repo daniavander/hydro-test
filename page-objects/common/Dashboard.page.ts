@@ -28,6 +28,7 @@ export class Dashboard {
     async topBarIsAvailable() {
         await this.topBar.elementHandle()
     }
+    
     async snapshotTopBar() {
         expect(await this.topBar.screenshot()).toMatchSnapshot('topBar.png')
     }

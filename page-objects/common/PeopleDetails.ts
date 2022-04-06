@@ -29,9 +29,8 @@ export class AddPeopleDetails {
         await this.page.locator('text=ImsTestGlobalAdmin3(ImsTestGlobalAdmin3@avander.hu)').click();
 
         //popup check
-        console.log("------------------------------------")
-        console.log(await (await this.page.waitForSelector("[title='Hydro']")))
-        console.log(await (await this.page.waitForSelector("[title='Injured']")))
+        await this.page.waitForSelector("[title='Hydro']")
+        await this.page.waitForSelector("[title='Injured']")
 
 
         await (await this.page.waitForSelector("[title='HSE']")).textContent()

@@ -129,7 +129,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
-  test.skip('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -183,6 +183,8 @@ test.describe("Smoke tests", () => {
     //page.evaluate("document.querySelector('[data-testid='case-submenu']').click()")
     //TODO megnézni miért hasal sokszor
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    //await page.pause()
+    await page.waitForTimeout(2000)
     await page.hover("data-testid=case-submenu")
 
     expect(page.locator("//button[text()=' Delete ']").isDisabled())

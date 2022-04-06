@@ -32,8 +32,8 @@ test.describe("my first test suite", () => {
     console.log('after waiting 15 sec');
 
     const response = await page.waitForResponse(response => response.status() === 200);
-    console.log('RESPONSE ' + (await response.body()))
-    console.log('STATUS ' + (await response.status()))
+    //console.log('RESPONSE ' + (await response.body()))
+    //console.log('STATUS ' + (await response.status()))
 
     await page.screenshot({ path: 'homepage1.png' });
     /*await page.locator("#i0116").type("ImsTestGlobalAdmin1@avander.hu")
