@@ -221,7 +221,7 @@ test.describe("Smoke tests", () => {
     await page.click("[title='Edit filters']")
     //fehervar filter is active
     page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")
-    await page.pause()
+    
     expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
     //HSE filter isvisible
     expect(page.locator("//span[@title='Type of incident:']")).toBeVisible()
