@@ -82,15 +82,16 @@ export class LoginPage {
         await this.page.locator('text=Yes').click()
         await delay(4000);
         //for webkit and porno chrome
-        await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
+        //await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
 
         const sidePanel = await this.page.locator(".top-menu-container")
         if (sidePanel === null) {
+            console.log("No logged in, please check manually")
             expect(this.page.locator(".top-menu-container")).toBeVisible()
-            expect(this.page.locator(".side-panel-content")).toBeVisible()
+            
         }
         else {
-            console.log("No logged in, please check manually")
+            expect(this.page.locator(".side-panel-content")).toBeVisible()
             expect(this.page.locator(".top-menu-container")).toBeVisible()
         }
     }
