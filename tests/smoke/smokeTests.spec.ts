@@ -26,7 +26,7 @@ test.describe("Smoke tests", () => {
   test.afterAll(async ({ browser }) => {
     await browser.close()
   })
-  test.only('31035 - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
+  test('31035 - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator(".c_site-selector-button")).toHaveAttribute('title', 'All MY sites')
@@ -38,7 +38,7 @@ test.describe("Smoke tests", () => {
     expect(response.status()).toBe(200)
   })
 
-  test.only('31036 - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
+  test('31036 - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator(".c_site-selector-button")).toHaveAttribute('title', 'All MY sites')
@@ -54,7 +54,8 @@ test.describe("Smoke tests", () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  test.only('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
+  test('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ browserName,dashBoard, navBar, casePage, addUserAction, page }) => {
+    test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -63,7 +64,9 @@ test.describe("Smoke tests", () => {
     await navBar.clickOnTopMenu("Add New Case")
 
     await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
-
+    //nem megy webkiten
+    //STEP locator.scrollIntoViewIfNeeded([title=Administration])
+    //STEP locator.click([title=Administration])
     await casePage.setDepartment(departments.administration)
     //await page.pause()
     await casePage.setCaseType("ife", secLevels.low)
@@ -89,7 +92,9 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test('31034 - Smoke test - Create a Serious Injury case @action', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+  test('31034 - Smoke test - Create a Serious Injury case @action', async ({ browserName ,dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+    test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
+
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
@@ -99,6 +104,7 @@ test.describe("Smoke tests", () => {
     await casePage.setSite("B&A-Brazil-Alunorte-CAPEX Projects")
 
     //webkiten failel:O
+    //locator.click([title=HSE])
     await casePage.setDepartment(departments.hse)
 
     await casePage.fillDescription("bbAutomation test description injury")
@@ -133,14 +139,14 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
-  test.skip('31032 - Smoke test - Close a WOC case with filled checklist @action', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+    test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Add New Case")
-
     await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
 
     await casePage.setDepartment(departments.hse)
@@ -209,7 +215,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ dashBoard, navBar, page, caseList }) => {
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ dashBoard, navBar, page, caseList }) => {
 
     //await dashBoard.sidebarIsVisible()
     //page.locator(".side-panel-content")

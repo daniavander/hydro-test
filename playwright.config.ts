@@ -25,7 +25,7 @@ const config: PlaywrightTestConfig = {
     screenshot: 'on',
     actionTimeout: 30000
   },
-  //grep: [new RegExp("@response")],
+  //grep: [new RegExp("@list", "@action")],
   expect: {
     timeout: 10 * 1000,
   },
