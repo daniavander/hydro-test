@@ -4,7 +4,7 @@ import { expect, Locator, Page } from "@playwright/test";
 export class LoginPage {
     //define selectors
     private page: Page
-    
+
     readonly usernameInput: Locator
     readonly passwordInput: Locator
     readonly submitBtn: Locator
@@ -55,32 +55,46 @@ export class LoginPage {
     async loginInAzure() {
         function delay(time: number | undefined) {
             return new Promise(function (resolve) {
-              setTimeout(resolve, time)
+                setTimeout(resolve, time)
             });
-          }
+        }
 
         //withou sso login steps
         var emailaddress = "ImsTestGlobalAdmin3@avander.hu"
         var pwd = "123ims456!"
-        //await this.page.pause()
+        const emailForm = this.page.locator("id=i0116")
+        await this.page.pause()
+        //for chrome
+        //await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
+        if (emailForm == null) {
+            console.log("No load the IMS, please check manually")
+            expect(this.page.locator("id=i0116")).toBeVisible()
+        }
         await this.page.type("id=i0116", emailaddress)
         await this.page.locator('text=Next').click()
 
         await delay(2000);
-        await this.page.type("id=i0118", pwd)
-        
+        await this.page.fill("id=i0118", pwd)
+
         await this.page.locator('text=Sign in').click()
         //await delay(6000);
         //await this.page.pause()
         await this.page.locator('text=Yes').click()
-        await delay(2000);
-        await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
+        await delay(4000);
+        //for webkit
+        //await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
 
-        await this.page.waitForSelector(".side-panel-content")
-        //await this.page.locator(".side-panel-content").screenshot({ path: 'screenshot/sidepanel.png' })
-        //await delay(6000);
-        await this.page.waitForSelector(".dashboard-qr-code-a")
-        //await this.page.screenshot({ path: 'screenshot/qrcode.png' });
+        await this.page.pause()
+
+        const sidePanel = await this.page.locator(".top-menu-container")
+        if (sidePanel === null) {
+            expect(this.page.locator(".top-menu-container")).toBeVisible()
+            expect(this.page.locator(".side-panel-content")).toBeVisible()
+        }
+        else {
+            console.log("No logged in, please check manually")
+            expect(this.page.locator(".top-menu-container")).toBeVisible()
+        }
     }
 
     //login in pipeline!

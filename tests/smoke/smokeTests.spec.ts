@@ -13,11 +13,9 @@ test.describe("Smoke tests", () => {
   const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/'
 
   test.beforeEach(async ({ loginPage, page }) => {
-
     await page.goto(baseUrl, { timeout: 50000 })
     await loginPage.loginInAzure()
   })
-
   test.afterEach(async ({ page }) => {
     await page.waitForTimeout(6000)
   })
@@ -142,7 +140,7 @@ test.describe("Smoke tests", () => {
     await casePage.setDepartment(departments.hse)
     //await page.pause()
     await casePage.setCaseType("woc", "ImsTestGlobalAdmin3")
-    
+
     await casePage.addMainAndSubTagWithoutBtn("Add shift", "Night shift")
     await casePage.addMainAndSubTagWithoutBtn("Add Action tag", "action1")
     await page.click('div[role="checkbox"]:has-text("Yes")')
@@ -205,22 +203,34 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test.only('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, page, caseList }) => {
 
-    await dashBoard.sidebarIsVisible()
-    page.locator(".side-panel-content")
+    //await dashBoard.sidebarIsVisible()
+    //page.locator(".side-panel-content")
 
-    await dashBoard.topBarIsAvailable()
+    //await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Cases")
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
     //step 3 list loaded
     expect(page.locator(".obs_csstable"))
-    //step 4 select site
-    await page.click("//div[@title='All MY sites']")
+    /*await caseList.searchCaseByFilters("Extrusion-Hungary-Szekesfehervar", "HSE")
 
-    //add method every filter
-    searchCaseByFilters
-    Extrusion-Hungary-Szekesfehervar
+    //filters
+    
+    await page.click("[title='Edit filters']")
+    //await page.click("//div[@title='Site: Extrusion-Hungary-Szekesfehervar ']")
+   // await page.locator('text=Extrusion-Hungary-Szekesfehervar').first().click();
+    page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")
+    await page.pause()
+    expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
+    expect(page.locator("(//div[@title='Type of incident: HSE ']//span)[2]")).toBeVisible()
+    //expect(page.locator("(//div[@title='Type of incident: HSE ']//span)[2]")).toBeDisabled()
+
+
+    /*const elemTextValue = await page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]").allTextContents()
+    console. log(elemTextValue)*/
+
+
   })
 
 })

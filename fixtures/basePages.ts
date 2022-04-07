@@ -23,6 +23,7 @@ const test = baseTest.extend<{
     getH3Text: CasePage
     surveyPage : SurveyPage
     caseList : CaseList
+    searchCaseByFilters : CaseList
     addUserAction : AddUserAction
     
     addUserActionDots : AddUserAction
@@ -55,6 +56,9 @@ const test = baseTest.extend<{
         await use(new CasePage(page))
     },
     caseList:async ({page}, use) => {
+        await use(new CaseList(page))
+    },
+    searchCaseByFilters:async ({page}, use) => {
         await use(new CaseList(page))
     },
     addUserAction:async ({page}, use) => {

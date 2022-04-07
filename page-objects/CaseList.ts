@@ -17,22 +17,21 @@ export class CaseList {
         await this.page.click("//button[text()='Yes']")
     }
 
-    async searchCaseByFilters(site: string, cases: string) {
+    async searchCaseByFilters(site: string, cat: string) {
         //uncheck all 
+        
+        await this.page.click("data-testid=site-selector")
         await this.page.locator('.csscheckbox').first().click();
-        await this.page.fill("#treeview-input-search", "" + site + "")
+        //step 4
+        await this.page.fill("#treeview-input-search", site)
         await this.page.keyboard.press('Enter');
         await this.page.locator('text=' + site + '').first().click();
-        //await page.pause()
         await this.page.click("//button[text()='OK']")
         //step 5
-        await this.page.fill("(//div[@class='c_container'])[1]", "" + cases + "")
-        await this.page.keyboard.press('Enter');
-        //(//span[text()='HSE'])[1]
-        await this.page.locator('text=' + cases + '').first().click()
+        await this.page.click("data-testid=ims-multi-select-entityType")
+        await this.page.locator('text=' + cat + '').first().click();
         await this.page.click("(//button[text()=' OK '])[1]")
-         //await page.locator('text=Customized view').click();
-        //customized view load
+        
         await expect(this.page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
     }
 
