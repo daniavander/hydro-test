@@ -226,7 +226,7 @@ test.describe("Smoke tests", () => {
     //HSE filter isvisible
     //await page.pause()
     //expect(page.locator("//span[@title='Type of incident:']")).toBeVisible()
-    expect(page.locator("(//span[text()='Fire'])[3]")).toBeVisible()
+    //expect(page.locator("(//span[text()='Fire'])[3]")).toBeVisible()
     //step7
     expect(page.locator("text='Recorded'")).toBeVisible()
     //expect(page.locator("//span[text()='Recorded']")).toBeDisabled()
