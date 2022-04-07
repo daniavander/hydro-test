@@ -18,9 +18,12 @@ test.describe("Smoke tests", () => {
   })
   test.afterEach(async ({ page }) => {
     await page.waitForTimeout(6000)
+    await page.close()
   })
-
-  test('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
+  test.afterAll(async ({ page }) => {
+    await page.close()
+  })
+  test.only('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator(".c_site-selector-button")).toHaveAttribute('title', 'All MY sites')
@@ -32,7 +35,7 @@ test.describe("Smoke tests", () => {
     expect(response.status()).toBe(200)
   })
 
-  test('31036 - Reports page', async ({ dashBoard, navBar, page, request }) => {
+  test.only('31036 - Reports page', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator(".c_site-selector-button")).toHaveAttribute('title', 'All MY sites')
@@ -48,7 +51,7 @@ test.describe("Smoke tests", () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
+  test.only('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")

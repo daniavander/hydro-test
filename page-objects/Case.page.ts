@@ -43,7 +43,7 @@ export class CasePage {
         //TODO create sting list or dict with severity names
         //ha van space a névben akkor: Very\\ high
 
-        await this.page.locator("//span[text()='please choose...']").click()
+        await this.page.locator("#pr_id_18_label").click()
         await this.page.locator("[aria-label='" + loc + "']").click()
     }
 
