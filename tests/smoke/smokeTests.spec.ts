@@ -14,7 +14,6 @@ test.describe("Smoke tests", () => {
 
   test.beforeEach(async ({ loginPage, page }) => {
     await page.goto(baseUrl, { timeout: 50000 })
-    await page.goto(baseUrl, { timeout: 50000 })
     await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }) => {
@@ -214,18 +213,22 @@ test.describe("Smoke tests", () => {
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
     //step 3 list loaded
     expect(page.locator(".obs_csstable"))
-    /*await caseList.searchCaseByFilters("Extrusion-Hungary-Szekesfehervar", "HSE")
+    await caseList.searchCaseByFilters("Extrusion-Hungary-Szekesfehervar", "HSE")
 
     //filters
     
+    //step 6
     await page.click("[title='Edit filters']")
-    //await page.click("//div[@title='Site: Extrusion-Hungary-Szekesfehervar ']")
-   // await page.locator('text=Extrusion-Hungary-Szekesfehervar').first().click();
+    //fehervar filter is active
     page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")
     await page.pause()
     expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
-    expect(page.locator("(//div[@title='Type of incident: HSE ']//span)[2]")).toBeVisible()
-    //expect(page.locator("(//div[@title='Type of incident: HSE ']//span)[2]")).toBeDisabled()
+    //HSE filter isvisible
+    expect(page.locator("//span[@title='Type of incident:']")).toBeVisible()
+    expect(page.locator("(//span[text()='HSE'])[3]")).toBeVisible()
+    //step7
+    expect(page.locator("text='Recorded'")).toBeVisible()
+    //expect(page.locator("//span[text()='Recorded']")).toBeDisabled()
 
 
     /*const elemTextValue = await page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]").allTextContents()
