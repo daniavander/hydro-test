@@ -63,9 +63,9 @@ export class LoginPage {
         var emailaddress = "ImsTestGlobalAdmin3@avander.hu"
         var pwd = "123ims456!"
         const emailForm = this.page.locator("id=i0116")
-        await this.page.pause()
+        //await this.page.pause()
         //for chrome
-        //await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
+        await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
         if (emailForm == null) {
             console.log("No load the IMS, please check manually")
             expect(this.page.locator("id=i0116")).toBeVisible()
@@ -83,8 +83,6 @@ export class LoginPage {
         await delay(4000);
         //for webkit
         //await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
-
-        await this.page.pause()
 
         const sidePanel = await this.page.locator(".top-menu-container")
         if (sidePanel === null) {
