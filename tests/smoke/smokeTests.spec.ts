@@ -16,14 +16,17 @@ test.describe("Smoke tests", () => {
     await page.goto(baseUrl, { timeout: 50000 })
     await loginPage.loginInAzure()
   })
-  test.afterEach(async ({ page }) => {
+  test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(6000)
-    await page.close()
+    console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
+    if (testInfo.status !== testInfo.expectedStatus)
+      console.log(`Did not run as expected, ended up at ${page.url()}`);
+    //await page.close()
   })
-  test.afterAll(async ({ page }) => {
-    await page.close()
+  test.afterAll(async ({ browser }) => {
+    await browser.close()
   })
-  test.only('31035 - Activity list', async ({ dashBoard, navBar, page, request }) => {
+  test.only('31035 - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator(".c_site-selector-button")).toHaveAttribute('title', 'All MY sites')
@@ -35,7 +38,7 @@ test.describe("Smoke tests", () => {
     expect(response.status()).toBe(200)
   })
 
-  test.only('31036 - Reports page', async ({ dashBoard, navBar, page, request }) => {
+  test.only('31036 - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator(".c_site-selector-button")).toHaveAttribute('title', 'All MY sites')
@@ -51,7 +54,7 @@ test.describe("Smoke tests", () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  test.only('30746 - Smoke test - Add IFE case with an user defined action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
+  test.only('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ dashBoard, navBar, casePage, addUserAction, caseList, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -86,7 +89,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test('31034 - Smoke test - Create a Serious Injury case', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+  test('31034 - Smoke test - Create a Serious Injury case @action', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
@@ -130,7 +133,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
-  test.skip('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test.skip('31032 - Smoke test - Close a WOC case with filled checklist @action', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -206,7 +209,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, page, caseList }) => {
+  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ dashBoard, navBar, page, caseList }) => {
 
     //await dashBoard.sidebarIsVisible()
     //page.locator(".side-panel-content")
@@ -219,7 +222,7 @@ test.describe("Smoke tests", () => {
     await caseList.searchCaseByFilters("Extrusion-Hungary-Szekesfehervar", "Fire")
 
     //filters
-    
+
     //step 6
     await page.click("[title='Edit filters']")
     expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
