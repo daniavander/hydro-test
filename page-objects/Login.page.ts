@@ -65,7 +65,7 @@ export class LoginPage {
         const emailForm = this.page.locator("id=i0116")
         //await this.page.pause()
         //for chrome
-        await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
+        //await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
         if (emailForm == null) {
             console.log("No load the IMS, please check manually")
             expect(this.page.locator("id=i0116")).toBeVisible()
@@ -81,8 +81,8 @@ export class LoginPage {
         //await this.page.pause()
         await this.page.locator('text=Yes').click()
         await delay(4000);
-        //for webkit
-        //await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
+        //for webkit and porno chrome
+        await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
 
         const sidePanel = await this.page.locator(".top-menu-container")
         if (sidePanel === null) {
