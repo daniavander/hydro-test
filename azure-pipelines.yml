@@ -5,6 +5,13 @@ pool:
   vmImage: 'ubuntu-20.04'
   workingDir: '$(service_path)'
 
+schedules:
+- cron: "0 3 * * Mon-Fri"
+  displayName: M-F 3:00 AM (UTC) daily build
+  branches:
+    include:
+    - main
+    
 jobs:
 - job: PreWork
   steps:
@@ -20,7 +27,6 @@ jobs:
     displayName: "run the test"
     condition: succeeded()
   - script: npm run smoke
-      
       
   - task: CopyFiles@1
     condition: succeededOrFailed()            # Run task even if previous ones fail
