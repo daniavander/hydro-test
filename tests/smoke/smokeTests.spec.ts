@@ -203,7 +203,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test.only('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, page, caseList }) => {
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, page, caseList }) => {
 
     //await dashBoard.sidebarIsVisible()
     //page.locator(".side-panel-content")
@@ -219,13 +219,7 @@ test.describe("Smoke tests", () => {
     
     //step 6
     await page.click("[title='Edit filters']")
-    //fehervar filter is active
-    page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")
-
     expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
-    //HSE filter isvisible
-    //await page.pause()
-    //expect(page.locator("//span[@title='Type of incident:']")).toBeVisible()
     expect(page.locator("(//span[text()='Fire'])[3]")).toBeVisible()
     //step7
     expect(page.locator("text='Recorded'")).toBeVisible()
