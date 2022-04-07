@@ -222,11 +222,11 @@ test.describe("Smoke tests", () => {
     //fehervar filter is active
     page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")
 
-    //expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
+    expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
     //HSE filter isvisible
     //await page.pause()
     //expect(page.locator("//span[@title='Type of incident:']")).toBeVisible()
-    //expect(page.locator("(//span[text()='Fire'])[3]")).toBeVisible()
+    expect(page.locator("(//span[text()='Fire'])[3]")).toBeVisible()
     //step7
     expect(page.locator("text='Recorded'")).toBeVisible()
     //expect(page.locator("//span[text()='Recorded']")).toBeDisabled()
