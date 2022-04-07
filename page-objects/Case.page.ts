@@ -70,7 +70,7 @@ export class CasePage {
             case "woc":
                 //await this.page.pause()
                 await this.wocType.click()
-                await this.page.locator('text=Please choose...').click()
+                await this.page.locator('#pr_id_18_label').click()
                 await this.page.locator('text=Interjú').click()
                 await this.page.fill('[placeholder="Interviewed"]', variable)
                 //await this.page.click("text=" + variable + "")

@@ -127,7 +127,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
-  test('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test.skip('31032 - Smoke test - Close a WOC case with filled checklist', async ({ dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -203,7 +203,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, page, caseList }) => {
+  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by)', async ({ dashBoard, navBar, page, caseList }) => {
 
     //await dashBoard.sidebarIsVisible()
     //page.locator(".side-panel-content")
