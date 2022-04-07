@@ -26,13 +26,14 @@ export class CaseList {
         //step 4
         await this.page.fill("#treeview-input-search", site)
         await this.page.keyboard.press('Enter');
-        await this.page.locator("text=" + site + " >> nth=0").click();
+        await this.page.locator("(//div[@class='filter-title'])[1]").click();
+        //await this.page.locator("text=" + site + " >> nth=0").click();
         //await this.page.locator('text=Extrusion-Hungary-Szekesfehervar').first().click();
         await this.page.click("//button[text()='OK']")
         //step 5
         await this.page.click("data-testid=ims-multi-select-entityType")
         //await this.page.locator('text=' + cat + '').first().click();
-        await this.page.locator('[data-testid="ims-multi-select-entityType"] >> text=HSE').click();
+        await this.page.locator('[data-testid="ims-multi-select-entityType"] >> text=' + cat + '').click();
         await this.page.click("(//button[text()=' OK '])[1]")
 
         await expect(this.page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')

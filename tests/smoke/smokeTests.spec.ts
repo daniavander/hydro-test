@@ -213,7 +213,7 @@ test.describe("Smoke tests", () => {
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
     //step 3 list loaded
     expect(page.locator(".obs_csstable"))
-    await caseList.searchCaseByFilters("Extrusion-Hungary-Szekesfehervar", "HSE")
+    await caseList.searchCaseByFilters("Extrusion-Hungary-Szekesfehervar", "Fire")
 
     //filters
     
@@ -221,11 +221,12 @@ test.describe("Smoke tests", () => {
     await page.click("[title='Edit filters']")
     //fehervar filter is active
     page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")
-    
+
     expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
     //HSE filter isvisible
+    await page.pause()
     expect(page.locator("//span[@title='Type of incident:']")).toBeVisible()
-    expect(page.locator("(//span[text()='HSE'])[3]")).toBeVisible()
+    expect(page.locator("(//span[text()='Fire'])[3]")).toBeVisible()
     //step7
     expect(page.locator("text='Recorded'")).toBeVisible()
     //expect(page.locator("//span[text()='Recorded']")).toBeDisabled()
