@@ -139,7 +139,6 @@ export class CasePage {
         //add class CONTAINS for h3 tag and the expected text
         const elemTextValue = await this.page.locator("//h3[contains(@class,'" + locClass + "')]/a").allTextContents()
         //h3[contains(@class,'warning translation')]/a
-
         expect(elemTextValue.toString()).toBe(expected)
     }
 

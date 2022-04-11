@@ -20,13 +20,11 @@ export class CaseList {
 
     async searchCaseByFilters(site: string, cat: string) {
         //uncheck all 
-
         await this.page.click("data-testid=site-selector")
         await this.page.locator('.csscheckbox').first().click();
         //step 4
         await this.page.fill("#treeview-input-search", site)
         await this.page.keyboard.press('Enter');
-        await this.page.pause()
         await this.page.locator("(//div[@class='filter-title'])[1]").click();
         //await this.page.locator("text=" + site + " >> nth=0").click();
         //await this.page.locator('text=Extrusion-Hungary-Szekesfehervar').first().click();
@@ -34,9 +32,9 @@ export class CaseList {
         //step 5
         await this.page.click("data-testid=ims-multi-select-entityType")
         //await this.page.locator('text=' + cat + '').first().click();
-        await this.page.locator('[data-testid="ims-multi-select-entityType"] >> text='+ cat +'').click();
+        await this.page.locator("//span[contains(@class, 'ml-2')][text()='" + cat + "']").click();
+        //span[contains(@class, 'ml-2')][text()=''+ cat +'']
         await this.page.click("(//button[text()=' OK '])[1]")
-
         await expect(this.page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
     }
 

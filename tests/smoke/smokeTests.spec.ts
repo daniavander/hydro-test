@@ -8,7 +8,7 @@ import { AddUserAction } from '@pages/common/AddUserAction';
 
 //test.describe.configure({ mode: 'parallel' })
 
-test.describe("Smoke tests", () => {
+test.describe("Smoke test pack", () => {
 
   const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/'
 
@@ -73,7 +73,7 @@ test.describe("Smoke tests", () => {
     await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
     await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
 
-    await casePage.fillDescription("Automation test descrption finish")
+    await casePage.fillDescription("Automation test descrption 04.08")
 
     await page.click("//button[text()='Save']")
 
@@ -124,12 +124,16 @@ test.describe("Smoke tests", () => {
     expect(page.isVisible("//p[text()=' Classify Injury ']"))
     expect(page.isVisible("//p[text()=' HR Details ']"))
 
+    //todo step 13 add after care
+
+    //step 14
     await addUserAction.fillInvestigationTask("investigation finding")
 
     //step 15
     await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
     //step 16
     await addUserAction.fillClassificationTask("Yes", "Fatality (Hydro)", "Very high")
+  
     await casePage.getCardH2Text("icon-poe ng-star-inserted", " Absent dates ")
     await page.waitForTimeout(2000)
     await casePage.getCardH2Text("icon-translation ng-star-inserted", "Translation review")
@@ -139,7 +143,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
   })
 
-  test('31032 - Smoke test - Close a WOC case with filled checklist @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
     test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
 
     await dashBoard.sidebarIsVisible()
@@ -215,7 +219,7 @@ test.describe("Smoke tests", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ dashBoard, navBar, page, caseList }) => {
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, page, caseList }) => {
 
     //await dashBoard.sidebarIsVisible()
     //page.locator(".side-panel-content")
@@ -223,19 +227,43 @@ test.describe("Smoke tests", () => {
     //await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Cases")
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
-    //step 3 list loaded
+    //step 3,4,5
     expect(page.locator(".obs_csstable"))
-    await caseList.searchCaseByFilters("Extrusion-Hungary-Szekesfehervar", "Fire")
-
-    //filters
-
+    await caseList.searchCaseByFilters("Extrusion-Hungary-Szekesfehervar", "Injury Free Event")
     //step 6
     await page.click("[title='Edit filters']")
     expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
-    expect(page.locator("(//span[text()='Fire'])[3]")).toBeVisible()
+    expect(page.locator("(//span[text()='Injury Free Event'])[3]")).toBeVisible()
     //step7
-    expect(page.locator("text='Recorded'")).toBeVisible()
-    //expect(page.locator("//span[text()='Recorded']")).toBeDisabled()
+    await page.click("text='Recorded'")
+    //step 8
+    await page.click("text='Last day'")
+    //await page.fill("//input[@placeholder='Name']","imstestglobaladmin3@avander.hu")
+    //in local due to azure ad login
+    await page.fill("//input[@placeholder='Name']","Kovács Dániel")
+    await page.click("//li[@role='option']")
+    //step 9
+    await page.click("text='Apply filters'")
+    //step 10 check the result list that IFE is in first element of the list
+    await getTexts.getDivFirstElementText("ims_block18 nowrap", "Injury free event ")
+
+    //check the previously selected filter is in the filter bar
+    //await page.pause()
+    expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
+    expect(page.locator("//div[@title='Type of incident: Injury Free Event']")).toBeVisible()
+    expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeVisible()
+    //expect(page.locator('#tagShowCase div:has-text("Creation date: Last day")')).toBeVisible();
+    await page.click("#reset-filter-button")
+    await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Cases')
+    //available in dom but hidden
+    expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeHidden()
+    /*expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeHidden()
+    expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeVisible()*/
+
+    ////////////////////////////////////////////////////
+    //the result depends on trhe previous test case
+    //31034 - Smoke test - Create a Serious Injury case
+    ////////////////////////////////////////////////////
 
 
     /*const elemTextValue = await page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]").allTextContents()

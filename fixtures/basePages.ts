@@ -12,6 +12,8 @@ import { Dashboard } from "@pages/common/Dashboard.page"
 import { AddUserAction } from "@pages/common/AddUserAction"
 import { AddPeopleDetails } from "@pages/common/PeopleDetails"
 
+import { GetTexts} from "@pages/common/Getters"
+
 
 const test = baseTest.extend<{
     dashBoard: Dashboard
@@ -32,6 +34,8 @@ const test = baseTest.extend<{
     fillClassificationTask : AddUserAction
     addPeopleDetails : AddPeopleDetails
     checkOpenedSurvey : SurveyPage
+
+    getTexts : GetTexts
     
 }>({
     dashBoard:async ({page}, use) => {
@@ -85,6 +89,9 @@ const test = baseTest.extend<{
     },
     checkOpenedSurvey:async ({page}, use) => {
         await use(new SurveyPage(page))
+    },
+    getTexts:async ({page}, use) => {
+        await use(new GetTexts(page))
     }
 
 })
