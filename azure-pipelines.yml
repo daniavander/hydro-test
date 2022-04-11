@@ -6,7 +6,7 @@ pool:
   workingDir: '$(service_path)'
 
 schedules:
-- cron: "0 3 * * Mon-Fri"
+- cron: "20 9 * * Mon-Fri"
   displayName: M-F 3:00 AM (UTC) daily build
   branches:
     include:
