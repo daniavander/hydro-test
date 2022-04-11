@@ -1,5 +1,7 @@
 variables:
       VERSION: 7.2
+      timezone: Europe/Budapest
+      
 pool:
   #vmImage: "ubuntu-18.04"
   vmImage: 'ubuntu-20.04'
