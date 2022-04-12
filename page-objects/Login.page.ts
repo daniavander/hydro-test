@@ -82,7 +82,7 @@ export class LoginPage {
         await this.page.locator('text=Yes').click()
         await delay(6000);
         //for webkit and porno chrome
-        await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
+        //await this.page.goto('https://stage-app-avander-ims-ui.azurewebsites.net/app/')
 
         expect(this.page.locator(".side-panel-content")).toBeVisible()
         expect(this.page.locator(".top-menu-container")).toBeVisible()
