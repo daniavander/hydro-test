@@ -14,7 +14,7 @@ test.describe("Smoke test pack", () => {
 
   test.beforeEach(async ({ loginPage, page }) => {
     await page.goto(baseUrl, { timeout: 50000 })
-    await loginPage.loginInAzure()
+    //await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(6000)
@@ -219,7 +219,7 @@ test.describe("Smoke test pack", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, page, caseList }) => {
+  test.only('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, page, caseList }) => {
 
     //await dashBoard.sidebarIsVisible()
     //page.locator(".side-panel-content")
@@ -244,15 +244,17 @@ test.describe("Smoke test pack", () => {
     await page.click("//li[@role='option']")
     //step 9
     await page.click("text='Apply filters'")
+    
     //step 10 check the result list that IFE is in first element of the list
     await getTexts.getDivFirstElementText("ims_block18 nowrap", "Injury free event ")
 
     //check the previously selected filter is in the filter bar
-    //await page.pause()
+    
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
     expect(page.locator("//div[@title='Type of incident: Injury Free Event']")).toBeVisible()
     expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeVisible()
     //expect(page.locator('#tagShowCase div:has-text("Creation date: Last day")')).toBeVisible();
+    await page.waitForTimeout(3000)
     await page.click("#reset-filter-button")
     await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Cases')
     //available in dom but hidden
