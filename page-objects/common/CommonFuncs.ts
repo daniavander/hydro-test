@@ -1,13 +1,13 @@
 import { Page, expect } from "@playwright/test";
 
-export class AbstractClass {
+export class CommonFunc {
     readonly page: Page
     
     constructor(page: Page){
         this.page= page
     }
 
-   async clickToMarkAsCompleteBtn()  {
+   async deleteCase()  {
     //await page.click("//button[text()='Mark as Completed']")
    }
 }

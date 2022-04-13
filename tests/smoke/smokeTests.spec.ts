@@ -54,7 +54,7 @@ test.describe("Smoke test pack", () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ browserName,dashBoard, navBar, casePage, addUserAction, page }) => {
+  test('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page }) => {
     test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
 
     await dashBoard.sidebarIsVisible()
@@ -92,7 +92,7 @@ test.describe("Smoke test pack", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test('31034 - Smoke test - Create a Serious Injury case @action', async ({ browserName ,dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+  test('31034 - Smoke test - Create a Serious Injury case @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
     test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
 
     await dashBoard.sidebarIsVisible()
@@ -133,7 +133,7 @@ test.describe("Smoke test pack", () => {
     await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
     //step 16
     await addUserAction.fillClassificationTask("Yes", "Fatality (Hydro)", "Very high")
-  
+
     await casePage.getCardH2Text("icon-poe ng-star-inserted", " Absent dates ")
     await page.waitForTimeout(2000)
     await casePage.getCardH2Text("icon-translation ng-star-inserted", "Translation review")
@@ -221,13 +221,23 @@ test.describe("Smoke test pack", () => {
 
   test.only('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, page, caseList }) => {
 
-    //await dashBoard.sidebarIsVisible()
-    //page.locator(".side-panel-content")
 
-    //await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Cases")
     //await expect(page.locator("#filter-site")).toHaveAttribute('title', 'All MY sites')
     //step 3,4,5
+    //await page.pause()
+    const deleteBtn = page.locator("#reset-filter-button")
+    //await page.locator("#reset-filter-button")
+    //await expect(page.locator("#reset-filter-button")).toBeHidden()
+    await expect(page.locator("#reset-filter-button")).toHaveCount(1)
+    //await expect(page.waitForSelector(".MyClass"))
+    try {
+      await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
+      console.log("The fuck.")
+    } catch (error) {
+      console.log("The element didn't appear.")
+    }
+    
     expect(page.locator(".obs_csstable"))
     await caseList.searchCaseByFilters("Extrusion-Hungary-Szekesfehervar", "Injury Free Event")
     //step 6
@@ -240,16 +250,16 @@ test.describe("Smoke test pack", () => {
     await page.click("text='Last day'")
     //await page.fill("//input[@placeholder='Name']","imstestglobaladmin3@avander.hu")
     //in local due to azure ad login
-    await page.fill("//input[@placeholder='Name']","Kovács Dániel")
+    await page.fill("//input[@placeholder='Name']", "Kovács Dániel")
     await page.click("//li[@role='option']")
     //step 9
     await page.click("text='Apply filters'")
-    
+
     //step 10 check the result list that IFE is in first element of the list
     await getTexts.getDivFirstElementText("ims_block18 nowrap", "Injury free event ")
 
     //check the previously selected filter is in the filter bar
-    
+
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
     expect(page.locator("//div[@title='Type of incident: Injury Free Event']")).toBeVisible()
     expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeVisible()
@@ -259,6 +269,8 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Cases')
     //available in dom but hidden
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeHidden()
+    
+    //omly in dom
     /*expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeHidden()
     expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeVisible()*/
 
