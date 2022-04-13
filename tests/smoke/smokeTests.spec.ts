@@ -14,7 +14,7 @@ test.describe("Smoke test pack", () => {
 
   test.beforeEach(async ({ loginPage, page }) => {
     await page.goto(baseUrl, { timeout: 50000 })
-    //await loginPage.loginInAzure()
+    await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(6000)
