@@ -229,9 +229,9 @@ test.describe("Smoke test pack", () => {
     //await page.locator("#reset-filter-button")
     //await expect(page.locator("#reset-filter-button")).toBeHidden()
     await expect(page.locator("#reset-filter-button")).toHaveCount(1)
-    await page.pause()
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
+      console.log("try to reset the filters")
       await page.click("#reset-filter-button", { timeout: 5000 })
       console.log("reseted")
     } catch (error) {
@@ -243,7 +243,7 @@ test.describe("Smoke test pack", () => {
     //step 6
     
     await page.click("[title='Edit filters']")
-    await page.pause()
+
     //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
     //fyi childnumber xpath is szar mert a child number néha változik:O
     //expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar\\\\\\\\   ']")).toBeVisible()
@@ -252,7 +252,6 @@ test.describe("Smoke test pack", () => {
     //expect(page.locator("//div[@title='Type of incident: Injury Free Event   ']")).toBeVisible()
     //step7
     await page.click("text='Recorded'")
-    expect(page.locator("text='Recordedd'")).toBeVisible()
     //step 8
     //fyi if check last day, NEED to add IFE in fehervar or run (31034 - Smoke test - Create a Serious Injury case), otherwise fail the test
     await page.click("text='Last day'")
