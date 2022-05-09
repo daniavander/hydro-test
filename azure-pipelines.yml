@@ -26,7 +26,7 @@ jobs:
   #- script: npm install @playwright/test
   - script: npx playwright install --with-deps
 
-    timeoutInMinutes: 60000 # how long to run the job before automatically cancelling
+    timeoutInMinutes: 1 # how long to run the job before automatically cancelling
 
     displayName: "run the test"
     condition: succeeded()
