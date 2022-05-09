@@ -41,7 +41,7 @@ const config: PlaywrightTestConfig = {
           launchOptions: {
             args: ['--no-sandbox', '--disable-dev-shm-usage'],
             headless: false,
-            slowMo: 50,
+            slowMo: 100,
           },
       }
     },

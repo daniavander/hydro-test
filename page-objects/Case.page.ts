@@ -157,4 +157,12 @@ export class CasePage {
         await this.page.click("text=Add items: " + itemNum + "")
         await console.log("---------")
     }
+
+    async getCaseByDescriptionAndDoInCasePage(action: string) {
+        //hover three dot
+        await this.page.hover("data-testid=case-submenu")
+        await this.page.locator('text="' + action + '"').click();
+        // //div[text()='Extrusion-Hungary-Szekesfehervar']
+        await this.page.click("//button[text()='Yes']")
+    }
 }

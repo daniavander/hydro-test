@@ -34,3 +34,7 @@ exports.secLevels = {
 exports.classesUnderAction3Dot = {
   aftercare: 'icon-afc'
 }
+
+exports.stringConstants = {
+  description: 'Automated test description'
+}

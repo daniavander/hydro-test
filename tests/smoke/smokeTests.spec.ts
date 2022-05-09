@@ -3,8 +3,9 @@ import { matchers } from 'playwright-expect';
 import { expect } from "@fixtures/basePages"
 import test from "@fixtures/basePages"
 
-import { caseType, secLevels, departments, classesUnderAction3Dot } from "@fixtures/constans"
+import { caseType, secLevels, departments, stringConstants, classesUnderAction3Dot } from "@fixtures/constans"
 import { AddUserAction } from '@pages/common/AddUserAction';
+import { CaseList } from '@pages/CaseList';
 
 //test.describe.configure({ mode: 'parallel' })
 
@@ -45,6 +46,7 @@ test.describe("Smoke test pack", () => {
     await expect(actionBar).toHaveClass("action-bar obs_clearfix ng-star-inserted");
     const response = await request.get(`${baseUrl}pi/report?queryString=`)
     expect(response.status()).toBe(200)
+    await page.click(".obs_highlighted")
     expect(page.locator("//span[text()='Sum']")).toBeVisible()
     expect(page.locator("//span[text()='Breakdown']")).toBeVisible()
     expect(page.locator("//span[text()='Diagrams']")).toBeVisible()
@@ -53,8 +55,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test('31034 - Smoke test - Create a Serious Injury case @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
-    test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
+  test.skip('31034 - Smoke test - Create a Serious Injury case @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -68,7 +69,7 @@ test.describe("Smoke test pack", () => {
     //locator.click([title=HSE])
     await casePage.setDepartment(departments.hse)
 
-    await casePage.fillDescription("bbAutomation test description injury")
+    await casePage.fillDescription(stringConstants.description + "serious injury")
     await casePage.setCaseType("injury", secLevels.seriouscase)
     await addPeopleDetails.injuredPerson("imsTestGlobalAdmin3", "Yes", "injury comment")
     await page.click("//button[text()='Save']")
@@ -89,7 +90,6 @@ test.describe("Smoke test pack", () => {
 
     //step 14
     await addUserAction.fillInvestigationTask("investigation finding")
-
     //step 15
     await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
     //step 16
@@ -101,11 +101,10 @@ test.describe("Smoke test pack", () => {
 
     await casePage.getH3Text("warning translation", "Click here to change to Portuguese (Brazil)")
 
-    //await caseList.getCaseByDescriptionAndDo("aaAutomation test description injury", "Delete")
+    await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
   })
 
-  test('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
-    test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
+  test.skip('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -122,18 +121,18 @@ test.describe("Smoke test pack", () => {
     await casePage.addMainAndSubTagWithoutBtn("Add Action tag", "action1")
     await page.click('div[role="checkbox"]:has-text("Yes")')
 
-    await casePage.fillDescription("Automation test descrption finish")
+    await casePage.fillDescription(stringConstants.description + "WOC")
 
     expect(await page.isVisible("//button[text()='Save']"))
     expect(await page.isVisible("text=Discard"))
 
     //add survey
     await casePage.addSurvey("Checklist", "első kategória", 1)
-    //await page.pause()
+    await page.pause()
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
     expect(await page.isVisible("//p[text()=' WOC form for managers ']"))
 
-    //id contain HUS string
+    //case id contain HUS string
     await expect(page.locator('data-testid=case-id')).toContainText('HUS')
 
     //buttons are disappeared
@@ -152,36 +151,24 @@ test.describe("Smoke test pack", () => {
     await page.click("//button[text()='Mark as Completed']")
     expect(page.locator("data-testid=case-status")).toContainText('Archive')
 
-    //await page.pause()
-    //const href = await page.evaluate(() => document.querySelector('[data-testid="case-submenu"]'))
-    //await page.evaluate(() => document.querySelector('[data-testid="case-submenu"]').click())
-    //page.evaluate("document.querySelector('[data-testid='case-submenu']').click()")
-    //TODO megnézni miért hasal sokszor
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    //await page.pause()
+    
     await page.waitForTimeout(2000)
     await page.hover("data-testid=case-submenu")
 
+    //dlete btn is disabled, because the status is archive
     expect(page.locator("//button[text()=' Delete ']").isDisabled())
 
     //reopen
     await page.click("//p[text()=' Sign & Archive ']")
     await page.click("//button[text()=' Reopen action ']")
-    await page.hover("data-testid=case-submenu")
-    await page.click("//button[text()=' Delete ']")
-    await page.click("//button[text()='Yes']")
 
+    //we can delete the case after reopen it
+    await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
 
-
-    //expect(await page.locator('div:has-text("Ongoing"'))
-
-
-    //await page.click('text=Close')
-    //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page }) => {
-    test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
+  test.skip('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ caseList, dashBoard, navBar, casePage, addUserAction, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -190,16 +177,13 @@ test.describe("Smoke test pack", () => {
     await navBar.clickOnTopMenu("Add New Case")
 
     await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
-    //nem megy webkiten
-    //STEP locator.scrollIntoViewIfNeeded([title=Administration])
-    //STEP locator.click([title=Administration])
     await casePage.setDepartment(departments.administration)
-    //await page.pause()
     await casePage.setCaseType("ife", secLevels.low)
     await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
     await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
 
-    await casePage.fillDescription("Automation test descrption 04.08")
+    await page.pause()
+    await casePage.fillDescription(stringConstants.description)
 
     await page.click("//button[text()='Save']")
 
@@ -216,9 +200,11 @@ test.describe("Smoke test pack", () => {
     await expect(mytasklocator).toHaveCSS('background', '#006eff');*/
     await page.click('text=Close')
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
+    await page.pause()
+    await caseList.getCaseByDescriptionAndDoFromListPage(stringConstants.description, "Delete")
   })
 
-  test.only('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, page, caseList }) => {
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, page, caseList }) => {
 
 
     await navBar.clickOnTopMenu("Cases")
