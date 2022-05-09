@@ -2,6 +2,7 @@ import { FullConfig, FullResult, Reporter, Suite, TestCase, TestError, TestResul
 
 class MyReporter implements Reporter {
     onBegin(config: FullConfig, suite: Suite) {
+        console.log(`Starting the run with ${suite.allTests().length} tests`);
         console.log(`>>> Suite title: ${suite.title} <<<`)
 
     }
@@ -25,13 +26,15 @@ class MyReporter implements Reporter {
         console.log(`ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ`)
         console.log(`Starting test ${test.title}`);
     }
+
     onTestEnd(test: TestCase, result: TestResult) {
-        console.log(`Finished test ${test.title}`);
+        console.log(`Finished test ${test.title} - ${result.status}`);
         if (result.error) {
-            console.log(`Test Error: ${result.error}`);
+            console.log('CHECK IT')
         }
-        console.log(`^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^`)
+        console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
     }
+
     onEnd(result: FullResult) {
         console.log(`Finished the Suite: ${result.status}`);
     }

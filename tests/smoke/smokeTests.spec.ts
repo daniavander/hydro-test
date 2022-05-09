@@ -11,17 +11,15 @@ import { AddUserAction } from '@pages/common/AddUserAction';
 test.describe("Smoke test pack", () => {
 
   const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/'
+  //const baseUrl = 'https://ims2uat.hydro.com/app/home'
 
   test.beforeEach(async ({ loginPage, page }) => {
     await page.goto(baseUrl, { timeout: 50000 })
+    //fyi comment out when run locally
     await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(6000)
-    console.log(`Finished ${testInfo.title} with status ${testInfo.status}`);
-    if (testInfo.status !== testInfo.expectedStatus)
-      console.log(`Did not run as expected, ended up at ${page.url()}`);
-    //await page.close()
   })
   test.afterAll(async ({ browser }) => {
     await browser.close()
@@ -29,7 +27,7 @@ test.describe("Smoke test pack", () => {
   test('31035 - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    await expect(page.locator(".c_site-selector-button")).toHaveAttribute('title', 'All MY sites')
+    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Activities")
     await page.locator('.obs_csstable').isVisible()
     const activitiesHeader = page.locator('.header.header-style2');
@@ -41,7 +39,7 @@ test.describe("Smoke test pack", () => {
   test('31036 - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    await expect(page.locator(".c_site-selector-button")).toHaveAttribute('title', 'All MY sites')
+    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Reports")
     const actionBar = page.locator('.action-bar');
     await expect(actionBar).toHaveClass("action-bar obs_clearfix ng-star-inserted");
@@ -54,43 +52,6 @@ test.describe("Smoke test pack", () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page }) => {
-    test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
-
-    await dashBoard.sidebarIsVisible()
-    page.locator(".side-panel-content")
-
-    await dashBoard.topBarIsAvailable()
-    await navBar.clickOnTopMenu("Add New Case")
-
-    await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
-    //nem megy webkiten
-    //STEP locator.scrollIntoViewIfNeeded([title=Administration])
-    //STEP locator.click([title=Administration])
-    await casePage.setDepartment(departments.administration)
-    //await page.pause()
-    await casePage.setCaseType("ife", secLevels.low)
-    await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
-    await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
-
-    await casePage.fillDescription("Automation test descrption 04.08")
-
-    await page.click("//button[text()='Save']")
-
-    expect(page.isVisible(".ghost-action-card-tile-title"))
-    await (await page.waitForSelector('.p-state-filled')).isVisible()
-    await addUserAction.addNewAction("description", "instruction", "ImsTestGlobalAdmin3", "Add Action tag", "action1")
-
-    await casePage.pageContainsActionCorrectly("description", "instruction")
-
-    const locator = page.locator('.fullopacity');
-    /*await page.pause()
-    //await expect.soft(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
-    const mytasklocator = page.locator(".tile.action.my-task:before")
-    await expect(mytasklocator).toHaveCSS('background', '#006eff');*/
-    await page.click('text=Close')
-    //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
-  })
 
   test('31034 - Smoke test - Create a Serious Injury case @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
     test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
@@ -219,7 +180,45 @@ test.describe("Smoke test pack", () => {
     //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, page, caseList }) => {
+  test('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page }) => {
+    test.skip(browserName === 'webkit', 'no work on webkit just on chrome')
+
+    await dashBoard.sidebarIsVisible()
+    page.locator(".side-panel-content")
+
+    await dashBoard.topBarIsAvailable()
+    await navBar.clickOnTopMenu("Add New Case")
+
+    await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
+    //nem megy webkiten
+    //STEP locator.scrollIntoViewIfNeeded([title=Administration])
+    //STEP locator.click([title=Administration])
+    await casePage.setDepartment(departments.administration)
+    //await page.pause()
+    await casePage.setCaseType("ife", secLevels.low)
+    await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
+    await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
+
+    await casePage.fillDescription("Automation test descrption 04.08")
+
+    await page.click("//button[text()='Save']")
+
+    expect(page.isVisible(".ghost-action-card-tile-title"))
+    await (await page.waitForSelector('.p-state-filled')).isVisible()
+    await addUserAction.addNewAction("description", "instruction", "ImsTestGlobalAdmin3", "Add Action tag", "action1")
+
+    await casePage.pageContainsActionCorrectly("description", "instruction")
+
+    const locator = page.locator('.fullopacity');
+    /*await page.pause()
+    //await expect.soft(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
+    const mytasklocator = page.locator(".tile.action.my-task:before")
+    await expect(mytasklocator).toHaveCSS('background', '#006eff');*/
+    await page.click('text=Close')
+    //await caseList.getCaseByDescriptionAndDo("Automation test descrption finish", "Delete")
+  })
+
+  test.only('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, page, caseList }) => {
 
 
     await navBar.clickOnTopMenu("Cases")
@@ -230,23 +229,32 @@ test.describe("Smoke test pack", () => {
     //await page.locator("#reset-filter-button")
     //await expect(page.locator("#reset-filter-button")).toBeHidden()
     await expect(page.locator("#reset-filter-button")).toHaveCount(1)
-    //await expect(page.waitForSelector(".MyClass"))
+    await page.pause()
+    await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
-      await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
-      console.log("The fuck.")
+      await page.click("#reset-filter-button", { timeout: 5000 })
+      console.log("reseted")
     } catch (error) {
-      console.log("The element didn't appear.")
+      console.log(error)
     }
     
     expect(page.locator(".obs_csstable"))
     await caseList.searchCaseByFilters("Extrusion-Hungary-Szekesfehervar", "Injury Free Event")
     //step 6
+    
     await page.click("[title='Edit filters']")
-    expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
-    expect(page.locator("(//span[text()='Injury Free Event'])[3]")).toBeVisible()
+    await page.pause()
+    //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
+    //fyi childnumber xpath is szar mert a child number néha változik:O
+    //expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar\\\\\\\\   ']")).toBeVisible()
+    //await page.locator('text=Site: Extrusion-Hungary-Szekesfehervar Components').nth(1).click();
+    //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
+    //expect(page.locator("//div[@title='Type of incident: Injury Free Event   ']")).toBeVisible()
     //step7
     await page.click("text='Recorded'")
+    expect(page.locator("text='Recordedd'")).toBeVisible()
     //step 8
+    //fyi if check last day, NEED to add IFE in fehervar or run (31034 - Smoke test - Create a Serious Injury case), otherwise fail the test
     await page.click("text='Last day'")
     //await page.fill("//input[@placeholder='Name']","imstestglobaladmin3@avander.hu")
     //in local due to azure ad login
@@ -261,6 +269,7 @@ test.describe("Smoke test pack", () => {
     //check the previously selected filter is in the filter bar
 
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
+    
     expect(page.locator("//div[@title='Type of incident: Injury Free Event']")).toBeVisible()
     expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeVisible()
     //expect(page.locator('#tagShowCase div:has-text("Creation date: Last day")')).toBeVisible();
