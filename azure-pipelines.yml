@@ -21,10 +21,12 @@ jobs:
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
-    
+
   - script: npm install
   #- script: npm install @playwright/test
   - script: npx playwright install --with-deps
+
+    timeoutInMinutes: 60000 # how long to run the job before automatically cancelling
 
     displayName: "run the test"
     condition: succeeded()
