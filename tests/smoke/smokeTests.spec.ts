@@ -275,7 +275,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test.only('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
 
 
     await navBar.clickOnTopMenu("Actions")
@@ -315,15 +315,15 @@ test.describe("Smoke test pack", () => {
     console.log(xx)
 
     //step 10 check the result list that Sign & Archive is in first element of the list
-    await getTexts.getDivElementTextOnListPage("ims_block10 obs_verticalcentered", "Sign & Archive", "Actions")
+    //await getTexts.getDivElementTextOnListPage("ims_block10 obs_verticalcentered", "Sign & Archive", "Actions")
     await page.pause()
 
     //check the previously selected filter is in the filter bar
-    //todo there is department filter bug
-    //expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
+    
+    expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
 
     expect(page.locator("//div[@title='Type of action: Signature']")).toBeVisible()
-    expect(page.locator("//div[@title='Last day: true']")).toBeVisible()
+    //expect(page.locator("//div[@title='Last day: true']")).toBeVisible()
 
     await page.waitForTimeout(3000)
     await page.click("#reset-filter-button")
