@@ -11,6 +11,7 @@ import { SurveyPage } from "@pages/Survey.page"
 import { Dashboard } from "@pages/common/Dashboard.page"
 import { AddUserAction } from "@pages/common/AddUserAction"
 import { AddPeopleDetails } from "@pages/common/PeopleDetails"
+import { CommonFunc } from "@pages/common/CommonFuncs"
 
 import { GetTexts} from "@pages/common/Getters"
 
@@ -25,7 +26,7 @@ const test = baseTest.extend<{
     getH3Text: CasePage
     surveyPage : SurveyPage
     caseList : CaseList
-    searchCaseByFilters : CaseList
+    commonFunc : CommonFunc
     addUserAction : AddUserAction
     
     addUserActionDots : AddUserAction
@@ -62,8 +63,8 @@ const test = baseTest.extend<{
     caseList:async ({page}, use) => {
         await use(new CaseList(page))
     },
-    searchCaseByFilters:async ({page}, use) => {
-        await use(new CaseList(page))
+    commonFunc:async ({page}, use) => {
+        await use(new CommonFunc(page))
     },
     addUserAction:async ({page}, use) => {
         await use(new AddUserAction(page))

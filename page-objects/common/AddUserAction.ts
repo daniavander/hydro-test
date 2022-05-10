@@ -47,7 +47,8 @@ export class AddUserAction {
         await this.page.locator("//div[text()='" + name + "']").click();
         await this.page.locator("//span[text()='" + tagname + "']").click();
         await this.page.locator("[aria-label=" + subtag + "]").click();
-        await this.page.locator("//button[text()='Save changes']").click()
+        //await this.page.locator("//button[text()='Save changes']").click()
+        await this.page.click('text=Save changes')
     }
 
     async addActionWith3Dot(type: string) {

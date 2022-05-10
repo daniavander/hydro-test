@@ -30,13 +30,14 @@ class MyReporter implements Reporter {
     onTestEnd(test: TestCase, result: TestResult) {
         console.log(`Finished test ${test.title} - ${result.status}`);
         if (result.error) {
-            console.log('CHECK IT')
+            console.log("Error happened -> ")
+            console.log(result.errors)
         }
         console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
     }
 
     onEnd(result: FullResult) {
-        console.log(`Finished the Suite: ${result.status}`);
+        console.log(`Finished the Suite: ${result.status}`)
     }
 }
 export default MyReporter;
