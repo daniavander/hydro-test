@@ -275,7 +275,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.only('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
 
 
     await navBar.clickOnTopMenu("Actions")
@@ -288,7 +288,7 @@ test.describe("Smoke test pack", () => {
       console.log(error)
     }
 
-    //dtep 3
+    //step 3
     expect(page.locator(".obs_csstable"))
     //step 4
     await commonFunc.searchCaseWithFilters("Extrusion-Hungary-Szekesfehervar", "Signature")
