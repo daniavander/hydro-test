@@ -312,7 +312,7 @@ test.describe("Smoke test pack", () => {
 
     //await page.pause()
     const xx = await page.textContent("(//div[contains(@class,'ims_block10 obs_verticalcentered')])[2]/p")
-    //console.log(xx)
+    console.log(xx)
 
     //step 10 check the result list that Sign & Archive is in first element of the list
     await getTexts.getDivElementTextOnListPage("ims_block10 obs_verticalcentered", "Sign & Archive", "Actions")
