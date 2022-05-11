@@ -56,7 +56,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test.skip('31034 - Smoke test - Create a Serious Injury case @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+  test('31034 - Smoke test - Create a Serious Injury case @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -73,8 +73,6 @@ test.describe("Smoke test pack", () => {
     await casePage.fillDescription(stringConstants.description + "serious injury")
     await casePage.setCaseType("injury", secLevels.seriouscase)
     await addPeopleDetails.injuredPerson("imsTestGlobalAdmin3", "Yes", "injury comment")
-    //todo itt mi a afszért hasal el
-    //await page.click("//button[text()='Save']")
 
     //TODO when answered my question https://github.com/microsoft/playwright/discussions/13123
     //expect(page.isVisible("(//action-list-tile[@class='ng-star-inserted']//div)[1]"))
@@ -106,7 +104,7 @@ test.describe("Smoke test pack", () => {
     await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
   })
 
-  test.skip('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -130,7 +128,7 @@ test.describe("Smoke test pack", () => {
 
     //add survey
     await casePage.addSurvey("Checklist", "első kategória", 1)
-    await page.pause()
+    //await page.pause()
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
     expect(await page.isVisible("//p[text()=' WOC form for managers ']"))
 
@@ -170,7 +168,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test.skip('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ caseList, dashBoard, navBar, casePage, addUserAction, page }) => {
+  test('30746 - Smoke test - Add IFE case with an user defined action @action', async ({ caseList, dashBoard, navBar, casePage, addUserAction, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -276,8 +274,6 @@ test.describe("Smoke test pack", () => {
   })
 
   test.only('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
-
-
     await navBar.clickOnTopMenu("Actions")
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
@@ -310,16 +306,10 @@ test.describe("Smoke test pack", () => {
     //step 9
     await page.click("text='Apply filters'")
 
-    //await page.pause()
-    const xx = await page.textContent("(//div[contains(@class,'ims_block10 obs_verticalcentered')])[2]/p")
-    console.log(xx)
-
     //step 10 check the result list that Sign & Archive is in first element of the list
-    //await getTexts.getDivElementTextOnListPage("ims_block10 obs_verticalcentered", "Sign & Archive", "Actions")
-    await page.pause()
+    await getTexts.getDivElementTextOnListPage("ims_ellipsis ng-star-inserted", " Conclude a completed case by a final evaluation and approval. ", "Actions")
 
     //check the previously selected filter is in the filter bar
-    
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
 
     expect(page.locator("//div[@title='Type of action: Signature']")).toBeVisible()

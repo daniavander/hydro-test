@@ -13,11 +13,13 @@ export class GetTexts {
         switch (page) {
             case "Cases":
                 elemTextValue = await this.page.textContent("(//div[contains(@class,'" + locClass + "')])[1]/p")
-                console.log(elemTextValue)
+                //elemTextValue = await this.page.textContent("(//div[contains(@class,'ims_block18 nowrap')])[1]/p")
                 break;
             case "Actions":
-                elemTextValue = await this.page.textContent("(//div[contains(@class,'" + locClass + "')])[2]/p")
-                console.log("----  " + elemTextValue)
+                //ha az ősrégi icon technológia új lesz akkor használható majd a lenti sor
+                //elemTextValue = await this.page.textContent("(//div[contains(@class,'" + locClass + "')])[2]/p")
+                // addig ez az actions oldalon
+                elemTextValue = await this.page.textContent("(//p[@class='" + locClass + "'])[1]")
                 break;
             default:
                 break;

@@ -7,7 +7,7 @@ expect.extend(matchers)
 
 const config: PlaywrightTestConfig = {
 
-  globalTimeout: 360000, // Maximum time the whole test suite can run, 6 min for 6 tests
+  globalTimeout: 480000, // Maximum time the whole test suite can run, 8 min for 6 tests
   timeout: 60000,        // Timeout for each test
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
@@ -18,7 +18,7 @@ const config: PlaywrightTestConfig = {
   //just the wanted folder will be run
   //testDir: "tests/tips",
   use: {
-    viewport: { width: 1450, height: 900 },
+    viewport: { width: 1250, height: 900 },
     ignoreHTTPSErrors: true,
     trace: 'on',
     video: 'on',

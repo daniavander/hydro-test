@@ -53,7 +53,6 @@ export class AddUserAction {
 
     async addActionWith3Dot(type: string) {
         //hover three dot
-        //await this.page.pause()
         await this.page.hover("data-testid=case-submenu")
         await this.page.locator("." + type + "").click()
     }
@@ -61,7 +60,7 @@ export class AddUserAction {
     async fillInvestigationTask(finding: string) {
         await this.page.click("//p[text()='Investigation task']")
         await this.page.fill("(//textarea[@rows='1'])[2]", finding)
-        await this.page.click("//button[text()='Mark as Completed']")
+        await this.page.click("text=Mark as Completed")
         expect(this.page.isVisible("//p[text()='" + finding + "']"))
         expect(this.page.isVisible("(//span[text()='Completed'])[1]"))
     }
@@ -72,7 +71,7 @@ export class AddUserAction {
         await this.page.click("#" + location + "")
         await this.page.click("//span[text()='" + locationspecify + "']")
         await this.page.fill("(//textarea[@rows='1'])[2]", comment)
-        await this.page.click("//button[text()=' Mark as Completed']")
+        await this.page.click('text=Mark as Completed')
         expect(this.page.isVisible("text=" + injury + ""))
         expect(this.page.isVisible("(//span[text()='Completed'])[2]"))
     }
@@ -85,6 +84,6 @@ export class AddUserAction {
             //await page.locator('[aria-label="Very\\ high"]').click();
             await this.page.click("[aria-label='" + level + "']")
         }
-        await this.page.click("//button[text()='Mark as Completed']")
+        await this.page.click("text=Mark as Completed")
     }
 }

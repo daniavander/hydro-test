@@ -41,11 +41,7 @@ export class CasePage {
     async setSite(loc: string) {
         //TODO create sting list or dict with severity names
         //ha van space a névben akkor: Very\\ high
-
-        //fixme after Product Backlog Item 32000: Automated Test - Unique data-testid for please choose sites dropdown done
-        //fyi itt változik a szám nélha
-        await this.page.pause()
-        //await this.page.locator("#pr_id_16_label").click()
+        await this.page.click("data-testid=case-siteselector")
         await this.page.locator("[aria-label='" + loc + "']").click()
     }
 
