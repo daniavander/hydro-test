@@ -18,7 +18,7 @@ test.describe("Smoke test pack", () => {
   test.beforeEach(async ({ loginPage, page }) => {
     await page.goto(baseUrl, { timeout: 50000 })
     //fyi comment out when run locally
-    //await loginPage.loginInAzure()
+    await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(6000)
@@ -273,7 +273,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test.only('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
