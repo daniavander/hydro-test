@@ -18,7 +18,7 @@ test.describe("Smoke test pack", () => {
   test.beforeEach(async ({ loginPage, page }) => {
     await page.goto(baseUrl, { timeout: 50000 })
     //fyi comment out when run locally
-    await loginPage.loginInAzure()
+    //await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(6000)
@@ -26,7 +26,7 @@ test.describe("Smoke test pack", () => {
   test.afterAll(async ({ browser }) => {
     await browser.close()
   })
-  test('31035 - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
+  test('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -38,7 +38,7 @@ test.describe("Smoke test pack", () => {
     expect(response.status()).toBe(200)
   })
 
-  test('31036 - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
+  test('31036 - Smoke test - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -70,7 +70,7 @@ test.describe("Smoke test pack", () => {
     //locator.click([title=HSE])
     await casePage.setDepartment(departments.hse)
 
-    await casePage.fillDescription(stringConstants.description + "serious injury")
+    await casePage.fillDescription(stringConstants.description + " serious injury")
     await casePage.setCaseType("injury", secLevels.seriouscase)
     await addPeopleDetails.injuredPerson("imsTestGlobalAdmin3", "Yes", "injury comment")
 
@@ -101,7 +101,7 @@ test.describe("Smoke test pack", () => {
 
     await casePage.getH3Text("warning translation", "Click here to change to Portuguese (Brazil)")
 
-    await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
+    //await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
   })
 
   test('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
@@ -121,7 +121,7 @@ test.describe("Smoke test pack", () => {
     await casePage.addMainAndSubTagWithoutBtn("Add Action tag", "action1")
     await page.click('div[role="checkbox"]:has-text("Yes")')
 
-    await casePage.fillDescription(stringConstants.description + "WOC")
+    await casePage.fillDescription(stringConstants.description + " WOC")
 
     expect(await page.isVisible("//button[text()='Save']"))
     expect(await page.isVisible("text=Discard"))
@@ -164,7 +164,7 @@ test.describe("Smoke test pack", () => {
     await page.click("//button[text()=' Reopen action ']")
 
     //we can delete the case after reopen it
-    await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
+    //await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
 
   })
 
@@ -182,7 +182,7 @@ test.describe("Smoke test pack", () => {
     await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
     await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
 
-    await casePage.fillDescription(stringConstants.description)
+    await casePage.fillDescription(stringConstants.description + " IFE")
 
     //await page.click("//button[text()='Save']")
 
@@ -201,7 +201,7 @@ test.describe("Smoke test pack", () => {
     const mytasklocator = page.locator(".tile.action.my-task:before")
     await expect(mytasklocator).toHaveCSS('background', '#006eff');*/
     await page.click('text=Close')
-    await caseList.getCaseByDescriptionAndDoFromListPage(stringConstants.description, "Delete")
+    //await caseList.getCaseByDescriptionAndDoFromListPage(stringConstants.description, "Delete")
   })
 
   test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
@@ -273,7 +273,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.only('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
@@ -307,7 +307,8 @@ test.describe("Smoke test pack", () => {
     await page.click("text='Apply filters'")
 
     //step 10 check the result list that Sign & Archive is in first element of the list
-    await getTexts.getDivElementTextOnListPage("ims_ellipsis ng-star-inserted", " Conclude a completed case by a final evaluation and approval. ", "Actions")
+    //if new icon usage-> await getTexts.getDivElementTextOnListPage("ims_block10 obs_verticalcentered", "sign&archive", "Actions")
+    await getTexts.getDivElementTextOnListPage("ims_ellipsis ng-star-inserted", "Conclude a completed case by a final evaluation and approval.", "Actions")
 
     //check the previously selected filter is in the filter bar
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
