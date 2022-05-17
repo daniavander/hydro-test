@@ -15,9 +15,12 @@ test.describe("Smoke test pack", () => {
   const baseUrl = 'https://stage-app-avander-ims-ui.azurewebsites.net/'
   //const baseUrl = 'https://ims2uat.hydro.com/app/home'
 
-  test.beforeEach(async ({ loginPage, page }) => {
+  test.beforeEach(async ({ loginPage, page, dashBoard}) => {
     await page.goto(baseUrl, { timeout: 50000 })
     //fyi comment out when run locally
+    await dashBoard.sidebarIsVisible()
+    await dashBoard.topBarIsAvailable()
+    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }, testInfo) => {
@@ -27,9 +30,7 @@ test.describe("Smoke test pack", () => {
     await browser.close()
   })
   test('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
-    await dashBoard.sidebarIsVisible()
-    await dashBoard.topBarIsAvailable()
-    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
+    
     await navBar.clickOnTopMenu("Activities")
     await page.locator('.obs_csstable').isVisible()
     const activitiesHeader = page.locator('.header.header-style2');
@@ -39,9 +40,9 @@ test.describe("Smoke test pack", () => {
   })
 
   test('31036 - Smoke test - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
-    await dashBoard.sidebarIsVisible()
-    await dashBoard.topBarIsAvailable()
-    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
+    //await dashBoard.sidebarIsVisible()
+    //await dashBoard.topBarIsAvailable()
+    //await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Reports")
     const actionBar = page.locator('.action-bar');
     await expect(actionBar).toHaveClass("action-bar obs_clearfix ng-star-inserted");
@@ -97,14 +98,15 @@ test.describe("Smoke test pack", () => {
 
     await casePage.getCardH2Text("icon-poe ng-star-inserted", " Absent dates ")
     await page.waitForTimeout(2000)
-    await casePage.getCardH2Text("icon-translation ng-star-inserted", "Translation review")
+    //todo
+    //await casePage.getCardH2Text("icon-translation ng-star-inserted", "Translation review")
 
     await casePage.getH3Text("warning translation", "Click here to change to Portuguese (Brazil)")
 
     //await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
   })
 
-  test('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test.only('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -204,7 +206,7 @@ test.describe("Smoke test pack", () => {
     //await caseList.getCaseByDescriptionAndDoFromListPage(stringConstants.description, "Delete")
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
 
 
     await navBar.clickOnTopMenu("Cases")
@@ -273,8 +275,9 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
+    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
       console.log("try to reset the filters")
