@@ -18,10 +18,10 @@ test.describe("Smoke test pack", () => {
   test.beforeEach(async ({ loginPage, page, dashBoard}) => {
     await page.goto(baseUrl, { timeout: 50000 })
     //fyi comment out when run locally
+    await loginPage.loginInAzure()
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
-    await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(6000)
