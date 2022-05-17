@@ -19,9 +19,6 @@ test.describe("Smoke test pack", () => {
     await page.goto(baseUrl, { timeout: 50000 })
     //fyi comment out when run locally
     await loginPage.loginInAzure()
-    await dashBoard.sidebarIsVisible()
-    await dashBoard.topBarIsAvailable()
-    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
   })
   test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(6000)
@@ -30,7 +27,9 @@ test.describe("Smoke test pack", () => {
     await browser.close()
   })
   test('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
-    
+    await dashBoard.sidebarIsVisible()
+    await dashBoard.topBarIsAvailable()
+    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Activities")
     await page.locator('.obs_csstable').isVisible()
     const activitiesHeader = page.locator('.header.header-style2');
@@ -40,9 +39,9 @@ test.describe("Smoke test pack", () => {
   })
 
   test('31036 - Smoke test - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
-    //await dashBoard.sidebarIsVisible()
-    //await dashBoard.topBarIsAvailable()
-    //await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
+    await dashBoard.sidebarIsVisible()
+    await dashBoard.topBarIsAvailable()
+    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Reports")
     const actionBar = page.locator('.action-bar');
     await expect(actionBar).toHaveClass("action-bar obs_clearfix ng-star-inserted");
@@ -58,6 +57,9 @@ test.describe("Smoke test pack", () => {
 
 
   test('31034 - Smoke test - Create a Serious Injury case @action', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+    await dashBoard.sidebarIsVisible()
+    await dashBoard.topBarIsAvailable()
+    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -107,6 +109,9 @@ test.describe("Smoke test pack", () => {
   })
 
   test('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+    await dashBoard.sidebarIsVisible()
+    await dashBoard.topBarIsAvailable()
+    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -206,7 +211,7 @@ test.describe("Smoke test pack", () => {
     //await caseList.getCaseByDescriptionAndDoFromListPage(stringConstants.description, "Delete")
   })
 
-  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
 
 
     await navBar.clickOnTopMenu("Cases")
@@ -275,7 +280,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
