@@ -106,7 +106,7 @@ test.describe("Smoke test pack", () => {
     //await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
   })
 
-  test.only('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
