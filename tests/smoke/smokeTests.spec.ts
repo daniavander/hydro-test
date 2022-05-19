@@ -111,7 +111,7 @@ test.describe("Smoke test pack", () => {
   test('31032 - Smoke test - Close a WOC case with filled checklist @just2', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
+    //await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -282,7 +282,7 @@ test.describe("Smoke test pack", () => {
 
   test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @just', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
-    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
+    //await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
       console.log("try to reset the filters")
