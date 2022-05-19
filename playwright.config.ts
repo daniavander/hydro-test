@@ -23,7 +23,7 @@ const config: PlaywrightTestConfig = {
     trace: 'on',
     video: 'on',
     screenshot: 'on',
-    actionTimeout: 50000
+    actionTimeout: 480000
   },
   //grep: [new RegExp("@just"),new RegExp("@just2")],
   expect: {
