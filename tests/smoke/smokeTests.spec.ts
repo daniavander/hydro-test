@@ -102,7 +102,7 @@ test.describe("Smoke test pack", () => {
     await page.waitForTimeout(2000)
     //todo
     //await casePage.getCardH2Text("icon-translation ng-star-inserted", "Translation review")
-
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
     await casePage.getH3Text("warning translation", "Click here to change to Portuguese (Brazil)")
 
     await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
@@ -158,7 +158,7 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Mark as Completed')
     expect(page.locator("data-testid=case-status")).toContainText('Archive')
 
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
 
     await page.waitForTimeout(2000)
     await page.hover("data-testid=case-submenu")
@@ -249,10 +249,12 @@ test.describe("Smoke test pack", () => {
     await page.click("text='Apply filters'")
 
     //step 10 check the result list that IFE is in first element of the list
-    await getTexts.getDivElementTextOnListPage("ims_block18 nowrap", "Injury free event ", "Cases")
+    // click to be list of elements
+    await page.click("[aria-label='list']")
+    await getTexts.getDivElementTextOnListPage("ims_ellipsis", "Injury free event", "Actions")
 
     //check the previously selected filter is in the filter bar
-
+    //fixme kifaszázni ha kész: Product Backlog Item 32660: Automation test - data-testid-s for smart filter tags
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
 
     expect(page.locator("//div[@title='Type of incident: Injury Free Event']")).toBeVisible()
@@ -313,9 +315,12 @@ test.describe("Smoke test pack", () => {
     await page.click("//li[@role='option']")
     //step 9
     await page.click("text='Apply filters'")
+    //await page.pause()
 
     //step 10 check the result list that Sign & Archive is in first element of the list
     //if new icon usage-> await getTexts.getDivElementTextOnListPage("ims_block10 obs_verticalcentered", "sign&archive", "Actions")
+    // click to be list of elements
+    await page.click("[aria-label='list']")
     await getTexts.getDivElementTextOnListPage("ims_ellipsis ng-star-inserted", "Conclude a completed case by a final evaluation and approval.", "Actions")
 
     //check the previously selected filter is in the filter bar
