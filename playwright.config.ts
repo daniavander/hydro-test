@@ -1,4 +1,3 @@
-import { AddUserAction } from '@pages/common/AddUserAction';
 import { PlaywrightTestConfig, devices } from '@playwright/test';
 import { expect } from "@playwright/test"
 import { matchers } from "expect-playwright"
@@ -11,7 +10,7 @@ const config: PlaywrightTestConfig = {
   timeout: 180000,        // Timeout for each test
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
-  reporter: [['html'] , ['list'] , ['./my-awesome-reporter.ts']],
+  reporter: [['html'] , ['experimental-allure-playwright'] , ['./my-awesome-reporter.ts'] , ["line"]],
   //reporter: [['html'], ['./my-awesome-reporter.ts'], ['allure-playwright']],
   // See: https://playwright.dev/docs/api/class-testconfig
   outputDir: 'test-results/',
@@ -20,12 +19,12 @@ const config: PlaywrightTestConfig = {
   use: {
     viewport: { width: 1250, height: 900 },
     ignoreHTTPSErrors: true,
-    trace: 'on',
+    trace: 'retain-on-failure',
     video: 'on',
     screenshot: 'on',
     actionTimeout: 480000
   },
-  //grep: [new RegExp("@just"),new RegExp("@just2")],
+  grep: [new RegExp("@response"), new RegExp("@case"), new RegExp("@list"), new RegExp("@smoke"),],
   expect: {
     timeout: 10 * 1000,
   },
