@@ -8,7 +8,7 @@
     "azureloginwebkit": "playwright test tests/login.spec.ts --config=playwright.config.ts --project=webkit --headed",
     "azurelogin": "playwright test tests/login.spec.ts --config=playwright.config.ts --project=chromium",
     "azureloginlocal": "playwright test tests/login.spec.ts --config=playwright.config.ts --headed",
-    "smoke": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome --grep @response",
+    "smoke": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome",
     "smokelocal": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=webkit --headed",
     "smokelocalchrome": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome --headed",
     "test": "npx playwright test testing.spec.ts --reporter=dot --project=chrome --grep @smoke"
