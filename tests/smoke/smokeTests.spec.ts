@@ -58,7 +58,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test('31034 - Smoke test - Create a Serious Injury case @case', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+  test('31034 - Smoke test - Create a Serious Injury case @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -75,7 +75,7 @@ test.describe("Smoke test pack", () => {
     //locator.click([title=HSE])
     await casePage.setDepartment(departments.hse)
 
-    await casePage.fillDescription(stringConstants.description + " serious injury")
+    await casePage.fillDescription(stringConstants.description + " serious injury delete")
     await casePage.setCaseType("injury", secLevels.seriouscase)
     await addPeopleDetails.injuredPerson("imsTestGlobalAdmin3", "Yes", "injury comment")
 
@@ -106,11 +106,9 @@ test.describe("Smoke test pack", () => {
     //await casePage.getCardH2Text("icon-translation ng-star-inserted", "Translation review")
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
     await casePage.getH3Text("warning translation", "Click here to change to Portuguese (Brazil)")
-
-    await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
   })
 
-  test('31032 - Smoke test - Close a WOC case with filled checklist @case', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -129,14 +127,14 @@ test.describe("Smoke test pack", () => {
     await casePage.addMainAndSubTagWithoutBtn("Add Action tag", "action1")
     await page.click('div[role="checkbox"]:has-text("Yes")')
 
-    await casePage.fillDescription(stringConstants.description + " WOC")
+    await casePage.fillDescription(stringConstants.description + " WOC delete")
 
     expect(await page.isVisible("//button[text()='Save']"))
     expect(await page.isVisible("text=Discard"))
 
     //add survey
     await casePage.addSurvey("Checklist", "első kategória", 1)
-    //await page.pause()
+
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
     expect(await page.isVisible("//p[text()=' WOC form for managers ']"))
 
@@ -172,11 +170,13 @@ test.describe("Smoke test pack", () => {
     await page.click("//button[text()=' Reopen action ']")
 
     //we can delete the case after reopen it
-    await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
+    await page.hover("data-testid=case-submenu")
+    expect(page.locator("text='Delete'").isEnabled())
+    //await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
 
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action @case', async ({ caseList, dashBoard, navBar, casePage, addUserAction, page }) => {
+  test('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ caseList, dashBoard, navBar, casePage, addUserAction, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -190,9 +190,7 @@ test.describe("Smoke test pack", () => {
     await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
     await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
 
-    await casePage.fillDescription(stringConstants.description + " IFE")
-
-    //await page.click("//button[text()='Save']")
+    await casePage.fillDescription(stringConstants.description + " IFE delete")
 
     await page.click('text=Save')
 
@@ -209,10 +207,9 @@ test.describe("Smoke test pack", () => {
     const mytasklocator = page.locator(".tile.action.my-task:before")
     await expect(mytasklocator).toHaveCSS('background', '#006eff');*/
     await page.click('text=Close')
-    //await caseList.getCaseByDescriptionAndDoFromListPage(stringConstants.description, "Delete")
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
 
 
     await navBar.clickOnTopMenu("Cases")
@@ -238,7 +235,7 @@ test.describe("Smoke test pack", () => {
     //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
     //expect(page.locator("//div[@title='Type of incident: Injury Free Event   ']")).toBeVisible()
     //step7
-    await page.click("text='Recorded'")
+    await page.click("//span[text()='Recorded']")
     //step 8
     //fyi if check last day, NEED to add IFE in fehervar or run (31034 - Smoke test - Create a Serious Injury case), otherwise fail the test
     await page.click("text='Last day'")
@@ -283,7 +280,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
     //await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
@@ -309,7 +306,7 @@ test.describe("Smoke test pack", () => {
     //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
     //expect(page.locator("//div[@title='Type of incident: Injury Free Event   ']")).toBeVisible()
     //step7
-    await page.click("text='Recorded'")
+    await page.click("//span[text()='Recorded']")
     //step 8
     await page.click("text='Last day'")
     await page.fill("//input[@placeholder='Name']", "Kovács Dániel")
@@ -336,6 +333,15 @@ test.describe("Smoke test pack", () => {
     //available in dom but hidden
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeHidden()
 
+  })
+
+  test('Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+    // it is work fine if the @cases tests are run previously
+    await navBar.clickOnTopMenu("Cases")
+    //await page.pause()
+    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description IFE delete", "Delete")
+    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description serious injury delete (auto-translated)", "Delete")
+    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
   })
 
 })
