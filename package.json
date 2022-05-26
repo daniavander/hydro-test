@@ -11,7 +11,7 @@
     "smoke": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome",
     "smokelocal": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=webkit --headed",
     "smokelocalchrome": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome --headed",
-    "test": "npx playwright test testing.spec.ts --reporter=dot --project=chrome --grep @smoke"
+    "test": "npx playwright test testing.spec.ts --reporter=dot --project=chrome"
   },
   "author": "",
   "license": "ISC",

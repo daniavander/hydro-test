@@ -112,7 +112,7 @@ test.describe("Smoke test pack", () => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
-
+    
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
@@ -125,7 +125,7 @@ test.describe("Smoke test pack", () => {
 
     await casePage.addMainAndSubTagWithoutBtn("Add shift", "Night shift")
     await casePage.addMainAndSubTagWithoutBtn("Add Action tag", "action1")
-    await page.click('div[role="checkbox"]:has-text("Yes")')
+    await page.click('div[role="checkbox"]:has-text("No")')
 
     await casePage.fillDescription(stringConstants.description + " WOC delete")
 
@@ -145,7 +145,8 @@ test.describe("Smoke test pack", () => {
     expect(page.locator("//button[text()='Save']")).toHaveCount(0)
     expect(page.locator("//button[text()='Discard']")).toHaveCount(0)
 
-    await surveyPage.checkOpenedSurvey("Ongoing", "Yes")
+    await surveyPage.checkOpenedSurvey("Ongoing", "No")
+    
 
 
     await page.locator("//p[text()=' Sign & Archive ']").isEnabled()
@@ -280,7 +281,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
     //await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
@@ -313,7 +314,7 @@ test.describe("Smoke test pack", () => {
     await page.click("//li[@role='option']")
     //step 9
     await page.click("text='Apply filters'")
-    //await page.pause()
+    await page.pause()
 
     //step 10 check the result list that Sign & Archive is in first element of the list
     //if new icon usage-> await getTexts.getDivElementTextOnListPage("ims_block10 obs_verticalcentered", "sign&archive", "Actions")
@@ -335,7 +336,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test('Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     // it is work fine if the @cases tests are run previously
     await navBar.clickOnTopMenu("Cases")
     //await page.pause()
