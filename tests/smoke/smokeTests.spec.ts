@@ -210,7 +210,7 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Close')
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
 
 
     await navBar.clickOnTopMenu("Cases")
@@ -281,7 +281,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
     //await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })

@@ -31,7 +31,7 @@ class MyReporter implements Reporter {
         console.log(`Finished test ${test.title} - ${result.status}`);
         if (result.error) {
             console.log("Error happened -> ")
-            console.log(result.errors)
+            //console.log(result.errors)
         }
         console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
     }
