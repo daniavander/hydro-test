@@ -69,9 +69,10 @@ test.describe("Smoke test pack", () => {
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Add New Case")
 
-    await casePage.setSite("B&A-Brazil-Alunorte-CAPEX Projects")
+    //await casePage.setSite("B&A-Brazil-Alunorte-CAPEX Projects")
+    await casePage.setSite("Automation tests")
 
-    //webkiten failel:O
+    await page.pause()
     //locator.click([title=HSE])
     await casePage.setDepartment(departments.hse)
 
@@ -81,6 +82,7 @@ test.describe("Smoke test pack", () => {
 
     //TODO when answered my question https://github.com/microsoft/playwright/discussions/13123
     //expect(page.isVisible("(//action-list-tile[@class='ng-star-inserted']//div)[1]"))
+    //ezmiez
     await page.locator("(//action-list-tile[@class='ng-star-inserted']//div)[1]").isEnabled()
     //expect(page.isVisible("(//action-list-tile[@class='ng-star-insertedd']//div)[1]"))
     //await page.locator("(//action-list-tile[@class='ng-star-insertedd']//div)[1]").isDisabled()
@@ -104,8 +106,8 @@ test.describe("Smoke test pack", () => {
     await page.waitForTimeout(2000)
     //todo
     //await casePage.getCardH2Text("icon-translation ng-star-inserted", "Translation review")
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-    await casePage.getH3Text("warning translation", "Click here to change to Portuguese (Brazil)")
+    //await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
+    //await casePage.getH3Text("warning translation", "Click here to change to Portuguese (Brazil)")
   })
 
   test('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
@@ -210,14 +212,14 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Close')
   })
 
-  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
 
 
     await navBar.clickOnTopMenu("Cases")
-    await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
+    //await page.waitForSelector("#reset-filter-button", { timeout: 6000 })
     try {
       console.log("try to reset the filters")
-      await page.click("#reset-filter-button", { timeout: 5000 })
+      await page.click("#reset-filter-button", { timeout: 6000 })
       console.log("reseted")
     } catch (error) {
       console.log(error)
@@ -226,15 +228,11 @@ test.describe("Smoke test pack", () => {
     expect(page.locator(".obs_csstable"))
     await commonFunc.searchCaseWithFilters("Extrusion-Hungary-Szekesfehervar", "Injury Free Event")
     //step 6
-
     await page.click("[title='Edit filters']")
-
-    //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
-    //fyi childnumber xpath is szar mert a child number néha változik:O
-    //expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar\\\\\\\\   ']")).toBeVisible()
-    //await page.locator('text=Site: Extrusion-Hungary-Szekesfehervar Components').nth(1).click();
-    //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
-    //expect(page.locator("//div[@title='Type of incident: Injury Free Event   ']")).toBeVisible()
+    await page.pause()
+    //this is in the custom filter
+    expect(page.locator('text=Site: Extrusion-Hungary-Szekesfehervar').nth(1)).toBeVisible()
+    expect(page.locator('text=Type of incident: Injury Free Event').nth(1)).toBeVisible()
     //step7
     await page.click("//span[text()='Recorded']")
     //step 8
@@ -254,10 +252,10 @@ test.describe("Smoke test pack", () => {
 
     //check the previously selected filter is in the filter bar
     //fixme kifaszázni ha kész: Product Backlog Item 32660: Automation test - data-testid-s for smart filter tags
-    expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
+    /*expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
+    expect(page.locator("(//span[text()='Injury Free Event'])[3]")).toBeVisible()
+    expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeVisible()*/
 
-    expect(page.locator("//div[@title='Type of incident: Injury Free Event']")).toBeVisible()
-    expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeVisible()
     //expect(page.locator('#tagShowCase div:has-text("Creation date: Last day")')).toBeVisible();
     await page.waitForTimeout(3000)
     await page.click("#reset-filter-button")
@@ -339,9 +337,8 @@ test.describe("Smoke test pack", () => {
   test('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     // it is work fine if the @cases tests are run previously
     await navBar.clickOnTopMenu("Cases")
-    //await page.pause()
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description IFE delete", "Delete")
-    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description serious injury delete (auto-translated)", "Delete")
+    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description serious injury delete", "Delete")
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
   })
 

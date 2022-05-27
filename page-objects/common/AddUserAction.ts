@@ -58,6 +58,7 @@ export class AddUserAction {
     }
 
     async fillInvestigationTask(finding: string) {
+        //fill investigation task with obligatory tag
         await this.page.click("//p[text()='Investigation task']")
         await this.page.fill("(//textarea[@rows='1'])[2]", finding)
         await this.page.click("text=Mark as Completed")

@@ -42,7 +42,7 @@ export class CasePage {
         //TODO create sting list or dict with severity names
         //ha van space a névben akkor: Very\\ high
         await this.page.click("data-testid=case-siteselector")
-        await this.page.locator("[aria-label='" + loc + "']").click()
+        await this.page.click("[aria-label='" + loc + "']")
     }
 
     async setDepartment(depName: string) {

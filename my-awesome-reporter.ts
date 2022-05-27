@@ -4,7 +4,6 @@ class MyReporter implements Reporter {
     onBegin(config: FullConfig, suite: Suite) {
         console.log(`Starting the run with ${suite.allTests().length} tests`);
         console.log(`>>> Suite title: ${suite.title} <<<`)
-
     }
     onStepBegin?(test: TestCase, result: TestResult, step: TestStep) {
         console.log(`STEP ${step.title}`);
