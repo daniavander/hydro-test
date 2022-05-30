@@ -38,18 +38,9 @@ export class AddPeopleDetails {
         
         //textarea[@rows='1'])[2]
         await this.page.fill("(//textarea[@rows='1'])[2]", comment)
-
         await this.page.locator("[title='Ok']").click();
     }
 
-    async addTags(main: string, sub: string) {
-        //main: tagname
-        //sub: subtagname
-        await this.page.locator("//span[text()='" + main + "']").click();
-        await this.page.locator("[aria-label=" + sub + "]").click();
-        await this.page.locator("//button[text()='Save changes']").click()
-        // Click text=Add Action tag
-    }
 
     //add udaction
     /*async addNewAction(desc: string, inst: string, name: string, tagname: string, subtag: string) {

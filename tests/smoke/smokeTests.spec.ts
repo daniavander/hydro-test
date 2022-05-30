@@ -35,7 +35,7 @@ test.describe("Smoke test pack", () => {
     await navBar.clickOnTopMenu("Activities")
     await page.locator('.obs_csstable').isVisible()
     const activitiesHeader = page.locator('.header.header-style2');
-    await expect(activitiesHeader).toHaveClass("row obs_flex obs_flexgrow1 header header-style2");
+    await expect(activitiesHeader).toHaveClass("row obs_flex obs_flexgrow1 header header-style2", { timeout: 30000 });
     const response = await request.get(`${baseURL}pi/activity?queryString=`)
     expect(response.status()).toBe(200)
   })
@@ -46,7 +46,7 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Reports")
     const actionBar = page.locator('.action-bar');
-    await expect(actionBar).toHaveClass("action-bar obs_clearfix ng-star-inserted");
+    await expect(actionBar).toHaveClass("action-bar obs_clearfix ng-star-inserted", { timeout: 30000 });
     const response = await request.get(`${baseURL}pi/report?queryString=`)
     expect(response.status()).toBe(200)
     await page.click(".obs_highlighted")
@@ -69,48 +69,36 @@ test.describe("Smoke test pack", () => {
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Add New Case")
 
-    //await casePage.setSite("B&A-Brazil-Alunorte-CAPEX Projects")
     await casePage.setSite("Automation tests")
 
-    await page.pause()
-    //locator.click([title=HSE])
     await casePage.setDepartment(departments.hse)
 
     await casePage.fillDescription(stringConstants.description + " serious injury delete")
     await casePage.setCaseType("injury", secLevels.seriouscase)
-    await addPeopleDetails.injuredPerson("imsTestGlobalAdmin3", "Yes", "injury comment")
+    //in the popup
+    await addPeopleDetails.injuredPerson("imsTestGlobalAdmin3", "No", "injury comment")
+    await addUserAction.addTags("Add obligatory","aa")    
+    //step 11
+    await page.click('text=Save')
+    //ghost card after care is visible and have ghost card class
+    const afterCareCard =  page.locator('text=After Care').nth(1)
+    await expect(afterCareCard).toHaveClass("icon-injury ghost-action-card-injury ghost-action-card-iccon ng-star-inserted");
 
-    //TODO when answered my question https://github.com/microsoft/playwright/discussions/13123
-    //expect(page.isVisible("(//action-list-tile[@class='ng-star-inserted']//div)[1]"))
-    //ezmiez
-    await page.locator("(//action-list-tile[@class='ng-star-inserted']//div)[1]").isEnabled()
-    //expect(page.isVisible("(//action-list-tile[@class='ng-star-insertedd']//div)[1]"))
-    //await page.locator("(//action-list-tile[@class='ng-star-insertedd']//div)[1]").isDisabled()
-
-    //await page.locator("(//action-list-tile[@class='ng-star-inserted']//div)[1]").isDisabled()
-    expect(page.isVisible("//p[text()='Investigation task']"))
-    expect(page.isVisible("//p[text()=' Injury Details ']"))
-    expect(page.isVisible("//p[text()=' Classify Injury ']"))
     expect(page.isVisible("//p[text()=' HR Details ']"))
-
-    //todo step 13 add after care
-
+    expect(page.isVisible("//p[text()=' Injury Details ']"))
+    expect(page.isVisible("//p[text()='Investigation task']"))
+    expect(page.isVisible("//p[text()=' Classify Injury ']"))
+    
     //step 14
-    await addUserAction.fillInvestigationTask("investigation finding")
+    await addUserAction.fillInvestigationTask("investigation finding", "Add obligatory","aa")
     //step 15
     await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
     //step 16
     await addUserAction.fillClassificationTask("Yes", "Fatality (Hydro)", "Very high")
-
-    await casePage.getCardH2Text("icon-poe ng-star-inserted", " Absent dates ")
-    await page.waitForTimeout(2000)
-    //todo
-    //await casePage.getCardH2Text("icon-translation ng-star-inserted", "Translation review")
-    //await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-    //await casePage.getH3Text("warning translation", "Click here to change to Portuguese (Brazil)")
+    expect(page.isVisible("//p[text()=' Absent dates ']"))
   })
 
-  test('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test.only('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
