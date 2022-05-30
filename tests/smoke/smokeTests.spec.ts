@@ -10,14 +10,14 @@ import { CommonFunc } from '@pages/common/CommonFuncs';
 
 //test.describe.configure({ mode: 'parallel' })
 test.use({
-  baseURL:"https://google.com"
+  baseURL: "https://google.com"
 })
 
 test.describe("Smoke test pack", () => {
-  const baseURL="https://stage-app-avander-ims-ui.azurewebsites.net/"
+  const baseURL = "https://stage-app-avander-ims-ui.azurewebsites.net/"
 
-  test.beforeEach(async ({ loginPage, page, dashBoard}) => {
-    await page.goto(baseURL,{ timeout: 100000 })
+  test.beforeEach(async ({ loginPage, page, dashBoard }) => {
+    await page.goto(baseURL, { timeout: 100000 })
     //fyi comment out when run locally
     await loginPage.loginInAzure()
   })
@@ -58,7 +58,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test('31034 - Smoke test - Create a Serious Injury case @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+  test.only('31034 - Smoke test - Create a Serious Injury case @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -77,20 +77,20 @@ test.describe("Smoke test pack", () => {
     await casePage.setCaseType("injury", secLevels.seriouscase)
     //in the popup
     await addPeopleDetails.injuredPerson("imsTestGlobalAdmin3", "No", "injury comment")
-    await addUserAction.addTags("Add obligatory","aa")    
+    await addUserAction.addTags("Add obligatory", "aa")
     //step 11
     await page.click('text=Save')
     //ghost card after care is visible and have ghost card class
-    const afterCareCard =  page.locator('text=After Care').nth(1)
+    const afterCareCard = page.locator('text=After Care').nth(1)
     await expect(afterCareCard).toHaveClass("icon-injury ghost-action-card-injury ghost-action-card-iccon ng-star-inserted");
 
     expect(page.isVisible("//p[text()=' HR Details ']"))
     expect(page.isVisible("//p[text()=' Injury Details ']"))
     expect(page.isVisible("//p[text()='Investigation task']"))
     expect(page.isVisible("//p[text()=' Classify Injury ']"))
-    
+
     //step 14
-    await addUserAction.fillInvestigationTask("investigation finding", "Add obligatory","aa")
+    await addUserAction.fillInvestigationTask("investigation finding", "Add obligatory", "aa")
     //step 15
     await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
     //step 16
@@ -102,68 +102,67 @@ test.describe("Smoke test pack", () => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
-    
+
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Add New Case")
-    await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
+    await casePage.setSite("Automation tests")
 
     await casePage.setDepartment(departments.hse)
     await casePage.setCaseType("woc", "ImsTestGlobalAdmin3")
-
-    await casePage.addMainAndSubTagWithoutBtn("Add shift", "Night shift")
-    await casePage.addMainAndSubTagWithoutBtn("Add Action tag", "action1")
-    await page.click('div[role="checkbox"]:has-text("No")')
-
     await casePage.fillDescription(stringConstants.description + " WOC delete")
 
-    expect(await page.isVisible("//button[text()='Save']"))
+    await addUserAction.addTags("Add obligatory", "aa")
+
+    expect(await page.isVisible("text='Save']"))
     expect(await page.isVisible("text=Discard"))
 
+    //step 12 necessary foolow up
+    await page.click("//span[text()='No']")
+
     //add survey
-    await casePage.addSurvey("Checklist", "első kategória", 1)
+    await casePage.addSurvey("Checklist", "0or1", 1)
 
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
-    expect(await page.isVisible("//p[text()=' WOC form for managers ']"))
 
     //case id contain HUS string
-    await expect(page.locator('data-testid=case-id')).toContainText('HUS')
+    await expect(page.locator('data-testid=case-id')).toContainText('E2E-22')
+
+    //cheklist is visible as an action
+    expect(await page.isVisible("//p[text()=' 0or1 ']"))
 
     //buttons are disappeared
-    expect(page.locator("//button[text()='Save']")).toHaveCount(0)
-    expect(page.locator("//button[text()='Discard']")).toHaveCount(0)
-
+    expect(page.locator("text='Save']")).toHaveCount(0)
+    expect(page.locator("text='Discard']")).toHaveCount(0)
+    //checklist status is ongoing step 11
     await surveyPage.checkOpenedSurvey("Ongoing", "No")
     
-
-
-    await page.locator("//p[text()=' Sign & Archive ']").isEnabled()
-    await casePage.getCardH2Text("icon-signature ng-star-inserted", " Sign & Archive ")
     await expect(page.locator("data-testid=case-status")).toContainText('Completed')
 
-    //open s and a
-    await page.click("//p[text()=' Sign & Archive ']")
+    //open s and a step 14
+    await page.locator("text=' Sign & Archive '").isEnabled()
+    await page.click("text=' Sign & Archive '")
+    await addUserAction.addTags("Add obligatory", "aa")
     await page.click('text=Mark as Completed')
     expect(page.locator("data-testid=case-status")).toContainText('Archive')
 
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
+    //await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
 
     await page.waitForTimeout(2000)
     await page.hover("data-testid=case-submenu")
-
     //dlete btn is disabled, because the status is archive
     expect(page.locator("//button[text()=' Delete ']").isDisabled())
 
     //reopen
-    await page.click("//p[text()=' Sign & Archive ']")
+    await page.click("text=' Sign & Archive '")
     await page.click("//button[text()=' Reopen action ']")
 
-    //we can delete the case after reopen it
+    //we can delete the case after reopen it step 15
     await page.hover("data-testid=case-submenu")
-    expect(page.locator("text='Delete'").isEnabled())
-    //await casePage.getCaseByDescriptionAndDoInCasePage("Delete")
+    expect(page.locator("//button[text()=' Delete ']").isEnabled())
+    await casePage.getFunctionAndDoInCasePage("Delete")
 
   })
 

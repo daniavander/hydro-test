@@ -69,7 +69,7 @@ export class CasePage {
                 //await this.page.pause()
                 await this.wocType.click()
                 await this.page.locator('text=Please choose...').click();
-                await this.page.locator('text=Interjú').click()
+                await this.page.click('[aria-label="Interview"]')
                 await this.page.fill('[placeholder="Interviewed"]', variable)
                 //await this.page.click("text=" + variable + "")
                 await this.page.locator('text=ImsTestGlobalAdmin3(ImsTestGlobalAdmin3@avander.hu)').click();
@@ -154,7 +154,7 @@ export class CasePage {
         await console.log("---------")
     }
 
-    async getCaseByDescriptionAndDoInCasePage(action: string) {
+    async getFunctionAndDoInCasePage(action: string) {
         //hover three dot
         await this.page.hover("data-testid=case-submenu")
         await this.page.locator('text="' + action + '"').click();

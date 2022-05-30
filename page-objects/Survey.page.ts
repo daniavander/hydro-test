@@ -15,17 +15,14 @@ export class SurveyPage {
 
     async checkOpenedSurvey(status: string, yesOrNo:string) {
         //await this.page.pause()
-        await this.page.click("//p[text()=' WOC form for managers ']")
+        await this.page.click("text=0or1")
+        //status check
         await expect(this.page.locator("//div[@class='ml-2 ims_color-ims-blue']")).toContainText(status)
-        //fil textarea
-        await this.page.fill("//input[@placeholder='Write down your answer here']","automated risk text")
+        //fill textarea
+        //await this.page.fill("//input[@placeholder='Write down your answer here']","automated risk checklist text")
         await this.page.click("(//span[@title='" + yesOrNo + "'])[1]")
         await this.page.click("(//span[@title='" + yesOrNo + "'])[2]")
-        await this.page.click("(//span[@title='" + yesOrNo + "'])[3]")
-        await this.page.click("(//span[@title='" + yesOrNo + "'])[4]")
         await this.page.click("//div[text()='Mark as Completed']")
 
     }
-
-
 }
