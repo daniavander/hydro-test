@@ -58,7 +58,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test.only('31034 - Smoke test - Create a Serious Injury case @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, page }) => {
+  test.only('31034 - Smoke test - Create a Serious Injury case @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, getTexts, page }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -80,9 +80,8 @@ test.describe("Smoke test pack", () => {
     await addUserAction.addTags("Add obligatory", "aa")
     //step 11
     await page.click('text=Save')
-    //ghost card after care is visible and have ghost card class
-    const afterCareCard = page.locator('text=After Care').nth(1)
-    await expect(afterCareCard).toHaveClass("icon-injury ghost-action-card-injury ghost-action-card-iccon ng-star-inserted");
+    //ghost card after care is visible and have ghost card class with injury icon
+    await getTexts.getGhostCardTitle("after care", "injury")
 
     expect(page.isVisible("//p[text()=' HR Details ']"))
     expect(page.isVisible("//p[text()=' Injury Details ']"))
@@ -96,6 +95,7 @@ test.describe("Smoke test pack", () => {
     //step 16
     await addUserAction.fillClassificationTask("Yes", "Fatality (Hydro)", "Very high")
     expect(page.isVisible("//p[text()=' Absent dates ']"))
+    await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
   })
 
   test.only('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
@@ -166,36 +166,28 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ caseList, dashBoard, navBar, casePage, addUserAction, page }) => {
+  test.only('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Add New Case")
-
-    await casePage.setSite("Extrusion-Hungary-Szekesfehervar")
+    await casePage.setSite("Automation tests")
     await casePage.setDepartment(departments.administration)
     await casePage.setCaseType("ife", secLevels.low)
-    await casePage.addMainAndSubTag("Add Csilla teszt", "Csilla2")
-    await casePage.addMainAndSubTagWithoutBtn("Add Műszak meghatározása", "Nappali műszak")
+    await addUserAction.addTags("Add obligatory", "aa")
 
     await casePage.fillDescription(stringConstants.description + " IFE delete")
-
     await page.click('text=Save')
 
-
-    expect(page.isVisible(".ghost-action-card-tile-title"))
+    await page.pause()
+    //ghost card after save is visible
+    await getTexts.getGhostCardTitle("investigation", "investigation")
     await (await page.waitForSelector('.p-state-filled')).isVisible()
-    await addUserAction.addNewAction("description", "instruction", "ImsTestGlobalAdmin3", "Add Action tag", "action1")
+    await addUserAction.addNewAction("description", "instruction", "ImsTestGlobalAdmin3", "Add obligatory", "aa")
 
     await casePage.pageContainsActionCorrectly("description", "instruction")
-
-    const locator = page.locator('.fullopacity');
-    /*await page.pause()
-    //await expect.soft(locator).toHaveClass("tile fadein action list-mode ng-star-inserted fullopacity my-task active");
-    const mytasklocator = page.locator(".tile.action.my-task:before")
-    await expect(mytasklocator).toHaveCSS('background', '#006eff');*/
     await page.click('text=Close')
   })
 

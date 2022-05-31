@@ -1,5 +1,7 @@
 import { Page, expect } from "@playwright/test";
 
+import { Helpers } from "@fixtures/helpers"
+
 export class GetTexts {
     readonly page: Page
 
@@ -27,4 +29,13 @@ export class GetTexts {
                 break;
         }
     }
-}
+
+    async getGhostCardTitle(cardName:string, iconNameForTypee:string){
+        //cardName: after care, investigation...
+        //iconNameForTypee: icon name
+        var temp:Helpers = new Helpers(cardName)
+        const finalResult = temp.toCamelWords(cardName)
+        const finalLoc = this.page.locator("//p[text()='" + finalResult + "']")
+        await expect(finalLoc).toHaveClass("icon-" + iconNameForTypee + " ghost-action-card-" + iconNameForTypee + " ghost-action-card-iccon ng-star-inserted");
+    }
+}      

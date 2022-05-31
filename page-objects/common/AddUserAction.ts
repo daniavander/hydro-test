@@ -92,6 +92,8 @@ export class AddUserAction {
             //await page.locator('[aria-label="Very\\ high"]').click();
             await this.page.click("[aria-label='" + level + "']")
         }
+        await this.page.locator("//span[text()='Add obligatory']").click();
+        await this.page.locator("[aria-label=aa]").click();
         await this.page.click("text=Mark as Completed")
     }
 }
