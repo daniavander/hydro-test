@@ -148,8 +148,7 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Mark as Completed')
     expect(page.locator("data-testid=case-status")).toContainText('Archive')
 
-    //await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
     await page.waitForTimeout(2000)
     await page.hover("data-testid=case-submenu")
     //dlete btn is disabled, because the status is archive
