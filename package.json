@@ -21,7 +21,8 @@
     "mocha": "^9.2.1",
     "playwright-core": "^1.19.2",
     "playwright-webkit": "^1.19.2",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.19.2",
