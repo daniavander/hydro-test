@@ -1,11 +1,5 @@
 name: ci
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-    
 variables:
       VERSION: 7.2
       timezone: Europe/Budapest
