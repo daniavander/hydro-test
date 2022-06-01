@@ -17,7 +17,7 @@ schedules:
     - main
     
 jobs:
-- job: Automated-tests
+- job: AutomatedTests
   steps:
   - task: NodeTool@0
     inputs:
