@@ -1,4 +1,4 @@
-Rem this is a simle comment row
+Rem this is a simple comment row
 
 
-allure serve
+allure serve 

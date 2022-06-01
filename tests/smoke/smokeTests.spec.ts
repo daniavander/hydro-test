@@ -1,5 +1,6 @@
 //import * as data from "../../Login.cred.json"
 import { matchers } from 'playwright-expect';
+import { allure } from "allure-playwright";
 import { expect } from "@fixtures/basePages"
 import test from "@fixtures/basePages"
 
@@ -27,7 +28,9 @@ test.describe("Smoke test pack", () => {
   test.afterAll(async ({ browser }) => {
     await browser.close()
   })
-  test('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
+  test.only('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
+    allure.epic("Responses");
+    allure.story("Activity list is loaded fine");
 
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
@@ -40,7 +43,10 @@ test.describe("Smoke test pack", () => {
     expect(response.status()).toBe(200)
   })
 
-  test('31036 - Smoke test - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
+  test.only('31036 - Smoke test - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
+    allure.epic("Responses");
+    allure.story("Reports page loaded fine");
+
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -58,7 +64,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test.only('31034 - Smoke test - Create a Serious Injury case @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, getTexts, page }) => {
+  test('31034 - Smoke test - Create a Serious Injury case @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, getTexts, page }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -98,7 +104,7 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
   })
 
-  test.only('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -165,7 +171,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test.only('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
+  test('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
