@@ -1,3 +1,11 @@
+name: ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
 variables:
       VERSION: 7.2
       timezone: Europe/Budapest
@@ -15,21 +23,24 @@ schedules:
     - main
     
 jobs:
-- job: PreWork
+- job: Automated-tests
   steps:
   - task: NodeTool@0
     inputs:
       versionSpec: '14.x'
+      cache: 'npm'
     displayName: 'Install Node.js'
 
   - script: npm install
   - script: npx playwright install --with-deps
 
-    timeoutInMinutes: 20 # how long to run the job before automatically cancelling
+    timeoutInMinutes: 7 # how long to run the job before automatically cancelling
 
     displayName: "run the test"
     condition: succeeded()
   - script: npm run smoke
+  
+  
 
   - task: CopyFiles@1
     condition: succeededOrFailed()            # Run task even if previous ones fail
@@ -47,3 +58,9 @@ jobs:
     displayName: 'Publish Artifact: drop'
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+
+  - task: AllureGenerate@1
+  
+    inputs:
+      resultsDir: 'allure-results'
+      targetDir: 'allure-report/$(Build.BuildNumber)'
