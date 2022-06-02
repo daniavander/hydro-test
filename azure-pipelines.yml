@@ -6,7 +6,7 @@ variables:
       
 pool:
   #vmImage: "ubuntu-18.04"
-  vmImage: 'ubuntu-20.04'
+  vmImage: 'windows-latest'
   workingDir: '$(service_path)'
 
 schedules:
