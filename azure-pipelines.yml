@@ -5,11 +5,7 @@ variables:
       timezone: Europe/Budapest
       
 pool:
-<<<<<<< HEAD
   #vmImage: "ubuntu-18.04"
-=======
-  #vmImage: "windows-latest"
->>>>>>> 79e92701f76960a7e7bdb8f1318451751d36f26e
   vmImage: 'windows-latest'
   workingDir: '$(service_path)'
 
