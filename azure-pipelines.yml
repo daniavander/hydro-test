@@ -5,7 +5,11 @@ variables:
       timezone: Europe/Budapest
       
 pool:
+<<<<<<< HEAD
   #vmImage: "ubuntu-18.04"
+=======
+  #vmImage: "windows-latest"
+>>>>>>> 79e92701f76960a7e7bdb8f1318451751d36f26e
   vmImage: 'windows-latest'
   workingDir: '$(service_path)'
 
@@ -18,28 +22,33 @@ schedules:
     
 jobs:
 - job: AutomatedTests
+  timeoutInMinutes: 7 # how long to run the job before automatically cancelling
+  cancelTimeoutInMinutes: 10 # how much time to give 'run always even if cancelled tasks' before killing them
   steps:
   - task: NodeTool@0
     inputs:
       versionSpec: '14.x'
-      cache: 'npm'
     displayName: 'Install Node.js'
+  - script: which node
 
   - script: npm install
   - script: npx playwright install --with-deps
 
-    timeoutInMinutes: 7 # how long to run the job before automatically cancelling
-
-    displayName: "run the test"
+    displayName: "Execute test"
     condition: succeeded()
   - script: npm run smoke
   - script: npm run generate
-
-  - task: AllureGenerate@1
   
+
+  #- task: AllureGenerate@1
+  #  inputs:
+  #    resultsDir: 'allure-results'
+  #    targetDir: 'allure-report/$(Build.BuildNumber)'
+
+  - task: PublishHtmlReport@1
     inputs:
-      resultsDir: 'allure-results'
-      targetDir: 'allure-report/$(Build.BuildNumber)'
+      reportDir: 'playwright-report/index.html'
+
 
   - task: CopyFiles@1
     condition: succeededOrFailed()            # Run task even if previous ones fail
@@ -51,4 +60,3 @@ jobs:
         screenshot/**
         test-results/**
       targetFolder: '$(Build.ArtifactStagingDirectory)'
-      
