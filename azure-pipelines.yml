@@ -52,8 +52,3 @@ jobs:
         test-results/**
       targetFolder: '$(Build.ArtifactStagingDirectory)'
       
-  - task: PublishBuildArtifacts@1
-    condition: succeededOrFailed()
-    displayName: 'Publish Artifact: drop'
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
