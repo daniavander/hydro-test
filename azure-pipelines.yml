@@ -18,27 +18,33 @@ schedules:
     
 jobs:
 - job: AutomatedTests
+  timeoutInMinutes: 7 # how long to run the job before automatically cancelling
+  cancelTimeoutInMinutes: 10 # how much time to give 'run always even if cancelled tasks' before killing them
   steps:
   - task: NodeTool@0
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
+  - script: which node
 
   - script: npm install
   - script: npx playwright install --with-deps
 
-    timeoutInMinutes: 7 # how long to run the job before automatically cancelling
-
-    displayName: "run the test"
+    displayName: "Execute test"
     condition: succeeded()
   - script: npm run smoke
   - script: npm run generate
+  
 
   - task: AllureGenerate@1
-  
     inputs:
       resultsDir: 'allure-results'
       targetDir: 'allure-report/$(Build.BuildNumber)'
+
+  - task: PublishHtmlReport@1
+    inputs:
+      reportDir: 'playwright-report/index.html'
+
 
   - task: CopyFiles@1
     condition: succeededOrFailed()            # Run task even if previous ones fail
