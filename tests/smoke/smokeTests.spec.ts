@@ -4,7 +4,7 @@ import { allure } from "allure-playwright";
 import { expect } from "@fixtures/basePages"
 import test from "@fixtures/basePages"
 
-import { caseType, secLevels, departments, stringConstants, classesUnderAction3Dot } from "@fixtures/constans"
+import { caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames , raMenuNames , frequency } from "@fixtures/constans"
 import { AddUserAction } from '@pages/common/AddUserAction';
 import { CaseList } from '@pages/CaseList';
 import { CommonFunc } from '@pages/common/CommonFuncs';
@@ -16,6 +16,7 @@ test.use({
 
 test.describe("Smoke test pack", () => {
   const baseURL = "https://stage-app-avander-ims-ui.azurewebsites.net/"
+  //const baseURL = "https://ims2uat.hydro.com/"
 
   test.beforeEach(async ({ loginPage, page, dashBoard }) => {
     await page.goto(baseURL, { timeout: 100000 })
@@ -28,7 +29,7 @@ test.describe("Smoke test pack", () => {
   test.afterAll(async ({ browser }) => {
     await browser.close()
   })
-  test.only('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
+  test('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
     allure.epic("Responses");
     allure.story("Activity list is loaded fine");
 
@@ -43,7 +44,7 @@ test.describe("Smoke test pack", () => {
     expect(response.status()).toBe(200)
   })
 
-  test.only('31036 - Smoke test - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
+  test('31036 - Smoke test - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
     allure.epic("Responses");
     allure.story("Reports page loaded fine");
 
@@ -64,7 +65,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test('31034 - Smoke test - Create a Serious Injury case @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, addPeopleDetails, caseList, getTexts, page }) => {
+  test('31034 - Smoke test - Create a Serious Injury case @cases', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, getTexts, page }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -324,6 +325,48 @@ test.describe("Smoke test pack", () => {
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description IFE delete", "Delete")
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description serious injury delete", "Delete")
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
+  })
+
+  test.only('31053 - Smoke test - Create new Risk Assessment without Risk @risk', async ({ dashBoard, page,addUserAction, navBar, raPage }) => {
+    allure.epic("RA");
+    allure.story("Risk Assessment is loaded fine");
+
+    await dashBoard.sidebarIsVisible()
+    page.locator(".side-panel-content")
+
+    await dashBoard.topBarIsAvailable()
+    await navBar.clickOnTopMenu("Risk Assessment")
+    //await page.pause()
+    await raPage.addNewRA("Automated RA" , "Automation tests", departments.hse)
+    //step 5
+    await raPage.checkRA("Automated RA" , "Published" , siteShortNames.automation, departments.hse)
+    //await raPage.fillRA("Automated desc" , "Extrusion-Hungary-Szekesfehervar" , "Administration", ["Add obligatory","aa"])
+    await raPage.fillRA(stringConstants.description , "Add obligatory", "aa" , ["Add obligatory","aa"])
+    //affected group frequenc -step 7
+    await raPage.addRADetails(raMenuNames.seg , "Management" , frequency.daily , "2")
+    //todo itt kéne a változó paraméter szám mert tök felesleges többet megadni csak egy kell
+    //add sign - step 8
+    await raPage.addRADetails(raMenuNames.signs , "Management" , frequency.daily , "2")
+    //add woc - step 9
+    await raPage.addRADetails(raMenuNames.woc , "Management" , frequency.daily , "2")
+    // add new step - step 10
+    await raPage.addRADetails(raMenuNames.steps , "Management" , frequency.daily , "2")
+    // add conected person - step 11
+    await raPage.addRADetails(raMenuNames.connectedperson , "Management" , frequency.daily , "2")
+    
+    // add new task page - step 12 , 13 , 14
+    await raPage.addNewTaskToRa("automation RA task" , "automation RA task desc",frequency.monthly)
+    // add safety sign to rask - step 15
+    await raPage.addRADetails(raMenuNames.signs , "Management" , frequency.daily , "2")
+    // add woc to task - step 16
+    await raPage.addRADetails(raMenuNames.woc , "Management" , frequency.daily , "2")
+    //ad step to task - step 17
+    await raPage.addRADetails(raMenuNames.steps , "Management" , frequency.daily , "2")
+    
+    // végre step 18 save and publish
+    await page.click(".survey-woc-editor-save-publish")
+    //check the status is published
+    await expect(page.locator("//p[@title='Published']")).toHaveText("Published")
   })
 
 })

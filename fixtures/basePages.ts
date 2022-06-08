@@ -7,6 +7,7 @@ import { Navbar } from "@pages/common/Navbar.page"
 import { CaseList } from "@pages/CaseList"
 import { CasePage } from "@pages/Case.page"
 import { SurveyPage } from "@pages/Survey.page"
+import { RaPage } from "@pages/RiskAssesment.page"
 
 import { Dashboard } from "@pages/common/Dashboard.page"
 import { AddUserAction } from "@pages/common/AddUserAction"
@@ -25,6 +26,7 @@ const test = baseTest.extend<{
     getCardH2Text: CasePage
     getH3Text: CasePage
     surveyPage : SurveyPage
+    raPage : RaPage
     caseList : CaseList
     commonFunc : CommonFunc
     addUserAction : AddUserAction
@@ -35,6 +37,11 @@ const test = baseTest.extend<{
     fillClassificationTask : AddUserAction
     addPeopleDetails : AddPeopleDetails
     checkOpenedSurvey : SurveyPage
+    addNewRA : RaPage
+    checkRA : RaPage
+    fillRA : RaPage
+    addRADetails : RaPage
+    addNewTaskToRa : RaPage
 
     getTexts : GetTexts
     
@@ -90,6 +97,27 @@ const test = baseTest.extend<{
     },
     checkOpenedSurvey:async ({page}, use) => {
         await use(new SurveyPage(page))
+    },
+    raPage:async ({page}, use) => {
+        await use(new RaPage(page))
+    },
+    addNewRA:async ({page}, use) => {
+        await use(new RaPage(page))
+    },
+    checkRA:async ({page}, use) => {
+        await use(new RaPage(page))
+    },
+    fillRA:async ({page}, use) => {
+        await use(new RaPage(page))
+    },
+    addRADetails:async ({page}, use) => {
+        await use(new RaPage(page))
+    },
+    addRADetails:async ({page}, use) => {
+        await use(new RaPage(page))
+    },
+    addNewTaskToRa:async ({page}, use) => {
+        await use(new RaPage(page))
     },
     getTexts:async ({page}, use) => {
         await use(new GetTexts(page))

@@ -49,12 +49,12 @@ export class CasePage {
         await this.page.click("button#filter-department")
         const element = this.page.locator("[title=" + depName + "]")
         await element.scrollIntoViewIfNeeded()
-        await this.page.locator("[title=" + depName + "]").click()
+        await this.page.click("[title=" + depName + "]")
     }
 
     async setTypeAndSev(type: string, level: string) {
-        await this.page.locator("#" + type + "").click()
-        await this.page.locator("[aria-label='" + level + "']").click()
+        await this.page.click("#" + type + "")
+        await this.page.click("[aria-label='" + level + "']")
     }
 
 

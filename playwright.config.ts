@@ -11,6 +11,7 @@ const config: PlaywrightTestConfig = {
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
   reporter: [['html'] , ["json", { outputFolder: 'my-allure-results' }] , ['allure-playwright'] , ['./my-awesome-reporter.ts'] , ["line"]],
+  //reporter: [['html'] , ['./my-awesome-reporter.ts'] , ["line"]],
   //reporter: [['html'], ['./my-awesome-reporter.ts'], ['allure-playwright']],
   // See: https://playwright.dev/docs/api/class-testconfig
   outputDir: 'test-results/',
@@ -25,7 +26,7 @@ const config: PlaywrightTestConfig = {
     actionTimeout: 20 * 1000,
     navigationTimeout: 30 * 1000,
   },
-  grep: [new RegExp("@response"), new RegExp("@list"), new RegExp("@cases"), new RegExp("@delete")],
+  grep: [new RegExp("@response"), new RegExp("@list"), new RegExp("@cases"), new RegExp("@delete"), new RegExp("@risk")],
   expect: {
     timeout: 10 * 1000,
   },
