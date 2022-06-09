@@ -21,7 +21,7 @@ test.describe("Smoke test pack", () => {
   test.beforeEach(async ({ loginPage, page, dashBoard }) => {
     await page.goto(baseURL, { timeout: 100000 })
     //fyi comment out when run locally
-    await loginPage.loginInAzure()
+    //await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(6000)
@@ -325,7 +325,7 @@ test.describe("Smoke test pack", () => {
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
   })
 
-  test('31053 - Smoke test - Create new Risk Assessment without Risk @risk', async ({ dashBoard, page,addUserAction, navBar, raPage }) => {
+  test.only('31053 - Smoke test - Create new Risk Assessment without Risk @risk', async ({ dashBoard, page,addUserAction, navBar, raPage }) => {
     allure.epic("RA");
     allure.story("Risk Assessment is loaded fine");
 
@@ -344,22 +344,22 @@ test.describe("Smoke test pack", () => {
     await raPage.addRADetails(raMenuNames.seg , "Management" , frequency.daily , "2")
     //todo itt kéne a változó paraméter szám mert tök felesleges többet megadni csak egy kell
     //add sign - step 8
-    await raPage.addRADetails(raMenuNames.signs , "Management" , frequency.daily , "2")
+    await raPage.addRADetails(raMenuNames.signs)
     //add woc - step 9
-    await raPage.addRADetails(raMenuNames.woc , "Management" , frequency.daily , "2")
+    await raPage.addRADetails(raMenuNames.woc)
     // add new step - step 10
-    await raPage.addRADetails(raMenuNames.steps , "Management" , frequency.daily , "2")
+    await raPage.addRADetails(raMenuNames.steps)
     // add conected person - step 11
-    await raPage.addRADetails(raMenuNames.connectedperson , "Management" , frequency.daily , "2")
+    await raPage.addRADetails(raMenuNames.connectedperson)
     
     // add new task page - step 12 , 13 , 14
     await raPage.addNewTaskToRa("automation RA task" , "automation RA task desc",frequency.monthly)
     // add safety sign to rask - step 15
-    await raPage.addRADetails(raMenuNames.signs , "Management" , frequency.daily , "2")
+    await raPage.addRADetails(raMenuNames.signs)
     // add woc to task - step 16
-    await raPage.addRADetails(raMenuNames.woc , "Management" , frequency.daily , "2")
+    await raPage.addRADetails(raMenuNames.woc)
     //ad step to task - step 17
-    await raPage.addRADetails(raMenuNames.steps , "Management" , frequency.daily , "2")
+    await raPage.addRADetails(raMenuNames.steps)
     
     // végre step 18 save and publish
     await page.click(".survey-woc-editor-save-publish")

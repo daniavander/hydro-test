@@ -42,7 +42,7 @@ export class RaPage {
         await this.page.locator("[aria-label=" + tags[1] + "]").click();
     }
 
-    async addRADetails(functionName: string, groupSiteName: string, frequency: string, num: string) {
+    async addRADetails(functionName: string, groupSiteName: string="null", frequency: string="null", num: string="null") {
         await this.page.click("[title='" + functionName + "']")
         switch (functionName) {
             case "Affected groups / SEG":
