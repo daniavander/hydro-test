@@ -51,6 +51,7 @@ exports.raMenuNames = {
   woc: 'WOC: control questions',
   steps: 'Steps',
   connectedperson: 'Connected persons',
+  hazard: 'Hazard / Risk',
   administration: 'Administration',
   addconnection: 'Add connection',
   exportdoc: 'Export In DOC',

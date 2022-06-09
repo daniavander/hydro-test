@@ -76,7 +76,6 @@ export class RaPage {
                 await expect(this.page.locator(".aq-checklist-row.ims_flex")).toBeVisible()
                 break
             case "Connected persons":
-
                 await this.page.click("text='Please choose...'")
                 await this.page.click("text='Interviewed'")
                 await this.page.fill("//input[@placeholder='Add related person']", "ImsTestGlobalAdmin3")
@@ -88,7 +87,8 @@ export class RaPage {
                 await expect(this.page.locator(".sub-menu-header")).toBeVisible()
 
                 break
-            case "Health":
+            case "Hazard / Risk":
+                await this.page.click("text='Add Single Risk'");
                 break
             case "QA":
                 break
