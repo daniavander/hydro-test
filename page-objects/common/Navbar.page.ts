@@ -20,7 +20,7 @@ export class Navbar {
         this.actions = page.locator("[title=Actions]")
         this.reports = page.locator("[title=Reports]")
         this.riskAssesment = page.locator("[title='Risk Assessment']")
-        this.riskInventory = page.locator("text=Risk Inventory")
+        this.riskInventory = page.locator("[title='Risk Inventory']")
         this.addNewCase = page.locator("[title='Add New Case']")
         this.admin = page.locator("text=Admin")
     }
@@ -44,7 +44,7 @@ export class Navbar {
             case "Risk Assessment":
                 await this.riskAssesment.click()
                 break
-            case "Risk":
+            case "Risk Inventory":
                 await this.riskInventory.click()
                 break
             case "Risk Inventory":
