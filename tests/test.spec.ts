@@ -47,7 +47,6 @@ test.describe("Smoke tests", () => {
       for (var i = 0; i < 5; i++) {
         if (xx == "low ife type automated test" + i)
           console.log('----found----')
-        await page.pause()
         var cc = await page.locator("//p[@title='low ife type automated test" + i +"']")
         await cc.click()
         await page.hover("(//div[contains(@class, 'p0i')])[1]")

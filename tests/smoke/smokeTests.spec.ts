@@ -168,7 +168,7 @@ test.describe("Smoke test pack", () => {
     //we can delete the case after reopen it step 15
     await page.hover("data-testid=case-submenu")
     expect(page.locator("//button[text()=' Delete ']").isEnabled())
-    await casePage.getFunctionAndDoInCasePage("Delete")
+    //await casePage.getFunctionAndDoInCasePage("Delete")
 
   })
 
@@ -187,7 +187,6 @@ test.describe("Smoke test pack", () => {
     await casePage.fillDescription(stringConstants.description + " IFE delete")
     await page.click('text=Save')
 
-    await page.pause()
     //ghost card after save is visible
     await getTexts.getGhostCardTitle("investigation", "investigation")
     await (await page.waitForSelector('.p-state-filled')).isVisible()
@@ -197,7 +196,7 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Close')
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
 
 
     await navBar.clickOnTopMenu("Cases")
@@ -297,7 +296,6 @@ test.describe("Smoke test pack", () => {
     await page.click("//li[@role='option']")
     //step 9
     await page.click("text='Apply filters'")
-    await page.pause()
 
     //step 10 check the result list that Sign & Archive is in first element of the list
     //if new icon usage-> await getTexts.getDivElementTextOnListPage("ims_block10 obs_verticalcentered", "sign&archive", "Actions")
@@ -327,7 +325,7 @@ test.describe("Smoke test pack", () => {
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
   })
 
-  test.only('31053 - Smoke test - Create new Risk Assessment without Risk @risk', async ({ dashBoard, page,addUserAction, navBar, raPage }) => {
+  test('31053 - Smoke test - Create new Risk Assessment without Risk @risk', async ({ dashBoard, page,addUserAction, navBar, raPage }) => {
     allure.epic("RA");
     allure.story("Risk Assessment is loaded fine");
 

@@ -74,7 +74,6 @@ export class AddUserAction {
         await this.page.click("//p[text()=' Injury Details ']")
         await this.page.click("[title='" + injury + "']")
         await this.page.click("[title='" + specify + "']")
-        await this.page.pause()
         await this.page.click("#" + location + "")
         await this.page.click("//span[text()='" + locationspecify + "']")
         await this.page.fill("(//textarea[@rows='1'])[2]", comment)
