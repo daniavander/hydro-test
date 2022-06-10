@@ -42,6 +42,8 @@ const test = baseTest.extend<{
     fillRA : RaPage
     addRADetails : RaPage
     addNewTaskToRa : RaPage
+    addSingleRisk : RaPage
+    checkRiInRa: RaPage
 
     getTexts : GetTexts
     
@@ -113,10 +115,13 @@ const test = baseTest.extend<{
     addRADetails:async ({page}, use) => {
         await use(new RaPage(page))
     },
-    addRADetails:async ({page}, use) => {
+    addNewTaskToRa:async ({page}, use) => {
         await use(new RaPage(page))
     },
-    addNewTaskToRa:async ({page}, use) => {
+    addSingleRisk:async ({page}, use) => {
+        await use(new RaPage(page))
+    },
+    checkRiInRa:async ({page}, use) => {
         await use(new RaPage(page))
     },
     getTexts:async ({page}, use) => {

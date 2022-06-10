@@ -4,7 +4,7 @@ import { allure } from "allure-playwright";
 import { expect } from "@fixtures/basePages"
 import test from "@fixtures/basePages"
 
-import { caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames , raMenuNames , frequency } from "@fixtures/constans"
+import { caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames , raMenuNames , frequency, riskMainTypes } from "@fixtures/constans"
 import { AddUserAction } from '@pages/common/AddUserAction';
 import { CaseList } from '@pages/CaseList';
 import { CommonFunc } from '@pages/common/CommonFuncs';
@@ -159,6 +159,7 @@ test.describe("Smoke test pack", () => {
     await page.waitForTimeout(2000)
     await page.hover("data-testid=case-submenu")
     //dlete btn is disabled, because the status is archive
+    await page.pause()
     expect(page.locator("//button[text()=' Delete ']").isDisabled())
 
     //reopen
@@ -365,22 +366,38 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("//p[@title='Published']")).toHaveText("Published")
   })
 
-  test.only('31056 - Smoke test - Create new Risk Assessment with Risk @risk', async ({ dashBoard, page,addUserAction, navBar, raPage }) => {
+
+  test.skip('31056 - Smoke test - Create new Risk Assessment with Risk @risk', async ({ dashBoard, page,addUserAction, navBar, raPage }) => {
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
     await dashBoard.topBarIsAvailable()
-    await navBar.clickOnTopMenu("Risk Assesment")
+    await navBar.clickOnTopMenu("Risk Assessment")
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
-    await page.pause()
+    
     await raPage.addNewRA("Automated RA" , "Automation tests", departments.hse)
+    await raPage.addRADetails(raMenuNames.hazard)
     //add hazard - step 6
-    await raPage.checkRA("Automated RA" , "Published" , siteShortNames.automation, departments.hse)
+    await raPage.addSingleRisk(riskMainTypes.asbestos, riskMainTypes.asbestos)
+    //check details - step 7
+    await raPage.checkRiInRa(riskMainTypes.asbestos, "Automation tests", siteShortNames.automation, departments.hse,"Asbestos")
+    //affected group frequenc - step 10
+    await raPage.addRADetails(raMenuNames.seg , "Management" , frequency.daily , "2")
+
+    // add inherent risk - step 11
+    await page.pause()
+    await raPage.addSingleRisk(riskMainTypes.mechanicalhazard, riskMainTypes.mechanicalhazard)
+    await page.click("//span[text()='Add inherent risk']")
+    //await raPage.checkRiInRa(riskMainTypes.asbestos, "Automation tests", siteShortNames.automation, departments.hse,"Mechanical hazard")
+
+
+
+    /*await raPage.checkRA("Automated RA" , "Published" , siteShortNames.automation, departments.hse)
     
     // végre step 18 save and publish
     await page.click(".survey-woc-editor-save-publish")
     //check the status is published
-    await expect(page.locator("//p[@title='Published']")).toHaveText("Published")
+    await expect(page.locator("//p[@title='Published']")).toHaveText("Published")*/
   })
 
 })

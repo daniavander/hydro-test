@@ -71,3 +71,20 @@ exports.frequency = {
   quarterly: 'Quarterly',
   halfyear: 'Half-yearly or less frequently',
 }
+
+exports.riskMainTypes = {
+  mechanicalhazard: "Mechanical hazard",
+  electrical:"",
+  chemical: "Chemical hazards",
+  fire: "Fire and explosion hazards",
+  hazard: "Hazard due to a lack of organisation",
+  warning: "Warning devices and information",
+  physical: "Physical hazards",
+  psychological: "Psychological strain",
+  isolation: "Working in isolation / working alone",
+  technical: "Technical inspections/checks",
+  biological: "Biological hazards",
+  asbestos: "Asbestos",
+  weraproduction: "Wera Production",
+  weraoffice: "Wera Office"
+}

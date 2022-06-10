@@ -85,10 +85,10 @@ export class RaPage {
                 await this.page.click("//button[text()='Ok']")
                 await expect(this.page.locator("//h2[@title='Connected persons']")).toBeVisible()
                 await expect(this.page.locator(".sub-menu-header")).toBeVisible()
-
                 break
             case "Hazard / Risk":
                 await this.page.click("text='Add Single Risk'");
+                // call addSingleRisk()
                 break
             case "QA":
                 break
@@ -113,5 +113,39 @@ export class RaPage {
         await expect(this.page.locator("//h2[@title='Frequency']")).toBeVisible()
         await expect(this.page.locator("[title='" + frequency + "']")).toBeVisible()
 
+    }
+    async addSingleRisk(mainType: string, subType: string) {
+        await this.page.click("[title='" + mainType + "']");
+        await this.page.click("//p[@title='" + subType + "']");
+        await this.page.click("//button[@title='Select']");
+    }
+
+    async checkRiInRa(riType: string, siteName: string,  siteShortName: string, depName: string, riskName: string) {
+        //site and department check
+        //fixme after
+        //Product Backlog Item 33473: Automation test - risk name to risk title
+        //most ez van //h1[@title='Add risk']
+        console.log("//h1[title()=' " + riType + " ']")
+        //await expect(this.page.locator("//h1[title()='" + riType + "']")).toContainText(riType, { trim: true })
+        const sitename = this.page.locator("//span[@title='" + siteName + "']")
+        await expect(sitename).toHaveText(siteShortName)
+        
+        const depname = this.page.locator("//span[text()='" + depName + "']")
+        await expect(depname).toHaveText(depName)
+
+        //https://github.com/microsoft/playwright/discussions/14785
+        expect(await this.page.locator("//button[@title='Save & Close']").isDisabled())
+        expect(await this.page.locator("//button[@title='Save & Close']").isEnabled())
+        // check the hazard type - step 8
+        const riskname = this.page.locator("//p[@title='" + riskName + "']")
+        await expect(riskname).toHaveText(riskName)
+        //matrix is displayed
+        expect(this.page.locator("risk-matrix")).toHaveCount(1)
+
+        //todo save and close will enable but now it is not working well fuck
+
+        //click to matrix element  > pbi for locator
+        await this.page.locator("(//div[@class='risk-probability-ec-hh ng-star-inserted']/following-sibling::div)[2]").click();
+        await this.page.click("//button[@title='Save & Close']")
     }
 }
