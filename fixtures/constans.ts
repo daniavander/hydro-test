@@ -1,3 +1,17 @@
+exports.siteShortNames = {
+  automation: 'E2E'
+},
+exports.siteNames = {
+  fehervar: 'Extrusion-Hungary-Szekesfehervar',
+  auto: "Automation tests"
+  
+},
+exports.entities = {
+  ife: 'Injury Free Event'
+},
+exports.times = {
+  
+},
 exports.departments = {
   administration: 'Administration',
   prés: '3-as prés',
@@ -12,6 +26,7 @@ exports.departments = {
 };
 
 exports.caseType = {
+  //inside add case
   ife: 'test-ife',
   injury: 'test-injury',
   health: 'test-health',
@@ -20,6 +35,7 @@ exports.caseType = {
 }
 
 exports.secLevels = {
+  //inside add case after select type
   low: 'Low',
   medium: 'Medium',
   high: 'High',
@@ -37,10 +53,6 @@ exports.classesUnderAction3Dot = {
 
 exports.stringConstants = {
   description: 'Automated test description'
-}
-
-exports.siteShortNames = {
-  automation: 'E2E'
 }
 
 exports.raMenuNames = {

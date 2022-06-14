@@ -4,7 +4,7 @@ import { allure } from "allure-playwright";
 import { expect } from "@fixtures/basePages"
 import test from "@fixtures/basePages"
 
-import { caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames , raMenuNames , frequency, riskMainTypes } from "@fixtures/constans"
+import { siteNames, entities, caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames , raMenuNames , frequency, riskMainTypes } from "@fixtures/constans"
 import { AddUserAction } from '@pages/common/AddUserAction';
 import { CaseList } from '@pages/CaseList';
 import { CommonFunc } from '@pages/common/CommonFuncs';
@@ -65,7 +65,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test('31034 - Smoke test - Create a Serious Injury case @cases', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, getTexts, page }) => {
+  test.skip('31034 - Smoke test - Create a Serious Injury case @cases', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, getTexts, page }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -105,7 +105,7 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
   })
 
-  test('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test.skip('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -133,7 +133,7 @@ test.describe("Smoke test pack", () => {
     await casePage.addSurvey("Checklist", "0or1", 1)
 
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
-
+    await page.pause()
     //case id contain HUS string
     await expect(page.locator('data-testid=case-id')).toContainText('E2E-22')
 
@@ -173,16 +173,18 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
+  test.skip('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ addReportedBy, caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Add New Case")
-    await casePage.setSite("Automation tests")
-    await casePage.setDepartment(departments.administration)
+    await casePage.setSite(siteNames.auto)
+    await page.pause()
+    await casePage.setDepartment(departments.hse)
     await casePage.setCaseType("ife", secLevels.low)
+    //await casePage.addReportedBy("Kovács Dániel")
     await addUserAction.addTags("Add obligatory", "aa")
 
     await casePage.fillDescription(stringConstants.description + " IFE delete")
@@ -197,11 +199,12 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Close')
   })
 
-  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.use({ viewport: { width: 1600, height: 900 } })
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, filter, commonFunc, page, caseList }) => {
 
+    //test.use({ viewport: { width: 1600, height: 900 } })
 
     await navBar.clickOnTopMenu("Cases")
-    //await page.waitForSelector("#reset-filter-button", { timeout: 6000 })
     try {
       console.log("try to reset the filters")
       await page.click("#reset-filter-button", { timeout: 6000 })
@@ -211,17 +214,16 @@ test.describe("Smoke test pack", () => {
     }
 
     expect(page.locator(".obs_csstable"))
-    await commonFunc.searchCaseWithFilters("Extrusion-Hungary-Szekesfehervar", "Injury Free Event")
+    await commonFunc.searchCaseWithFilters(siteNames.auto , entities.ife)
     //step 6
     await page.click("[title='Edit filters']")
-    await page.pause()
     //this is in the custom filter
-    expect(page.locator('text=Site: Extrusion-Hungary-Szekesfehervar').nth(1)).toBeVisible()
-    expect(page.locator('text=Type of incident: Injury Free Event').nth(1)).toBeVisible()
+    expect(page.locator('text=Site: ' + siteNames.auto + '').nth(1)).toBeVisible()
+    expect(page.locator('text=Type of incident: ' + entities.ife + '').nth(1)).toBeVisible()
     //step7
     await page.click("//span[text()='Recorded']")
     //step 8
-    //fyi if check last day, NEED to add IFE in fehervar or run (31034 - Smoke test - Create a Serious Injury case), otherwise fail the test
+    //fyi if check last day, NEED to add IFE in auto site or run (31034 - Smoke test - Create a Serious Injury case), otherwise fail the test
     await page.click("text='Last day'")
     //await page.fill("//input[@placeholder='Name']","imstestglobaladmin3@avander.hu")
     //in local due to azure ad login
@@ -230,19 +232,15 @@ test.describe("Smoke test pack", () => {
     //step 9
     await page.click("text='Apply filters'")
 
-    //step 10 check the result list that IFE is in first element of the list
+    //step 9 check the result list that IFE is in first element of the list
     // click to be list of elements
+    
     await page.click("[aria-label='list']")
-    await getTexts.getDivElementTextOnListPage("ims_ellipsis", "Injury free event", "Actions")
 
-    //check the previously selected filter is in the filter bar
-    //fixme kifaszázni ha kész: Product Backlog Item 32660: Automation test - data-testid-s for smart filter tags
-    /*expect(page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]")).toBeVisible()
-    expect(page.locator("(//span[text()='Injury Free Event'])[3]")).toBeVisible()
-    expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeVisible()*/
+    await filter.checkFilterTabs(siteNames.auto , entities.ife, "Kovács Dániel (kovacs.daniel@avander.hu)", "lastday")
 
-    //expect(page.locator('#tagShowCase div:has-text("Creation date: Last day")')).toBeVisible();
     await page.waitForTimeout(3000)
+    //step 10 reset filters and check that the full list is displayed
     await page.click("#reset-filter-button")
     await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Cases')
     //available in dom but hidden
@@ -318,7 +316,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     // it is work fine if the @cases tests are run previously
     await navBar.clickOnTopMenu("Cases")
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description IFE delete", "Delete")
@@ -367,7 +365,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test.skip('31056 - Smoke test - Create new Risk Assessment with Risk @risk', async ({ dashBoard, page,addUserAction, navBar, raPage }) => {
+  test.skip('31056 - Smoke test - Create new Risk Assessment with Risk @risk', async ({ dashBoard, page, navBar, raPage }) => {
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
@@ -376,19 +374,39 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     
     await raPage.addNewRA("Automated RA" , "Automation tests", departments.hse)
-    await raPage.addRADetails(raMenuNames.hazard)
+    
+    //affected group frequenc - step 10
+    await raPage.addRADetails(raMenuNames.seg , "Management" , frequency.daily , "2")
     //add hazard - step 6
+    await raPage.addRADetails(raMenuNames.hazard)
     await raPage.addSingleRisk(riskMainTypes.asbestos, riskMainTypes.asbestos)
     //check details - step 7
     await raPage.checkRiInRa(riskMainTypes.asbestos, "Automation tests", siteShortNames.automation, departments.hse,"Asbestos")
-    //affected group frequenc - step 10
-    await raPage.addRADetails(raMenuNames.seg , "Management" , frequency.daily , "2")
+    
 
     // add inherent risk - step 11
-    await page.pause()
-    await raPage.addSingleRisk(riskMainTypes.mechanicalhazard, riskMainTypes.mechanicalhazard)
+    //inside hazard
     await page.click("//span[text()='Add inherent risk']")
+    await page.click("(//risk-matrix/div[2]/div[4])[1]")
+
+    //todo felvenni hogy egy mátrix érték kapjon data-testid-t
     //await raPage.checkRiInRa(riskMainTypes.asbestos, "Automation tests", siteShortNames.automation, departments.hse,"Mechanical hazard")
+
+    //add residual risk - step 12
+    await page.locator('button:has-text("Add residual risk")').click();
+    await page.click("(//risk-matrix/div[2]/div[4])[3]")
+
+    //add existing measure  - step 13
+    await page.pause()
+    //hiába katintok nem jön fel az ablak 
+    //fixme  //todo //fyi
+    await page.click("//span[text()='Add existing measure']")
+    await raPage.addExistingMeasure("Test Automation Question","PPE")
+
+    //todo befejezni
+
+    // step 14
+    await page.fill(".details-textarea","Test Automation Risk Description")
 
 
 
@@ -401,4 +419,3 @@ test.describe("Smoke test pack", () => {
   })
 
 })
-

@@ -133,9 +133,16 @@ export class RaPage {
         const depname = this.page.locator("//span[text()='" + depName + "']")
         await expect(depname).toHaveText(depName)
 
+        
         //https://github.com/microsoft/playwright/discussions/14785
+        //todo data test id: Product Backlog Item 33498: Automated test - data-testid for rusk save and publish
         expect(await this.page.locator("//button[@title='Save & Close']").isDisabled())
         expect(await this.page.locator("//button[@title='Save & Close']").isEnabled())
+        //const myButton = this.page.locator('button.survey-woc-editor-save-publish.sop-hazard-add-btn')
+        //await this.page.pause()
+        //await expect(myButton).toBeEnabled();
+        //await expect(myButton).toBeDisabled();
+
         // check the hazard type - step 8
         const riskname = this.page.locator("//p[@title='" + riskName + "']")
         await expect(riskname).toHaveText(riskName)
@@ -145,7 +152,18 @@ export class RaPage {
         //todo save and close will enable but now it is not working well fuck
 
         //click to matrix element  > pbi for locator
-        await this.page.locator("(//div[@class='risk-probability-ec-hh ng-star-inserted']/following-sibling::div)[2]").click();
-        await this.page.click("//button[@title='Save & Close']")
+        ////////////////todo
+        /*
+        current risk     (//risk-matrix/div[2]/div[4])[1]
+        residual risk     (//risk-matrix/div[2]/div[4])[2]
+        */
+        await this.page.locator("(//risk-matrix/div[2]/div[4])[1]").click();
+        //await this.page.click("//button[@title='Save & Close']")
+    }
+
+    async addExistingMeasure(question: string, type: string) {
+        await this.page.fill("//input[@placeholder='Question name..']", question)
+        await this.page.click("//span[@title='" + type + "']")
+        await this.page.click("//button[@title='Add']")
     }
 }

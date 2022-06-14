@@ -10,6 +10,7 @@ import { SurveyPage } from "@pages/Survey.page"
 import { RaPage } from "@pages/RiskAssesment.page"
 
 import { Dashboard } from "@pages/common/Dashboard.page"
+import { Filter } from "@pages/common/Filter.page"
 import { AddUserAction } from "@pages/common/AddUserAction"
 import { AddPeopleDetails } from "@pages/common/PeopleDetails"
 import { CommonFunc } from "@pages/common/CommonFuncs"
@@ -20,9 +21,12 @@ import { GetTexts} from "@pages/common/Getters"
 const test = baseTest.extend<{
     dashBoard: Dashboard
     navBar : Navbar
+    filter : Filter
+    checkFilterTabs: Filter
     loginPage : LoginPage
     casePage : CasePage
     addSurvey : CasePage
+    addReportedBy: CasePage
     getCardH2Text: CasePage
     getH3Text: CasePage
     surveyPage : SurveyPage
@@ -43,16 +47,22 @@ const test = baseTest.extend<{
     addRADetails : RaPage
     addNewTaskToRa : RaPage
     addSingleRisk : RaPage
+    addExistingMeasure: RaPage
     checkRiInRa: RaPage
 
-    getTexts : GetTexts
-    
+    getTexts : GetTexts   
 }>({
     dashBoard:async ({page}, use) => {
         await use(new Dashboard(page))
     },
     navBar:async ({page}, use) => {
         await use(new Navbar(page))
+    },
+    filter:async ({page}, use) => {
+        await use(new Filter(page))
+    },
+    checkFilterTabs:async ({page}, use) => {
+        await use(new Filter(page))
     },
     loginPage:async ({page}, use) => {
         await use(new LoginPage(page))
@@ -61,6 +71,9 @@ const test = baseTest.extend<{
         await use(new CasePage(page))
     },
     addSurvey:async ({page}, use) => {
+        await use(new CasePage(page))
+    },
+    addReportedBy:async ({page}, use) => {
         await use(new CasePage(page))
     },
     getCardH2Text:async ({page}, use) => {
@@ -119,6 +132,9 @@ const test = baseTest.extend<{
         await use(new RaPage(page))
     },
     addSingleRisk:async ({page}, use) => {
+        await use(new RaPage(page))
+    },
+    addExistingMeasure:async ({page}, use) => {
         await use(new RaPage(page))
     },
     checkRiInRa:async ({page}, use) => {

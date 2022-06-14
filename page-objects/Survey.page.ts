@@ -22,6 +22,7 @@ export class SurveyPage {
         //await this.page.fill("//input[@placeholder='Write down your answer here']","automated risk checklist text")
         await this.page.click("(//span[@title='" + yesOrNo + "'])[1]")
         await this.page.click("(//span[@title='" + yesOrNo + "'])[2]")
+        await this.page.click("(//span[@title='" + yesOrNo + "'])[3]")
         await this.page.click("//div[text()='Mark as Completed']")
 
     }

@@ -57,6 +57,11 @@ export class CasePage {
         await this.page.click("[aria-label='" + level + "']")
     }
 
+    async addReportedBy(name: string){
+        await this.page.fill("//input[@placeholder='Reported by']", name)
+        await this.page.click("//div[text()='" + name + "']")
+    }
+
 
 
     async setCaseType(caseType: any, variable: string) {
