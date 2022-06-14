@@ -105,7 +105,7 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
   })
 
-  test.skip('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
