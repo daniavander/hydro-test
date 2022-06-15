@@ -48,6 +48,8 @@ const test = baseTest.extend<{
     addNewTaskToRa : RaPage
     addSingleRisk : RaPage
     addExistingMeasure: RaPage
+    addNewActionInRisk: RaPage
+    addChecklistToRisk:RaPage
     checkRiInRa: RaPage
 
     getTexts : GetTexts   
@@ -135,6 +137,12 @@ const test = baseTest.extend<{
         await use(new RaPage(page))
     },
     addExistingMeasure:async ({page}, use) => {
+        await use(new RaPage(page))
+    },
+    addNewActionInRisk:async ({page}, use) => {
+        await use(new RaPage(page))
+    },
+    addChecklistToRisk:async ({page}, use) => {
         await use(new RaPage(page))
     },
     checkRiInRa:async ({page}, use) => {

@@ -10,9 +10,7 @@ export class RaPage {
     async addNewRA(raName: string, siteName: string, department: string) {
         await this.page.click("[title='Add new Risk Assessment']")
         await this.page.fill('[placeholder="Add Assessment Title"]', raName)
-        //pbi ba lesznek data-testid-k addig így van
-        //TODO
-        await this.page.click("//span[text()='please choose...']")
+        await this.page.click("data-testid=ra-siteselector")
         await this.page.click("text=" + siteName + "")
         await this.page.click("#filter-department")
         await this.page.click("[title=" + department + "]")
@@ -120,26 +118,18 @@ export class RaPage {
         await this.page.click("//button[@title='Select']");
     }
 
-    async checkRiInRa(riType: string, siteName: string,  siteShortName: string, depName: string, riskName: string) {
-        //site and department check
-        //fixme after
-        //Product Backlog Item 33473: Automation test - risk name to risk title
-        //most ez van //h1[@title='Add risk']
-        console.log("//h1[title()=' " + riType + " ']")
-        //await expect(this.page.locator("//h1[title()='" + riType + "']")).toContainText(riType, { trim: true })
+    async checkRiInRa(hazardType: string, siteName: string,  siteShortName: string, depName: string, riskName: string) {
+        await this.page.click("data-testid=" + hazardType + "")
         const sitename = this.page.locator("//span[@title='" + siteName + "']")
         await expect(sitename).toHaveText(siteShortName)
-        
         const depname = this.page.locator("//span[text()='" + depName + "']")
         await expect(depname).toHaveText(depName)
 
-        
         //https://github.com/microsoft/playwright/discussions/14785
         //todo data test id: Product Backlog Item 33498: Automated test - data-testid for rusk save and publish
-        expect(await this.page.locator("//button[@title='Save & Close']").isDisabled())
-        expect(await this.page.locator("//button[@title='Save & Close']").isEnabled())
+        expect(await this.page.locator("data-testid=risk-save-close").isDisabled())
+        expect(await this.page.locator("data-testid=risk-save-close").isEnabled())
         //const myButton = this.page.locator('button.survey-woc-editor-save-publish.sop-hazard-add-btn')
-        //await this.page.pause()
         //await expect(myButton).toBeEnabled();
         //await expect(myButton).toBeDisabled();
 
@@ -149,21 +139,58 @@ export class RaPage {
         //matrix is displayed
         expect(this.page.locator("risk-matrix")).toHaveCount(1)
 
-        //todo save and close will enable but now it is not working well fuck
-
-        //click to matrix element  > pbi for locator
         ////////////////todo
         /*
         current risk     (//risk-matrix/div[2]/div[4])[1]
         residual risk     (//risk-matrix/div[2]/div[4])[2]
         */
         await this.page.locator("(//risk-matrix/div[2]/div[4])[1]").click();
-        //await this.page.click("//button[@title='Save & Close']")
+        //await this.page.click("data-testid=risk-save-close")
     }
 
     async addExistingMeasure(question: string, type: string) {
+        //inside risk
+        await this.page.click("text='Add existing measure'")
         await this.page.fill("//input[@placeholder='Question name..']", question)
         await this.page.click("//span[@title='" + type + "']")
         await this.page.click("//button[@title='Add']")
+    }
+
+    async addNewActionInRisk(desc: string, inst: string, responsible:string, tagname: string='null', subtag: string='null') {
+        //inside risk
+        //todo fix after this: Product Backlog Item 33573: Automation test -data-testid for action elements inside risk
+        //ez a geci valamiért ki lép
+        await this.page.click("text='Add new action'")
+        await this.page.fill('[placeholder="Add a subject for the task..."]', desc)
+        await this.page.fill('(//textarea[@autoresize="autoResize"])[3]', inst)
+        await this.page.fill('[placeholder="Add\ responsible"]', responsible)
+        await this.page.locator("//div[text()='" + responsible + "']").click();
+        await this.page.locator('div[role="dialog"] >> text=' + tagname + '').click()
+        await this.page.locator("[aria-label=" + subtag + "]").click();
+        await this.page.click('text=Save changes')
+        //connected actions titlke is visible
+        expect(await this.page.locator("//h2[@title='Connected actions']").isVisible())
+        // check there is an action id
+        //fix after this Product Backlog Item 33573: Automation test -data-testid for action elements inside risk
+        //expect(this.page.locator("//h2[@title='E2E-22-T007']")).toContainText('E2E-22')
+        //expect(this.page.locator("//h2[@title='E2E-22']").isVisible())
+        expect(await this.page.locator("//p[text()=' Ongoing ']").isVisible())
+        expect(await this.page.locator("//span[@title='" + responsible + "']").isVisible())
+        //expect(this.page.locator("//h2[@title='E2E-22-T007']")).toContainText('E2E-2')
+    }
+
+    async addChecklistToRisk(checklistname: string) {
+        //inside risk
+        await this.page.click("text='Checklist'")
+        await this.page.click("//button[contains(@class,'p-ripple p-element')]")
+        await this.page.click("//span[text()='" + checklistname + "']")
+        await this.page.click("//button[text()='Add items: 1']")
+        //checks
+        await this.page.pause()
+        expect(await this.page.locator("//h2[text()='" + checklistname + "']").isVisible())
+        expect(await this.page.locator("//h2[text()='ccc']").isVisible())
+        //expect(await this.page.locator("//p[text()=' Ongoing ']").isVisible())
+        //deadline missing
+        expect(await this.page.locator("//div[@title='ImsTestGlobalAdmin3 (ImsTestGlobalAdmin3@avander.hu) ']").isVisible())
     }
 }

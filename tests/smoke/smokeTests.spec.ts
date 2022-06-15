@@ -105,7 +105,7 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
   })
 
-  test.only('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+  test('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -365,7 +365,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test.skip('31056 - Smoke test - Create new Risk Assessment with Risk @risk', async ({ dashBoard, page, navBar, raPage }) => {
+  test('31056 - Smoke test - Create new Risk Assessment with Risk @risk', async ({ dashBoard, page, navBar, raPage }) => {
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
@@ -388,34 +388,47 @@ test.describe("Smoke test pack", () => {
     //inside hazard
     await page.click("//span[text()='Add inherent risk']")
     await page.click("(//risk-matrix/div[2]/div[4])[1]")
+    expect(page.locator("risk-matrix")).toHaveCount(2)
 
     //todo felvenni hogy egy mátrix érték kapjon data-testid-t
     //await raPage.checkRiInRa(riskMainTypes.asbestos, "Automation tests", siteShortNames.automation, departments.hse,"Mechanical hazard")
 
     //add residual risk - step 12
-    await page.locator('button:has-text("Add residual risk")').click();
+    await page.click("//span[text()='Add residual risk']")
     await page.click("(//risk-matrix/div[2]/div[4])[3]")
+    expect(page.locator("risk-matrix")).toHaveCount(3)
 
     //add existing measure  - step 13
-    await page.pause()
     //hiába katintok nem jön fel az ablak 
+    // Bug 33563: RA - add existing measure
     //fixme  //todo //fyi
-    await page.click("//span[text()='Add existing measure']")
-    await raPage.addExistingMeasure("Test Automation Question","PPE")
-
-    //todo befejezni
-
+    /*
+    await page.waitForTimeout(3000);
+    await raPage.addExistingMeasure("Test Automation Question","PPE")*/
+    
     // step 14
     await page.fill(".details-textarea","Test Automation Risk Description")
 
+    //todo befejezni
+    //add new action - step 15,16  -  inside risk
+    await raPage.addNewActionInRisk("risk action desc","risk action inst", "Kovács Dániel","Add obligatory","aa")
 
-
-    /*await raPage.checkRA("Automated RA" , "Published" , siteShortNames.automation, departments.hse)
-    
-    // végre step 18 save and publish
+    // add checklist step 17,18
+    await raPage.addChecklistToRisk("0or1")
+    //sva and close - step 19
+    await page.click("data-testid=risk-save-close")
+    // save and publish step 20
     await page.click(".survey-woc-editor-save-publish")
-    //check the status is published
-    await expect(page.locator("//p[@title='Published']")).toHaveText("Published")*/
+
+    await raPage.checkRA("Automated RA" , "Published" , siteShortNames.automation, departments.hse)
+    await expect(page.locator("//p[@title='Published']")).toHaveText("Published")
+  
+
+
+
+
+
+    
   })
 
 })
