@@ -31,7 +31,7 @@ jobs:
   - script: npx playwright install --with-deps
 
     displayName: "Execute test"
-    condition: succeeded()
+    condition: succeededOrFailed()
   - script: npm run smoke
   - script: npm run generate
   
@@ -42,6 +42,7 @@ jobs:
   #    targetDir: 'allure-report/$(Build.BuildNumber)'
 
   - task: PublishHtmlReport@1
+    condition: succeededOrFailed()
     inputs:
       reportDir: 'playwright-report/index.html'
 
