@@ -134,7 +134,8 @@ export class RaPage {
         //await expect(myButton).toBeDisabled();
 
         // check the hazard type - step 8
-        const riskname = this.page.locator("//p[@title='" + riskName + "']")
+        await this.page.pause()
+        const riskname = this.page.locator("data-testid=" + riskName + "")
         await expect(riskname).toHaveText(riskName)
         //matrix is displayed
         expect(this.page.locator("risk-matrix")).toHaveCount(1)

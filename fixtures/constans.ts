@@ -85,18 +85,33 @@ exports.frequency = {
 }
 
 exports.riskMainTypes = {
-  mechanicalhazard: "Mechanical hazard",
-  electrical:"",
-  chemical: "Chemical hazards",
-  fire: "Fire and explosion hazards",
-  hazard: "Hazard due to a lack of organisation",
-  warning: "Warning devices and information",
-  physical: "Physical hazards",
-  psychological: "Psychological strain",
-  isolation: "Working in isolation / working alone",
-  technical: "Technical inspections/checks",
-  biological: "Biological hazards",
+  mechanicalhazard: "MechanicalHazard",
+  electrical:"ElectricalHazards",
+  chemical: "ChemicalHazards",
+  fire: "FireAndExplosionHazards",
+  hazard: "HazardDueToALackOfOrganisation",
+  warning: "WarningDevicesAndInformation",
+  physical: "PhysicalHazards",
+  psychological: "PsychologicalStrain",
+  isolation: "WorkingInIsolation/WorkingAlone",
+  technical: "TechnicalInspections/checks",
+  biological: "BiologicalHazards",
   asbestos: "Asbestos",
-  weraproduction: "Wera Production",
-  weraoffice: "Wera Office"
+  weraproduction: "WeraProduction",
+  weraoffice: "WeraOffice"
+}
+
+exports.riskSubTypes = {
+  dangeroussurfaces: "DangerousSurfaces",
+  shortcircuits:"ShortCircuits",
+  chemical: "ChemicalHazards",
+  inhalation: "FireAndExplosionHazards",
+  thermal: "ThermalExplosions",
+  dangerouswork: "DangerousWork",
+  lightning: "Lighting",
+  psychological: "PsychologicalStrain",
+  freedom: "FreedomOfAction,Responsibility",
+  workingalone: "WorkingInIsloationWithSpecialRisk",
+  heatstress: "HeatStress",
+  officenoise: "WeraOfficeNoise"
 }
