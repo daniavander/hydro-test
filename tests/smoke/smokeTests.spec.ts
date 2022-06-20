@@ -35,7 +35,7 @@ test.describe("Smoke test pack", () => {
 
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
-    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
+    await expect(page.locator("data-testid=site-selectorr")).toHaveAttribute('title', 'All MY sites')
     await navBar.clickOnTopMenu("Activities")
     await page.locator('.obs_csstable').isVisible()
     const activitiesHeader = page.locator('.header.header-style2');

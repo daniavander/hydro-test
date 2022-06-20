@@ -34,7 +34,7 @@ jobs:
     displayName: "Execute test"
     condition: succeededOrFailed()
   - script: npm run smoke
-  - script: npm run generate
+  #- script: npm run generate
 
  #  displayName: "Run test"
  #  condition: succeededOrFailed()
