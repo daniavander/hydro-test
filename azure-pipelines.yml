@@ -29,15 +29,16 @@ jobs:
 
     displayName: "Install framework"
   - script: npm install
-  - script: npx playwright install --with-deps
+  #- script: npx playwright install --with-deps
 
     displayName: "Execute test"
     condition: succeededOrFailed()
   - script: npm run smoke
-
-    displayName: "Generate report"
-    condition: succeededOrFailed()
   - script: npm run generate
+
+ #  displayName: "Run test"
+ #  condition: succeededOrFailed()
+ #- script: npm run generate
   
 
   #- task: AllureGenerate@1
