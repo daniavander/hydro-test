@@ -29,7 +29,7 @@ test.describe("Smoke test pack", () => {
   test.afterAll(async ({ browser }) => {
     await browser.close()
   })
-  test.only('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
+  test('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
     allure.epic("Responses");
     allure.story("Activity list is loaded fine");
 
