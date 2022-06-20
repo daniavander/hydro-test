@@ -27,13 +27,15 @@ jobs:
     displayName: 'Install Node.js'
   - script: which node
 
+    displayName: "Install framework"
   - script: npm install
   - script: npx playwright install --with-deps
 
     displayName: "Execute test"
     condition: succeededOrFailed()
   - script: npm run smoke
-    displayName: "Generate reportt"
+
+    displayName: "Generate report"
     condition: succeededOrFailed()
   - script: npm run generate
   
