@@ -6,7 +6,7 @@ expect.extend(matchers)
 
 const config: PlaywrightTestConfig = {
 
-  globalTimeout: 480000, // Maximum time the whole test suite can run, 8 min for 6 tests
+  globalTimeout: 600000, // Maximum time the whole test suite can run, 8 min for 6 tests
   timeout: 250000,        // Timeout for each test
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
