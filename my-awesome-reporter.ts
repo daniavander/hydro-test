@@ -3,7 +3,7 @@ import { FullConfig, FullResult, Reporter, Suite, TestCase, TestError, TestResul
 class MyReporter implements Reporter {
     onBegin(config: FullConfig, suite: Suite) {
         console.log(`Starting the run with ${suite.allTests().length} tests`);
-        console.log(`>>> Suite title: ${suite.title} <<<`)
+        //console.log(`>>> Suite title: ${suite.title} <<<`)
     }
     onStepBegin?(test: TestCase, result: TestResult, step: TestStep) {
         console.log(`STEP ${step.title}`);
@@ -12,7 +12,7 @@ class MyReporter implements Reporter {
             console.log(`Starting step title ${step.title}`);
         }
     }
-    onStepEnd?(test: TestCase, result: TestResult, step: TestStep) {
+    /*onStepEnd?(test: TestCase, result: TestResult, step: TestStep) {
         if (step.category === "test.step") {
             console.log(`Result of Step ${step.title} with status ${result.status}`);
         }
@@ -37,6 +37,6 @@ class MyReporter implements Reporter {
 
     onEnd(result: FullResult) {
         console.log(`Finished the Suite: ${result.status}`)
-    }
+    }*/
 }
 export default MyReporter;
