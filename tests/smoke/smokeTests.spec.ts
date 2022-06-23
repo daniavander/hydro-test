@@ -4,7 +4,7 @@ import { allure } from "allure-playwright";
 import { expect } from "@fixtures/basePages"
 import test from "@fixtures/basePages"
 
-import { siteNames, entities, caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames , raMenuNames , frequency, riskMainTypes } from "@fixtures/constans"
+import { siteNames, entities, caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames, raMenuNames, frequency, riskMainTypes } from "@fixtures/constans"
 import { AddUserAction } from '@pages/common/AddUserAction';
 import { CaseList } from '@pages/CaseList';
 import { CommonFunc } from '@pages/common/CommonFuncs';
@@ -145,7 +145,7 @@ test.describe("Smoke test pack", () => {
     expect(page.locator("text='Discard']")).toHaveCount(0)
     //checklist status is ongoing step 11
     await surveyPage.checkOpenedSurvey("Ongoing", "No")
-    
+
     await expect(page.locator("data-testid=case-status")).toContainText('Completed')
 
     //open s and a step 14
@@ -214,7 +214,7 @@ test.describe("Smoke test pack", () => {
     }
 
     expect(page.locator(".obs_csstable"))
-    await commonFunc.searchCaseWithFilters(siteNames.auto , entities.ife)
+    await commonFunc.searchCaseWithFilters("Cases", siteNames.auto, entities.ife)
     //step 6
     await page.click("[title='Edit filters']")
     //this is in the custom filter
@@ -234,10 +234,10 @@ test.describe("Smoke test pack", () => {
 
     //step 9 check the result list that IFE is in first element of the list
     // click to be list of elements
-    
+
     await page.click("[aria-label='list']")
 
-    await filter.checkFilterTabs(siteNames.auto , entities.ife, "Kovács Dániel (kovacs.daniel@avander.hu)", "lastday")
+    await filter.checkFilterTabs(siteNames.auto, entities.ife, "Kovács Dániel (kovacs.daniel@avander.hu)", "lastday")
 
     await page.waitForTimeout(3000)
     //step 10 reset filters and check that the full list is displayed
@@ -277,7 +277,7 @@ test.describe("Smoke test pack", () => {
     //step 3
     expect(page.locator(".obs_csstable"))
     //step 4
-    await commonFunc.searchCaseWithFilters("Extrusion-Hungary-Szekesfehervar", "Signature")
+    await commonFunc.searchCaseWithFilters("Cases", "Extrusion-Hungary-Szekesfehervar", "Signature")
     //step 6 open custom filter tab
     await page.click("[title='Edit filters']")
 
@@ -324,21 +324,20 @@ test.describe("Smoke test pack", () => {
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
   })
 
-  test('31053 - Smoke test - Create new Risk Assessment without Risk @risk', async ({ dashBoard, page,addUserAction, navBar, raPage }) => {
-        await dashBoard.sidebarIsVisible()
+  test('31053 - Smoke test - Create new Risk Assessment without Risk @risk', async ({ dashBoard, page, commonFunc, navBar, raPage }) => {
+    await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
-
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Risk Assessment")
-    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
-    
-    await raPage.addNewRA("Automated RA" , "Automation tests", departments.hse)
+    //await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
+
+    await raPage.addNewRA("Automated RA", "Automation tests", departments.hse)
     //step 5
-    await raPage.checkRA("Automated RA" , "Published" , siteShortNames.automation, departments.hse)
+    await raPage.checkRA("Automated RA", "Published", siteShortNames.automation, departments.hse)
     //await raPage.fillRA("Automated desc" , "Extrusion-Hungary-Szekesfehervar" , "Administration", ["Add obligatory","aa"])
-    await raPage.fillRA(stringConstants.description , "Add obligatory", "aa" , ["Add obligatory","aa"])
+    await raPage.fillRA(stringConstants.description, "Add obligatory", "aa", ["Add obligatory", "aa"])
     //affected group frequenc -step 7
-    await raPage.addRADetails(raMenuNames.seg , "Management" , frequency.daily , "2")
+    await raPage.addRADetails(raMenuNames.seg, "Management", frequency.daily, "2")
     //todo itt kéne a változó paraméter szám mert tök felesleges többet megadni csak egy kell
     //add sign - step 8
     await raPage.addRADetails(raMenuNames.signs)
@@ -348,41 +347,44 @@ test.describe("Smoke test pack", () => {
     await raPage.addRADetails(raMenuNames.steps)
     // add conected person - step 11
     await raPage.addRADetails(raMenuNames.connectedperson)
-    
+
     // add new task page - step 12 , 13 , 14
-    await raPage.addNewTaskToRa("automation RA task" , "automation RA task desc",frequency.monthly)
+    await raPage.addNewTaskToRa("automation RA task", "automation RA task desc", frequency.monthly)
     // add safety sign to rask - step 15
     await raPage.addRADetails(raMenuNames.signs)
     // add woc to task - step 16
     await raPage.addRADetails(raMenuNames.woc)
     //ad step to task - step 17
     await raPage.addRADetails(raMenuNames.steps)
-    
+
     // végre step 18 save and publish
     await page.click(".survey-woc-editor-save-publish")
     //check the status is published
     await expect(page.locator("//p[@title='Published']")).toHaveText("Published")
+
+    // delete the RA after published
+    await page.click("//div[@title='Automated RA']")
+    await raPage.addRADetails(raMenuNames.delete)
   })
 
 
   test('31056 - Smoke test - Create new Risk Assessment with Risk @risk', async ({ dashBoard, page, navBar, raPage }) => {
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
-
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Risk Assessment")
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
-    
-    await raPage.addNewRA("Automated RA" , "Automation tests", departments.hse)
-    
+
+    await raPage.addNewRA("Automated RA", "Automation tests", departments.hse)
+
     //affected group frequenc - step 10
-    await raPage.addRADetails(raMenuNames.seg , "Management" , frequency.daily , "2")
+    await raPage.addRADetails(raMenuNames.seg, "Management", frequency.daily, "2")
     //add hazard - step 6
     await raPage.addRADetails(raMenuNames.hazard)
     await raPage.addSingleRisk(riskMainTypes.asbestos, riskMainTypes.asbestos)
     //check details - step 7
-    await raPage.checkRiInRa(riskMainTypes.asbestos, "Automation tests", siteShortNames.automation, departments.hse,"Asbestos")
-    
+    await raPage.checkRiInRa(riskMainTypes.asbestos, "Automation tests", siteShortNames.automation, departments.hse, "Asbestos")
+
 
     // add inherent risk - step 11
     //inside hazard
@@ -405,13 +407,13 @@ test.describe("Smoke test pack", () => {
     /*
     await page.waitForTimeout(3000);
     await raPage.addExistingMeasure("Test Automation Question","PPE")*/
-    
+
     // step 14
-    await page.fill(".details-textarea","Test Automation Risk Description")
+    await page.fill(".details-textarea", "Test Automation Risk Description")
 
     //todo befejezni
     //add new action - step 15,16  -  inside risk
-    await raPage.addNewActionInRisk("risk action desc","risk action inst", "Kovács Dániel","Add obligatory","aa")
+    await raPage.addNewActionInRisk("risk action desc", "risk action inst", "Kovács Dániel", "Add obligatory", "aa")
 
     // add checklist step 17,18
     await raPage.addChecklistToRisk("0or1")
@@ -420,15 +422,12 @@ test.describe("Smoke test pack", () => {
     // save and publish step 20
     await page.click(".survey-woc-editor-save-publish")
 
-    await raPage.checkRA("Automated RA" , "Published" , siteShortNames.automation, departments.hse)
+    await raPage.checkRA("Automated RA", "Published", siteShortNames.automation, departments.hse)
     await expect(page.locator("//p[@title='Published']")).toHaveText("Published")
-  
 
-
-
-
-
-    
+    // delete the RA after published
+    await page.click("//div[@title='Automated RA']")
+    await raPage.addRADetails(raMenuNames.delete)
   })
 
 })

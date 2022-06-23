@@ -1,10 +1,11 @@
 import { Page, expect } from "@playwright/test";
 
-export class RaPage {
-    readonly page: Page
+import { Navbar } from "@pages/common/Navbar.page"
+
+export class RaPage extends Navbar{
 
     constructor(page: Page) {
-        this.page = page
+        super(page)
     }
 
     async addNewRA(raName: string, siteName: string, department: string) {
@@ -74,13 +75,14 @@ export class RaPage {
                 await expect(this.page.locator(".aq-checklist-row.ims_flex")).toBeVisible()
                 break
             case "Connected persons":
+                //await this.page.pause()
                 await this.page.click("text='Please choose...'")
                 await this.page.click("text='Interviewed'")
                 await this.page.fill("//input[@placeholder='Add related person']", "ImsTestGlobalAdmin3")
                 await this.page.click("//div[contains(@class,'user-img f')]")
-                await this.page.click("//button[text()='Ok']")
-                //add people details ok
-                await this.page.click("//button[text()='Ok']")
+                await this.page.click('text=Ok')
+                //add people details popup ok
+                await this.page.click('text=Ok')
                 await expect(this.page.locator("//h2[@title='Connected persons']")).toBeVisible()
                 await expect(this.page.locator(".sub-menu-header")).toBeVisible()
                 break
@@ -90,7 +92,8 @@ export class RaPage {
                 break
             case "QA":
                 break
-            case "HSE":
+            case "Delete":
+                await this.page.click("//button[text()=' Yes, delete all']")
                 break
             default:
                 throw new Error("This is not a valid RA function name...")
@@ -194,4 +197,5 @@ export class RaPage {
         //deadline missing
         expect(await this.page.locator("//div[@title='ImsTestGlobalAdmin3 (ImsTestGlobalAdmin3@avander.hu) ']").isVisible())
     }
+
 }
