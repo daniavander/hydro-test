@@ -257,7 +257,7 @@ test.describe("Smoke test pack", () => {
     //step 3
     expect(page.locator(".obs_csstable"))
     //step 4
-    await commonFunc.searchCaseWithFilters("Cases", "Extrusion-Hungary-Szekesfehervar", "Signature")
+    await commonFunc.searchCaseWithFilters("Cases", siteNames.auto, "Signature")
     //step 6 open custom filter tab
     await page.click("[title='Edit filters']")
 
@@ -277,23 +277,20 @@ test.describe("Smoke test pack", () => {
     await page.click("text='Apply filters'")
 
     //step 10 check the result list that Sign & Archive is in first element of the list
-    //if new icon usage-> await getTexts.getDivElementTextOnListPage("ims_block10 obs_verticalcentered", "sign&archive", "Actions")
     // click to be list of elements
     await page.click("[aria-label='list']")
     await getTexts.getDivElementTextOnListPage("ims_ellipsis ng-star-inserted", "Conclude a completed case by a final evaluation and approval.", "Actions")
 
     //check the previously selected filter is in the filter bar
-    expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeVisible()
-
-    expect(page.locator("//div[@title='Type of action: Signature']")).toBeVisible()
-    //expect(page.locator("//div[@title='Last day: true']")).toBeVisible()
+    expect(page.locator("data-testid=detailedfilter.label.site: Automation tests")).toBeVisible()
+    expect(page.locator("data-testid=detailedfilter.action.label.entity: Signature")).toBeVisible()
+    expect(page.locator("data-testid=filter.tag.lastday: true")).toBeVisible()
 
     await page.waitForTimeout(3000)
     await page.click("#reset-filter-button")
     await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('All actions')
     //available in dom but hidden
-    expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeHidden()
-
+    expect(page.locator("data-testid=detailedfilter.label.site: Automation tests")).toBeHidden()
   })
 
   test('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
