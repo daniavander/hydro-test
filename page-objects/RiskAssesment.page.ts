@@ -128,16 +128,9 @@ export class RaPage extends Navbar{
         const depname = this.page.locator("//span[text()='" + depName + "']")
         await expect(depname).toHaveText(depName)
 
-        //https://github.com/microsoft/playwright/discussions/14785
-        //todo data test id: Product Backlog Item 33498: Automated test - data-testid for rusk save and publish
-        expect(await this.page.locator("data-testid=risk-save-close").isDisabled())
-        expect(await this.page.locator("data-testid=risk-save-close").isEnabled())
-        //const myButton = this.page.locator('button.survey-woc-editor-save-publish.sop-hazard-add-btn')
-        //await expect(myButton).toBeEnabled();
-        //await expect(myButton).toBeDisabled();
+        await expect(this.page.locator("data-testid=risk-save-close")).toHaveClass('survey-woc-editor-save-publish sop-hazard-add-btn disabled ng-star-inserted')
 
         // check the hazard type - step 8
-        await this.page.pause()
         const riskname = this.page.locator("data-testid=" + riskName + "")
         await expect(riskname).toHaveText(riskName)
         //matrix is displayed

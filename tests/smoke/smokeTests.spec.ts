@@ -5,9 +5,6 @@ import { expect } from "@fixtures/basePages"
 import test from "@fixtures/basePages"
 
 import { siteNames, entities, caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames, raMenuNames, frequency, riskMainTypes } from "@fixtures/constans"
-import { AddUserAction } from '@pages/common/AddUserAction';
-import { CaseList } from '@pages/CaseList';
-import { CommonFunc } from '@pages/common/CommonFuncs';
 
 //test.describe.configure({ mode: 'parallel' })
 test.use({
@@ -234,7 +231,6 @@ test.describe("Smoke test pack", () => {
 
     //step 9 check the result list that IFE is in first element of the list
     // click to be list of elements
-
     await page.click("[aria-label='list']")
 
     await filter.checkFilterTabs(siteNames.auto, entities.ife, "Kovács Dániel (kovacs.daniel@avander.hu)", "lastday")
@@ -245,26 +241,10 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Cases')
     //available in dom but hidden
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeHidden()
-
-    //omly in dom
-    /*expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeHidden()
-    expect(page.locator("(//div[@title='Last day: true']//span)[1]")).toBeVisible()*/
-
-    ////////////////////////////////////////////////////
-    //the result depends on trhe previous test case
-    //31034 - Smoke test - Create a Serious Injury case
-    ////////////////////////////////////////////////////
-
-
-    /*const elemTextValue = await page.locator("(//span[text()='Extrusion-Hungary-Szekesfehervar'])[3]").allTextContents()
-    console. log(elemTextValue)*/
-
-
   })
 
-  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
-    //await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
       console.log("try to reset the filters")
@@ -375,7 +355,7 @@ test.describe("Smoke test pack", () => {
     await navBar.clickOnTopMenu("Risk Assessment")
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
 
-    await raPage.addNewRA("Automated RA", "Automation tests", departments.hse)
+    await raPage.addNewRA("Automated RA with Risk", "Automation tests", departments.hse)
 
     //affected group frequenc - step 10
     await raPage.addRADetails(raMenuNames.seg, "Management", frequency.daily, "2")
@@ -421,12 +401,13 @@ test.describe("Smoke test pack", () => {
     await page.click("data-testid=risk-save-close")
     // save and publish step 20
     await page.click(".survey-woc-editor-save-publish")
+    await expect(page.locator(".survey-woc-editor-save-publish")).toHaveClass('survey-woc-editor-save-publish')
 
     await raPage.checkRA("Automated RA", "Published", siteShortNames.automation, departments.hse)
     await expect(page.locator("//p[@title='Published']")).toHaveText("Published")
 
     // delete the RA after published
-    await page.click("//div[@title='Automated RA']")
+    await page.click("//div[@title='Automated RA with Risk']")
     await raPage.addRADetails(raMenuNames.delete)
   })
 
