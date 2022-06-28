@@ -11,10 +11,8 @@ export class Filter {
     }
     async checkFilterTabs(site: string, entity: string, addBy: string, time: string) {
         //await this.page.click("data-testid='" + filter1 +'"')
-        await this.page.pause()
         expect (this.page.locator('data-testid=detailedfilter.label.site: ' + site + '')).toBeEnabled()
         expect (this.page.locator('data-testid=detailedfilter.label.entity: ' + entity + '')).toBeEnabled()
-        await this.page.pause()
         expect (this.page.locator('data-testid=detailedfilter.label.myrecords: ' + addBy + '')).toBeEnabled()
         expect (this.page.locator('data-testid=filter.tag.' + time + ': true')).toBeEnabled()
 

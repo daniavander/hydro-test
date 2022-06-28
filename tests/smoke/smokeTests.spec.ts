@@ -130,7 +130,6 @@ test.describe("Smoke test pack", () => {
     await casePage.addSurvey("Checklist", "0or1", 1)
 
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
-    await page.pause()
     //case id contain HUS string
     await expect(page.locator('data-testid=case-id')).toContainText('E2E-22')
 
@@ -156,7 +155,6 @@ test.describe("Smoke test pack", () => {
     await page.waitForTimeout(2000)
     await page.hover("data-testid=case-submenu")
     //dlete btn is disabled, because the status is archive
-    await page.pause()
     expect(page.locator("//button[text()=' Delete ']").isDisabled())
 
     //reopen
@@ -178,7 +176,6 @@ test.describe("Smoke test pack", () => {
     await dashBoard.topBarIsAvailable()
     await navBar.clickOnTopMenu("Add New Case")
     await casePage.setSite(siteNames.auto)
-    await page.pause()
     await casePage.setDepartment(departments.hse)
     await casePage.setCaseType("ife", secLevels.low)
     //await casePage.addReportedBy("Kovács Dániel")
@@ -197,7 +194,17 @@ test.describe("Smoke test pack", () => {
   })
 
   test.use({ viewport: { width: 1600, height: 900 } })
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, filter, commonFunc, page, caseList }) => {
+
+
+  test('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+    // it is work fine if the @cases tests are run previously
+    await navBar.clickOnTopMenu("Cases")
+    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description IFE delete", "Delete")
+    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description serious injury delete", "Delete")
+    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
+  })
+
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, filter, commonFunc, page, caseList }) => {
 
     //test.use({ viewport: { width: 1600, height: 900 } })
 
@@ -241,9 +248,12 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Cases')
     //available in dom but hidden
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeHidden()
+
+    const response = await request.get(`${baseURL}pi/action?queryString=`)
+    expect(response.status()).toBe(200)
   })
 
-  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
@@ -291,14 +301,10 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('All actions')
     //available in dom but hidden
     expect(page.locator("data-testid=detailedfilter.label.site: Automation tests")).toBeHidden()
-  })
 
-  test('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
-    // it is work fine if the @cases tests are run previously
-    await navBar.clickOnTopMenu("Cases")
-    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description IFE delete", "Delete")
-    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description serious injury delete", "Delete")
-    await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
+    const response = await request.get(`${baseURL}pi/action?queryString=`)
+    expect(response.status()).toBe(200)
+
   })
 
   test('31053 - Smoke test - Create new Risk Assessment without Risk @risk', async ({ dashBoard, page, commonFunc, navBar, raPage }) => {
