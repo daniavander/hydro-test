@@ -33,8 +33,7 @@ jobs:
   - script: npx playwright install-deps chromium
 
     displayName: "Execute test"
-    condition: succeededOrFailed()
-
+    condition: succeeded()
   - script: npm run smoke
 
   - task: PythonScript@0
@@ -44,19 +43,6 @@ jobs:
         status=$(find test-results -type f | wc -l)
         echo $status
         if [ "$status" -eq "0" ]; then echo "Passed"; exit 0; else exit 1; fi
-
-
-  #- script: npm run generate
-
- #  displayName: "Run test"
- #  condition: succeededOrFailed()
- #- script: npm run generate
-  
-
-  #- task: AllureGenerate@1
-  #  inputs:
-  #    resultsDir: 'allure-results'
-  #    targetDir: 'allure-report/$(Build.BuildNumber)'
 
   - task: PublishHtmlReport@1
     condition: succeededOrFailed()
