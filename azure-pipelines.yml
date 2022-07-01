@@ -29,8 +29,8 @@ jobs:
   - script: which node
 
     displayName: "Install framework"
-  - script: npm install
-  #- script: npx playwright install --with-deps
+  #- script: npm install
+  - script: npx playwright install-deps chromium
 
     displayName: "Execute test"
     condition: succeededOrFailed()
