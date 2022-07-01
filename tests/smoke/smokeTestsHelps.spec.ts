@@ -5,10 +5,10 @@ import { expect } from "@fixtures/basePages"
 import test from "@fixtures/basePages"
 
 import { siteNames, entities, caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames, raMenuNames, frequency, riskMainTypes } from "@fixtures/constans"
-import { AddUserAction } from '@pages/common/AddUserAction';
-import { CaseList } from '@pages/CaseList';
-import { CommonFunc } from '@pages/common/CommonFuncs';
 
+/// <reference path="@fixtures/basePages" />
+
+namespace Constants{
 //test.describe.configure({ mode: 'parallel' })
 test.use({
   baseURL: "https://google.com"
@@ -59,4 +59,4 @@ test.describe("Smoke test pack", () => {
 
 
 })
-
+}

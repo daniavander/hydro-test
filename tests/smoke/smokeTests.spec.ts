@@ -5,7 +5,7 @@ import { expect } from "@fixtures/basePages"
 import test from "@fixtures/basePages"
 
 import { siteNames, entities, caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames, raMenuNames, frequency, riskMainTypes } from "@fixtures/constans"
-
+//// <reference path="@fixtures/basePages" />
 //test.describe.configure({ mode: 'parallel' })
 test.use({
   baseURL: "https://google.com"
@@ -26,9 +26,7 @@ test.describe("Smoke test pack", () => {
   test.afterAll(async ({ browser }) => {
     await browser.close()
   })
-  test('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
-    allure.epic("Responses");
-    allure.story("Activity list is loaded fine");
+  test.only('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
 
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
@@ -38,7 +36,7 @@ test.describe("Smoke test pack", () => {
     const activitiesHeader = page.locator('.header.header-style2');
     await expect(activitiesHeader).toHaveClass("row obs_flex obs_flexgrow1 header header-style2", { timeout: 30000 });
     const response = await request.get(`${baseURL}pi/activity?queryString=`)
-    expect(response.status()).toBe(200)
+    expect(response.status()).toBe(500)
   })
 
   test('31036 - Smoke test - Reports page @response', async ({ dashBoard, navBar, page, request }) => {
@@ -193,9 +191,6 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Close')
   })
 
-  test.use({ viewport: { width: 1600, height: 900 } })
-
-
   test('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     // it is work fine if the @cases tests are run previously
     await navBar.clickOnTopMenu("Cases")
@@ -307,6 +302,8 @@ test.describe("Smoke test pack", () => {
 
   })
 
+  
+  test.use({ viewport: { width: 1600, height: 900 } })
   test('31053 - Smoke test - Create new Risk Assessment without Risk @risk', async ({ dashBoard, page, commonFunc, navBar, raPage }) => {
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")

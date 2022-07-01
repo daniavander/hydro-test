@@ -12,16 +12,18 @@ class MyReporter implements Reporter {
             console.log(`Starting step title ${step.title}`);
         }
     }
-    /*onStepEnd?(test: TestCase, result: TestResult, step: TestStep) {
+    onStepEnd?(test: TestCase, result: TestResult, step: TestStep) {
+        let isFailed:boolean = false;
         if (step.category === "test.step") {
             console.log(`Result of Step ${step.title} with status ${result.status}`);
         }
         if (step.error) {
+            isFailed: true
             console.log(step.error.message);
         }
         
     }
-    onTestBegin(test: TestCase, result: TestResult) {
+    /*onTestBegin(test: TestCase, result: TestResult) {
         console.log(`ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ`)
         console.log(`Starting test ${test.title}`);
     }

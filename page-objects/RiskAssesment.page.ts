@@ -128,6 +128,7 @@ export class RaPage extends Navbar{
         const depname = this.page.locator("//span[text()='" + depName + "']")
         await expect(depname).toHaveText(depName)
 
+        //todo tombbé áttenni  ?
         await expect(this.page.locator("data-testid=risk-save-close")).toHaveClass('survey-woc-editor-save-publish sop-hazard-add-btn disabled ng-star-inserted')
 
         // check the hazard type - step 8
