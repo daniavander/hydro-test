@@ -10,8 +10,8 @@ const config: PlaywrightTestConfig = {
   timeout: 250000,        // Timeout for each test
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
-  reporter: [['html'] , ["json", { outputFolder: 'my-allure-results' }] , ['allure-playwright'] , ['./my-awesome-reporter.ts'] , ["line"]],
-  //reporter: [['html'] , ['./my-awesome-reporter.ts'] , ["line"]],
+  //reporter: [['html'] , ["json", { outputFolder: 'my-allure-results' }] , ['allure-playwright'] , ['./my-awesome-reporter.ts'] , ["line"]],
+  reporter:'./my-awesome-reporter.ts',
   //reporter: [['html'], ['./my-awesome-reporter.ts'], ['allure-playwright']],
   // See: https://playwright.dev/docs/api/class-testconfig
   outputDir: 'test-results/',

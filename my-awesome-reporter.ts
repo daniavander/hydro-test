@@ -18,8 +18,9 @@ class MyReporter implements Reporter {
             console.log(`Result of Step ${step.title} with status ${result.status}`);
         }
         if (step.error) {
-            isFailed: true
+            isFailed= true
             console.log(step.error.message);
+            console.log(isFailed);
         }
         
     }
