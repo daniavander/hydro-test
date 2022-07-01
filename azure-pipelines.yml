@@ -24,25 +24,25 @@ jobs:
   steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '16.x'
+      versionSpec: '14.x'
     displayName: 'Install Node.js'
   - script: which node
 
     displayName: "Install framework"
   #- script: npm install
-  - script: npx playwright install-deps chromium
+  - script: npx playwright install
 
     displayName: "Execute test"
     condition: succeeded()
   - script: npm run smoke
 
-  - task: PythonScript@0
-    inputs:
-      scriptSource: 'inline'
-      script: |
-        status=$(find test-results -type f | wc -l)
-        echo $status
-        if [ "$status" -eq "0" ]; then echo "Passed"; exit 0; else exit 1; fi
+#  - task: PythonScript@0
+#    inputs:
+#      scriptSource: 'inline'
+#      script: |
+#        status=$(find test-results -type f | wc -l)
+#        echo $status
+#        if [ "$status" -eq "0" ]; then echo "Passed"; exit 0; else exit 1; fi
 
   - task: PublishHtmlReport@1
     condition: succeededOrFailed()
