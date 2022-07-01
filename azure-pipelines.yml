@@ -16,7 +16,7 @@ schedules:
     include:
     - main
   always: true
-    
+
 jobs:
 - job: AutomatedTests
   timeoutInMinutes: 30 # how long to run the job before automatically cancelling
@@ -35,6 +35,16 @@ jobs:
     displayName: "Execute test"
     condition: succeededOrFailed()
   - script: npm run smoke
+
+  - task: PythonScript@0
+    inputs:
+      scriptSource: 'inline'
+      script: |
+        status=$(find test-results -type f | wc -l)
+        echo $status
+        if [ "$status" -eq "0" ]; then echo "Passed"; exit 0; else exit 1; fi
+
+
   #- script: npm run generate
 
  #  displayName: "Run test"
