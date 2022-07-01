@@ -26,7 +26,7 @@ test.describe("Smoke test pack", () => {
   test.afterAll(async ({ browser }) => {
     await browser.close()
   })
-  test.only('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
+  test('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
 
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
@@ -36,7 +36,7 @@ test.describe("Smoke test pack", () => {
     const activitiesHeader = page.locator('.header.header-style2');
     await expect(activitiesHeader).toHaveClass("row obs_flex obs_flexgrow1 header header-style2", { timeout: 30000 });
     const response = await request.get(`${baseURL}pi/activity?queryString=`)
-    expect(response.status()).toBe(50)
+    expect(response.status()).toBe(200)
   })
 
   test('31036 - Smoke test - Reports page @response', async ({ dashBoard, navBar, page, request }) => {

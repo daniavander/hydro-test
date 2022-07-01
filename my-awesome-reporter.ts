@@ -2,8 +2,8 @@ import { FullConfig, FullResult, Reporter, Suite, TestCase, TestError, TestResul
 
 class MyReporter implements Reporter {
     onBegin(config: FullConfig, suite: Suite) {
-        console.log(`Starting the run with ${suite.allTests().length} tests`);
-        //console.log(`>>> Suite title: ${suite.title} <<<`)
+        //console.log(`Starting the run with ${suite.allTests().length} tests`);
+        console.log(`>>> Suite title: ${suite.title} <<<`)
     }
     onStepBegin?(test: TestCase, result: TestResult, step: TestStep) {
         console.log(`STEP ${step.title}`);
@@ -24,12 +24,11 @@ class MyReporter implements Reporter {
         }
         
     }
-    /*onTestBegin(test: TestCase, result: TestResult) {
-        console.log(`ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ`)
-        console.log(`Starting test ${test.title}`);
+    onTestBegin(test: TestCase, result: TestResult) {
+        console.log(`>>>>>>>>>>>>>>>>>>>>>>Starting test ${test.title}`);
     }
 
-    onTestEnd(test: TestCase, result: TestResult) {
+    /*onTestEnd(test: TestCase, result: TestResult) {
         console.log(`Finished test ${test.title} - ${result.status}`);
         if (result.error) {
             console.log("Error happened -> ")
