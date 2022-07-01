@@ -143,10 +143,12 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("data-testid=case-status")).toContainText('Completed')
 
     //open s and a step 14
-    await page.locator("text=' Sign & Archive '").isEnabled()
-    await page.click("text=' Sign & Archive '")
+    await page.locator("text=Sign & Archive").isEnabled()
+    await page.pause()
+    await page.click("//p[text()=' Sign & Archive ']")
     await addUserAction.addTags("Add obligatory", "aa")
     await page.click('text=Mark as Completed')
+    await page.waitForTimeout(2000);
     expect(page.locator("data-testid=case-status")).toContainText('Archive')
 
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
