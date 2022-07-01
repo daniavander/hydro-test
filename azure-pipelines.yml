@@ -25,12 +25,19 @@ jobs:
   - task: NodeTool@0
     inputs:
       versionSpec: '14.x'
+      failOnStderr: true
     displayName: 'Install Node.js'
   - script: which node
 
-    displayName: "Install framework"
-  - script: npm install
+  - task: CmdLine@2
+    inputs:
+      script: npm i && npx playwright install
+      failOnStderr: true
+
+  #  displayName: "Install framework"
+  #- script: npm install
   #- script: npx playwright install --with-deps
+
 
     displayName: "Execute test"
     condition: succeeded()
