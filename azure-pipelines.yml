@@ -29,8 +29,8 @@ jobs:
   - script: which node
 
     displayName: "Install framework"
-  #- script: npm install
-  - script: npx playwright install
+  - script: npm install
+  #- script: npx playwright install --with-deps
 
     displayName: "Execute test"
     condition: succeeded()
