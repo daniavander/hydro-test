@@ -15,13 +15,13 @@ test.describe("Smoke test pack", () => {
   const baseURL = "https://stage-app-avander-ims-ui.azurewebsites.net/"
   //const baseURL = "https://ims2uat.hydro.com/"
 
-  test.beforeEach(async ({ loginPage, page, dashBoard }) => {
+  test.beforeEach(async ({ loginPage, page }) => {
     await page.goto(baseURL, { timeout: 100000 })
     //fyi comment out when run locally
     await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }, testInfo) => {
-    await page.waitForTimeout(6000)
+    await page.waitForTimeout(4000)
   })
   test.afterAll(async ({ browser }) => {
     await browser.close()
@@ -144,7 +144,6 @@ test.describe("Smoke test pack", () => {
 
     //open s and a step 14
     await page.locator("text=Sign & Archive").isEnabled()
-    await page.pause()
     await page.click("//p[text()=' Sign & Archive ']")
     await addUserAction.addTags("Add obligatory", "aa")
     await page.click('text=Mark as Completed')
@@ -193,7 +192,7 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Close')
   })
 
-  test('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     // it is work fine if the @cases tests are run previously
     await navBar.clickOnTopMenu("Cases")
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description IFE delete", "Delete")

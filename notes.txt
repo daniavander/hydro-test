@@ -1,0 +1,97 @@
+npm init
+
+[code formatter]
+npm install prettier
+
+[install steps]
+npm install @playwright/test
+npx playwright install  (install browsers)
+
+[run]
+npx playwright test
+
+[update playwright]
+npx playwright install
+npm i -D @playwright/test
+
+[shpw report]
+npx playwright show-report
+
+[add headed browser]
+npx playwright test --headed --browser=firefox
+
+[run only one test file]
+npx playwright test tests/example.spec.ts
+
+[run with tag]
+npx playwright test --grep '@mytag'
+
+[run spec browwser from config]
+npx playwright test --config=playwright.config.ts --project=Webkit
+
+[add reporterr]
+npx playwright test --config=playwright.config.ts --project=Webkit --reporter=line/list/dot/junit/html
+
+[start in debugger]
+npx playwright codegen https://stage-app-avander-ims-ui.azurewebsites.net/app/
+
+[run with script]
+npm run $scriptname
+
+[update snapshots]
+npm run $scriptname -- --update-snapshots
+
+[save auth cookie to json]
+playwright codegen --save-storage auth.json {url}
+
+[just open and simulate a phone]
+npx playwright open --device="iPhone 11" wikipedia.org
+
+[just take screenshot from coomandline]
+npx playwright screenshot --device="iPhone 11" --color-scheme=dark --wait-for-timeout=3000 twitter.com twitteriphone.png
+
+[change timezone and language]
+npx playwright open --timezone="Europe/Rome" --lang="it-IT" google.com
+
+[allure report]
+- install - set JAVA_HOME
+npm i -d experimental-allure-playwright
+npm i -d allure-coomandline
+- use
+npx playwright test (or testscriptname) --reporter=experimental-allure-playwright
+npx allure generate ./allure-results --clean
+npx allure open ./allure-report
+
+[mocha playright more reporter]
+npm i mocha chai playwright-core
+
+[terries workers number]
+--repeat-each 2 --max-failures 3 --workers=1
+
+[selectors]
+- text=some text
+- css
+     button
+     #id
+     .class
+
+- only visible css selector
+await page.clik(".submit-button:visible")
+- combinations
+.click(#username .userclass)
+- xpath
+.click("//xpath")
+
+
+
+//////////////////////////////type /script///////////////////////////////
+! összefűzésnél fordított aposztróf kell! ez->   ``
+
+[timeoutig vár kilépés előtt]
+await page.waitForTimeout(5000)
+
+[fulli parallel in for the file]
+test.describe.configure({mode: 'parallel'})
+
+[soft exceptions - fail a step but the test continue]
+expect.soft()

@@ -10,7 +10,7 @@ const config: PlaywrightTestConfig = {
   timeout: 250000,        // Timeout for each test
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
-  reporter: [['html'] , ['allure-playwright'] , ['./my-awesome-reporter.ts'] , ["line"]],
+  reporter: [['html'], ['allure-playwright'], ['./my-awesome-reporter.ts'], ["line"]],
   //reporter:'./my-awesome-reporter.ts',
   //reporter: [['html'], ['./my-awesome-reporter.ts'], ['allure-playwright']],
   // See: https://playwright.dev/docs/api/class-testconfig
@@ -20,7 +20,7 @@ const config: PlaywrightTestConfig = {
   use: {
     viewport: { width: 1250, height: 900 },
     ignoreHTTPSErrors: true,
-    trace: 'retain-on-failure',
+    trace: 'on',
     video: 'on',
     screenshot: 'on',
     actionTimeout: 20 * 1000,
@@ -33,29 +33,29 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       // Desktop Chromium
-        name: 'chrome',
-        use: {
-          browserName: 'chromium',
-          headless: true,
-          // Can be "chrome", "msedge", "chrome-beta", "msedge-beta", "msedge-dev", etc. Test against chrome channel.
-          channel: 'chrome',
-          launchOptions: {
-            args: ['--no-sandbox', '--disable-dev-shm-usage'],
-            headless: false,
-            //devtools: true,
-            slowMo: 100,
-          },
+      name: 'chrome',
+      use: {
+        browserName: 'chromium',
+        headless: true,
+        // Can be "chrome", "msedge", "chrome-beta", "msedge-beta", "msedge-dev", etc. Test against chrome channel.
+        channel: 'chrome',
+        launchOptions: {
+          args: ['--no-sandbox', '--disable-dev-shm-usage'],
+          headless: false,
+          //devtools: true,
+          slowMo: 100,
+        },
       }
     },
     {
       name: "webkit",
-      use:{
+      use: {
         browserName: "webkit"
       }
     },
     {
       name: "firefox",
-      use:{
+      use: {
         browserName: "firefox"
       }
     }

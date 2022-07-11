@@ -1,0 +1,11 @@
+böngésző konzolban próbálni
+
+[get lsit,element value]
+document.querySelector(#id).value
+document.querySelector(#id).getAttribute("value")
+
+[list of elements more class]
+document.querySelector(".ims_block18.obs_verticalcentered.obs_clickable")
+
+[hover az element with own tag name]
+document.querySelector('[data-testid="case-submenu"]').click();

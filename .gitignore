@@ -26,8 +26,6 @@ typings/
 lib/*.js
 tests/*.js
 *.map
-notes.txt
-notes-js.txt
 .prettierrc
 yarn.lock
 *.png
