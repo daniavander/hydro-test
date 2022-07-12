@@ -14,10 +14,9 @@ export class SurveyPage {
     }
 
     async checkOpenedSurvey(status: string, yesOrNo:string) {
-        //await this.page.pause()
         await this.page.click("text=0or1")
         //status check
-        await expect(this.page.locator("//div[@class='ml-2 ims_color-ims-blue']")).toContainText(status)
+        await expect(this.page.locator(".flex.py-2.px-3.bg-mid-blue.ng-star-inserted")).toContainText(status)
         //fill textarea
         //await this.page.fill("//input[@placeholder='Write down your answer here']","automated risk checklist text")
         await this.page.click("(//span[@title='" + yesOrNo + "'])[1]")

@@ -60,7 +60,7 @@ test.describe("Smoke test pack", () => {
   })
 
 
-  test('31034 - Smoke test - Create a Serious Injury case @cases', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, getTexts, page }) => {
+  test.skip('31034 - Smoke test - Create a Serious Injury case @cases', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, getTexts, page }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -126,7 +126,8 @@ test.describe("Smoke test pack", () => {
 
     //add survey
     await casePage.addSurvey("Checklist", "0or1", 1)
-
+    //await page.waitForSelector("data-testid=case-status")
+    await page.waitForTimeout(25000);
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
     //case id contain HUS string
     await expect(page.locator('data-testid=case-id')).toContainText('E2E-22')
@@ -143,8 +144,10 @@ test.describe("Smoke test pack", () => {
     await expect(page.locator("data-testid=case-status")).toContainText('Completed')
 
     //open s and a step 14
+    //todo  due to cache
+    await page.waitForTimeout(3000)
     await page.locator("text=Sign & Archive").isEnabled()
-    await page.click("//p[text()=' Sign & Archive ']")
+    await page.click("text=Sign & Archive")
     await addUserAction.addTags("Add obligatory", "aa")
     await page.click('text=Mark as Completed')
     await page.waitForTimeout(2000);
@@ -153,11 +156,11 @@ test.describe("Smoke test pack", () => {
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
     await page.waitForTimeout(2000)
     await page.hover("data-testid=case-submenu")
-    //dlete btn is disabled, because the status is archive
+    //delete btn is disabled, because the status is archive
     expect(page.locator("//button[text()=' Delete ']").isDisabled())
 
     //reopen
-    await page.click("text=' Sign & Archive '")
+    await page.click("text=Sign & Archive")
     await page.click("//button[text()=' Reopen action ']")
 
     //we can delete the case after reopen it step 15
@@ -167,7 +170,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
-  test('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ addReportedBy, caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
+  test.skip('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ addReportedBy, caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -184,6 +187,7 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Save')
 
     //ghost card after save is visible
+    await page.pause()
     await getTexts.getGhostCardTitle("investigation", "investigation")
     await (await page.waitForSelector('.p-state-filled')).isVisible()
     await addUserAction.addNewAction("description", "instruction", "ImsTestGlobalAdmin3", "Add obligatory", "aa")
@@ -200,7 +204,7 @@ test.describe("Smoke test pack", () => {
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, filter, commonFunc, page, caseList }) => {
+  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, filter, commonFunc, page, caseList }) => {
 
     //test.use({ viewport: { width: 1600, height: 900 } })
 

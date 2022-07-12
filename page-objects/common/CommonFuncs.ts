@@ -22,7 +22,7 @@ export class CommonFunc extends Navbar {
         await this.page.fill("#treeview-input-search", site)
         await this.page.keyboard.press('Enter')
         await this.page.click("(//div[@class='filter-title'])[1]")
-        await this.page.click("//button[text()='OK']")
+        await this.page.click("text=OK")
         const decideWhichPage = new CommonFunc(this.page)
         decideWhichPage.clickOnTopMenu(pageName)
         //step 5

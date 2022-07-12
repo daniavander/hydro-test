@@ -64,15 +64,15 @@ export class RaPage extends Navbar{
                 break
             case "WOC: control questions":
                 await this.page.fill("//input[@placeholder='New woc question title']", "control woc auto")
-                await this.page.click("//button[text()='Add']")
+                await this.page.click("text='Add'")
                 await expect(this.page.locator("//h2[@title='WOC Questions']")).toBeVisible()
                 await expect(this.page.locator(".aq-checkitem-row")).toBeVisible()
                 break
             case "Steps":
                 await this.page.fill("//input[@placeholder='New step title']", "step auto")
-                await this.page.click("//button[text()='Add']")
+                await this.page.click("text='Add'")
                 await expect(this.page.locator("//h2[@title='Steps']")).toBeVisible()
-                await expect(this.page.locator(".aq-checklist-row.ims_flex")).toBeVisible()
+                await expect(this.page.locator(".aq-checklist-row.flex")).toBeVisible()
                 break
             case "Connected persons":
                 //await this.page.pause()
@@ -103,7 +103,7 @@ export class RaPage extends Navbar{
     async addNewTaskToRa(taskName: string, desc: string, frequency: string) {
         await this.page.click("text=Add new task")
         await this.page.fill("//input[@placeholder='New task title']", taskName)
-        await this.page.click("//button[text()='Add']")
+        await this.page.click("text='Add'")
         await this.page.fill("textarea", desc)
         //add new frequeny - step 14
         await this.page.click("text='Frequency'")
@@ -182,9 +182,8 @@ export class RaPage extends Navbar{
         await this.page.click("text='Checklist'")
         await this.page.click("//button[contains(@class,'p-ripple p-element')]")
         await this.page.click("//span[text()='" + checklistname + "']")
-        await this.page.click("//button[text()='Add items: 1']")
+        await this.page.click("text=Add items: 1")
         //checks
-        await this.page.pause()
         expect(await this.page.locator("//h2[text()='" + checklistname + "']").isVisible())
         expect(await this.page.locator("//h2[text()='ccc']").isVisible())
         //expect(await this.page.locator("//p[text()=' Ongoing ']").isVisible())

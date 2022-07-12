@@ -30,12 +30,18 @@ export class GetTexts {
         }
     }
 
-    async getGhostCardTitle(cardName:string, iconNameForTypee:string){
+    async getGhostCardTitle(cardName:string, iconNameForType:string){
         //cardName: after care, investigation...
-        //iconNameForTypee: icon name
+        //iconNameForType: icon name
         var temp:Helpers = new Helpers(cardName)
         const finalResult = temp.toCamelWords(cardName)
-        const finalLoc = this.page.locator("//p[text()='" + finalResult + "']")
-        await expect(finalLoc).toHaveClass("icon-" + iconNameForTypee + " ghost-action-card-" + iconNameForTypee + " ghost-action-card-iccon ng-star-inserted");
+        const finalLoc = this.page.locator("text=" + finalResult + "")
+        //const finalLoc = this.page.locator('text=Investigation').nth(1)
+        //fixme after Product Backlog Item 34111: Automation test - data-testid for action cards
+        // jelenleg több after care,investigation text van a domban ezért nem megy
+        //todo Serious Injury emiatt van skippelve
+        //const finalLoc = this.page.locator('text=After Care').nth(1)
+        //await this.page.locator('text=After Care').nth(1).click();
+        await expect(finalLoc).toHaveClass("icon-" + iconNameForType + " ghost-action-card-" + iconNameForType + " ghost-action-card-iccon ng-star-inserted");
     }
 }      
