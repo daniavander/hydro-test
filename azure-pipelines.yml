@@ -29,7 +29,7 @@ jobs:
   - script: which node
 
     displayName: "Install framework"
-  - script: npm install
+  - script: npm i && npx playwright install
   #- script: npx playwright install --with-deps
 
 
