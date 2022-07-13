@@ -18,7 +18,7 @@ test.describe("Smoke test pack", () => {
   test.beforeEach(async ({ loginPage, page }) => {
     await page.goto(baseURL, { timeout: 100000 })
     //fyi comment out when run locally
-    await loginPage.loginInAzure()
+    //await loginPage.loginInAzure()
   })
   test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(4000)
@@ -59,7 +59,7 @@ test.describe("Smoke test pack", () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-
+  //todo skip: expect.toHaveClass: Error: strict mode violation: "text=After Care" resolved to 3 elements:
   test.skip('31034 - Smoke test - Create a Serious Injury case @cases', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, getTexts, page }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
@@ -170,6 +170,7 @@ test.describe("Smoke test pack", () => {
 
   })
 
+  //todo skip: Error: strict mode violation: "text=Investigation" resolved to 3 elements:
   test.skip('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ addReportedBy, caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
 
     await dashBoard.sidebarIsVisible()
@@ -196,6 +197,7 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Close')
   })
 
+   //todo skip: expect.toHaveClass: Error: strict mode violation: "text=After Care" resolved to 3 elements:
   test.skip('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     // it is work fine if the @cases tests are run previously
     await navBar.clickOnTopMenu("Cases")
@@ -204,7 +206,7 @@ test.describe("Smoke test pack", () => {
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
   })
 
-  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, filter, commonFunc, page, caseList }) => {
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, filter, commonFunc, page, caseList }) => {
 
     //test.use({ viewport: { width: 1600, height: 900 } })
 
@@ -253,7 +255,7 @@ test.describe("Smoke test pack", () => {
     expect(response.status()).toBe(200)
   })
 
-  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, commonFunc, page, caseList }) => {
+  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
