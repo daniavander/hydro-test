@@ -206,7 +206,7 @@ test.describe("Smoke test pack", () => {
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
   })
 
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, filter, commonFunc, page, caseList }) => {
+  test.skip('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, filter, commonFunc, page, caseList }) => {
 
     //test.use({ viewport: { width: 1600, height: 900 } })
 
