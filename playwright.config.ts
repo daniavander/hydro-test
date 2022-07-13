@@ -10,9 +10,9 @@ const config: PlaywrightTestConfig = {
   timeout: 250000,        // Timeout for each test
   retries: 0,  //how many times re test the failed
   // See: https://playwright.dev/docs/test-reporters/
-  reporter: [['html'], ['allure-playwright'], ['./my-awesome-reporter.ts'], ["line"]],
+  //reporter: [['html'], ['allure-playwright'], ['./my-awesome-reporter.ts'], ["line"]],
   //reporter:'./my-awesome-reporter.ts',
-  //reporter: [['html'], ['./my-awesome-reporter.ts'], ['allure-playwright']],
+  reporter: 'html',
   // See: https://playwright.dev/docs/api/class-testconfig
   outputDir: 'test-results/',
   //just the wanted folder will be run
