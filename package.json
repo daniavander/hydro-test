@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "smoke": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chromium",
+    "smoke": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=chromium",
     "smokelocalchrome": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --headed",
-    "smokelocaltag": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --headed --grep @response",
-    "smokerepeat": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --repeat-each 10 --workers=1"
+    "smokelocaltag": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --headed --grep @response",
+    "smokerepeat": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --repeat-each 10 --workers=1"
   },
   "keywords": [],
   "author": "",
