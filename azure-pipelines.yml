@@ -35,7 +35,7 @@ jobs:
 
     displayName: "Execute test"
     condition: succeeded()
-  - script: npm run smokerepeat
+  - script: npm run smoke
 
 #  - task: PythonScript@0
 #    inputs:
