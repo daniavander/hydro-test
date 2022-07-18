@@ -1,5 +1,9 @@
 import { FullConfig, FullResult, Reporter, Suite, TestCase, TestError, TestResult, TestStep } from '@playwright/test/reporter';
 
+
+
+declare var circleNum: 0;
+
 class MyReporter implements Reporter {
     onBegin(config: FullConfig, suite: Suite) {
         //console.log(`Starting the run with ${suite.allTests().length} tests`);
@@ -13,32 +17,42 @@ class MyReporter implements Reporter {
         }
     }
     onStepEnd?(test: TestCase, result: TestResult, step: TestStep) {
-        let isFailed:boolean = false;
+        let isFailed: boolean = false;
         if (step.category === "test.step") {
             console.log(`Result of Step ${step.title} with status ${result.status}`);
         }
         if (step.error) {
-            isFailed= true
+            isFailed = true
             console.log(step.error.message);
             console.log(isFailed);
         }
-        
     }
     onTestBegin(test: TestCase, result: TestResult) {
         console.log(`>>>>>>>>>>>>>>>>>>>>>>Starting test ${test.title}`);
     }
 
     onTestEnd(test: TestCase, result: TestResult) {
-        console.log(`>>>>>>>>>>>>>>>>>>>>>>Finished test ${test.title} - ${result.status}`);
+
+
+        //console.log("That is: " + circleNum + " circle");
+        if (result.status == 'passed') {
+            console.log(">>Finished PASS :)")
+        }else{
+            console.log(">>Finished FAILED :(")
+        }
         if (result.error) {
             console.log("Error happened -> ")
             console.log(result.errors)
         }
-        console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
+        //circleNum ++
     }
 
     onEnd(result: FullResult) {
-        console.log(`Finished the Suite: ${result.status}`)
+        if (result.status == 'passed') {
+            console.log("SUITE PASS :)")
+        }else{
+            console.log("SUITE FAILED :(")
+        }
     }
 }
 export default MyReporter;

@@ -1,39 +1,21 @@
 {
-  "name": "hydro",
+  "name": "neeew",
   "version": "1.0.0",
-  "description": "functional tests",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "smoke": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome",
-    "smokerepeat": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome --repeat-each 10 --workers=1",
-    "smokelocal": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=webkit --headed",
-    "smokelocalchrome": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome --headed",
-    "smokelocaltag": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome --headed --grep @cases",
-    "smokelocalhelp": "playwright test tests/smoke/smokeTestsHelps.spec.ts --config=playwright.config.ts --project=chrome --headed",
-    "test": "npx playwright test testing.spec.ts --reporter=dot --project=chrom",
-    "generate": "npx allure generate ./allure-results --clean",
-    "open": "npx allure open ./allure-report"
+    "smoke": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chromium",
+    "smokelocalchrome": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --headed",
+    "smokelocaltag": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --headed --grep @response",
+    "smokerepeat": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --repeat-each 10 --workers=1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "chai": "^4.3.6",
-    "init-playwright": "^0.25.3",
-    "mocha": "^9.2.1",
-    "playwright-core": "^1.19.2",
-    "playwright-webkit": "^1.22.2",
-    "prettier": "^2.5.1",
-    "uuid": "^8.3.2"
-  },
   "devDependencies": {
-    "@playwright/test": "^1.23.2",
-    "allure-commandline": "^2.17.2",
-    "allure-playwright": "^2.0.0-beta.15",
-    "expect-playwright": "^0.8.0",
-    "experimental-allure-playwright": "^0.0.3",
-    "jest": "^27.5.1",
-    "jest-playwright-preset": "^1.7.0",
-    "playwright": "^1.19.2",
-    "playwright-expect": "^0.1.2"
+    "@playwright/test": "^1.23.3"
+  },
+  "dependencies": {
+    "npm": "^8.13.2"
   }
 }

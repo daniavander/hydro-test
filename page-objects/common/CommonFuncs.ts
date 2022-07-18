@@ -35,6 +35,11 @@ export class CommonFunc extends Navbar {
             await this.page.click("data-testid=ims-multi-select-undefined")
             await this.page.click('text="' + cat + '"')
             await this.page.click('text=OK')
+        }if (pageName === "Actions") {
+            await this.page.click("data-testid=ims-multi-select-entityType")
+            await this.page.click('text="' + cat + '"')
+            await this.page.click("(//button[text()=' OK '])[1]")
+            await expect(this.page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
         }
     }
 }

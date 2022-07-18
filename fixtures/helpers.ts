@@ -5,7 +5,6 @@ const crypto = require('crypto')
 export class Helpers {
     variable: string
 
-
     constructor(variable: string) {
         this.variable = variable
     }
@@ -25,7 +24,6 @@ export class Helpers {
     export async function getRandomEmail()  {
         return crypto.randomBytes(20).toString('hex')
     }*/
-
 
     toCamelWords(str: string){
         return str.split(' ').map(function(word,index){
