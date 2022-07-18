@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "smoke": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome",
+    "smokerepeat": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome --repeat-each 10 --workers=1",
     "smokelocal": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=webkit --headed",
     "smokelocalchrome": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome --headed",
     "smokelocaltag": "playwright test tests/smoke/smokeTests.spec.ts --config=playwright.config.ts --project=chrome --headed --grep @cases",

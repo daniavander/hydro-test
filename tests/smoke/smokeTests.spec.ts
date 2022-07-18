@@ -27,7 +27,6 @@ test.describe("Smoke test pack", () => {
     await browser.close()
   })
   test('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
-
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -255,7 +254,7 @@ test.describe("Smoke test pack", () => {
     expect(response.status()).toBe(200)
   })
 
-  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, commonFunc, page, caseList }) => {
+  test.only('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, commonFunc, page, caseList }) => {
     await navBar.clickOnTopMenu("Actions")
     await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
     try {
