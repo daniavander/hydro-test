@@ -13,6 +13,8 @@ import { devices } from '@playwright/test';
 const config: PlaywrightTestConfig = {
   testDir: ".",
   timeout: 100 * 1000,
+  grep: [new RegExp("@response"), new RegExp("@filter"), new RegExp("@cases"), new RegExp("@delete"), new RegExp("@risk")],
+ 
   expect: {
     timeout: 10000
   },

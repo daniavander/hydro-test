@@ -9,14 +9,26 @@ export class Filter {
         this.page = page
         this.dashboard = page.locator("text=Dashboard")
     }
-    async checkFilterTabs(site: string, entity: string, addBy: string, time: string) {
+    async checkFilterTabs(site: string, entity: string, addBy?: string, time?: string) {
         //await this.page.click("data-testid='" + filter1 +'"')
-        expect (this.page.locator('data-testid=detailedfilter.label.site: ' + site + '')).toBeEnabled()
-        expect (this.page.locator('data-testid=detailedfilter.label.entity: ' + entity + '')).toBeEnabled()
-        expect (this.page.locator('data-testid=detailedfilter.label.myrecords: ' + addBy + '')).toBeEnabled()
-        expect (this.page.locator('data-testid=filter.tag.' + time + ': true')).toBeEnabled()
+        /*expect(this.page.locator('data-testid=detailedfilter.label.site: ' + site + '')).toBeEnabled()
+        expect(this.page.locator('data-testid=detailedfilter.label.entity: ' + entity + '')).toBeEnabled()
+        expect(this.page.locator('data-testid=detailedfilter.label.myrecords: ' + addBy + '')).toBeEnabled()
+        expect(this.page.locator('data-testid=filter.tag.' + time + ': true')).toBeEnabled()*/
 
+        if (entity === "Cases") {
+            expect(this.page.locator('data-testid=detailedfilter.label.site: ' + site + '')).toBeEnabled()
+            expect(this.page.locator('data-testid=detailedfilter.label.entity: ' + entity + '')).toBeEnabled()
+            expect(this.page.locator('data-testid=detailedfilter.label.myrecords: ' + addBy + '')).toBeEnabled()
+            expect(this.page.locator('data-testid=filter.tag.' + time + ': true')).toBeEnabled()
+            
+        } if (entity === "HSE") {
+            expect(this.page.locator('data-testid=detailedfilter.label.site: ' + site + '')).toBeEnabled()
+            expect(this.page.locator('data-testid=detailedfilter.label.department: ' + entity + '')).toBeEnabled()
+            //expect(this.page.locator('detailedfilter.label.myrecords:')).toBeEnabled()
         }
 
-    
+    }
+
+
 }

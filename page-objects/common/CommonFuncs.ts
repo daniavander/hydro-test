@@ -42,4 +42,14 @@ export class CommonFunc extends Navbar {
             await expect(this.page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
         }
     }
+
+    async setAllPagesTo(neededSite: string) {
+        const sites = await this.page.locator("data-testid=site-selector").textContent({ timeout: 6000 })
+        if (neededSite !== sites) {
+            await this.page.click("data-testid=site-selector")
+            await this.page.locator('.csscheckbox').first().click()
+            await this.page.locator('button:has-text("OK")').click();
+        }
+        await expect(this.page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites', { timeout: 6000 })
+    }
 }

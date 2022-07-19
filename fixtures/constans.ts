@@ -9,7 +9,8 @@ namespace Constants {
 
     },
     exports.entities = {
-      ife: 'Injury Free Event'
+      ife: 'Injury Free Event',
+      hse: 'HSE'
     },
     exports.times = {
 

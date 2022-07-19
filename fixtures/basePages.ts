@@ -51,7 +51,6 @@ const test = baseTest.extend<{
     addNewActionInRisk: RaPage
     addChecklistToRisk:RaPage
     checkRiInRa: RaPage
-
     getTexts : GetTexts   
 }>({
     dashBoard:async ({page}, use) => {

@@ -9,19 +9,19 @@ import { siteNames, entities, caseType, secLevels, departments, stringConstants,
 test.describe('Item', () => {
   const baseURL = "https://stage-app-avander-ims-ui.azurewebsites.net/"
 
-  test.beforeEach(async ({ loginPage, page }) => {
+  test.beforeEach(async ({ loginPage, page, dashBoard, commonFunc }) => {
     await page.goto('' , { timeout: 100000 })
     //fyi comment out when run locally
     await loginPage.loginInAzure()
+    await dashBoard.sidebarIsVisible()
+    await dashBoard.topBarIsAvailable()
+    await commonFunc.setAllPagesTo("All MY sites")
   })
   test.afterEach(async ({ page }, testInfo) => {
     await page.waitForTimeout(4000)
   })
 
   test('31035 - Smoke test - Activity list @response', async ({ dashBoard, navBar, page, request }) => {
-    await dashBoard.sidebarIsVisible()
-    await dashBoard.topBarIsAvailable()
-
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
     await page.click("[title=Activities]")
     await page.locator('.obs_csstable').isVisible()
@@ -185,7 +185,6 @@ test.describe('Item', () => {
     await page.click('text=Save')
 
     //ghost card after save is visible
-    await page.pause()
     await getTexts.getGhostCardTitle("investigation", "investigation")
     await (await page.waitForSelector('.p-state-filled')).isVisible()
     await addUserAction.addNewAction("description", "instruction", "ImsTestGlobalAdmin3", "Add obligatory", "aa")
@@ -201,113 +200,6 @@ test.describe('Item', () => {
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description IFE delete", "Delete")
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description serious injury delete", "Delete")
     await caseList.getCaseByDescriptionAndDoFromListPage("Automated test description WOC delete", "Delete")
-  })
-
-
-  test.use({ viewport: { width: 1600, height: 900 } })
-  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @list', async ({ request, getTexts, navBar, filter, commonFunc, page, caseList }) => {
-
-    await navBar.clickOnTopMenu("Cases")
-    try {
-      console.log("try to reset the filters")
-      await page.click("#reset-filter-button", { timeout: 6000 })
-      console.log("reseted")
-    } catch (error) {
-      console.log(error)
-    }
-
-    expect(page.locator(".obs_csstable"))
-    await commonFunc.searchCaseWithFilters("Cases", siteNames.auto, entities.ife)
-    //step 6
-    await page.click("[title='Edit filters']")
-    //this is in the custom filter
-    expect(page.locator('text=Site: ' + siteNames.auto + '').nth(1)).toBeVisible()
-    expect(page.locator('text=Type of incident: ' + entities.ife + '').nth(1)).toBeVisible()
-    //step7
-    await page.click("//span[text()='Recorded']")
-    //step 8
-    //fyi if check last day, NEED to add IFE in auto site or run (31034 - Smoke test - Create a Serious Injury case), otherwise fail the test
-    //await page.pause()
-    await page.click("text='Last day'")
-    //await page.fill("//input[@placeholder='Name']","imstestglobaladmin3@avander.hu")
-    //in local due to azure ad login
-    await page.fill("//input[@placeholder='Name']", "Kovács Dániel")
-    await page.click("//li[@role='option']")
-    //step 9
-    await page.click("text='Apply filters'")
-
-    //step 9 check the result list that IFE is in first element of the list
-    // click to be list of elements
-    await page.click("[aria-label='list']")
-
-    await filter.checkFilterTabs(siteNames.auto, entities.ife, "Kovács Dániel (kovacs.daniel@avander.hu)", "lastday")
-
-    await page.waitForTimeout(3000)
-    //step 10 reset filters and check that the full list is displayed
-    await page.click("#reset-filter-button")
-    await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Cases')
-    //available in dom but hidden
-    expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeHidden()
-
-    const response = await request.get(`${baseURL}pi/action?queryString=`)
-    expect(response.status()).toBe(200)
-  })
-
-  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @list', async ({ dashBoard, request, getTexts, navBar, commonFunc, page, caseList }) => {
-    await dashBoard.sidebarIsVisible()
-    await dashBoard.topBarIsAvailable()
-
-    await navBar.clickOnTopMenu("Actions")
-    //await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
-    try {
-      console.log("try to reset the filters")
-      await page.click("#reset-filter-button", { timeout: 15 * 1000 })
-      console.log("reseted")
-    } catch (error) {
-      console.log(error)
-    }
-
-    //step 3
-    expect(page.locator(".obs_csstable"))
-    //step 4
-    await commonFunc.searchCaseWithFilters("Actions", siteNames.auto, "Signature")
-    //step 6 open custom filter tab
-    await page.click("[title='Edit filters']")
-
-    //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
-    //fyi childnumber xpath is szar mert a child number néha változik:O
-    //expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar\\\\\\\\   ']")).toBeVisible()
-    //await page.locator('text=Site: Extrusion-Hungary-Szekesfehervar Components').nth(1).click();
-    //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
-    //expect(page.locator("//div[@title='Type of incident: Injury Free Event   ']")).toBeVisible()
-    //step7
-    await page.click("//span[text()='Recorded']")
-    //step 8
-    await page.click("text='Last day'")
-    await page.fill("//input[@placeholder='Name']", "Kovács Dániel")
-    await page.click("//li[@role='option']")
-    //step 9
-    await page.click("text='Apply filters'")
-
-    //step 10 check the result list that Sign & Archive is in first element of the list
-    // click to be list of elements
-    await page.click("[aria-label='list']")
-    await getTexts.getDivElementTextOnListPage("ims_ellipsis ng-star-inserted", "Conclude a completed case by a final evaluation and approval.", "Actions")
-
-    //check the previously selected filter is in the filter bar
-    expect(page.locator("data-testid=detailedfilter.label.site: Automation tests")).toBeVisible()
-    expect(page.locator("data-testid=detailedfilter.action.label.entity: Signature")).toBeVisible()
-    expect(page.locator("data-testid=filter.tag.lastday: true")).toBeVisible()
-
-    await page.waitForTimeout(3000)
-    await page.click("#reset-filter-button")
-    await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('All actions')
-    //available in dom but hidden
-    expect(page.locator("data-testid=detailedfilter.label.site: Automation tests")).toBeHidden()
-
-    const response = await request.get(`${baseURL}pi/action?queryString=`)
-    expect(response.status()).toBe(200)
-
   })
 
   //test.use({ viewport: { width: 1600, height: 900 } })
@@ -422,6 +314,165 @@ test.describe('Item', () => {
     // delete the RA after published
     await page.click("//div[@title='Automated RA with Risk']")
     await raPage.addRADetails(raMenuNames.delete)
+  })
+
+  test.use({ viewport: { width: 1600, height: 900 } })
+  //todo próbálni hogy hogy fut
+  test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @filter', async ({ request, getTexts, navBar, filter, commonFunc, page, caseList }) => {
+
+    await navBar.clickOnTopMenu("Cases")
+    try {
+      console.log("try to reset the filters")
+      await page.click("#reset-filter-button", { timeout: 6000 })
+      console.log("reseted")
+    } catch (error) {
+      console.log(error)
+    }
+
+    expect(page.locator(".obs_csstable"))
+    await commonFunc.searchCaseWithFilters("Cases", siteNames.auto, entities.ife)
+    //step 6
+    await page.click("[title='Edit filters']")
+    
+    //this is in the custom filter
+    expect(page.locator('data-testid=detailedfilter.label.site: ' + siteNames.auto + '')).toBeEnabled()
+    expect(page.locator('data-testid=detailedfilter.label.entity: ' + entities.ife + '')).toBeEnabled()
+    //step7
+    await page.click("//span[text()='Recorded']")
+    //step 8
+    //fyi if check last day, NEED to add IFE in auto site or run (31034 - Smoke test - Create a Serious Injury case), otherwise fail the test
+    //await page.pause()
+    await page.click("text='Last day'")
+    //await page.fill("//input[@placeholder='Name']","imstestglobaladmin3@avander.hu")
+    //in local due to azure ad login
+    await page.fill("//input[@placeholder='Name']", "Kovács Dániel")
+    await page.click("//li[@role='option']")
+    //step 9
+    await page.click("text='Apply filters'")
+
+    //step 9 check the result list that IFE is in first element of the list
+    // click to be list of elements
+    await page.click("[aria-label='list']")
+
+    await filter.checkFilterTabs(siteNames.auto, entities.ife, "Kovács Dániel (kovacs.daniel@avander.hu)", "lastday")
+
+    await page.waitForTimeout(3000)
+    //step 10 reset filters and check that the full list is displayed
+    await page.click("#reset-filter-button")
+    await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Cases')
+    //available in dom but hidden
+    expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeHidden()
+
+    const response = await request.get(`${baseURL}pi/action?queryString=`)
+    expect(response.status()).toBe(200)
+  })
+
+  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @filter', async ({ dashBoard, request, getTexts, navBar, commonFunc, page, caseList }) => {
+    await dashBoard.sidebarIsVisible()
+    await dashBoard.topBarIsAvailable()
+
+    await navBar.clickOnTopMenu("Actions")
+    //await page.waitForSelector("#reset-filter-button", { timeout: 5000 })
+    try {
+      console.log("try to reset the filters")
+      await page.click("#reset-filter-button", { timeout: 15 * 1000 })
+      console.log("reseted")
+    } catch (error) {
+      console.log(error)
+    }
+
+    //step 3
+    expect(page.locator(".obs_csstable"))
+    //step 4
+    await commonFunc.searchCaseWithFilters("Actions", siteNames.auto, "Signature")
+    //step 6 open custom filter tab
+    await page.click("[title='Edit filters']")
+
+    //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
+    //fyi childnumber xpath is szar mert a child number néha változik:O
+    //expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar\\\\\\\\   ']")).toBeVisible()
+    //await page.locator('text=Site: Extrusion-Hungary-Szekesfehervar Components').nth(1).click();
+    //fixme after Product Backlog Item 32413: Automated Test - delete unnecessary spaces done
+    //expect(page.locator("//div[@title='Type of incident: Injury Free Event   ']")).toBeVisible()
+    //step7
+    await page.click("//span[text()='Recorded']")
+    //step 8
+    await page.click("text='Last day'")
+    await page.fill("//input[@placeholder='Name']", "Kovács Dániel")
+    await page.click("//li[@role='option']")
+    //step 9
+    await page.click("text='Apply filters'")
+
+    //step 10 check the result list that Sign & Archive is in first element of the list
+    // click to be list of elements
+    await page.click("[aria-label='list']")
+    await getTexts.getDivElementTextOnListPage("ims_ellipsis ng-star-inserted", "Conclude a completed case by a final evaluation and approval.", "Actions")
+
+    //check the previously selected filter is in the filter bar
+    expect(page.locator("data-testid=detailedfilter.label.site: Automation tests")).toBeVisible()
+    expect(page.locator("data-testid=detailedfilter.action.label.entity: Signature")).toBeVisible()
+    expect(page.locator("data-testid=filter.tag.lastday: true")).toBeVisible()
+
+    await page.waitForTimeout(3000)
+    await page.click("#reset-filter-button")
+    await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('All actions')
+    //available in dom but hidden
+    expect(page.locator("data-testid=detailedfilter.label.site: Automation tests")).toBeHidden()
+
+    const response = await request.get(`${baseURL}pi/action?queryString=`)
+    expect(response.status()).toBe(200)
+
+  })
+
+  test('31057 - Smoke test - Risk Assessment filters (site, department, creation date, my records) @filter', async ({ dashBoard, navBar, page, commonFunc, filter }) => {
+    await dashBoard.sidebarIsVisible()
+    await dashBoard.topBarIsAvailable()
+
+    await navBar.clickOnTopMenu("Risk Assessment")
+
+    try {
+      console.log("try to reset the filters")
+      await page.click("#reset-filter-button", { timeout: 6000 })
+      console.log("reseted")
+    } catch (error) {
+      console.log(error)
+    }
+    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
+
+    expect(page.locator(".obs_csstable"))
+    //step 3,4
+    await commonFunc.searchCaseWithFilters("Risk Assessment", siteNames.auto, entities.hse)
+    //step 5
+    
+    await page.click("[title='Edit filters']")
+    //this is in the custom filter
+    //expect(page.locator('text=Site: ' + siteNames.auto + '').nth(1)).toBeVisible()
+    //expect(page.locator('text=Type of incident: ' + entities.hse + '').nth(1)).toBeVisible()
+    //step 6 
+    await page.click("text=Recorded")
+    //step 7
+    await page.click("text=My records")
+    await page.pause()
+    expect(page.locator("text=my records:")).toHaveCount(2)
+    //click in date form to today
+    await page.locator('.ims_block45').first().click();
+    await page.click("text=Today")
+
+    //step 8
+    await page.click("text='Apply filters'")
+    //filters visible in filetr tab and the list is ok
+    //todo
+    await filter.checkFilterTabs(siteNames.auto, entities.hse)
+
+
+
+    //step 9 reset filters
+    await page.click("#reset-filter-button")
+    await expect(page.locator("[title='List of Risk Assessments']")).toContainText(' List of Risk Assessments')
+    
+
+
+
   })
 
 })

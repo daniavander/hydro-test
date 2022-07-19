@@ -37,12 +37,13 @@ class MyReporter implements Reporter {
         //console.log("That is: " + circleNum + " circle");
         if (result.status == 'passed') {
             console.log(">>Finished PASS :)")
-        }else{
-            console.log(">>Finished FAILED :(")
         }
         if (result.error) {
             console.log("Error happened -> ")
             console.log(result.errors)
+        }
+        else{
+            console.log(`>>${test.title} SKIPPED`)
         }
         //circleNum ++
     }
