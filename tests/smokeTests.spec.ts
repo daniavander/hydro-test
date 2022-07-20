@@ -2,7 +2,7 @@ import { type Page, request, expect } from '@playwright/test';
 
 import test from "@fixtures/basePages"
 
-import { siteNames, entities, caseType, secLevels, departments, stringConstants, classesUnderAction3Dot, siteShortNames, raMenuNames, frequency, riskMainTypes } from "@fixtures/constans"
+import { siteNames, entities, caseType, secLevels, departments, actionCards, ghostActionCards, stringConstants, classesUnderAction3Dot, siteShortNames, raMenuNames, frequency, riskMainTypes } from "@fixtures/constans"
 //// <reference path="@fixtures/basePages" />
 
 
@@ -48,7 +48,6 @@ test.describe('Item', () => {
     await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
-  //todo skip: expect.toHaveClass: Error: strict mode violation: "text=After Care" resolved to 3 elements:
   test('31034 - Smoke test - Create a Serious Injury case @cases', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, getTexts, page }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
@@ -71,21 +70,13 @@ test.describe('Item', () => {
     await addUserAction.addTags("Add obligatory", "aa")
     //step 11
     await page.click('text=Save')
-    
     //ghost card after care is visible and have ghost card class with injury icon
-    await expect(page.locator("data-testid=form.action.header.Investigation")).toHaveText("Investigation task")
-    await expect(page.locator("data-testid=form.action.header.Investigation")).toBeEnabled()
+    await expect(page.locator(ghostActionCards.ghostaftercare)).toBeEnabled()
 
-
-
-    /*await getTexts.getGhostCardTitle("after care", "injury")
-    //todo hr details data testid
-    expect(page.isVisible("//p[text()=' HR Details ']"))
-    //todo data testid
-    expect(page.isVisible("//p[text()=' Injury Details ']"))
-    //todo data testid
-    expect(page.isVisible("//p[text()=' Classify Injury ']"))
-    */
+    await expect(page.locator(actionCards.investigation)).toBeEnabled()
+    await expect(page.locator(actionCards.injurydetails)).toBeEnabled()
+    await expect(page.locator(actionCards.classifyinjury)).toBeEnabled()
+    await expect(page.locator(actionCards.hrdetails)).toBeEnabled()
 
     //step 14
     await addUserAction.fillInvestigationTask("investigation finding", "Add obligatory", "aa")
@@ -93,6 +84,8 @@ test.describe('Item', () => {
     await addUserAction.fillInjuryDetailsTask("Wound", "Irritation", "left-arm", "Elbow", "injury comments")
     //step 16
     await addUserAction.fillClassificationTask("Yes", "Fatality (Hydro)", "Very high")
+    ////////////////-------------------------////////////////////////
+    await expect(page.locator(actionCards.absentdates)).toBeEnabled()
     expect(page.isVisible("//p[text()=' Absent dates ']"))
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
   })
@@ -123,10 +116,9 @@ test.describe('Item', () => {
 
     //add survey
     await casePage.addSurvey("Checklist", "0or1", 1)
-    //await page.waitForSelector("data-testid=case-status")
-    await page.waitForTimeout(25000);
+    await page.waitForSelector("data-testid=case-status")
     await expect(page.locator("data-testid=case-status")).toContainText('Ongoing')
-    //case id contain HUS string
+    //case id contain E"E-22 string
     await expect(page.locator('data-testid=case-id')).toContainText('E2E-22')
 
     //cheklist is visible as an action
@@ -141,10 +133,7 @@ test.describe('Item', () => {
     await expect(page.locator("data-testid=case-status")).toContainText('Completed')
 
     //open s and a step 14
-    //todo  due to cache
-    await page.waitForTimeout(3000)
-    await page.locator("text=Sign & Archive").isEnabled()
-    await page.click("text=Sign & Archive")
+    await page.click(actionCards.sign)
     await addUserAction.addTags("Add obligatory", "aa")
     await page.click('text=Mark as Completed')
     await page.waitForTimeout(2000);
@@ -157,18 +146,17 @@ test.describe('Item', () => {
     expect(page.locator("//button[text()=' Delete ']").isDisabled())
 
     //reopen
-    await page.click("text=Sign & Archive")
+    await page.click(actionCards.sign)
     await page.click("//button[text()=' Reopen action ']")
 
     //we can delete the case after reopen it step 15
     await page.hover("data-testid=case-submenu")
     expect(page.locator("//button[text()=' Delete ']").isEnabled())
-    //await casePage.getFunctionAndDoInCasePage("Delete")
+    await casePage.getFunctionAndDoInCasePage("Delete")
 
   })
 
-  //todo skip: Error: strict mode violation: "text=Investigation" resolved to 3 elements:
-  test.skip('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ addReportedBy, caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
+  test('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ addReportedBy, caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
 
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
@@ -185,7 +173,10 @@ test.describe('Item', () => {
     await page.click('text=Save')
 
     //ghost card after save is visible
-    await getTexts.getGhostCardTitle("investigation", "investigation")
+    //await page.pause()
+    //investigation ghost card is enable and have good text
+    await expect(page.locator(ghostActionCards.ghostinvestigation)).toHaveText("Investigation")
+
     await (await page.waitForSelector('.p-state-filled')).isVisible()
     await addUserAction.addNewAction("description", "instruction", "ImsTestGlobalAdmin3", "Add obligatory", "aa")
 
@@ -193,7 +184,6 @@ test.describe('Item', () => {
     await page.click('text=Close')
   })
 
-  //todo skip: expect.toHaveClass: Error: strict mode violation: "text=After Care" resolved to 3 elements:
   test.skip('31049 - Smoke test - Delete test cases (IFE, WOC, Injury) @delete  @cases', async ({ getTexts, navBar, commonFunc, page, caseList }) => {
     // it is work fine if the @cases tests are run previously
     await navBar.clickOnTopMenu("Cases")
@@ -317,7 +307,6 @@ test.describe('Item', () => {
   })
 
   test.use({ viewport: { width: 1600, height: 900 } })
-  //todo próbálni hogy hogy fut
   test('31043 - Smoke test - Cases listview filters (site, department, recorded date, recorded by) @filter', async ({ request, getTexts, navBar, filter, commonFunc, page, caseList }) => {
 
     await navBar.clickOnTopMenu("Cases")
@@ -356,9 +345,8 @@ test.describe('Item', () => {
 
     await filter.checkFilterTabs(siteNames.auto, entities.ife, "Kovács Dániel (kovacs.daniel@avander.hu)", "lastday")
 
-    await page.waitForTimeout(3000)
     //step 10 reset filters and check that the full list is displayed
-    await page.click("#reset-filter-button")
+    await page.click("#reset-filter-button", { timeout: 6000})
     await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Cases')
     //available in dom but hidden
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeHidden()
@@ -446,13 +434,10 @@ test.describe('Item', () => {
     
     await page.click("[title='Edit filters']")
     //this is in the custom filter
-    //expect(page.locator('text=Site: ' + siteNames.auto + '').nth(1)).toBeVisible()
-    //expect(page.locator('text=Type of incident: ' + entities.hse + '').nth(1)).toBeVisible()
     //step 6 
     await page.click("text=Recorded")
     //step 7
     await page.click("text=My records")
-    await page.pause()
     expect(page.locator("text=my records:")).toHaveCount(2)
     //click in date form to today
     await page.locator('.ims_block45').first().click();
@@ -461,10 +446,7 @@ test.describe('Item', () => {
     //step 8
     await page.click("text='Apply filters'")
     //filters visible in filetr tab and the list is ok
-    //todo
-    await filter.checkFilterTabs(siteNames.auto, entities.hse)
-
-
+    await filter.checkFilterTabs(siteNames.auto, entities.hse, "Kovács Dániel (kovacs.daniel@avander.hu)")
 
     //step 9 reset filters
     await page.click("#reset-filter-button")

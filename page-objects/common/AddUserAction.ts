@@ -59,9 +59,7 @@ export class AddUserAction {
     }
 
     async fillInvestigationTask(finding: string, tagname: string, subtag: string) {
-        //fill investigation task with obligatory tag
-        //todo
-        await this.page.click("//p[text()='Investigation task']")
+        await this.page.click("data-testid=uda.investigation")
         await this.page.fill("(//textarea[@rows='1'])[2]", finding)
         await this.page.locator("//span[text()='" + tagname + "']").click();
         await this.page.locator("[aria-label=" + subtag + "]").click();
@@ -72,7 +70,7 @@ export class AddUserAction {
         expect(this.page.isVisible("(//span[text()='Completed'])[1]"))
     }
     async fillInjuryDetailsTask(injury: string, specify: string, location: string, locationspecify: string, comment: string) {
-        await this.page.click("//p[text()=' Injury Details ']")
+        await this.page.click("data-testid=uda.injurydetails")
         await this.page.click("[title='" + injury + "']")
         await this.page.click("[title='" + specify + "']")
         await this.page.click("#" + location + "")
@@ -85,7 +83,7 @@ export class AddUserAction {
         expect(this.page.isVisible("(//span[text()='Completed'])[2]"))
     }
     async fillClassificationTask(recordable: string, type: string, level: string) {
-        await this.page.click("text=Classify Injury")
+        await this.page.click("data-testid=uda.injury")
         await this.page.click("(//span[text()='" + recordable + "'])[2]")
         if (recordable === "Yes") {
             await this.page.click("text=" + type + "")
