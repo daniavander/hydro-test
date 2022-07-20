@@ -10,7 +10,7 @@ test.describe('Item', () => {
   const baseURL = "https://stage-app-avander-ims-ui.azurewebsites.net/"
 
   test.beforeEach(async ({ loginPage, page, dashBoard, commonFunc }) => {
-    await page.goto('' , { timeout: 100000 })
+    await page.goto('', { timeout: 100000 })
     //fyi comment out when run locally
     await loginPage.loginInAzure()
     await dashBoard.sidebarIsVisible()
@@ -43,12 +43,13 @@ test.describe('Item', () => {
     await page.click(".obs_highlighted")
     expect(page.locator("//span[text()='Sum']")).toBeVisible()
     expect(page.locator("//span[text()='Breakdown']")).toBeVisible()
+    expect(page.locator("//span[text()='Breakdown']")).toBeEnabled()
     expect(page.locator("//span[text()='Diagrams']")).toBeVisible()
     expect(page.locator("//span[text()='Legacy reports']")).toBeVisible()
-    await page.locator("//span[text()='Diagrams']").isVisible()
   })
 
   test('31034 - Smoke test - Create a Serious Injury case @cases', async ({ dashBoard, navBar, casePage, addUserAction, addPeopleDetails, getTexts, page }) => {
+    //ez a szar webkiten failel department beállítás nem megy
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -71,7 +72,7 @@ test.describe('Item', () => {
     //step 11
     await page.click('text=Save')
     //ghost card after care is visible and have ghost card class with injury icon
-    await expect(page.locator(ghostActionCards.ghostaftercare)).toBeEnabled()
+    await expect(page.locator(ghostActionCards.ghostaftercare)).toBeEnabled({timeout:15000})
 
     await expect(page.locator(actionCards.investigation)).toBeEnabled()
     await expect(page.locator(actionCards.injurydetails)).toBeEnabled()
@@ -91,6 +92,7 @@ test.describe('Item', () => {
   })
 
   test('31032 - Smoke test - Close a WOC case with filled checklist @cases', async ({ browserName, dashBoard, navBar, casePage, addUserAction, page, surveyPage }) => {
+    //ez a szar webkiten failel department beállítás nem megy
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
@@ -157,7 +159,7 @@ test.describe('Item', () => {
   })
 
   test('30746 - Smoke test - Add IFE case with an user defined action @cases', async ({ addReportedBy, caseList, dashBoard, navBar, casePage, addUserAction, getTexts, page }) => {
-
+    //ez a szar webkiten failel department beállítás nem megy
     await dashBoard.sidebarIsVisible()
     page.locator(".side-panel-content")
 
@@ -322,7 +324,7 @@ test.describe('Item', () => {
     await commonFunc.searchCaseWithFilters("Cases", siteNames.auto, entities.ife)
     //step 6
     await page.click("[title='Edit filters']")
-    
+
     //this is in the custom filter
     expect(page.locator('data-testid=detailedfilter.label.site: ' + siteNames.auto + '')).toBeEnabled()
     expect(page.locator('data-testid=detailedfilter.label.entity: ' + entities.ife + '')).toBeEnabled()
@@ -346,7 +348,7 @@ test.describe('Item', () => {
     await filter.checkFilterTabs(siteNames.auto, entities.ife, "Kovács Dániel (kovacs.daniel@avander.hu)", "lastday")
 
     //step 10 reset filters and check that the full list is displayed
-    await page.click("#reset-filter-button", { timeout: 6000})
+    await page.click("#reset-filter-button", { timeout: 6000 })
     await expect(page.locator("//h1[contains(@class,'m0i')]")).toContainText('Cases')
     //available in dom but hidden
     expect(page.locator("//div[@title='Site: Extrusion-Hungary-Szekesfehervar']")).toBeHidden()
@@ -431,7 +433,7 @@ test.describe('Item', () => {
     //step 3,4
     await commonFunc.searchCaseWithFilters("Risk Assessment", siteNames.auto, entities.hse)
     //step 5
-    
+
     await page.click("[title='Edit filters']")
     //this is in the custom filter
     //step 6 
@@ -451,7 +453,52 @@ test.describe('Item', () => {
     //step 9 reset filters
     await page.click("#reset-filter-button")
     await expect(page.locator("[title='List of Risk Assessments']")).toContainText(' List of Risk Assessments')
-    
+
+
+
+
+  })
+
+  test('31059 - moke test - Risk Inventory filters (site, department, creation date, my records) @filter', async ({ dashBoard, navBar, page, commonFunc, filter }) => {
+    await dashBoard.sidebarIsVisible()
+    await dashBoard.topBarIsAvailable()
+
+    await navBar.clickOnTopMenu("Risk Assessment")
+
+    try {
+      console.log("try to reset the filters")
+      await page.click("#reset-filter-button", { timeout: 6000 })
+      console.log("reseted")
+    } catch (error) {
+      console.log(error)
+    }
+    await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
+
+    expect(page.locator(".obs_csstable"))
+    //step 3,4
+    await commonFunc.searchCaseWithFilters("Risk Assessment", siteNames.auto, entities.hse)
+    //step 5
+
+    await page.click("[title='Edit filters']")
+    //this is in the custom filter
+    //step 6 
+    await page.click("text=Recorded")
+    //step 7
+    await page.click("text=My records")
+    expect(page.locator("text=my records:")).toHaveCount(2)
+    //click in date form to today
+    await page.locator('.ims_block45').first().click();
+    await page.click("text=Today")
+
+    //step 8
+    await page.click("text='Apply filters'")
+    //filters visible in filetr tab and the list is ok
+    await filter.checkFilterTabs(siteNames.auto, entities.hse, "Kovács Dániel (kovacs.daniel@avander.hu)")
+
+    //step 9 reset filters
+    await page.click("#reset-filter-button")
+    await expect(page.locator("[title='List of Risk Assessments']")).toContainText(' List of Risk Assessments')
+
 
 
 

@@ -17,7 +17,7 @@ export class Dashboard {
     }
 
     async sidebarIsVisible() {
-        await this.page.waitForTimeout(5000)
+        await this.page.waitForTimeout(10000)
         await this.sideBar.isVisible()
     }
     async snapshotSideBar() {
