@@ -357,7 +357,7 @@ test.describe('Item', () => {
     expect(response.status()).toBe(200)
   })
 
-  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @filter', async ({ dashBoard, request, getTexts, navBar, commonFunc, page, caseList }) => {
+  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @filter', async ({ dashBoard, request, getTexts, navBar, commonFunc, page, caseList }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
 
