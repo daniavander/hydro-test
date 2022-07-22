@@ -7,7 +7,7 @@
     "smoke": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=chromium",
     "smokewebkit": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=webkit --headed",
     "smokelocalchrome": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --headed",
-    "smokelocaltag": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --headed --grep @response",
+    "smokelocaltag": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --headed --grep @filter",
     "smokerepeat": "playwright test tests/smokeTests.spec.ts --config=playwright.config.ts --project=chromium --repeat-each 10 --workers=1"
   },
   "keywords": [],

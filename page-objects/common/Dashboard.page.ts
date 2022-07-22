@@ -17,8 +17,7 @@ export class Dashboard {
     }
 
     async sidebarIsVisible() {
-        await this.page.waitForTimeout(10000)
-        await this.sideBar.isVisible()
+        await this.sideBar.isVisible( {timeout: 10000})
     }
     async snapshotSideBar() {
         //take snapshot about the sidebar, took next to the test, tofast just take a white shot

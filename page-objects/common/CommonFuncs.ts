@@ -13,8 +13,7 @@ export class CommonFunc extends Navbar {
         //await page.click("//button[text()='Mark as Completed']")
     }
 
-    async searchCaseWithFilters(pageName: string, site: string, cat: string) {
-        //uncheck all 
+    async searchCaseWithFilters(pageName: string, site: string, cat= "HSE", hazardType= "hazardtype") {
         await this.page.click("data-testid=site-selector")
         //uncheck all site
         await this.page.locator('.csscheckbox').first().click()
@@ -32,7 +31,7 @@ export class CommonFunc extends Navbar {
             await this.page.click("(//button[text()=' OK '])[1]")
             await expect(this.page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
         } if (pageName === "Risk Assessment") {
-            await this.page.click("data-testid=ims-multi-select-undefined")
+            await this.page.click("data-testid=ims-multi-select-department")
             await this.page.click('text="' + cat + '"')
             await this.page.click('text=OK')
         }if (pageName === "Actions") {
@@ -40,6 +39,13 @@ export class CommonFunc extends Navbar {
             await this.page.click('text="' + cat + '"')
             await this.page.click("(//button[text()=' OK '])[1]")
             await expect(this.page.locator("//h1[contains(@class,'m0i')]")).toContainText('Customized view')
+        }if (pageName === "Risk Inventory") {
+            await this.page.click("data-testid=ims-multi-select-department")
+            await this.page.click('text="' + cat + '"')
+            await this.page.click('text=OK')
+            await this.page.click("data-testid=ims-multi-select-hazardType")
+            await this.page.click('text="' + hazardType + '"')
+            await this.page.click("(//button[text()=' OK '])[3]")
         }
     }
 

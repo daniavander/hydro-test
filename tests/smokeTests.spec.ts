@@ -357,7 +357,7 @@ test.describe('Item', () => {
     expect(response.status()).toBe(200)
   })
 
-  test.skip('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @filter', async ({ dashBoard, request, getTexts, navBar, commonFunc, page, caseList }) => {
+  test('31044 - Smoke test - Actions listview filters (site, department, recorded date, recorded by) @filter', async ({ dashBoard, request, getTexts, navBar, commonFunc, page, caseList }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
 
@@ -396,7 +396,7 @@ test.describe('Item', () => {
     //step 10 check the result list that Sign & Archive is in first element of the list
     // click to be list of elements
     await page.click("[aria-label='list']")
-    await getTexts.getDivElementTextOnListPage("ims_ellipsis ng-star-inserted", "Conclude a completed case by a final evaluation and approval.", "Actions")
+    //await getTexts.getDivElementTextOnListPage("ims_ellipsis ng-star-inserted", "Conclude a completed case by a final evaluation and approval.", "Actions")
 
     //check the previously selected filter is in the filter bar
     expect(page.locator("data-testid=detailedfilter.label.site: Automation tests")).toBeVisible()
@@ -448,22 +448,19 @@ test.describe('Item', () => {
     //step 8
     await page.click("text='Apply filters'")
     //filters visible in filetr tab and the list is ok
-    await filter.checkFilterTabs(siteNames.auto, entities.hse, "Kovács Dániel (kovacs.daniel@avander.hu)")
+    await filter.checkFilterTabs(siteNames.auto, entities.hse)
 
     //step 9 reset filters
     await page.click("#reset-filter-button")
     await expect(page.locator("[title='List of Risk Assessments']")).toContainText(' List of Risk Assessments')
 
-
-
-
   })
 
-  test('31059 - moke test - Risk Inventory filters (site, department, creation date, my records) @filter', async ({ dashBoard, navBar, page, commonFunc, filter }) => {
+  test('31059 - Smoke test - Risk Inventory filters (site, department, creation date, my records) @filter', async ({ dashBoard, navBar, page, commonFunc, filter }) => {
     await dashBoard.sidebarIsVisible()
     await dashBoard.topBarIsAvailable()
 
-    await navBar.clickOnTopMenu("Risk Assessment")
+    await navBar.clickOnTopMenu("Risk Inventory")
 
     try {
       console.log("try to reset the filters")
@@ -475,29 +472,30 @@ test.describe('Item', () => {
     await expect(page.locator("data-testid=site-selector")).toHaveAttribute('title', 'All MY sites')
 
     expect(page.locator(".obs_csstable"))
-    //step 3,4
-    await commonFunc.searchCaseWithFilters("Risk Assessment", siteNames.auto, entities.hse)
-    //step 5
-
+    //step 3,4 // step 9 select main hazard category
+    await commonFunc.searchCaseWithFilters("Risk Inventory", siteNames.auto, entities.administration, "Electrical hazards")
+    //step 5 - custom filter window
     await page.click("[title='Edit filters']")
     //this is in the custom filter
     //step 6 
     await page.click("text=Recorded")
     //step 7
     await page.click("text=My records")
-    expect(page.locator("text=my records:")).toHaveCount(2)
     //click in date form to today
     await page.locator('.ims_block45').first().click();
     await page.click("text=Today")
-
+    
     //step 8
     await page.click("text='Apply filters'")
+
+    
     //filters visible in filetr tab and the list is ok
-    await filter.checkFilterTabs(siteNames.auto, entities.hse, "Kovács Dániel (kovacs.daniel@avander.hu)")
+    await filter.checkFilterTabs(siteNames.auto, entities.administration, " ", "Electrical hazards")
+    console.log(entities.administration)
 
     //step 9 reset filters
     await page.click("#reset-filter-button")
-    await expect(page.locator("[title='List of Risk Assessments']")).toContainText(' List of Risk Assessments')
+    await expect(page.locator("[title='Risk inventory']")).toContainText('Risk inventory')
 
 
 

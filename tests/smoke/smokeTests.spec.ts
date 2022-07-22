@@ -187,7 +187,6 @@ test.describe("Smoke test pack", () => {
     await page.click('text=Save')
 
     //ghost card after save is visible
-    await page.pause()
     await getTexts.getGhostCardTitle("investigation", "investigation")
     await (await page.waitForSelector('.p-state-filled')).isVisible()
     await addUserAction.addNewAction("description", "instruction", "ImsTestGlobalAdmin3", "Add obligatory", "aa")
